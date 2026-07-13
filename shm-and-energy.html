@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Harmonic Motion & Energy</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-family: monospace; font-size: 1.1rem; overflow-x: auto; }
+        .math-inline { font-family: monospace; font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+    
+    <div class="container">
+        <nav class="nav-bar">
+            <a href="waves-and-oscillations.html" class="back-btn">
+                <span>←</span> Back to Topics
+            </a>
+            <a href="Waves and Oscillation_b.pdf" target="_blank" class="pdf-btn">
+                View Original PDF
+            </a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>Simple Harmonic Motion & Energy</h1>
+            <p class="subtitle">Waves & Oscillations • Part I</p>
+        </header>
+
+        <main class="notes-container">
+            <section class="notes-section">
+                <h2>1. Parameters of Periodic Motion</h2>
+                <p>Many kinds of motion repeat over and over, such as the vibrations of a quartz crystal in a watch, a swinging pendulum, and the back-and-forth motion of a piston. This is called periodic motion.</p>
+                <ul>
+                    <li><strong>Amplitude (A):</strong> The maximum magnitude of displacement from the equilibrium position. It is always positive.</li>
+                    <li><strong>Period (T):</strong> The time required for one complete oscillation.</li>
+                    <li><strong>Frequency (f):</strong> The number of cycles in a unit time.</li>
+                </ul>
+            </section>
+
+            <section class="notes-section">
+                <h2>2. Simple Harmonic Motion (SHM)</h2>
+                <p>The simplest kind of oscillation occurs when the restoring force <span class="math-inline">F<sub>x</sub></span> is directly proportional to the displacement from equilibrium <span class="math-inline">x</span>.</p>
+                
+                <div class="math-block">
+                    F<sub>x</sub> = -kx
+                </div>
+                
+                <p>Using Newton's Second Law, the differential equation for a mass-spring oscillator is:</p>
+                
+                <div class="math-block">
+                    d<sup>2</sup>x / dt<sup>2</sup> = -(k/m)x
+                </div>
+
+                <p><strong>General Solution:</strong> Guessing a trial solution yields:</p>
+                
+                <div class="math-block">
+                    x(t) = A cos(&omega;<sub>0</sub>t + &phi;)<br><br>
+                    v(t) = dx/dt = -A&omega;<sub>0</sub> sin(&omega;<sub>0</sub>t + &phi;)<br>
+                    a(t) = dv/dt = -A&omega;<sub>0</sub><sup>2</sup> cos(&omega;<sub>0</sub>t + &phi;) = -&omega;<sub>0</sub><sup>2</sup>x(t)
+                </div>
+
+                <p>Where the natural angular frequency <span class="math-inline">&omega;<sub>0</sub></span> and Period <span class="math-inline">T</span> are:</p>
+                
+                <div class="math-block">
+                    &omega;<sub>0</sub> = &radic;(k/m)<br>
+                    T = 2&pi;&radic;(m/k)
+                </div>
+                <p>The phase difference between velocity and displacement is <span class="math-inline">&pi;/2</span>, and between acceleration and displacement is <span class="math-inline">&pi;</span>.</p>
+            </section>
+
+            <section class="notes-section">
+                <h2>3. Energy Approach</h2>
+                <p>Assuming no dissipative mechanisms (no friction), the total energy of the mass-spring system is conserved.</p>
+                
+                <ul>
+                    <li><strong>Kinetic Energy (K):</strong> <span class="math-inline">½mv<sup>2</sup></span></li>
+                    <li><strong>Potential Energy (U):</strong> <span class="math-inline">½kx<sup>2</sup></span></li>
+                </ul>
+
+                <div class="math-block">
+                    Total Energy (E) = ½mv<sup>2</sup> + ½kx<sup>2</sup> = Constant<br><br>
+                    E = ½kA<sup>2</sup> cos<sup>2</sup>(&omega;<sub>0</sub>t + &phi;) + ½mA<sup>2</sup>&omega;<sub>0</sub><sup>2</sup> sin<sup>2</sup>(&omega;<sub>0</sub>t + &phi;)<br>
+                    E = ½kA<sup>2</sup>
+                </div>
+                <p>From energy conservation, we can find velocity at any position x:</p>
+                <div class="math-block">
+                    v(x) = &plusmn;&omega;<sub>0</sub>&radic;(A<sup>2</sup> - x<sup>2</sup>)
+                </div>
+            </section>
+
+            <section class="notes-section">
+                <h2>4. Pendulums</h2>
+                <p><strong>The General Pendulum:</strong> For a displaced pendulum, the gravitational potential energy is <span class="math-inline">mgL(1 - cos&theta;)</span>. For small angles, <span class="math-inline">cos&theta; &approx; 1 - &theta;<sup>2</sup>/2</span>.</p>
+                
+                <p>Applying the conservation of energy with moment of inertia <span class="math-inline">I</span>:</p>
+                <div class="math-block">
+                    Total Energy = ½I(d&theta;/dt)<sup>2</sup> + ½mgL&theta;<sup>2</sup> = constant<br>
+                    d<sup>2</sup>&theta;/dt<sup>2</sup> = -(mgL/I)&theta;
+                </div>
+                <p>This is the SHM equation with <span class="math-inline">&omega;<sub>0</sub> = &radic;(mgL/I)</span>.</p>
+                <br>
+                <p><strong>The Simple Pendulum:</strong> A particle of mass <span class="math-inline">m</span> attached to a cable of length <span class="math-inline">L</span> of negligible mass. The restoring force is <span class="math-inline">F = -mg sin&theta; &approx; -mg&theta;</span>.</p>
+                
+                <div class="math-block">
+                    &omega;<sub>0</sub> = &radic;(g/L)<br>
+                    T = 2&pi;&radic;(L/g)
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

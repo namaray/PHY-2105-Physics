@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forced Oscillations & Resonance</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-family: monospace; font-size: 1.1rem; overflow-x: auto; }
+        .math-inline { font-family: monospace; font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+    
+    <div class="container">
+        <nav class="nav-bar">
+            <a href="waves-and-oscillations.html" class="back-btn">
+                <span>←</span> Back to Topics
+            </a>
+            <a href="Waves and Oscillation_b.pdf" target="_blank" class="pdf-btn">
+                View Original PDF
+            </a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>Forced Oscillations & Resonance</h1>
+            <p class="subtitle">Waves & Oscillations • Part I</p>
+        </header>
+
+        <main class="notes-container">
+            <section class="notes-section">
+                <h2>1. Driven Harmonic Motion</h2>
+                <p>Forced vibrations occur when there is a periodic driving force applied to a system. This force may or may not have the same period as the natural frequency of the system.</p>
+                <p>Consider what happens when we apply a time-dependent force <span class="math-inline">F(t)</span> to a system that normally would carry out SHM with an angular frequency <span class="math-inline">&omega;<sub>0</sub></span>.</p>
+                
+                <p>Assume the external force is <span class="math-inline">F(t) = F<sub>0</sub> cos(&omega;t)</span>. The equation of motion becomes:</p>
+                <div class="math-block">
+                    ma = -kx - bv + F<sub>0</sub> cos(&omega;t)<br>
+                    m(d<sup>2</sup>x/dt<sup>2</sup>) + b(dx/dt) + kx = F<sub>0</sub> cos(&omega;t)
+                </div>
+                <p>The steady state motion of this system will be harmonic motion with an angular frequency equal to the angular frequency of the driving force.</p>
+            </section>
+
+            <section class="notes-section">
+                <h2>2. Steady State Solution</h2>
+                <p>The general solution takes the form:</p>
+                
+                <div class="math-block">
+                    x(t) = A<sub>0</sub> sin(&omega;t + &phi;<sub>0</sub>)
+                </div>
+
+                <p>Where the amplitude <span class="math-inline">A<sub>0</sub></span> depends on the driving frequency <span class="math-inline">&omega;</span>, natural frequency <span class="math-inline">&omega;<sub>0</sub></span>, and damping constant <span class="math-inline">b</span>:</p>
+                
+                <div class="math-block">
+                    A<sub>0</sub> = F<sub>0</sub> / [ m &radic;( (&omega;<sup>2</sup> - &omega;<sub>0</sub><sup>2</sup>)<sup>2</sup> + (b<sup>2</sup>&omega;<sup>2</sup> / m<sup>2</sup>) ) ]
+                </div>
+            </section>
+
+            <section class="notes-section">
+                <h2>3. Resonance</h2>
+                <p>If the driving frequency is close to the natural frequency of the system (<span class="math-inline">&omega; &approx; &omega;<sub>0</sub></span>), the resulting amplitudes can be very large even for small driving amplitudes. The system is said to be in <strong>resonance</strong>.</p>
+                
+                <p>In realistic systems, there will always be a damping force. Whether or not resonance behavior will be observed depends on the strength of the damping term. The sharpness of the resonant peak depends on the damping:</p>
+                <ul>
+                    <li>If the damping is small, the peak can be quite sharp.</li>
+                    <li>If the damping is large, the peak is broad and less sharp.</li>
+                </ul>
+
+                <h3>Q Factor</h3>
+                <p>The width of the resonant peak can be characterized by the Q factor (Quality factor):</p>
+                <div class="math-block">
+                    Q = m&omega;<sub>0</sub> / b
+                </div>
+            </section>
+
+            <section class="notes-section">
+                <h2>4. Real World Examples</h2>
+                <p>Like damping, resonance can be wanted or unwanted:</p>
+                <ul>
+                    <li><strong>Unwanted Resonance:</strong> Large-amplitude oscillations of the Tacoma Narrows Bridge, due to gusty winds, led to its collapse in 1940. Collapse of a freeway in California due to the 1989 earthquake.</li>
+                    <li><strong>Wanted Resonance:</strong> Musical instruments and TV/radio receivers depend on resonance to amplify specific frequencies and tune into specific channels.</li>
+                </ul>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

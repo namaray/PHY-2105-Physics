@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Motion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-family: monospace; font-size: 1.1rem; overflow-x: auto; }
+        .math-inline { font-family: monospace; font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+    
+    <div class="container">
+        <nav class="nav-bar">
+            <a href="waves-and-oscillations.html" class="back-btn">
+                <span>←</span> Back to Topics
+            </a>
+            <a href="Waves and Oscillation_b.pdf" target="_blank" class="pdf-btn">
+                View Original PDF
+            </a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>Wave Motion</h1>
+            <p class="subtitle">Waves & Oscillations • Part I</p>
+        </header>
+
+        <main class="notes-container">
+            <section class="notes-section">
+                <h2>1. Types of Waves</h2>
+                <p>A wave is a traveling disturbance that transports energy from place to place. There are two basic types of waves:</p>
+                <ul>
+                    <li><strong>Transverse:</strong> The medium oscillates perpendicular to the direction the wave is moving (e.g., water waves, electromagnetic light waves).</li>
+                    <li><strong>Longitudinal:</strong> The medium oscillates in the same direction as the wave is moving (e.g., sound waves moving air back and forth).</li>
+                </ul>
+            </section>
+
+            <section class="notes-section">
+                <h2>2. Wave Properties</h2>
+                <ul>
+                    <li><strong>Wavelength (<span class="math-inline">&lambda;</span>):</strong> The distance between identical points on the wave.</li>
+                    <li><strong>Period (T):</strong> The time for a point on the wave to undergo one complete oscillation.</li>
+                    <li><strong>Speed (v):</strong> The wave moves one wavelength <span class="math-inline">&lambda;</span> in one period <span class="math-inline">T</span>, so its speed is <span class="math-inline">v = &lambda;/T = f&lambda;</span>.</li>
+                </ul>
+                <p>Note: The speed of a wave is a constant that depends only on the medium. The speed of a wave particle is NOT the same as the speed of the wave; the particle performs simple harmonic motion with velocity <span class="math-inline">v = A&omega; cos(&omega;t)</span>.</p>
+            </section>
+
+            <section class="notes-section">
+                <h2>3. Equation for a Progressive Wave</h2>
+                <p>The simplest type of wave is one in which the particles of the medium are set into simple harmonic vibrations as the wave passes through it. The displacement of a particle at a distance <span class="math-inline">x</span> traveling left to right with velocity <span class="math-inline">v</span> is:</p>
+                
+                <div class="math-block">
+                    y = A sin( &omega;t - &phi; )<br>
+                    Phase difference &phi; = (2&pi;x) / &lambda;
+                </div>
+
+                <p>Substituting this phase difference yields the progressive wave equation:</p>
+                
+                <div class="math-block">
+                    y = A sin( 2&pi;(t/T - x/&lambda;) )<br>
+                    y = A sin[ (2&pi;/&lambda;)(vt - x) ]
+                </div>
+            </section>
+
+            <section class="notes-section">
+                <h2>4. Differential Equation for Wave Motion</h2>
+                <p>Differentiating the progressive wave equation <span class="math-inline">y = A sin[ (2&pi;/&lambda;)(vt - x) ]</span> twice with respect to <span class="math-inline">x</span> and twice with respect to <span class="math-inline">t</span> gives us:</p>
+                
+                <div class="math-block">
+                    d<sup>2</sup>y/dt<sup>2</sup> = -A(4&pi;<sup>2</sup>v<sup>2</sup>/&lambda;<sup>2</sup>) sin[ (2&pi;/&lambda;)(vt - x) ]<br>
+                    d<sup>2</sup>y/dx<sup>2</sup> = -A(4&pi;<sup>2</sup>/&lambda;<sup>2</sup>) sin[ (2&pi;/&lambda;)(vt - x) ]
+                </div>
+
+                <p>Comparing these equations gives the general differential equation of wave velocity:</p>
+                
+                <div class="math-block">
+                    d<sup>2</sup>y/dt<sup>2</sup> = v<sup>2</sup> (d<sup>2</sup>y/dx<sup>2</sup>)
+                </div>
+            </section>
+
+            <section class="notes-section">
+                <h2>5. Superposition & Lissajous' Figures</h2>
+                <p>When a particle is influenced simultaneously by two simple harmonic motions at right angles to each other, the resultant motion traces a curve called a <strong>Lissajous' figure</strong>. The shape depends on the time period, phase difference, and amplitude of the constituent vibrations.</p>
+                <div class="math-block">
+                    x = A<sub>1</sub> cos(&omega;t)<br>
+                    y = A<sub>2</sub> cos(&omega;t + &phi;)
+                </div>
+                <ul>
+                    <li>If <span class="math-inline">&phi; = 0</span>, the path is a straight line (Rectilinear motion).</li>
+                    <li>If <span class="math-inline">&phi; = &pi;/2</span>, the path is an ellipse (x<sup>2</sup>/A<sub>1</sub><sup>2</sup> + y<sup>2</sup>/A<sub>2</sub><sup>2</sup> = 1).</li>
+                </ul>
+            </section>
+
+            <section class="notes-section">
+                <h2>6. Stationary (Standing) Waves</h2>
+                <p>A stationary wave is produced by the superposition of two progressive waves of the same amplitude and frequency but traveling in opposite directions.</p>
+                <ul>
+                    <li><strong>Nodes (N):</strong> Points that remain stationary (no displacement occurs).</li>
+                    <li><strong>Antinodes (A):</strong> Points of largest amplitude of oscillation.</li>
+                </ul>
+                <p>Unlike progressive waves, <strong>no energy is transferred</strong> along the direction of propagation in a stationary wave, and the wave profile does not move.</p>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
