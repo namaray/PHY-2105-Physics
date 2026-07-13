@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-family: monospace; font-size: 1.1rem; overflow-x: auto; }
-        .math-inline { font-family: monospace; font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-size: 1.2rem; overflow-x: auto; text-align: center; }
+        .math-inline { font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <div class="background-elements">
@@ -45,43 +47,43 @@
             <section class="notes-section">
                 <h2>2. Wave Properties</h2>
                 <ul>
-                    <li><strong>Wavelength (<span class="math-inline">&lambda;</span>):</strong> The distance between identical points on the wave.</li>
-                    <li><strong>Period (T):</strong> The time for a point on the wave to undergo one complete oscillation.</li>
-                    <li><strong>Speed (v):</strong> The wave moves one wavelength <span class="math-inline">&lambda;</span> in one period <span class="math-inline">T</span>, so its speed is <span class="math-inline">v = &lambda;/T = f&lambda;</span>.</li>
+                    <li><strong>Wavelength <span class="math-inline">\( \lambda \)</span>:</strong> The distance between identical points on the wave.</li>
+                    <li><strong>Period <span class="math-inline">\( T \)</span>:</strong> The time for a point on the wave to undergo one complete oscillation.</li>
+                    <li><strong>Speed <span class="math-inline">\( v \)</span>:</strong> The wave moves one wavelength <span class="math-inline">\( \lambda \)</span> in one period <span class="math-inline">\( T \)</span>, so its speed is <span class="math-inline">\( v = \frac{\lambda}{T} = f\lambda \)</span>.</li>
                 </ul>
-                <p>Note: The speed of a wave is a constant that depends only on the medium. The speed of a wave particle is NOT the same as the speed of the wave; the particle performs simple harmonic motion with velocity <span class="math-inline">v = A&omega; cos(&omega;t)</span>.</p>
+                <p>Note: The speed of a wave is a constant that depends only on the medium. The speed of a wave particle is NOT the same as the speed of the wave; the particle performs simple harmonic motion with velocity <span class="math-inline">\( v = A\omega \cos(\omega t) \)</span>.</p>
             </section>
 
             <section class="notes-section">
                 <h2>3. Equation for a Progressive Wave</h2>
-                <p>The simplest type of wave is one in which the particles of the medium are set into simple harmonic vibrations as the wave passes through it. The displacement of a particle at a distance <span class="math-inline">x</span> traveling left to right with velocity <span class="math-inline">v</span> is:</p>
+                <p>The simplest type of wave is one in which the particles of the medium are set into simple harmonic vibrations as the wave passes through it. The displacement of a particle at a distance <span class="math-inline">\( x \)</span> traveling left to right with velocity <span class="math-inline">\( v \)</span> is:</p>
                 
                 <div class="math-block">
-                    y = A sin( &omega;t - &phi; )<br>
-                    Phase difference &phi; = (2&pi;x) / &lambda;
+                    \[ y = A \sin(\omega t - \phi) \]
+                    \[ \text{Phase difference } \phi = \frac{2\pi x}{\lambda} \]
                 </div>
 
                 <p>Substituting this phase difference yields the progressive wave equation:</p>
                 
                 <div class="math-block">
-                    y = A sin( 2&pi;(t/T - x/&lambda;) )<br>
-                    y = A sin[ (2&pi;/&lambda;)(vt - x) ]
+                    \[ y = A \sin\left(2\pi\left(\frac{t}{T} - \frac{x}{\lambda}\right)\right) \]
+                    \[ y = A \sin\left[\frac{2\pi}{\lambda}(vt - x)\right] \]
                 </div>
             </section>
 
             <section class="notes-section">
                 <h2>4. Differential Equation for Wave Motion</h2>
-                <p>Differentiating the progressive wave equation <span class="math-inline">y = A sin[ (2&pi;/&lambda;)(vt - x) ]</span> twice with respect to <span class="math-inline">x</span> and twice with respect to <span class="math-inline">t</span> gives us:</p>
+                <p>Differentiating the progressive wave equation <span class="math-inline">\( y = A \sin\left[\frac{2\pi}{\lambda}(vt - x)\right] \)</span> twice with respect to <span class="math-inline">\( x \)</span> and twice with respect to <span class="math-inline">\( t \)</span> gives us:</p>
                 
                 <div class="math-block">
-                    d<sup>2</sup>y/dt<sup>2</sup> = -A(4&pi;<sup>2</sup>v<sup>2</sup>/&lambda;<sup>2</sup>) sin[ (2&pi;/&lambda;)(vt - x) ]<br>
-                    d<sup>2</sup>y/dx<sup>2</sup> = -A(4&pi;<sup>2</sup>/&lambda;<sup>2</sup>) sin[ (2&pi;/&lambda;)(vt - x) ]
+                    \[ \frac{d^2y}{dt^2} = -A\left(\frac{4\pi^2v^2}{\lambda^2}\right) \sin\left[\frac{2\pi}{\lambda}(vt - x)\right] \]
+                    \[ \frac{d^2y}{dx^2} = -A\left(\frac{4\pi^2}{\lambda^2}\right) \sin\left[\frac{2\pi}{\lambda}(vt - x)\right] \]
                 </div>
 
                 <p>Comparing these equations gives the general differential equation of wave velocity:</p>
                 
                 <div class="math-block">
-                    d<sup>2</sup>y/dt<sup>2</sup> = v<sup>2</sup> (d<sup>2</sup>y/dx<sup>2</sup>)
+                    \[ \frac{d^2y}{dt^2} = v^2 \frac{d^2y}{dx^2} \]
                 </div>
             </section>
 
@@ -89,12 +91,12 @@
                 <h2>5. Superposition & Lissajous' Figures</h2>
                 <p>When a particle is influenced simultaneously by two simple harmonic motions at right angles to each other, the resultant motion traces a curve called a <strong>Lissajous' figure</strong>. The shape depends on the time period, phase difference, and amplitude of the constituent vibrations.</p>
                 <div class="math-block">
-                    x = A<sub>1</sub> cos(&omega;t)<br>
-                    y = A<sub>2</sub> cos(&omega;t + &phi;)
+                    \[ x = A_1 \cos(\omega t) \]
+                    \[ y = A_2 \cos(\omega t + \phi) \]
                 </div>
                 <ul>
-                    <li>If <span class="math-inline">&phi; = 0</span>, the path is a straight line (Rectilinear motion).</li>
-                    <li>If <span class="math-inline">&phi; = &pi;/2</span>, the path is an ellipse (x<sup>2</sup>/A<sub>1</sub><sup>2</sup> + y<sup>2</sup>/A<sub>2</sub><sup>2</sup> = 1).</li>
+                    <li>If <span class="math-inline">\( \phi = 0 \)</span>, the path is a straight line (Rectilinear motion).</li>
+                    <li>If <span class="math-inline">\( \phi = \frac{\pi}{2} \)</span>, the path is an ellipse <span class="math-inline">\( \left(\frac{x^2}{A_1^2} + \frac{y^2}{A_2^2} = 1\right) \)</span>.</li>
                 </ul>
             </section>
 

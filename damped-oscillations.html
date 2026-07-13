@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-family: monospace; font-size: 1.1rem; overflow-x: auto; }
-        .math-inline { font-family: monospace; font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-size: 1.2rem; overflow-x: auto; text-align: center; }
+        .math-inline { font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <div class="background-elements">
@@ -44,54 +46,53 @@
                 <p>We model these mechanisms by introducing a damping force which is proportional to the velocity of the oscillator.</p>
                 
                 <div class="math-block">
-                    Damping Force: F' = -bv<br><br>
-                    Newton's Second Law for horizontal forces:<br>
-                    ma = -kx - bv<br><br>
-                    m(d<sup>2</sup>x/dt<sup>2</sup>) = -kx - b(dx/dt)
+                    \[ F' = -bv \]
+                    \[ ma = -kx - bv \]
+                    \[ m\frac{d^2x}{dt^2} = -kx - b\frac{dx}{dt} \]
                 </div>
 
                 <p>We can rewrite the differential equation as:</p>
                 
                 <div class="math-block">
-                    d<sup>2</sup>x/dt<sup>2</sup> + &gamma;(dx/dt) + &omega;<sub>0</sub><sup>2</sup>x = 0
+                    \[ \frac{d^2x}{dt^2} + \gamma\frac{dx}{dt} + \omega_0^2x = 0 \]
                 </div>
 
                 <p>Where:</p>
                 <ul>
-                    <li><span class="math-inline">&omega;<sub>0</sub> = &radic;(k/m)</span> (Natural angular frequency)</li>
-                    <li><span class="math-inline">&gamma; = b/m</span> (Damping constant, unit: s<sup>-1</sup>)</li>
+                    <li><span class="math-inline">\( \omega_0 = \sqrt{\frac{k}{m}} \)</span> (Natural angular frequency)</li>
+                    <li><span class="math-inline">\( \gamma = \frac{b}{m} \)</span> (Damping constant, unit: <span class="math-inline">\( s^{-1} \)</span>)</li>
                 </ul>
             </section>
 
             <section class="notes-section">
                 <h2>3. Solving the Damped Oscillator Equation</h2>
-                <p>Assuming a solution of the form <span class="math-inline">x = Be<sup>pt</sup></span>, the auxiliary equation becomes:</p>
+                <p>Assuming a solution of the form <span class="math-inline">\( x = Be^{pt} \)</span>, the auxiliary equation becomes:</p>
                 
                 <div class="math-block">
-                    p<sup>2</sup> + &gamma;p + &omega;<sub>0</sub><sup>2</sup> = 0
+                    \[ p^2 + \gamma p + \omega_0^2 = 0 \]
                 </div>
                 
                 <p>Using the quadratic formula, the roots are:</p>
                 <div class="math-block">
-                    p = -&gamma;/2 &plusmn; &radic;(&gamma;<sup>2</sup>/4 - &omega;<sub>0</sub><sup>2</sup>)
+                    \[ p = -\frac{\gamma}{2} \pm \sqrt{\frac{\gamma^2}{4} - \omega_0^2} \]
                 </div>
 
                 <p>We can distinguish three distinct cases based on the discriminant:</p>
 
                 <h3>Case (i): Oscillatory Behavior (Underdamping)</h3>
-                <p>Condition: <span class="math-inline">&omega;<sub>0</sub><sup>2</sup> &gt; &gamma;<sup>2</sup>/4</span></p>
+                <p>Condition: <span class="math-inline">\( \omega_0^2 > \frac{\gamma^2}{4} \)</span></p>
                 <p>The solution is an oscillatory function multiplied by an exponentially decaying factor:</p>
                 <div class="math-block">
-                    x(t) = Ae<sup>-&gamma;t/2</sup> cos(&omega;<sub>1</sub>t + &phi;)
+                    \[ x(t) = Ae^{-\frac{\gamma t}{2}} \cos(\omega_1 t + \phi) \]
                 </div>
-                <p>The amplitude exponentially decays with time. As <span class="math-inline">&gamma; &rarr; 0</span>, we approach the undamped oscillator.</p>
+                <p>The amplitude exponentially decays with time. As <span class="math-inline">\( \gamma \to 0 \)</span>, we approach the undamped oscillator.</p>
 
                 <h3>Case (ii): Critical Damping</h3>
-                <p>Condition: <span class="math-inline">&omega;<sub>0</sub><sup>2</sup> = &gamma;<sup>2</sup>/4</span></p>
-                <p>The roots coincide, and the system returns to equilibrium without oscillating. The condition is referred to as "critical damping." If <span class="math-inline">&omega;<sub>0</sub><sup>2</sup> &lt; &gamma;<sup>2</sup>/4</span>, the system will not oscillate.</p>
+                <p>Condition: <span class="math-inline">\( \omega_0^2 = \frac{\gamma^2}{4} \)</span></p>
+                <p>The roots coincide, and the system returns to equilibrium without oscillating. The condition is referred to as "critical damping." If <span class="math-inline">\( \omega_0^2 < \frac{\gamma^2}{4} \)</span>, the system will not oscillate.</p>
 
                 <h3>Case (iii): Overdamping</h3>
-                <p>Condition: <span class="math-inline">&omega;<sub>0</sub><sup>2</sup> &lt; &gamma;<sup>2</sup>/4</span></p>
+                <p>Condition: <span class="math-inline">\( \omega_0^2 < \frac{\gamma^2}{4} \)</span></p>
                 <p>The system slowly approaches the rest position without any oscillations.</p>
             </section>
 
@@ -100,22 +101,22 @@
                 <p>The series RLC circuit (Resistor, Inductor, Capacitor) is the electrical analogue of the damped mass-spring system. According to Kirchhoff's voltage law:</p>
                 
                 <div class="math-block">
-                    V<sub>R</sub> + V<sub>C</sub> + V<sub>L</sub> = 0<br><br>
-                    iR + Q/C + L(di/dt) = 0<br>
-                    d<sup>2</sup>i/dt<sup>2</sup> + (R/L)(di/dt) + (1/LC)i = 0
+                    \[ V_R + V_C + V_L = 0 \]
+                    \[ iR + \frac{Q}{C} + L\frac{di}{dt} = 0 \]
+                    \[ \frac{d^2i}{dt^2} + \frac{R}{L}\frac{di}{dt} + \frac{1}{LC}i = 0 \]
                 </div>
 
                 <p>Comparing this to the mechanical system:</p>
                 <ul>
-                    <li><span class="math-inline">&gamma; = R/L</span></li>
-                    <li><span class="math-inline">&omega;<sub>0</sub> = &radic;(1/LC)</span></li>
+                    <li><span class="math-inline">\( \gamma = \frac{R}{L} \)</span></li>
+                    <li><span class="math-inline">\( \omega_0 = \sqrt{\frac{1}{LC}} \)</span></li>
                 </ul>
 
                 <p>The three distinguishable cases for the RLC circuit are:</p>
                 <ul>
-                    <li><strong>Oscillatory behavior:</strong> <span class="math-inline">1/LC &gt; R<sup>2</sup>/(4L<sup>2</sup>)</span></li>
-                    <li><strong>Critical damping:</strong> <span class="math-inline">1/LC = R<sup>2</sup>/(4L<sup>2</sup>)</span></li>
-                    <li><strong>Over damping:</strong> <span class="math-inline">1/LC &lt; R<sup>2</sup>/(4L<sup>2</sup>)</span></li>
+                    <li><strong>Oscillatory behavior:</strong> <span class="math-inline">\( \frac{1}{LC} > \frac{R^2}{4L^2} \)</span></li>
+                    <li><strong>Critical damping:</strong> <span class="math-inline">\( \frac{1}{LC} = \frac{R^2}{4L^2} \)</span></li>
+                    <li><strong>Over damping:</strong> <span class="math-inline">\( \frac{1}{LC} < \frac{R^2}{4L^2} \)</span></li>
                 </ul>
             </section>
         </main>

@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-family: monospace; font-size: 1.1rem; overflow-x: auto; }
-        .math-inline { font-family: monospace; font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-size: 1.2rem; overflow-x: auto; text-align: center; }
+        .math-inline { font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <div class="background-elements">
@@ -35,7 +37,7 @@
         <main class="notes-container">
             <section class="notes-section">
                 <h2>1. Introduction to LC Circuits</h2>
-                <p>An LC circuit, also called a resonant circuit, tank circuit, or tuned circuit, consists of an inductor, represented by the letter <span class="math-inline">L</span>, and a capacitor, represented by the letter <span class="math-inline">C</span>. When connected together, they can act as an electrical resonator.</p>
+                <p>An LC circuit, also called a resonant circuit, tank circuit, or tuned circuit, consists of an inductor, represented by the letter <span class="math-inline">\( L \)</span>, and a capacitor, represented by the letter <span class="math-inline">\( C \)</span>. When connected together, they can act as an electrical resonator.</p>
                 <p>During the charging and discharging of an LC Circuit, the energy shifts between the electric field of the capacitor and the magnetic field of the inductor.</p>
             </section>
 
@@ -44,39 +46,39 @@
                 <p>Using Kirchhoff's voltage law, the sum of the voltages across the components must be zero:</p>
                 
                 <div class="math-block">
-                    Voltage across capacitor: V<sub>C</sub> = Q/C<br>
-                    Voltage across inductor: V<sub>L</sub> = L(di/dt)<br><br>
-                    Q/C + L(di/dt) = 0
+                    \[ V_C = \frac{Q}{C} \quad \text{(Voltage across capacitor)} \]
+                    \[ V_L = L\frac{di}{dt} \quad \text{(Voltage across inductor)} \]
+                    \[ \frac{Q}{C} + L\frac{di}{dt} = 0 \]
                 </div>
                 
-                <p>Since current <span class="math-inline">i = dQ/dt</span>, we can rewrite the equation in terms of current:</p>
+                <p>Since current <span class="math-inline">\( i = \frac{dQ}{dt} \)</span>, we can rewrite the equation in terms of current:</p>
                 
                 <div class="math-block">
-                    d<sup>2</sup>i / dt<sup>2</sup> + (1/LC)i = 0
+                    \[ \frac{d^2i}{dt^2} + \frac{1}{LC}i = 0 \]
                 </div>
 
                 <p>This is mathematically identical to the differential equation of Simple Harmonic Motion.</p>
                 
                 <div class="math-block">
-                    SHM: d<sup>2</sup>x / dt<sup>2</sup> + &omega;<sub>0</sub><sup>2</sup>x = 0
+                    \[ \text{SHM: } \frac{d^2x}{dt^2} + \omega_0^2x = 0 \]
                 </div>
             </section>
 
             <section class="notes-section">
                 <h2>3. Frequency and Time Period</h2>
-                <p>By comparing the LC circuit differential equation to the standard SHM equation, we find the natural angular frequency <span class="math-inline">&omega;<sub>0</sub></span>:</p>
+                <p>By comparing the LC circuit differential equation to the standard SHM equation, we find the natural angular frequency <span class="math-inline">\( \omega_0 \)</span>:</p>
                 
                 <div class="math-block">
-                    &omega;<sub>0</sub><sup>2</sup> = 1 / LC &rArr; &omega;<sub>0</sub> = 1 / &radic;(LC)<br><br>
-                    Time Period (T) = 2&pi;&radic;(LC)<br>
-                    Frequency (f) = 1 / (2&pi;&radic;(LC))
+                    \[ \omega_0^2 = \frac{1}{LC} \implies \omega_0 = \frac{1}{\sqrt{LC}} \]
+                    \[ T = 2\pi\sqrt{LC} \]
+                    \[ f = \frac{1}{2\pi\sqrt{LC}} \]
                 </div>
 
                 <p>The solutions for charge and current are oscillatory:</p>
                 
                 <div class="math-block">
-                    Q(t) = Q<sub>0</sub> cos(&omega;<sub>0</sub>t + &phi;)<br>
-                    i(t) = -i<sub>0</sub> sin(&omega;<sub>0</sub>t + &phi;)
+                    \[ Q(t) = Q_0 \cos(\omega_0 t + \phi) \]
+                    \[ i(t) = -i_0 \sin(\omega_0 t + \phi) \]
                 </div>
             </section>
 
@@ -93,8 +95,8 @@
 
                 <p><strong>Energy Analogy:</strong></p>
                 <ul>
-                    <li><strong>Potential energy (½kx²)</strong> corresponds to <strong>Electric energy in capacitor (½Q²/C)</strong></li>
-                    <li><strong>Kinetic energy (½mv²)</strong> corresponds to <strong>Magnetic energy in inductor (½Li²)</strong></li>
+                    <li><strong>Potential energy</strong> <span class="math-inline">\( (\frac{1}{2}kx^2) \)</span> corresponds to <strong>Electric energy in capacitor</strong> <span class="math-inline">\( (\frac{1}{2}\frac{Q^2}{C}) \)</span></li>
+                    <li><strong>Kinetic energy</strong> <span class="math-inline">\( (\frac{1}{2}mv^2) \)</span> corresponds to <strong>Magnetic energy in inductor</strong> <span class="math-inline">\( (\frac{1}{2}Li^2) \)</span></li>
                 </ul>
             </section>
         </main>

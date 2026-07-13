@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-family: monospace; font-size: 1.1rem; overflow-x: auto; }
-        .math-inline { font-family: monospace; font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-size: 1.2rem; overflow-x: auto; text-align: center; }
+        .math-inline { font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <div class="background-elements">
@@ -36,12 +38,12 @@
             <section class="notes-section">
                 <h2>1. Driven Harmonic Motion</h2>
                 <p>Forced vibrations occur when there is a periodic driving force applied to a system. This force may or may not have the same period as the natural frequency of the system.</p>
-                <p>Consider what happens when we apply a time-dependent force <span class="math-inline">F(t)</span> to a system that normally would carry out SHM with an angular frequency <span class="math-inline">&omega;<sub>0</sub></span>.</p>
+                <p>Consider what happens when we apply a time-dependent force <span class="math-inline">\( F(t) \)</span> to a system that normally would carry out SHM with an angular frequency <span class="math-inline">\( \omega_0 \)</span>.</p>
                 
-                <p>Assume the external force is <span class="math-inline">F(t) = F<sub>0</sub> cos(&omega;t)</span>. The equation of motion becomes:</p>
+                <p>Assume the external force is <span class="math-inline">\( F(t) = F_0 \cos(\omega t) \)</span>. The equation of motion becomes:</p>
                 <div class="math-block">
-                    ma = -kx - bv + F<sub>0</sub> cos(&omega;t)<br>
-                    m(d<sup>2</sup>x/dt<sup>2</sup>) + b(dx/dt) + kx = F<sub>0</sub> cos(&omega;t)
+                    \[ ma = -kx - bv + F_0 \cos(\omega t) \]
+                    \[ m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = F_0 \cos(\omega t) \]
                 </div>
                 <p>The steady state motion of this system will be harmonic motion with an angular frequency equal to the angular frequency of the driving force.</p>
             </section>
@@ -51,19 +53,19 @@
                 <p>The general solution takes the form:</p>
                 
                 <div class="math-block">
-                    x(t) = A<sub>0</sub> sin(&omega;t + &phi;<sub>0</sub>)
+                    \[ x(t) = A_0 \sin(\omega t + \phi_0) \]
                 </div>
 
-                <p>Where the amplitude <span class="math-inline">A<sub>0</sub></span> depends on the driving frequency <span class="math-inline">&omega;</span>, natural frequency <span class="math-inline">&omega;<sub>0</sub></span>, and damping constant <span class="math-inline">b</span>:</p>
+                <p>Where the amplitude <span class="math-inline">\( A_0 \)</span> depends on the driving frequency <span class="math-inline">\( \omega \)</span>, natural frequency <span class="math-inline">\( \omega_0 \)</span>, and damping constant <span class="math-inline">\( b \)</span>:</p>
                 
                 <div class="math-block">
-                    A<sub>0</sub> = F<sub>0</sub> / [ m &radic;( (&omega;<sup>2</sup> - &omega;<sub>0</sub><sup>2</sup>)<sup>2</sup> + (b<sup>2</sup>&omega;<sup>2</sup> / m<sup>2</sup>) ) ]
+                    \[ A_0 = \frac{F_0}{m \sqrt{(\omega^2 - \omega_0^2)^2 + \left(\frac{b\omega}{m}\right)^2}} \]
                 </div>
             </section>
 
             <section class="notes-section">
                 <h2>3. Resonance</h2>
-                <p>If the driving frequency is close to the natural frequency of the system (<span class="math-inline">&omega; &approx; &omega;<sub>0</sub></span>), the resulting amplitudes can be very large even for small driving amplitudes. The system is said to be in <strong>resonance</strong>.</p>
+                <p>If the driving frequency is close to the natural frequency of the system (<span class="math-inline">\( \omega \approx \omega_0 \)</span>), the resulting amplitudes can be very large even for small driving amplitudes. The system is said to be in <strong>resonance</strong>.</p>
                 
                 <p>In realistic systems, there will always be a damping force. Whether or not resonance behavior will be observed depends on the strength of the damping term. The sharpness of the resonant peak depends on the damping:</p>
                 <ul>
@@ -74,7 +76,7 @@
                 <h3>Q Factor</h3>
                 <p>The width of the resonant peak can be characterized by the Q factor (Quality factor):</p>
                 <div class="math-block">
-                    Q = m&omega;<sub>0</sub> / b
+                    \[ Q = \frac{m\omega_0}{b} \]
                 </div>
             </section>
 

@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-family: monospace; font-size: 1.1rem; overflow-x: auto; }
-        .math-inline { font-family: monospace; font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-size: 1.2rem; overflow-x: auto; text-align: center; }
+        .math-inline { font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <div class="background-elements">
@@ -45,33 +47,33 @@
 
             <section class="notes-section">
                 <h2>2. Simple Harmonic Motion (SHM)</h2>
-                <p>The simplest kind of oscillation occurs when the restoring force <span class="math-inline">F<sub>x</sub></span> is directly proportional to the displacement from equilibrium <span class="math-inline">x</span>.</p>
+                <p>The simplest kind of oscillation occurs when the restoring force <span class="math-inline">\( F_x \)</span> is directly proportional to the displacement from equilibrium <span class="math-inline">\( x \)</span>.</p>
                 
                 <div class="math-block">
-                    F<sub>x</sub> = -kx
+                    \[ F_x = -kx \]
                 </div>
                 
                 <p>Using Newton's Second Law, the differential equation for a mass-spring oscillator is:</p>
                 
                 <div class="math-block">
-                    d<sup>2</sup>x / dt<sup>2</sup> = -(k/m)x
+                    \[ \frac{d^2x}{dt^2} = -\frac{k}{m}x \]
                 </div>
 
                 <p><strong>General Solution:</strong> Guessing a trial solution yields:</p>
                 
                 <div class="math-block">
-                    x(t) = A cos(&omega;<sub>0</sub>t + &phi;)<br><br>
-                    v(t) = dx/dt = -A&omega;<sub>0</sub> sin(&omega;<sub>0</sub>t + &phi;)<br>
-                    a(t) = dv/dt = -A&omega;<sub>0</sub><sup>2</sup> cos(&omega;<sub>0</sub>t + &phi;) = -&omega;<sub>0</sub><sup>2</sup>x(t)
+                    \[ x(t) = A \cos(\omega_0 t + \phi) \]
+                    \[ v(t) = \frac{dx}{dt} = -A\omega_0 \sin(\omega_0 t + \phi) \]
+                    \[ a(t) = \frac{dv}{dt} = -A\omega_0^2 \cos(\omega_0 t + \phi) = -\omega_0^2 x(t) \]
                 </div>
 
-                <p>Where the natural angular frequency <span class="math-inline">&omega;<sub>0</sub></span> and Period <span class="math-inline">T</span> are:</p>
+                <p>Where the natural angular frequency <span class="math-inline">\( \omega_0 \)</span> and Period <span class="math-inline">\( T \)</span> are:</p>
                 
                 <div class="math-block">
-                    &omega;<sub>0</sub> = &radic;(k/m)<br>
-                    T = 2&pi;&radic;(m/k)
+                    \[ \omega_0 = \sqrt{\frac{k}{m}} \]
+                    \[ T = 2\pi\sqrt{\frac{m}{k}} \]
                 </div>
-                <p>The phase difference between velocity and displacement is <span class="math-inline">&pi;/2</span>, and between acceleration and displacement is <span class="math-inline">&pi;</span>.</p>
+                <p>The phase difference between velocity and displacement is <span class="math-inline">\( \frac{\pi}{2} \)</span>, and between acceleration and displacement is <span class="math-inline">\( \pi \)</span>.</p>
             </section>
 
             <section class="notes-section">
@@ -79,37 +81,37 @@
                 <p>Assuming no dissipative mechanisms (no friction), the total energy of the mass-spring system is conserved.</p>
                 
                 <ul>
-                    <li><strong>Kinetic Energy (K):</strong> <span class="math-inline">½mv<sup>2</sup></span></li>
-                    <li><strong>Potential Energy (U):</strong> <span class="math-inline">½kx<sup>2</sup></span></li>
+                    <li><strong>Kinetic Energy (K):</strong> <span class="math-inline">\( \frac{1}{2}mv^2 \)</span></li>
+                    <li><strong>Potential Energy (U):</strong> <span class="math-inline">\( \frac{1}{2}kx^2 \)</span></li>
                 </ul>
 
                 <div class="math-block">
-                    Total Energy (E) = ½mv<sup>2</sup> + ½kx<sup>2</sup> = Constant<br><br>
-                    E = ½kA<sup>2</sup> cos<sup>2</sup>(&omega;<sub>0</sub>t + &phi;) + ½mA<sup>2</sup>&omega;<sub>0</sub><sup>2</sup> sin<sup>2</sup>(&omega;<sub>0</sub>t + &phi;)<br>
-                    E = ½kA<sup>2</sup>
+                    \[ E = K + U = \frac{1}{2}mv^2 + \frac{1}{2}kx^2 = \text{Constant} \]
+                    \[ E = \frac{1}{2}kA^2 \cos^2(\omega_0 t + \phi) + \frac{1}{2}mA^2\omega_0^2 \sin^2(\omega_0 t + \phi) \]
+                    \[ E = \frac{1}{2}kA^2 \]
                 </div>
                 <p>From energy conservation, we can find velocity at any position x:</p>
                 <div class="math-block">
-                    v(x) = &plusmn;&omega;<sub>0</sub>&radic;(A<sup>2</sup> - x<sup>2</sup>)
+                    \[ v(x) = \pm \omega_0 \sqrt{A^2 - x^2} \]
                 </div>
             </section>
 
             <section class="notes-section">
                 <h2>4. Pendulums</h2>
-                <p><strong>The General Pendulum:</strong> For a displaced pendulum, the gravitational potential energy is <span class="math-inline">mgL(1 - cos&theta;)</span>. For small angles, <span class="math-inline">cos&theta; &approx; 1 - &theta;<sup>2</sup>/2</span>.</p>
+                <p><strong>The General Pendulum:</strong> For a displaced pendulum, the gravitational potential energy is <span class="math-inline">\( mgL(1 - \cos\theta) \)</span>. For small angles, <span class="math-inline">\( \cos\theta \approx 1 - \frac{\theta^2}{2} \)</span>.</p>
                 
-                <p>Applying the conservation of energy with moment of inertia <span class="math-inline">I</span>:</p>
+                <p>Applying the conservation of energy with moment of inertia <span class="math-inline">\( I \)</span>:</p>
                 <div class="math-block">
-                    Total Energy = ½I(d&theta;/dt)<sup>2</sup> + ½mgL&theta;<sup>2</sup> = constant<br>
-                    d<sup>2</sup>&theta;/dt<sup>2</sup> = -(mgL/I)&theta;
+                    \[ \text{Total Energy} = \frac{1}{2}I\left(\frac{d\theta}{dt}\right)^2 + \frac{1}{2}mgL\theta^2 = \text{constant} \]
+                    \[ \frac{d^2\theta}{dt^2} = -\frac{mgL}{I}\theta \]
                 </div>
-                <p>This is the SHM equation with <span class="math-inline">&omega;<sub>0</sub> = &radic;(mgL/I)</span>.</p>
+                <p>This is the SHM equation with <span class="math-inline">\( \omega_0 = \sqrt{\frac{mgL}{I}} \)</span>.</p>
                 <br>
-                <p><strong>The Simple Pendulum:</strong> A particle of mass <span class="math-inline">m</span> attached to a cable of length <span class="math-inline">L</span> of negligible mass. The restoring force is <span class="math-inline">F = -mg sin&theta; &approx; -mg&theta;</span>.</p>
+                <p><strong>The Simple Pendulum:</strong> A particle of mass <span class="math-inline">\( m \)</span> attached to a cable of length <span class="math-inline">\( L \)</span> of negligible mass. The restoring force is <span class="math-inline">\( F = -mg \sin\theta \approx -mg\theta \)</span>.</p>
                 
                 <div class="math-block">
-                    &omega;<sub>0</sub> = &radic;(g/L)<br>
-                    T = 2&pi;&radic;(L/g)
+                    \[ \omega_0 = \sqrt{\frac{g}{L}} \]
+                    \[ T = 2\pi\sqrt{\frac{L}{g}} \]
                 </div>
             </section>
         </main>
