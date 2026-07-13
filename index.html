@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHY-2105 Physics Notes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>PHY-2105 <span>Physics</span></h1>
+            <p class="subtitle">Comprehensive Course Notes for Summer 2026</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('mid')">Midterm Topics</button>
+            <button class="tab-btn" onclick="switchTab('final')">Final Topics</button>
+            <button class="tab-btn" onclick="switchTab('syllabus')">Syllabus & Info</button>
+        </div>
+
+        <main>
+            <!-- Midterm Section -->
+            <section id="mid" class="topic-section active-section">
+                <div class="card-grid">
+                    <a href="Classification of Motion_b.pdf" target="_blank" class="topic-card">
+                        <div class="card-icon">🌊</div>
+                        <div class="card-content">
+                            <h3>Classification of Motion</h3>
+                            <p>Introduction to various types of motion, periodic motion, and basic oscillations.</p>
+                        </div>
+                        <div class="card-action">View Notes ➔</div>
+                    </a>
+
+                    <a href="Waves and Oscillation_b.pdf" target="_blank" class="topic-card">
+                        <div class="card-icon">〰️</div>
+                        <div class="card-content">
+                            <h3>Waves & Oscillations</h3>
+                            <p>SHM, Damped & Forced Oscillations, Progressive Waves, and Wave Properties.</p>
+                        </div>
+                        <div class="card-action">View Notes ➔</div>
+                    </a>
+
+                    <div class="topic-card locked">
+                        <div class="card-icon">⚡</div>
+                        <div class="card-content">
+                            <h3>Electricity & Magnetism</h3>
+                            <p>Electrostatics, Electric Field, and Potential.</p>
+                            <span class="badge">Notes Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Section -->
+            <section id="final" class="topic-section">
+                <div class="card-grid">
+                    <div class="topic-card locked">
+                        <div class="card-icon">🔋</div>
+                        <div class="card-content">
+                            <h3>Capacitance & Circuits</h3>
+                            <p>Capacitors, RC Circuits, Resistance & Electromotive Force.</p>
+                            <span class="badge">Notes Coming Soon</span>
+                        </div>
+                    </div>
+
+                    <div class="topic-card locked">
+                        <div class="card-icon">🧲</div>
+                        <div class="card-content">
+                            <h3>Magnetic Fields & Induction</h3>
+                            <p>Lorentz Force, Ampere's Law, Faraday's Law, Inductance.</p>
+                            <span class="badge">Notes Coming Soon</span>
+                        </div>
+                    </div>
+
+                    <div class="topic-card locked">
+                        <div class="card-icon">⚛️</div>
+                        <div class="card-content">
+                            <h3>Quantum Physics</h3>
+                            <p>Photo-electric Effect, Compton Effect, Schrodinger Equation.</p>
+                            <span class="badge">Notes Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Syllabus Section -->
+            <section id="syllabus" class="topic-section">
+                <div class="card-grid">
+                    <a href="Course Outline Syllabus_Details_2105_B_Summer 2026.pdf" target="_blank" class="topic-card highlight">
+                        <div class="card-icon">📋</div>
+                        <div class="card-content">
+                            <h3>Detailed Syllabus</h3>
+                            <p>Complete course outline, grading policy, and lecture breakdown.</p>
+                        </div>
+                        <div class="card-action">View PDF ➔</div>
+                    </a>
+
+                    <a href="Course Outline_2105_B_Summer 2026_short.pdf" target="_blank" class="topic-card highlight">
+                        <div class="card-icon">📝</div>
+                        <div class="card-content">
+                            <h3>Short Syllabus</h3>
+                            <p>Quick overview of the course schedule and textbook references.</p>
+                        </div>
+                        <div class="card-action">View PDF ➔</div>
+                    </a>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        function switchTab(tabId) {
+            // Update buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update sections
+            document.querySelectorAll('.topic-section').forEach(section => {
+                section.classList.remove('active-section');
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(10px)';
+            });
+            
+            setTimeout(() => {
+                document.querySelectorAll('.topic-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                const activeSection = document.getElementById(tabId);
+                activeSection.style.display = 'block';
+                
+                // Trigger reflow
+                void activeSection.offsetWidth;
+                
+                activeSection.classList.add('active-section');
+                activeSection.style.opacity = '1';
+                activeSection.style.transform = 'translateY(0)';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
