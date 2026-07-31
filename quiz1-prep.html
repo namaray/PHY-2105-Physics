@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz-1 Preparation Guide — PHY-2105</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-size: 1.15rem; overflow-x: auto; text-align: center; }
+        .math-inline { font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+
+        /* Exam info banner */
+        .exam-banner {
+            background: linear-gradient(135deg, rgba(255, 65, 108, 0.15), rgba(255, 75, 43, 0.15));
+            border: 1px solid rgba(255, 65, 108, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .exam-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 65, 108, 0.08) 0%, transparent 60%);
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        .exam-banner h2 { color: #ff416c; margin-bottom: 0.5rem; position: relative; z-index: 1; font-size: 1.6rem; }
+        .exam-banner .exam-date { font-size: 1.3rem; color: var(--text-primary); font-weight: 700; position: relative; z-index: 1; }
+        .exam-banner .exam-meta { color: var(--text-secondary); margin-top: 0.5rem; position: relative; z-index: 1; font-size: 0.95rem; }
+
+        /* Marks distribution bar */
+        .marks-bar {
+            display: flex;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            height: 40px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .marks-math { background: linear-gradient(90deg, #6366f1, #8b5cf6); flex: 7.5; display: flex; align-items: center; justify-content: center; color: white; }
+        .marks-short { background: linear-gradient(90deg, #f59e0b, #ef4444); flex: 2.5; display: flex; align-items: center; justify-content: center; color: white; }
+
+        /* Checklist styling */
+        .checklist { list-style: none; padding: 0; }
+        .checklist li {
+            padding: 0.8rem 1rem;
+            margin: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .checklist li:hover { background: rgba(255, 255, 255, 0.07); transform: translateX(4px); }
+        .checklist li input[type="checkbox"] {
+            width: 18px; height: 18px;
+            accent-color: var(--accent-color);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .checklist li.checked { opacity: 0.5; text-decoration: line-through; border-left-color: #22c55e; }
+
+        /* Excluded topics */
+        .excluded-tag {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+        }
+
+        /* Important warnings */
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+        }
+        .warning-box h4 { color: #f59e0b; margin-bottom: 0.4rem; }
+
+        /* Formula card */
+        .formula-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        .formula-card:hover { border-color: var(--accent-color); background: rgba(255, 255, 255, 0.06); }
+        .formula-card h4 { color: var(--accent-color); margin-bottom: 0.5rem; font-size: 1rem; }
+
+        /* Problem type badge */
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-math { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+        .badge-short { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+        .badge-graph { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+        .badge-proof { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
+
+        /* Collapsible sections */
+        .collapsible-header {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+        .collapsible-header::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+            color: var(--text-secondary);
+        }
+        .collapsible-header.collapsed::after { transform: rotate(-90deg); }
+        .collapsible-body { overflow: hidden; transition: max-height 0.4s ease; }
+        .collapsible-body.collapsed { max-height: 0 !important; }
+
+        /* Progress tracker */
+        .progress-bar-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            height: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), #6366f1);
+            border-radius: 20px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+        .progress-text { font-size: 0.85rem; color: var(--text-secondary); text-align: right; margin-top: 0.3rem; }
+
+        /* Two-column grid for formula cards */
+        .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 768px) { .formula-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+    
+    <div class="container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn">
+                <span>←</span> Back to Home
+            </a>
+            <a href="Waves and Oscillation_b.pdf" target="_blank" class="pdf-btn">
+                View Slides PDF
+            </a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>🎯 Quiz-1 Preparation Guide</h1>
+            <p class="subtitle">PHY-2105 • Simple Harmonic Motion</p>
+        </header>
+
+        <!-- EXAM INFO BANNER -->
+        <div class="exam-banner">
+            <h2>⏰ Quiz-1</h2>
+            <div class="exam-date">Friday, August 1, 2026 — During Lecture #8</div>
+            <div class="exam-meta">Off-line Exam • Pen, Pencil, Rubber, Sharpener, Calculator Required</div>
+            <div class="exam-meta" style="margin-top: 0.3rem;">⚠️ Must write: <strong>Name + ID + Section + Course Code</strong> on answer script</div>
+            <div class="exam-meta" style="margin-top: 0.3rem;">⚠️ <strong>Must return the question paper</strong> (attach to last page of answer script)</div>
+        </div>
+
+        <!-- MARKS DISTRIBUTION -->
+        <section class="notes-section">
+            <h2>📊 Marks Distribution</h2>
+            <div class="marks-bar">
+                <div class="marks-math">70–80% Math Problems</div>
+                <div class="marks-short">20–30% Short Q</div>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; text-align: center;">Total from slides: ~25 math problems • Total from Practice Sheet: ~22 math problems</p>
+        </section>
+
+        <!-- STUDY PROGRESS TRACKER -->
+        <section class="notes-section">
+            <h2>📈 Study Progress</h2>
+            <div class="progress-bar-container">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0 / 0 topics checked</div>
+        </section>
+
+        <!-- ============================================= -->
+        <!--  SECTION A: THEORY & FORMULAS                 -->
+        <!-- ============================================= -->
+        <main class="notes-container">
+
+            <section class="notes-section">
+                <h2 class="collapsible-header" onclick="toggleSection(this)">📐 A. Core SHM Formulas & Theory</h2>
+                <div class="collapsible-body">
+
+                    <ul class="checklist" data-group="theory">
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>SHM Definition & Restoring Force</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Differential Equation of SHM</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>General Solution: x(t), v(t), a(t)</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>All SHM Parameters (T, f, ω, A, δ)</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>V<sub>max</sub>, a<sub>max</sub>, x<sub>max</sub>, V<sub>min</sub>, a<sub>min</sub></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Energy: E = ½kA² (Proof from sinusoid)</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Energy vs Displacement & Time Graphs</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Time Period Constant Proof: y(t) = y(t+T)</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>SHM Graph Drawing (x-t, v-t, a-t)</span></li>
+                    </ul>
+
+                    <!-- 1. RESTORING FORCE & SHM DEFINITION -->
+                    <div class="formula-card">
+                        <h4>1. SHM Definition & Restoring Force</h4>
+                        <p>Simple Harmonic Motion occurs when the restoring force is directly proportional to displacement from equilibrium and directed toward the equilibrium position:</p>
+                        <div class="math-block">
+                            \[ F = -kx \]
+                        </div>
+                        <p>where \( k \) is the spring constant (N/m) and \( x \) is the displacement. The negative sign indicates the force is always directed opposite to displacement (toward equilibrium).</p>
+                        <p><strong>Characteristics of SHM:</strong></p>
+                        <ul>
+                            <li>Motion is periodic (repeats in time)</li>
+                            <li>Restoring force is proportional to displacement</li>
+                            <li>Acceleration is always directed toward equilibrium</li>
+                            <li>Motion is sinusoidal in nature</li>
+                        </ul>
+                    </div>
+
+                    <!-- 2. DIFFERENTIAL EQUATION -->
+                    <div class="formula-card">
+                        <h4>2. Differential Equation of SHM <span class="badge badge-proof">May appear in Quiz</span></h4>
+                        <p>From Newton's Second Law \( F = ma \) and Hooke's Law \( F = -kx \):</p>
+                        <div class="math-block">
+                            \[ ma = -kx \]
+                            \[ m\frac{d^2x}{dt^2} = -kx \]
+                            \[ \frac{d^2x}{dt^2} + \omega_0^2 x = 0 \]
+                        </div>
+                        <p>This is the <strong>standard differential equation of SHM</strong>, where \( \omega_0^2 = \frac{k}{m} \).</p>
+                    </div>
+
+                    <!-- 3. GENERAL SOLUTION -->
+                    <div class="formula-card">
+                        <h4>3. General Solution of SHM</h4>
+                        <p>The solution to the differential equation gives <strong>displacement, velocity, and acceleration</strong> as functions of time:</p>
+                        <div class="math-block">
+                            \[ x(t) = A\cos(\omega_0 t + \delta) \]
+                            \[ v(t) = \frac{dx}{dt} = -A\omega_0 \sin(\omega_0 t + \delta) \]
+                            \[ a(t) = \frac{d^2x}{dt^2} = -A\omega_0^2 \cos(\omega_0 t + \delta) = -\omega_0^2 x(t) \]
+                        </div>
+                        <p>where:</p>
+                        <ul>
+                            <li>\( A \) = Amplitude (maximum displacement)</li>
+                            <li>\( \omega_0 \) = Angular frequency (rad/s)</li>
+                            <li>\( \delta \) (or \( \phi \)) = Phase constant / initial phase</li>
+                            <li>\( (\omega_0 t + \delta) \) = Phase of the motion</li>
+                        </ul>
+                    </div>
+
+                    <!-- 4. SHM PARAMETERS -->
+                    <div class="formula-card">
+                        <h4>4. Complete SHM Parameters <span class="badge badge-math">Critical for Quiz</span></h4>
+                        <div class="formula-grid">
+                            <div>
+                                <p><strong>Angular Frequency:</strong></p>
+                                <div class="math-block">\[ \omega_0 = \sqrt{\frac{k}{m}} = \frac{2\pi}{T} = 2\pi f \]</div>
+                            </div>
+                            <div>
+                                <p><strong>Time Period:</strong></p>
+                                <div class="math-block">\[ T = \frac{2\pi}{\omega_0} = 2\pi\sqrt{\frac{m}{k}} \]</div>
+                            </div>
+                            <div>
+                                <p><strong>Frequency:</strong></p>
+                                <div class="math-block">\[ f = \frac{1}{T} = \frac{\omega_0}{2\pi} = \frac{1}{2\pi}\sqrt{\frac{k}{m}} \]</div>
+                            </div>
+                            <div>
+                                <p><strong>Velocity at position x:</strong></p>
+                                <div class="math-block">\[ v(x) = \pm\omega_0\sqrt{A^2 - x^2} \]</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. MAX/MIN PARAMETERS -->
+                    <div class="formula-card">
+                        <h4>5. Maximum & Minimum Parameters <span class="badge badge-math">Critical for Quiz</span></h4>
+                        <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid rgba(255,255,255,0.1);">
+                                    <th style="padding: 0.7rem; text-align: left; color: var(--accent-color);">Parameter</th>
+                                    <th style="padding: 0.7rem; text-align: center; color: var(--accent-color);">Maximum</th>
+                                    <th style="padding: 0.7rem; text-align: center; color: var(--accent-color);">Minimum</th>
+                                    <th style="padding: 0.7rem; text-align: left; color: var(--accent-color);">Occurs When</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.7rem;"><strong>Displacement</strong></td>
+                                    <td style="padding: 0.7rem; text-align: center;">\( x_{max} = A \)</td>
+                                    <td style="padding: 0.7rem; text-align: center;">\( x_{min} = 0 \)</td>
+                                    <td style="padding: 0.7rem;">Max at extreme, Min at equilibrium</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.7rem;"><strong>Velocity</strong></td>
+                                    <td style="padding: 0.7rem; text-align: center;">\( v_{max} = A\omega_0 \)</td>
+                                    <td style="padding: 0.7rem; text-align: center;">\( v_{min} = 0 \)</td>
+                                    <td style="padding: 0.7rem;">Max at equilibrium (x=0), Min at extremes (x=±A)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 0.7rem;"><strong>Acceleration</strong></td>
+                                    <td style="padding: 0.7rem; text-align: center;">\( a_{max} = A\omega_0^2 \)</td>
+                                    <td style="padding: 0.7rem; text-align: center;">\( a_{min} = 0 \)</td>
+                                    <td style="padding: 0.7rem;">Max at extremes (x=±A), Min at equilibrium (x=0)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.7rem;"><strong>Total Energy</strong></td>
+                                    <td style="padding: 0.7rem; text-align: center;" colspan="2">\( E = \frac{1}{2}kA^2 \) (constant)</td>
+                                    <td style="padding: 0.7rem;">Always constant, never changes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p><strong>Key relationships at any position \( x \):</strong></p>
+                        <div class="math-block">
+                            \[ v = \omega_0\sqrt{A^2 - x^2} \quad \Rightarrow \quad v_{max} = A\omega_0 \text{ (at } x = 0\text{)} \]
+                            \[ a = -\omega_0^2 x \quad \Rightarrow \quad |a_{max}| = \omega_0^2 A \text{ (at } x = \pm A\text{)} \]
+                        </div>
+                    </div>
+
+                    <!-- 6. ENERGY PROOF -->
+                    <div class="formula-card">
+                        <h4>6. Proof: \( E = \frac{1}{2}kA^2 \) from Sinusoidal Equation <span class="badge badge-proof">Important Proof</span></h4>
+                        <p><strong>Step 1:</strong> Write KE and PE using sinusoidal SHM equations:</p>
+                        <div class="math-block">
+                            \[ x = A\cos(\omega_0 t + \delta), \quad v = -A\omega_0\sin(\omega_0 t + \delta) \]
+                        </div>
+                        <p><strong>Step 2:</strong> Kinetic Energy:</p>
+                        <div class="math-block">
+                            \[ K = \frac{1}{2}mv^2 = \frac{1}{2}m A^2\omega_0^2 \sin^2(\omega_0 t + \delta) \]
+                        </div>
+                        <p>Since \( \omega_0^2 = \frac{k}{m} \), we get \( m\omega_0^2 = k \), so:</p>
+                        <div class="math-block">
+                            \[ K = \frac{1}{2}kA^2 \sin^2(\omega_0 t + \delta) \]
+                        </div>
+                        <p><strong>Step 3:</strong> Potential Energy:</p>
+                        <div class="math-block">
+                            \[ U = \frac{1}{2}kx^2 = \frac{1}{2}kA^2 \cos^2(\omega_0 t + \delta) \]
+                        </div>
+                        <p><strong>Step 4:</strong> Total Energy:</p>
+                        <div class="math-block">
+                            \[ E = K + U = \frac{1}{2}kA^2\left[\sin^2(\omega_0 t + \delta) + \cos^2(\omega_0 t + \delta)\right] \]
+                        </div>
+                        <p>Since \( \sin^2\theta + \cos^2\theta = 1 \):</p>
+                        <div class="math-block">
+                            \[ \boxed{E = \frac{1}{2}kA^2} \]
+                        </div>
+                        <p>✅ Total energy is <strong>constant</strong> and depends only on amplitude — independent of time!</p>
+                    </div>
+
+                    <!-- 7. TIME PERIOD PROOF -->
+                    <div class="formula-card">
+                        <h4>7. Proof: Time Period is Constant — \( y(t) = y(t + T) \) <span class="badge badge-proof">Important Proof</span></h4>
+                        <p>We need to show that if \( x(t) = A\cos(\omega_0 t + \delta) \), then \( x(t+T) = x(t) \).</p>
+                        <div class="math-block">
+                            \[ x(t + T) = A\cos[\omega_0(t + T) + \delta] \]
+                            \[ = A\cos[\omega_0 t + \omega_0 T + \delta] \]
+                        </div>
+                        <p>Since \( \omega_0 = \frac{2\pi}{T} \), we have \( \omega_0 T = 2\pi \):</p>
+                        <div class="math-block">
+                            \[ x(t + T) = A\cos[\omega_0 t + 2\pi + \delta] \]
+                            \[ = A\cos[\omega_0 t + \delta] = x(t) \]
+                        </div>
+                        <p>✅ Since \( \cos(\theta + 2\pi) = \cos\theta \), the motion repeats after every period \( T \). Hence proved!</p>
+                    </div>
+
+                    <!-- 8. ENERGY GRAPHS -->
+                    <div class="formula-card">
+                        <h4>8. SHM Energy Graphs <span class="badge badge-graph">Graph Drawing</span></h4>
+                        <p><strong>Energy vs Displacement Graph:</strong></p>
+                        <ul>
+                            <li><strong>KE curve:</strong> \( K = \frac{1}{2}k(A^2 - x^2) \) — inverted parabola, max at \( x = 0 \), zero at \( x = \pm A \)</li>
+                            <li><strong>PE curve:</strong> \( U = \frac{1}{2}kx^2 \) — upward parabola, zero at \( x = 0 \), max at \( x = \pm A \)</li>
+                            <li><strong>Total E:</strong> Horizontal straight line at \( E = \frac{1}{2}kA^2 \)</li>
+                            <li>KE and PE curves intersect at \( x = \pm \frac{A}{\sqrt{2}} \) where \( K = U = \frac{E}{2} \)</li>
+                        </ul>
+                        <br>
+                        <p><strong>Energy vs Time Graph:</strong></p>
+                        <ul>
+                            <li><strong>KE:</strong> \( K = \frac{1}{2}kA^2\sin^2(\omega_0 t + \delta) \) — oscillates between 0 and \( \frac{1}{2}kA^2 \) with frequency \( 2\omega_0 \)</li>
+                            <li><strong>PE:</strong> \( U = \frac{1}{2}kA^2\cos^2(\omega_0 t + \delta) \) — oscillates between 0 and \( \frac{1}{2}kA^2 \) with frequency \( 2\omega_0 \)</li>
+                            <li><strong>Total E:</strong> Constant horizontal line at \( E = \frac{1}{2}kA^2 \)</li>
+                            <li>KE and PE are always complementary: when one is max, the other is zero</li>
+                        </ul>
+                    </div>
+
+                    <!-- 9. x-t, v-t, a-t GRAPHS -->
+                    <div class="formula-card">
+                        <h4>9. SHM Wave Graphs: x-t, v-t, a-t <span class="badge badge-graph">Graph Drawing</span></h4>
+                        <p><strong>Displacement vs Time (\( x \) vs \( t \)):</strong></p>
+                        <ul>
+                            <li>Cosine wave: \( x(t) = A\cos(\omega_0 t + \delta) \)</li>
+                            <li>Oscillates between \( +A \) and \( -A \)</li>
+                        </ul>
+                        <p><strong>Velocity vs Time (\( v \) vs \( t \)):</strong></p>
+                        <ul>
+                            <li>Negative sine wave: \( v(t) = -A\omega_0\sin(\omega_0 t + \delta) \)</li>
+                            <li>Leads displacement by \( \frac{\pi}{2} \) (90°)</li>
+                            <li>Oscillates between \( +A\omega_0 \) and \( -A\omega_0 \)</li>
+                        </ul>
+                        <p><strong>Acceleration vs Time (\( a \) vs \( t \)):</strong></p>
+                        <ul>
+                            <li>Negative cosine: \( a(t) = -A\omega_0^2\cos(\omega_0 t + \delta) \)</li>
+                            <li>Leads displacement by \( \pi \) (180°), i.e., opposite phase</li>
+                            <li>Oscillates between \( +A\omega_0^2 \) and \( -A\omega_0^2 \)</li>
+                        </ul>
+                        <p>📌 <strong>Key:</strong> All three graphs have the <strong>same period T</strong> but different amplitudes and phase relationships.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================= -->
+            <!--  SECTION B: QUICK REFERENCE FORMULA SHEET     -->
+            <!-- ============================================= -->
+            <section class="notes-section">
+                <h2 class="collapsible-header" onclick="toggleSection(this)">📋 B. Quick-Reference Formula Sheet</h2>
+                <div class="collapsible-body">
+                    <div class="formula-grid">
+                        <div class="formula-card">
+                            <h4>Displacement</h4>
+                            <div class="math-block">\[ x = A\cos(\omega t + \delta) \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>Velocity</h4>
+                            <div class="math-block">\[ v = -A\omega\sin(\omega t + \delta) \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>Acceleration</h4>
+                            <div class="math-block">\[ a = -\omega^2 x = -A\omega^2\cos(\omega t + \delta) \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>Velocity at position x</h4>
+                            <div class="math-block">\[ v = \pm\omega\sqrt{A^2 - x^2} \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>Angular Frequency</h4>
+                            <div class="math-block">\[ \omega = 2\pi f = \frac{2\pi}{T} = \sqrt{\frac{k}{m}} \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>Time Period</h4>
+                            <div class="math-block">\[ T = 2\pi\sqrt{\frac{m}{k}} \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>Kinetic Energy</h4>
+                            <div class="math-block">\[ K = \frac{1}{2}mv^2 = \frac{1}{2}k(A^2 - x^2) \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>Potential Energy</h4>
+                            <div class="math-block">\[ U = \frac{1}{2}kx^2 \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>Total Energy</h4>
+                            <div class="math-block">\[ E = \frac{1}{2}kA^2 = \text{constant} \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>Max Values</h4>
+                            <div class="math-block">\[ v_{max} = A\omega, \quad a_{max} = A\omega^2 \]</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================= -->
+            <!--  SECTION C: PROBLEM TYPES TO EXPECT           -->
+            <!-- ============================================= -->
+            <section class="notes-section">
+                <h2 class="collapsible-header" onclick="toggleSection(this)">🧮 C. Problem Types to Expect</h2>
+                <div class="collapsible-body">
+                    <p>Based on the syllabus, expect the following types of mathematical problems:</p>
+                    
+                    <ul class="checklist" data-group="problems">
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Find \( T, f, \omega \) given spring constant \( k \) and mass \( m \)</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Calculate \( v_{max}, a_{max}, x_{max} \) from given parameters</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Find velocity \( v \) at a given displacement \( x \) using \( v = \omega\sqrt{A^2 - x^2} \)</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Calculate total energy \( E = \frac{1}{2}kA^2 \)</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Find KE and PE at a given position</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Identify SHM equation and extract A, ω, δ from given \( x(t) \)</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Find position where KE = PE (at \( x = \pm\frac{A}{\sqrt{2}} \))</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Spring-mass problems with initial conditions</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-proof">Proof</span> Derive differential equation of SHM</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-proof">Proof</span> Show \( E = \frac{1}{2}kA^2 \) from sinusoid equation</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-proof">Proof</span> Prove \( y(t) = y(t+T) \)</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Draw x-t, v-t, a-t graphs for SHM</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Draw Energy vs Displacement graph (KE, PE, Total E)</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Draw Energy vs Time graph</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Multiple graphs in single plot/frame</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Define SHM, periodic motion, restoring force</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Characteristics of SHM</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Relationship between SHM parameters</span></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ============================================= -->
+            <!--  SECTION D: PRACTICE PROBLEM SHEET            -->
+            <!-- ============================================= -->
+            <section class="notes-section">
+                <h2 class="collapsible-header" onclick="toggleSection(this)">📝 D. Practice Problem Sheet-1 (22 Problems)</h2>
+                <div class="collapsible-body">
+                    <p>Problems to solve from <strong>Practice Problem Sheet-1</strong>:</p>
+                    <ul class="checklist" data-group="practice">
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 1</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 2</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 3</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 4</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 5</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 6</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 7</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 8</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 9</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 10</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 12 (except phase constant)</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 13</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 14</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 15</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 18</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 20</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 23</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 24</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 25</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 26</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 28</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem 30</span></li>
+                    </ul>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem;">📌 Note: Some problems from this sheet may exactly match the slide examples.</p>
+                </div>
+            </section>
+
+            <!-- ============================================= -->
+            <!--  SECTION E: SLIDE EXAMPLE PROBLEMS            -->
+            <!-- ============================================= -->
+            <section class="notes-section">
+                <h2 class="collapsible-header" onclick="toggleSection(this)">📖 E. Slide Example Problems (25 Problems)</h2>
+                <div class="collapsible-body">
+                    <p>Example problems from <strong>PPT Slides (Waves & Oscillation — SHM)</strong>:</p>
+                    <ul class="checklist" data-group="slides">
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 1</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 2</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 3</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 4</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 5</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 6</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 7</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 8</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 9</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 10</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 11</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 12</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 13</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.4</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.6</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.7</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.8</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.9</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.10</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.11</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.13</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.14</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.15</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.17</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.18</span></li>
+                    </ul>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem;">📌 Only problems whose theory content has been fully covered in class are included.</p>
+                </div>
+            </section>
+
+            <!-- ============================================= -->
+            <!--  SECTION F: EXCLUDED TOPICS                   -->
+            <!-- ============================================= -->
+            <section class="notes-section">
+                <h2 class="collapsible-header" onclick="toggleSection(this)">🚫 F. Topics NOT in Quiz-1</h2>
+                <div class="collapsible-body">
+                    <p>The following topics are <strong>explicitly excluded</strong> from Quiz-1:</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                        <span class="excluded-tag">❌ Damped Harmonic Motion (DHM)</span>
+                        <span class="excluded-tag">❌ RLC / LC Circuits</span>
+                        <span class="excluded-tag">❌ Simple Pendulum</span>
+                        <span class="excluded-tag">❌ Progressive Waves</span>
+                        <span class="excluded-tag">❌ Lissajous Figures</span>
+                        <span class="excluded-tag">❌ Classification of Motion</span>
+                        <span class="excluded-tag">❌ Classification of Waves</span>
+                        <span class="excluded-tag">❌ Phase Leading / Lagging</span>
+                        <span class="excluded-tag">❌ Phase Shift & Phase Difference</span>
+                        <span class="excluded-tag">❌ Amplitude from Wave Equation</span>
+                        <span class="excluded-tag">❌ Broad Questions / Full Derivations</span>
+                    </div>
+                    <div class="warning-box" style="margin-top: 1.5rem;">
+                        <h4>⚠️ However, note:</h4>
+                        <ul>
+                            <li>Small segments of proofs <strong>can appear</strong> (e.g., differential equation of SHM, \( v_{max} \), \( x_{max} \) derivation segments)</li>
+                            <li>Parts of a "broad question" may appear as small segments</li>
+                            <li>Various types of <strong>graph drawings</strong> ARE included</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================= -->
+            <!--  SECTION G: EXAM DAY REMINDERS                -->
+            <!-- ============================================= -->
+            <section class="notes-section">
+                <h2>⚠️ G. Exam Day Reminders</h2>
+                <div class="warning-box">
+                    <h4>🔴 PENALTY if you forget:</h4>
+                    <ul>
+                        <li>Write <strong>Name + ID + Section + Course Code</strong> on your answer script (front or inside)</li>
+                        <li><strong>Return the question paper</strong> — attach it to the last page of your answer script</li>
+                    </ul>
+                </div>
+                <div class="formula-card">
+                    <h4>🎒 Bring with you:</h4>
+                    <ul style="columns: 2;">
+                        <li>✅ Pen (blue/black)</li>
+                        <li>✅ Pencil</li>
+                        <li>✅ Rubber/Eraser</li>
+                        <li>✅ Sharpener</li>
+                        <li>✅ Calculator</li>
+                        <li>✅ Scale/Ruler (for graphs)</li>
+                    </ul>
+                    <p style="color: #ef4444; margin-top: 0.5rem;">❌ Do NOT borrow tools from others!</p>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer>
+            <p>Made for PHY-2105 • Quiz-1 Prep • Summer 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        // Toggle checklist items
+        function toggleCheck(li) {
+            const checkbox = li.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            li.classList.toggle('checked', checkbox.checked);
+            updateProgress();
+            saveState();
+        }
+
+        // Toggle collapsible sections
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            const body = header.nextElementSibling;
+            if (body) body.classList.toggle('collapsed');
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const total = document.querySelectorAll('.checklist input[type="checkbox"]').length;
+            const checked = document.querySelectorAll('.checklist input[type="checkbox"]:checked').length;
+            const pct = total > 0 ? (checked / total) * 100 : 0;
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('progressText').textContent = checked + ' / ' + total + ' topics checked (' + Math.round(pct) + '%)';
+        }
+
+        // Save state to localStorage
+        function saveState() {
+            const states = {};
+            document.querySelectorAll('.checklist li').forEach((li, i) => {
+                states[i] = li.querySelector('input').checked;
+            });
+            localStorage.setItem('quiz1-progress', JSON.stringify(states));
+        }
+
+        // Load state from localStorage
+        function loadState() {
+            const saved = localStorage.getItem('quiz1-progress');
+            if (saved) {
+                const states = JSON.parse(saved);
+                document.querySelectorAll('.checklist li').forEach((li, i) => {
+                    if (states[i]) {
+                        li.querySelector('input').checked = true;
+                        li.classList.add('checked');
+                    }
+                });
+            }
+            updateProgress();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', loadState);
+    </script>
+</body>
+</html>
