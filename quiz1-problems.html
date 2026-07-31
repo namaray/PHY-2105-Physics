@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz-1 Solved Problems — PHY-2105</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-size: 1.15rem; overflow-x: auto; text-align: center; }
+        .math-inline { font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+        .formula-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1rem 0; transition: all 0.3s ease; }
+        .formula-card:hover { border-color: var(--accent-color); background: rgba(255, 255, 255, 0.06); }
+        .formula-card h4 { color: var(--accent-color); margin-bottom: 0.5rem; font-size: 1rem; }
+        .badge { display: inline-block; padding: 0.2rem 0.7rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-math { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+        .notes-section { margin-bottom: 3rem; }
+        .notes-container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+        .nav-bar { display: flex; justify-content: space-between; padding: 1rem 0; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-bar a { color: var(--accent-color); text-decoration: none; font-weight: 600; }
+        .nav-bar a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container notes-container">
+        <nav class="nav-bar">
+            <a href="quiz1-prep.html" class="back-btn">
+                <span>←</span> Back to Prep Guide
+            </a>
+        </nav>
+
+        <header class="notes-header">
+            <h1 style="text-align: center; margin-bottom: 2rem; font-family: 'Outfit', sans-serif;">🎯 Quiz-1 Solved Problems</h1>
+        </header>
+        <section class="notes-section">
+            <h2>SECTION 1: PPT Slide Examples (13 + 12 = 25 problems)</h2>
+        <div class="formula-card">
+            <h4>Example 1 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> A block of mass 680g fastened to spring k=65 N/m, pulled 11cm. Find (a) \(\omega\), f, T; (b) A; (c) v_max.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( \omega=\sqrt{(65/0.68)}=9.78 \text{ rad/s} \)</p>
+                <p>\( f=1.56 \text{ Hz} \)</p>
+                <p>\( T=0.64s \)</p>
+                <p>\( A=0.11m \)</p>
+                <p>\( v_{max}=\omega A=1.1 \text{ m/s} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Example 2 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Spring stretches 3.90cm with 10.0g. 25.0g oscillates. Find (a) T; (b) f, \(\omega\).</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( k=m_1g/\Delta y=2.513 \text{ N/m} \)</p>
+                <p>\( T=2\pi\sqrt{(0.025/2.513)}=0.627s \)</p>
+                <p>\( f=1.59Hz \)</p>
+                <p>\( \omega=10.0 \text{ rad/s} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Example 3 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> 0.42kg, spring stretches 2.1cm, a=9.0 m/s². Find k.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( k=ma/x=0.42\times9.0/0.021=180 \text{ N/m} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Example 4 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> k=19.6N/m, A=0.100m. Find (a) E; (b) K,U vs t; (c) v at x=0.050m; (d) K,U at x=A/2.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( E=\frac{1}{2}kA^2=9.80\times10^{-2} \text{ J} \)</p>
+                <p>\( v=\omega\sqrt{(A^2-x^2)}=0.70 \text{ m/s} \)</p>
+                <p>\( \text{at } A/2: U=2.45\times10^{-2} \text{ J}, K=7.35\times10^{-2} \text{ J} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Example 5 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> 500g, A=20cm, T=0.80s. At what x is v=1.0 m/s?</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( \omega=2\pi/0.80=7.85 \)</p>
+                <p>\( x=\pm\sqrt{(A^2-(v/\omega)^2)}=\pm15.4\text{cm} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Example 6 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Loudspeaker f=1.0kHz, A=0.20mm. (a) v_max; (b) where.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( v_{max}=A\omega=A(2\pi f)=1.3 \text{ m/s} \)</p>
+                <p>\( \text{at } x=0 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Example 7 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> FM radio 100 MHz. Find T.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( T=1/f=10 \text{ ns} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Example 8 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Loudspeaker f=1.0kHz, A=0.20mm. (a) a_max; (b) where.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( a_{max}=A\omega^2=7.9\times10^3 \text{ m/s}^2 \)</p>
+                <p>\( \text{at } x=\pm A \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Example 9 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> 2.00kg, k=196N/m, held 5.00cm. (a) \(\omega\),f,T; (b) x(t).</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( \omega=9.90 \)</p>
+                <p>\( f=1.58Hz \)</p>
+                <p>\( T=0.635s \)</p>
+                <p>\( x(t)=5.00\text{cm} \cos(9.90t) \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Example 10 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Glider pulled 20cm, 15 oscillations in 10s. (a) T; (b) v_max; (c) x,v at t=0.80s.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( T=0.667s \)</p>
+                <p>\( v_{max}=1.88 \text{ m/s} \)</p>
+                <p>\( x(0.80)=6.2\text{cm} \)</p>
+                <p>\( v(0.80)=-1.79 \text{ m/s} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Example 11 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Starts at x=A. When first at x=A/2?</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( t=T/6 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Example 12 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> y=12sin(2\(\pi\)t/10+\(\pi\)/4). Find A,f,y(1.25),v(2.5),a(5).</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( A=12 \)</p>
+                <p>\( f=0.1Hz \)</p>
+                <p>\( y(1.25)=12 \)</p>
+                <p>\( v(2.5)=-5.33 \)</p>
+                <p>\( a(5)=+3.35 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Example 13 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> y=10sin(10t-\(\pi\)/6). Find f,T,y_max,v_max,a_max.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( f\approx1.59Hz \)</p>
+                <p>\( T\approx0.628s \)</p>
+                <p>\( y_{max}=10 \)</p>
+                <p>\( v_{max}=100 \)</p>
+                <p>\( a_{max}=1000 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Ex 0.4 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Graph. m=0.25kg, A=0.2m, T=0.6s.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( x=0.2\cos(10\pi t/3) \)</p>
+                <p>\( V_{max}=2.094 \)</p>
+                <p>\( a_{max}=21.93 \)</p>
+                <p>\( E=0.548J \)</p>
+                <p>\( KE=PE \text{ at } \pm14.14\text{cm} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Ex 0.6 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Graph. m=500g, A=10, T=6s.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( x=10\cos(\pi t/3) \)</p>
+                <p>\( v(3)=0 \)</p>
+                <p>\( a(2)=+5.48 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Ex 0.7 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> m=680g, k=65, A=11cm.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( \omega=9.78 \)</p>
+                <p>\( v_{max}=1.1 \)</p>
+                <p>\( a_{max}=11 \)</p>
+                <p>\( \phi=0 \)</p>
+                <p>\( x(1.5)=-0.059m \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Ex 0.8 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> 0.25s between zero-v points, 36cm apart.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( T=0.50s \)</p>
+                <p>\( f=2.0Hz \)</p>
+                <p>\( A=18\text{cm} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Ex 0.9 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> A=2.20cm, f=6.60Hz.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( a_{max}=37.8 \text{ m/s}^2 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Ex 0.10 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> x=6cos(2.5t-\(\pi\)/3). v,a at t=1.4s.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( v=-9.53 \)</p>
+                <p>\( a=+28.96 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Ex 0.11 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> v_max=1, a_max=1.57.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( \omega=1.57 \)</p>
+                <p>\( T=4.0s \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Ex 0.13 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> m=2.72×10⁵kg, f=10Hz, x_m=0.20m.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( E=2.15\times10^7J \)</p>
+                <p>\( v=12.57 \text{ m/s} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Ex 0.14 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> k=460, x=0.150, v=-15, a=-125.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( f=4.60Hz \)</p>
+                <p>\( m=0.552\text{kg} \)</p>
+                <p>\( A=0.541m \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Ex 0.15 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> A=8m, at x=4m a=80.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( v=30.98 \)</p>
+                <p>\( T=1.405s \)</p>
+                <p>\( v_{max}=35.78 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Ex 0.17 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> m=6.4kg, \(\omega\)=56, A=15cm. KE at x=14cm; KE=0 where?</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( KE=29.10J \)</p>
+                <p>\( \text{at } \pm15\text{cm} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>Ex 0.18 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> m=500g, x=5cos(3\(\pi\)t/10+\(\pi\)/4). All params.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( A=5 \)</p>
+                <p>\( \omega=0.9425 \)</p>
+                <p>\( f=0.15Hz \)</p>
+                <p>\( T=6.67s \)</p>
+                <p>\( E=5.551J \)</p>
+                </div>
+            </details>
+        </div>
+        </section>
+        <section class="notes-section">
+            <h2>SECTION 2: Practice Sheet (22 problems)</h2>
+        <div class="formula-card">
+            <h4>P1 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> m=80g, v_max=70, a_max=720. Released from amp at t=0.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( \omega=10.286 \)</p>
+                <p>\( A=6.806 \)</p>
+                <p>\( x(3)=5.68 \)</p>
+                <p>\( a(4)=+688 \)</p>
+                <p>\( E=196J \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P2 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> y=2cos(20t+2\(\pi\)), m=50g.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( k=20 \)</p>
+                <p>\( E=40J \)</p>
+                <p>\( PE(0.3)=36.88 \)</p>
+                <p>\( KE(2)=22.21 \)</p>
+                <p>\( v_{max}=40 \)</p>
+                <p>\( a_{max}=800 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P3 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> m=70g, k=18.6, A=20cm.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( \omega=16.30 \)</p>
+                <p>\( v(3)=+3.19 \)</p>
+                <p>\( a(1.5)=-42.30 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P4 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> 0.24kg, A=6cm, T=0.30s.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( F_{max}=6.32N \)</p>
+                <p>\( k=105.28 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P5 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> y=3cos(2\(\pi\)t-\(\pi\)/3), m=0.45kg.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( PE(2)=19.99 \)</p>
+                <p>\( KE(2)=59.95 \)</p>
+                <p>\( KE=3PE \)</p>
+                <p>\( KE=PE \text{ at } t\approx7/24s \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P6 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Shaver 8mm back-forth, f=50Hz.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( A=4\text{mm} \)</p>
+                <p>\( v_{max}=1.257 \)</p>
+                <p>\( a_{max}=3947.8 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P7 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> m=38g, k=0.74 N/m, A=15cm.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( T=1.424 \)</p>
+                <p>\( f=0.702 \)</p>
+                <p>\( \omega=4.413 \)</p>
+                <p>\( v_{max}=0.662 \)</p>
+                <p>\( a_{max}=2.921 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P8 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> x=0.40cm at t=0, v=0, f=0.5Hz.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( T=2.0 \)</p>
+                <p>\( \omega=\pi \)</p>
+                <p>\( A=0.40\text{cm} \)</p>
+                <p>\( x(3)=-0.40 \)</p>
+                <p>\( v(3)=0 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P9 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> 0.25s between zero-v, 34cm.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( T=0.50 \)</p>
+                <p>\( f=2.0 \)</p>
+                <p>\( A=17\text{cm} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P10 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> v_max=1, a_max=1.57.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( \omega=1.57 \)</p>
+                <p>\( T=4.0s \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P12 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> m=680g, k=65, A=11cm. All params + v,a at specific times.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( \text{Full solution as above} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P13 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> A=4m, f=0.5Hz, \(\phi\)=\(\pi\)/4.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( T=2.0 \)</p>
+                <p>\( x=4\cos(\pi t+\pi/4) \)</p>
+                <p>\( v(5)=+8.89 \)</p>
+                <p>\( a(5)=+27.91 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P14 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> 2.00kg, k=196, A=5cm.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( \omega=9.90 \)</p>
+                <p>\( f=1.58 \)</p>
+                <p>\( T=0.635 \)</p>
+                <p>\( x=5\cos(9.90t)\text{cm} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P15 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Graph, m=500g, A=2m, T=4s.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( x=2\cos(\pi t/2) \)</p>
+                <p>\( a(2.5)=+3.49 \)</p>
+                <p>\( KE(1.5)=1.234J \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P18 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> k=360, x=0.150, v=-15, a=-125.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( f=4.60 \)</p>
+                <p>\( m=0.432 \)</p>
+                <p>\( A=0.541 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P20 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> A=10m, at x=2.5 a=80.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( v=54.77 \)</p>
+                <p>\( T=1.111 \)</p>
+                <p>\( v_{max}=56.57 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P23 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Graph, m=400g, A=10m, T=1s.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( x=10\sin(2\pi t) \)</p>
+                <p>\( a(1)=0 \)</p>
+                <p>\( KE(0.5)=789.6J \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P24 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> m=2.72×10⁵, f=10Hz, x_m=0.20m.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( E=2.15\times10^7 \)</p>
+                <p>\( v_{max}=12.57 \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P25 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> 500g, stretches 7cm, displaced 3cm, v₀=40cm/s.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( k=70 \)</p>
+                <p>\( \omega=11.83 \)</p>
+                <p>\( T=0.531 \)</p>
+                <p>\( U_0=0.0315 \)</p>
+                <p>\( K_0=0.040 \)</p>
+                <p>\( A=4.52\text{cm} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P26 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Graph, m=0.25kg, A=0.2m, T=0.6s. Comprehensive.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( E=0.548J \)</p>
+                <p>\( V_{max}=2.094 \)</p>
+                <p>\( KE=PE \text{ at } \pm14.14\text{cm} \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P28 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Graph, m=200g, A=0.5m, T=0.4s.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( V_{max}=7.854 \)</p>
+                <p>\( a_{max}=123.37 \)</p>
+                <p>\( E=6.169J \)</p>
+                <p>\( KE=PE \text{ at } \pm0.3536m \)</p>
+                </div>
+            </details>
+        </div>
+        <div class="formula-card">
+            <h4>P30 <span class="badge badge-math">Math</span></h4>
+            <p><strong>Problem:</strong> Velocity graph, m=500g. V_max=0.5, T=0.6s.</p>
+            <details>
+                <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>\( A=0.0477m \)</p>
+                <p>\( E=0.0625J \)</p>
+                <p>\( a_{max}=5.236 \)</p>
+                </div>
+            </details>
+        </div>
+        </section>
+    </div>
+</body>
+</html>
