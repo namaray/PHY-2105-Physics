@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz-2 Preparation Guide — PHY-2105</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.5rem 0; font-size: 1.15rem; overflow-x: auto; text-align: center; }
+        .math-inline { font-style: italic; background: rgba(255, 255, 255, 0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+
+        /* Exam info banner */
+        .exam-banner {
+            background: linear-gradient(135deg, rgba(255, 65, 108, 0.15), rgba(255, 75, 43, 0.15));
+            border: 1px solid rgba(255, 65, 108, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .exam-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 65, 108, 0.08) 0%, transparent 60%);
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        .exam-banner h2 { color: #ff416c; margin-bottom: 0.5rem; position: relative; z-index: 1; font-size: 1.6rem; }
+        .exam-banner .exam-date { font-size: 1.3rem; color: var(--text-primary); font-weight: 700; position: relative; z-index: 1; }
+        .exam-banner .exam-meta { color: var(--text-secondary); margin-top: 0.5rem; position: relative; z-index: 1; font-size: 0.95rem; }
+
+        /* Marks distribution bar */
+        .marks-bar {
+            display: flex;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            height: 40px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        .marks-math { background: linear-gradient(90deg, #6366f1, #8b5cf6); flex: 7.5; display: flex; align-items: center; justify-content: center; color: white; }
+        .marks-short { background: linear-gradient(90deg, #f59e0b, #ef4444); flex: 2.5; display: flex; align-items: center; justify-content: center; color: white; }
+
+        /* Checklist styling */
+        .checklist { list-style: none; padding: 0; }
+        .checklist li {
+            padding: 0.8rem 1rem;
+            margin: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .checklist li:hover { background: rgba(255, 255, 255, 0.07); transform: translateX(4px); }
+        .checklist li input[type="checkbox"] {
+            width: 18px; height: 18px;
+            accent-color: var(--accent-color);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .checklist li.checked { opacity: 0.5; text-decoration: line-through; border-left-color: #22c55e; }
+
+        /* Excluded topics */
+        .excluded-tag {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            border: 1px solid rgba(239, 68, 68, 0.25);
+        }
+
+        /* Important warnings */
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+        }
+        .warning-box h4 { color: #f59e0b; margin-bottom: 0.4rem; }
+
+        /* Formula card */
+        .formula-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        .formula-card:hover { border-color: var(--accent-color); background: rgba(255, 255, 255, 0.06); }
+        .formula-card h4 { color: var(--accent-color); margin-bottom: 0.5rem; font-size: 1rem; }
+
+        /* Problem type badge */
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-math { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+        .badge-short { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+        .badge-graph { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+        .badge-proof { background: rgba(236, 72, 153, 0.2); color: #f472b6; }
+
+        /* Collapsible sections */
+        .collapsible-header {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            user-select: none;
+        }
+        .collapsible-header::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+            color: var(--text-secondary);
+        }
+        .collapsible-header.collapsed::after { transform: rotate(-90deg); }
+        .collapsible-body { overflow: hidden; transition: max-height 0.4s ease; }
+        .collapsible-body.collapsed { max-height: 0 !important; }
+
+        /* Progress tracker */
+        .progress-bar-container {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            height: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), #6366f1);
+            border-radius: 20px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+        .progress-text { font-size: 0.85rem; color: var(--text-secondary); text-align: right; margin-top: 0.3rem; }
+
+        /* Two-column grid for formula cards */
+        .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 768px) { .formula-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+    
+    <div class="container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn">
+                <span>←</span> Back to Home
+            </a>
+            <a href="Damped Harmonic Motion_DHM_b.pdf" target="_blank" class="pdf-btn">
+                View Slides PDF
+            </a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>🎯 Quiz-2 Preparation Guide</h1>
+            <p class="subtitle">PHY-2105 • Phase Shift & Difference • Simple Pendulum • DHM</p>
+        </header>
+
+        <!-- MARKS DISTRIBUTION -->
+        <section class="notes-section">
+            <h2>📊 Marks Distribution</h2>
+            <div class="marks-bar">
+                <div class="marks-math">70–80% Math Problems</div>
+                <div class="marks-short">20–30% Short Q</div>
+            </div>
+        </section>
+
+        <!-- STUDY PROGRESS TRACKER -->
+        <section class="notes-section">
+            <h2>📈 Study Progress</h2>
+            <div class="progress-bar-container">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0 / 0 topics checked</div>
+        </section>
+
+        <!-- ============================================= -->
+        <!--  SECTION A: THEORY & FORMULAS                 -->
+        <!-- ============================================= -->
+        <main class="notes-container">
+
+            <section class="notes-section">
+                <h2 class="collapsible-header" onclick="toggleSection(this)">📐 A. Core Theory & Formulas</h2>
+                <div class="collapsible-body">
+                    
+                    <!-- 1. Phase Shift & Phase Difference -->
+                    <div class="formula-card">
+                        <h4>1. Phase Shift & Phase Difference</h4>
+                        <p>Phase angle \( \phi \) in \( y = A\sin(\omega t + \phi) \)</p>
+                        <ul>
+                            <li>For \( y = 0 \): \( \sin(\omega t + \phi) = 0 \), so \( \omega t = -\phi \rightarrow \) wave starts from \( \omega t = -\phi \)</li>
+                            <li>Positive \( \phi \rightarrow \) wave shifts LEFT (leads)</li>
+                            <li>Negative \( \phi \rightarrow \) wave shifts RIGHT (lags)</li>
+                        </ul>
+                        <p>Phase difference between two waves: \( \Delta\phi = \phi_2 - \phi_1 \)</p>
+                        <p>4 graphical cases:</p>
+                        <ul>
+                            <li>\( y = A\sin(\omega t + \pi/4) \)</li>
+                            <li>\( y = A\sin(\omega t - \pi/4) \)</li>
+                            <li>\( y = A\sin(\omega t + \pi/2) \)</li>
+                            <li>\( y = A\sin(\omega t + \pi/3) \)</li>
+                        </ul>
+                    </div>
+
+                    <!-- 2. Simple Pendulum -->
+                    <div class="formula-card">
+                        <h4>2. Simple Pendulum</h4>
+                        <p>Valid for small angles only (\( \theta < 15^\circ \))</p>
+                        <ul>
+                            <li>Period: \( T = 2\pi\sqrt{\frac{L}{g}} \)</li>
+                            <li>Frequency: \( f = \frac{1}{2\pi}\sqrt{\frac{g}{L}} \)</li>
+                            <li>Angular frequency: \( \omega = \sqrt{\frac{g}{L}} \)</li>
+                        </ul>
+                    </div>
+
+                    <!-- 3. DHM — Mechanical System -->
+                    <div class="formula-card">
+                        <h4>3. DHM — Mechanical System (Spring-Mass with Damping)</h4>
+                        <p>Definition: amplitude decreases with time due to friction.</p>
+                        <ul>
+                            <li>Damping force: \( F = -bv \) where \( b \) is damping coefficient</li>
+                            <li>Newton's second law: \( ma = -kx - bv \)</li>
+                            <li>Differential equation: \( \frac{d^2x}{dt^2} + \frac{b}{m}\frac{dx}{dt} + \frac{k}{m}x = 0 \)</li>
+                            <li>Standard form: \( \frac{d^2x}{dt^2} + 2\alpha\frac{dx}{dt} + \omega_0^2x = 0 \)</li>
+                        </ul>
+                        <p>Where: \( \alpha = \frac{b}{2m} \) (damping factor), \( \omega_0 = \sqrt{\frac{k}{m}} \) (natural angular frequency)</p>
+                        <p>Solution: \( x(t) = Ae^{-\alpha t}\cos(\omega_1 t + \phi) \)</p>
+                        <ul>
+                            <li>Damped angular frequency: \( \omega_1 = \sqrt{\omega_0^2 - \alpha^2} \)</li>
+                            <li>Damped frequency: \( f_1 = \frac{\omega_1}{2\pi} \)</li>
+                            <li>Damped period: \( T_1 = \frac{2\pi}{\omega_1} \)</li>
+                            <li>Damping amplitude: \( A_d(t) = Ae^{-\alpha t} \)</li>
+                            <li>Energy: \( E(t) = E_0e^{-2\alpha t} = E_0e^{-\frac{bt}{m}} \)</li>
+                            <li>Lifetime/relaxation time: \( \tau = \frac{m}{b} = \frac{1}{2\alpha} \)</li>
+                        </ul>
+                        <p>Three types:</p>
+                        <ul>
+                            <li><strong>Underdamped:</strong> \( \omega_0 > \alpha \) (oscillatory with decaying amplitude)</li>
+                            <li><strong>Critically damped:</strong> \( \omega_0 = \alpha \) (no oscillation, fastest return)</li>
+                            <li><strong>Overdamped:</strong> \( \omega_0 < \alpha \) (no oscillation, slow return)</li>
+                        </ul>
+                    </div>
+
+                    <!-- 4. DHM — RLC Circuit -->
+                    <div class="formula-card">
+                        <h4>4. DHM — RLC Circuit (Electrical System)</h4>
+                        <p>Kirchhoff's voltage law: \( iR + \frac{Q}{C} + L\frac{di}{dt} = 0 \)</p>
+                        <p>Differential equation: \( \frac{d^2Q}{dt^2} + \frac{R}{L}\frac{dQ}{dt} + \frac{1}{LC}Q = 0 \)</p>
+                        <p>Comparing: \( \alpha = \frac{R}{2L} \), \( \omega_0 = \frac{1}{\sqrt{LC}} \)</p>
+                        <p>Three cases:</p>
+                        <ul>
+                            <li>Oscillatory: \( \frac{1}{LC} > \frac{R^2}{4L^2} \)</li>
+                            <li>Critical damping: \( \frac{1}{LC} = \frac{R^2}{4L^2} \)</li>
+                            <li>Overdamped: \( \frac{1}{LC} < \frac{R^2}{4L^2} \)</li>
+                        </ul>
+                        <p>Solution: \( Q(t) = Ae^{-\frac{R}{2L}t}\cos(\omega_1 t + \phi) \)</p>
+                        <ul>
+                            <li>\( \omega_1 = \sqrt{\frac{1}{LC} - \frac{R^2}{4L^2}} \)</li>
+                            <li>Frequency: \( f_1 = \frac{1}{2\pi}\sqrt{\frac{1}{LC} - \frac{R^2}{4L^2}} \)</li>
+                            <li>Resonant frequency: \( f_0 = \frac{1}{2\pi\sqrt{LC}} \)</li>
+                            <li>Critical resistance (series): \( R_c = 2\sqrt{\frac{L}{C}} \)</li>
+                            <li>Critical resistance (parallel): \( R_c = \frac{1}{2}\sqrt{\frac{L}{C}} \)</li>
+                        </ul>
+                        <p>Mechanical-Electrical analogy: \( m\leftrightarrow L \), \( b\leftrightarrow R \), \( k\leftrightarrow \frac{1}{C} \), \( x\leftrightarrow Q \), \( v\leftrightarrow i \)</p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================= -->
+            <!--  SECTION B: QUICK REFERENCE FORMULA SHEET     -->
+            <!-- ============================================= -->
+            <section class="notes-section">
+                <h2 class="collapsible-header" onclick="toggleSection(this)">📋 B. Quick-Reference Formula Sheet</h2>
+                <div class="collapsible-body">
+                    <div class="formula-grid">
+                        <div class="formula-card">
+                            <h4>1. Phase</h4>
+                            <div class="math-block">\[ y = A \sin(\omega t + \phi) \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>2. Simple Pendulum</h4>
+                            <div class="math-block">\[ T = 2\pi\sqrt{\frac{L}{g}} \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>3. DHM Equation</h4>
+                            <div class="math-block">\[ x(t) = Ae^{-\alpha t}\cos(\omega_1 t + \phi) \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>4. Damping Factor</h4>
+                            <div class="math-block">\[ \alpha = \frac{b}{2m} \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>5. Natural Frequency</h4>
+                            <div class="math-block">\[ \omega_0 = \sqrt{\frac{k}{m}} \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>6. Damped Frequency</h4>
+                            <div class="math-block">\[ \omega_1 = \sqrt{\omega_0^2 - \alpha^2} \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>7. Lifetime</h4>
+                            <div class="math-block">\[ \tau = \frac{m}{b} = \frac{1}{2\alpha} \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>8. Energy Decay</h4>
+                            <div class="math-block">\[ E(t) = E_0e^{-\frac{bt}{m}} \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>9. RLC Equation</h4>
+                            <div class="math-block">\[ \frac{d^2Q}{dt^2} + \frac{R}{L}\frac{dQ}{dt} + \frac{1}{LC}Q = 0 \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>10. RLC α</h4>
+                            <div class="math-block">\[ \alpha = \frac{R}{2L} \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>11. RLC ω₀</h4>
+                            <div class="math-block">\[ \omega_0 = \frac{1}{\sqrt{LC}} \]</div>
+                        </div>
+                        <div class="formula-card">
+                            <h4>12. Critical R (series)</h4>
+                            <div class="math-block">\[ R_c = 2\sqrt{\frac{L}{C}} \]</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================= -->
+            <!--  SECTION C: PROBLEM TYPES TO EXPECT           -->
+            <!-- ============================================= -->
+            <section class="notes-section">
+                <h2 class="collapsible-header" onclick="toggleSection(this)">🧮 C. Problem Types to Expect</h2>
+                <div class="collapsible-body">
+                    <ul class="checklist" data-group="problems">
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Phase shift graph drawing</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Phase difference calculation</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Simple pendulum calculations</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> DHM parameter extraction from equation</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> DHM graph reading / equation construction</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> DHM damping amplitude, energy, lifetime</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> RLC circuit oscillatory check</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> RLC frequency of oscillation</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> RLC critical damping resistance</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> DHM types identification</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> DHM differential equation</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> RLC differential equation</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Mechanical-electrical analogy</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> DHM solution characteristics</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Types of damping conditions</span></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ============================================= -->
+            <!--  SECTION D: SLIDE & SUBSIDIARY EXAMPLES       -->
+            <!-- ============================================= -->
+            <section class="notes-section">
+                <h2 class="collapsible-header" onclick="toggleSection(this)">📖 D. Slide & Subsidiary Example Problems (32 Problems)</h2>
+                <div class="collapsible-body">
+                    <ul class="checklist" data-group="slides">
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.1</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.3</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.5</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.6</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.12</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.16</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 14</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 15</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 16</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.17</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.18</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.19</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.20</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.21</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.22</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.23</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.24</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.25</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.26</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.27</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.28</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.29</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.30</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.31</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.32</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.33</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.34</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.35</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.36</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.37</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.41</span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Example 0.42</span></li>
+                    </ul>
+                    <a href="quiz2-problems.html" style="display: block; text-align: center; padding: 1rem; margin-top: 1.5rem; background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15)); border: 1px solid rgba(99,102,241,0.3); border-radius: 12px; color: var(--accent-color); font-weight: 700; text-decoration: none; transition: all 0.3s ease;">
+                        📖 View All Solved Problems →
+                    </a>
+                </div>
+            </section>
+
+            <!-- ============================================= -->
+            <!--  SECTION E: PRACTICE PROBLEM SHEET            -->
+            <!-- ============================================= -->
+            <section class="notes-section">
+                <h2 class="collapsible-header" onclick="toggleSection(this)">📝 E. Practice Problem Sheet 2 (36 Problems)</h2>
+                <div class="collapsible-body">
+                    <p>All problems from Practice Sheet 2 with syllabus mapping:</p>
+                    <ul class="checklist" data-group="practice">
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P1 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P2 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P3 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P4 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P5 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P6 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P7 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P8 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P9 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P10 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P11 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P12 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P13 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P14 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P15 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P16 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P17 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P18 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P19 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P20 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P21 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P22 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P23 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P24 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P25 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P26 <span class="badge badge-math" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Midterm</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P27 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P28 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P29 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P30 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P31 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P32 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P33 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P34 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P35 <span class="badge badge-math">CT02</span></span></li>
+                        <li onclick="toggleCheck(this)"><input type="checkbox"> <span>Problem P36 <span class="badge badge-math">CT02</span></span></li>
+                    </ul>
+                    <a href="quiz2-problems.html" style="display: block; text-align: center; padding: 1rem; margin-top: 1.5rem; background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15)); border: 1px solid rgba(99,102,241,0.3); border-radius: 12px; color: var(--accent-color); font-weight: 700; text-decoration: none; transition: all 0.3s ease;">
+                        📖 View All Solved Problems →
+                    </a>
+                </div>
+            </section>
+
+            <!-- ============================================= -->
+            <!--  SECTION F: EXCLUDED TOPICS                   -->
+            <!-- ============================================= -->
+            <section class="notes-section">
+                <h2 class="collapsible-header" onclick="toggleSection(this)">🚫 F. Excluded Topics</h2>
+                <div class="collapsible-body">
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+                        <span class="excluded-tag">❌ Lissajous Figures</span>
+                        <span class="excluded-tag">❌ Advanced DHM Characteristics</span>
+                        <span class="excluded-tag">❌ Progressive Wave Math</span>
+                        <span class="excluded-tag">❌ Standing Waves / Stationary Waves</span>
+                        <span class="excluded-tag">❌ Wave Ranking</span>
+                        <span class="excluded-tag">❌ Amplitude A Calculation / Proof</span>
+                        <span class="excluded-tag">❌ Phase Leading / Lagging Drawing</span>
+                        <span class="excluded-tag">❌ Broad Questions / Full Proofs / Derivations</span>
+                        <span class="excluded-tag">❌ Node / Antinode Point Finding</span>
+                    </div>
+                    <div class="warning-box" style="margin-top: 1.5rem;">
+                        <h4>⚠️ Warning:</h4>
+                        <p>Special remarks about ID/Section/Course code penalty may apply. Double check your exam details.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        // Toggle checklist items
+        function toggleCheck(li) {
+            const checkbox = li.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            li.classList.toggle('checked', checkbox.checked);
+            updateProgress();
+            saveState();
+        }
+
+        // Toggle collapsible sections
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            const body = header.nextElementSibling;
+            if (body) body.classList.toggle('collapsed');
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const total = document.querySelectorAll('.checklist input[type="checkbox"]').length;
+            const checked = document.querySelectorAll('.checklist input[type="checkbox"]:checked').length;
+            const pct = total > 0 ? (checked / total) * 100 : 0;
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('progressText').textContent = checked + ' / ' + total + ' topics checked (' + Math.round(pct) + '%)';
+        }
+
+        // Save state to localStorage
+        function saveState() {
+            const states = {};
+            document.querySelectorAll('.checklist li').forEach((li, i) => {
+                states[i] = li.querySelector('input').checked;
+            });
+            localStorage.setItem('quiz2-progress', JSON.stringify(states));
+        }
+
+        // Load state from localStorage
+        function loadState() {
+            const saved = localStorage.getItem('quiz2-progress');
+            if (saved) {
+                const states = JSON.parse(saved);
+                document.querySelectorAll('.checklist li').forEach((li, i) => {
+                    if (states[i]) {
+                        li.querySelector('input').checked = true;
+                        li.classList.add('checked');
+                    }
+                });
+            }
+            updateProgress();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', loadState);
+    </script>
+</body>
+</html>
