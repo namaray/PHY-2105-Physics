@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midterm Preparation Guide — PHY-2105</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255,255,255,0.05); padding: 0.9rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 0.8rem 0; font-size: 1.05rem; overflow-x: auto; text-align: center; }
+        .formula-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1rem 0; }
+        .formula-card h4 { color: var(--accent-color); margin-bottom: 0.4rem; font-size: 0.98rem; }
+        .formula-card p.note { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.4rem; }
+        .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 768px) { .formula-grid { grid-template-columns: 1fr; } }
+        .badge { display: inline-block; padding: 0.2rem 0.7rem; border-radius: 20px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-math { background: rgba(99,102,241,0.2); color: #818cf8; }
+        .badge-short { background: rgba(236,72,153,0.2); color: #f472b6; }
+        .badge-graph { background: rgba(34,197,94,0.2); color: #4ade80; }
+        .notes-section { margin-bottom: 3rem; }
+        .notes-container { max-width: 880px; margin: 0 auto; padding: 2rem; }
+        .nav-bar { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; padding: 1rem 0; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-bar a { color: var(--accent-color); text-decoration: none; font-weight: 600; }
+        .nav-bar a:hover { text-decoration: underline; }
+        .warning-box { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); border-radius: 12px; padding: 1.1rem 1.4rem; margin: 1.2rem 0; }
+        .warning-box h4 { color: #f59e0b; margin-bottom: 0.4rem; }
+        .excluded-box { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.28); border-radius: 12px; padding: 1.1rem 1.4rem; margin: 1.2rem 0; }
+        .excluded-box h4 { color: #ef4444; margin-bottom: 0.4rem; }
+        .good-box { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px; padding: 1.1rem 1.4rem; margin: 1.2rem 0; }
+        .good-box h4 { color: #4ade80; margin-bottom: 0.4rem; }
+        .collapsible-header { cursor: pointer; user-select: none; }
+        .collapsible-header::after { content: ' ▾'; font-size: 0.8em; color: var(--text-secondary); }
+        .collapsible-header.collapsed::after { content: ' ▸'; }
+        .collapsible-body.collapsed { display: none; }
+        .checklist { list-style: none; padding: 0; }
+        .checklist li { display: flex; gap: 0.7rem; align-items: center; padding: 0.6rem 0.9rem; margin: 0.35rem 0; background: rgba(255,255,255,0.04); border-left: 3px solid rgba(255,255,255,0.12); border-radius: 8px; cursor: pointer; transition: all 0.2s ease; }
+        .checklist li:hover { background: rgba(255,255,255,0.07); transform: translateX(4px); }
+        .checklist li input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent-color); cursor: pointer; flex-shrink: 0; }
+        .checklist li.checked { opacity: 0.5; text-decoration: line-through; border-left-color: #22c55e; }
+        .progress-bar-container { width: 100%; height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; }
+        .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #6366f1, #a855f7); transition: width 0.4s ease; }
+        .progress-text { font-size: 0.85rem; color: var(--text-secondary); text-align: right; margin-top: 0.3rem; }
+        table.tbl { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.93rem; }
+        table.tbl th, table.tbl td { padding: 0.55rem 0.7rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        table.tbl th { color: var(--accent-color); }
+        .part-header { color: var(--accent-color); border-bottom: 2px solid rgba(99,102,241,0.35); padding-bottom: 0.4rem; margin: 2.5rem 0 1.2rem; font-size: 1.15rem; }
+    </style>
+</head>
+<body>
+    <div class="container notes-container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn"><span>←</span> Back to Home</a>
+            <a href="midterm-derivations.html">Derivation Sheet</a>
+            <a href="quiz2-problems.html">Solved Problems</a>
+            <a href="Waves and Oscillation_b.pdf" target="_blank">Main Slides PDF</a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>📗 Midterm Preparation Guide</h1>
+            <p class="subtitle">PHY-2105 • SHM · DHM · Driven Oscillations &amp; Resonance · LC &amp; RLC · Wave Equation</p>
+        </header>
+
+        <!-- SCOPE -->
+        <section class="notes-section">
+            <h2>🎯 What's in scope</h2>
+            <div class="good-box">
+                <h4>✅ Included — everything in the shared slides</h4>
+                <p>Part 1 of the <em>Waves and Oscillation</em> slide is listed as: <strong>Simple harmonic oscillators ·
+                Damped oscillators · Driven oscillators · Resonance · The Wave Equation</strong>. Together with the
+                <em>DHM</em> slide and the <em>Phase, Phase Difference &amp; Phase Shift</em> slide, that is your syllabus.</p>
+                <p style="margin-top:0.6rem;">In short: <strong>SHM, DHM, driven oscillations &amp; resonance, LC and RLC circuits,
+                phase, and the wave equation.</strong></p>
+            </div>
+            <div class="excluded-box">
+                <h4>🚫 Excluded — exactly two things</h4>
+                <p><strong>Classification of Motion</strong> and <strong>Classification of Waves</strong>. You can skip those slides
+                entirely; nothing else depends on them.</p>
+                <p style="margin-top:0.5rem;"><strong>Electricity &amp; Magnetism</strong> is not in the midterm either.</p>
+            </div>
+            <div class="warning-box">
+                <h4>📐 Notation used throughout</h4>
+                <p>\( \alpha = \dfrac{b}{2m} \) is the damping factor (some books write \( \gamma \) — same number).
+                \( \omega_0 \) is the natural angular frequency, \( \omega_d \) the damped one, and \( \omega \) a
+                <em>driving</em> frequency when one is present.</p>
+            </div>
+        </section>
+
+        <!-- PROGRESS -->
+        <section class="notes-section">
+            <h2>📈 Study Progress</h2>
+            <div class="progress-bar-container"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="progress-text" id="progressText">0 / 0 topics checked</div>
+        </section>
+
+        <!-- ================= FORMULA SHEET ================= -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">📋 A. Formula Sheet</h2>
+            <div class="collapsible-body">
+
+                <h3 class="part-header">A1 — Simple Harmonic Motion</h3>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>1. SHM equation</h4>
+                        <div class="math-block">\[ \ddot{x} + \omega_0^2x = 0 \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>2. Solution</h4>
+                        <div class="math-block">\[ x = A\cos(\omega_0t + \phi) \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>3. Natural frequency</h4>
+                        <div class="math-block">\[ \omega_0 = \sqrt{\frac{k}{m}},\quad T = 2\pi\sqrt{\frac{m}{k}} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>4. Velocity &amp; acceleration</h4>
+                        <div class="math-block">\[ v_{max} = A\omega_0,\quad a_{max} = A\omega_0^2 \]</div>
+                        <p class="note">and \( a = -\omega_0^2x \) at any instant.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>5. Energy</h4>
+                        <div class="math-block">\[ E = \tfrac{1}{2}kA^2 = \tfrac{1}{2}m\omega_0^2A^2 \]</div>
+                        <p class="note">Constant. \(K\) and \(U\) each average \( \tfrac{1}{4}kA^2 \).</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>6. Velocity at position x</h4>
+                        <div class="math-block">\[ v(x) = \pm\omega_0\sqrt{A^2 - x^2} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>7. Simple pendulum</h4>
+                        <div class="math-block">\[ \omega_0 = \sqrt{\frac{g}{L}},\quad T = 2\pi\sqrt{\frac{L}{g}} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>8. Compound pendulum</h4>
+                        <div class="math-block">\[ \omega_0 = \sqrt{\frac{mgL}{I}},\quad T = 2\pi\sqrt{\frac{I}{mgL}} \]</div>
+                        <p class="note">Reduces to #7 when \( I = mL^2 \).</p>
+                    </div>
+                </div>
+
+                <h3 class="part-header">A2 — Damped Harmonic Motion</h3>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>9. DHM equation</h4>
+                        <div class="math-block">\[ m\ddot{x} + b\dot{x} + kx = 0 \]</div>
+                        <p class="note">i.e. \( \ddot{x} + 2\alpha\dot{x} + \omega_0^2x = 0 \)</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>10. Damping factor</h4>
+                        <div class="math-block">\[ \alpha = \frac{b}{2m} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>11. Underdamped solution</h4>
+                        <div class="math-block">\[ x = A_0e^{-\alpha t}\cos(\omega_dt + \phi) \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>12. Damped frequency</h4>
+                        <div class="math-block">\[ \omega_d = \sqrt{\omega_0^2 - \alpha^2},\quad T_d = \frac{2\pi}{\omega_d} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>13. Damping conditions</h4>
+                        <div class="math-block">\[ \alpha &lt; \omega_0 : \text{under} \\ \alpha = \omega_0 : \text{critical} \\ \alpha &gt; \omega_0 : \text{over} \]</div>
+                        <p class="note">Equivalently \( b^2 \) vs \( 4mk \).</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>14. Critical damping</h4>
+                        <div class="math-block">\[ b_c = 2m\omega_0 = 2\sqrt{mk} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>15. Amplitude &amp; energy decay</h4>
+                        <div class="math-block">\[ A(t) = A_0e^{-\alpha t},\quad E(t) = E_0e^{-2\alpha t} \]</div>
+                        <p class="note">Energy decays at <strong>twice</strong> the amplitude rate.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>16. Relaxation time (lifetime)</h4>
+                        <div class="math-block">\[ \tau = \frac{m}{b} = \frac{1}{2\alpha} \]</div>
+                        <p class="note"><strong>Energy</strong> definition — see the warning below.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>17. Logarithmic decrement</h4>
+                        <div class="math-block">\[ \delta = \ln\frac{A_n}{A_{n+1}} = \alpha T_d \]</div>
+                        <p class="note">How you get \( \alpha \) off a graph, then \( b = 2m\alpha \).</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>18. Damping force</h4>
+                        <div class="math-block">\[ F_d = -b\,v \]</div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Two decay times — the classic trap</h4>
+                    <p>Amplitude and energy do not decay at the same rate, so "falls to \(1/e\)" has two answers:</p>
+                    <table class="tbl">
+                        <tr><th>what decays</th><th>law</th><th>reaches \(1/e\) at</th><th>halves at</th></tr>
+                        <tr><td>amplitude</td><td>\(A_0e^{-\alpha t}\)</td><td>\(1/\alpha = 2m/b\)</td><td>\(\ln 2/\alpha\)</td></tr>
+                        <tr style="background:rgba(245,158,11,0.12);"><td><strong>energy</strong> ← #16</td><td>\(E_0e^{-2\alpha t}\)</td><td><strong>\(1/2\alpha = m/b\)</strong></td><td>\(\ln 2/2\alpha\)</td></tr>
+                    </table>
+                    <p>Your slides define lifetime by the <strong>energy</strong>, so use \( \tau = m/b \) unless the question
+                    explicitly says amplitude.</p>
+                </div>
+
+                <h3 class="part-header">A3 — Driven Oscillations &amp; Resonance</h3>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>19. Driven equation</h4>
+                        <div class="math-block">\[ m\ddot{x} + b\dot{x} + kx = F_0\sin\omega t \]</div>
+                        <p class="note">\( \omega \) is the <em>driving</em> frequency, not \( \omega_0 \).</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>20. Steady-state amplitude</h4>
+                        <div class="math-block">\[ A_0 = \frac{F_0}{m\sqrt{(\omega^2-\omega_0^2)^2 + \left(\frac{b\omega}{m}\right)^2}} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>21. Amplitude resonance</h4>
+                        <div class="math-block">\[ \omega_r = \sqrt{\omega_0^2 - 2\alpha^2} \]</div>
+                        <p class="note">Slightly below \( \omega_0 \); no peak at all if \( 2\alpha^2 &gt; \omega_0^2 \).</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>22. Velocity resonance</h4>
+                        <div class="math-block">\[ \omega = \omega_0 \]</div>
+                        <p class="note">Exactly at \( \omega_0 \), unshifted by damping.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>23. Quality factor</h4>
+                        <div class="math-block">\[ Q = \frac{m\omega_0}{b} = \frac{\omega_0}{2\alpha} \]</div>
+                        <p class="note">Large \(Q\) → sharp peak. Small \(Q\) → broad peak.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>24. Phase lag</h4>
+                        <div class="math-block">\[ \tan\phi_0 = \frac{b\omega}{m(\omega_0^2 - \omega^2)} \]</div>
+                    </div>
+                </div>
+
+                <h3 class="part-header">A4 — LC and RLC Circuits</h3>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>25. LC circuit</h4>
+                        <div class="math-block">\[ \ddot{Q} + \frac{1}{LC}Q = 0 \]</div>
+                        <p class="note">Electrical SHM — no damping at all.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>26. LC frequency</h4>
+                        <div class="math-block">\[ \omega_0 = \frac{1}{\sqrt{LC}},\quad T = 2\pi\sqrt{LC} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>27. RLC equation</h4>
+                        <div class="math-block">\[ \frac{d^2Q}{dt^2} + \frac{R}{L}\frac{dQ}{dt} + \frac{1}{LC}Q = 0 \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>28. Series \( \alpha \) and \( \omega_0 \)</h4>
+                        <div class="math-block">\[ \alpha = \frac{R}{2L},\quad \omega_0 = \frac{1}{\sqrt{LC}} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>29. Series: oscillatory?</h4>
+                        <div class="math-block">\[ R &lt; 2\sqrt{\frac{L}{C}} \]</div>
+                        <p class="note">If \( R &gt; R_c \) → overdamped, no oscillation.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>30. Series: critical R</h4>
+                        <div class="math-block">\[ R_c = 2\sqrt{\frac{L}{C}} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>31. Resonant frequency</h4>
+                        <div class="math-block">\[ f_0 = \frac{1}{2\pi\sqrt{LC}} \]</div>
+                        <p class="note">Exists even when the circuit is overdamped.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>32. Series: frequency of oscillation</h4>
+                        <div class="math-block">\[ f_d = \frac{1}{2\pi}\sqrt{\frac{1}{LC} - \left(\frac{R}{2L}\right)^2} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>33. Parallel: oscillatory?</h4>
+                        <div class="math-block">\[ R &gt; \frac{1}{2}\sqrt{\frac{L}{C}} \]</div>
+                        <p class="note"><strong>Inequality flips.</strong> Parallel needs a <em>large</em> R.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>34. Parallel: \( \alpha \) and critical R</h4>
+                        <div class="math-block">\[ \alpha = \frac{1}{2RC},\quad R_c = \frac{1}{2}\sqrt{\frac{L}{C}} \]</div>
+                        <p class="note">\( \alpha \) uses \( 1/2RC \) here, not \( R/2L \).</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>35. Parallel: frequency of oscillation</h4>
+                        <div class="math-block">\[ f_d = \frac{1}{2\pi}\sqrt{\frac{1}{LC} - \frac{1}{4R^2C^2}} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>36. Charge decay</h4>
+                        <div class="math-block">\[ Q(t) = Q_0e^{-\frac{R}{2L}t}\cos(\omega_dt) \]</div>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚡ Series vs. parallel — the one thing to remember</h4>
+                    <p>Both share \( \omega_0 = 1/\sqrt{LC} \). Only the damping term changes: series \( \alpha = R/2L \),
+                    parallel \( \alpha = 1/2RC \). Everything else follows from \( \omega_d = \sqrt{\omega_0^2-\alpha^2} \),
+                    and it oscillates whenever \( \alpha &lt; \omega_0 \).</p>
+                    <p style="margin-top:0.5rem;">Because \( R \) is on top in series but on the bottom in parallel, the condition
+                    <strong>reverses</strong>, and the critical values differ by a factor of 4.</p>
+                </div>
+
+                <h3 class="part-header">A5 — Wave Equation</h3>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>37. Progressive wave</h4>
+                        <div class="math-block">\[ y = A\sin(\omega t - kx) \]</div>
+                        <p class="note">\( -kx \) → travels \( +x \); \( +kx \) → travels \( -x \).</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>38. Alternative forms</h4>
+                        <div class="math-block">\[ y = A\sin 2\pi\left(\frac{t}{T}-\frac{x}{\lambda}\right) = A\sin\frac{2\pi}{\lambda}(vt-x) \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>39. Wave number &amp; speed</h4>
+                        <div class="math-block">\[ k = \frac{2\pi}{\lambda},\quad v = \frac{\omega}{k} = f\lambda \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>40. Differential wave equation</h4>
+                        <div class="math-block">\[ \frac{\partial^2y}{\partial t^2} = v^2\frac{\partial^2y}{\partial x^2} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>41. Particle velocity</h4>
+                        <div class="math-block">\[ \frac{\partial y}{\partial t} = -v\frac{\partial y}{\partial x} \]</div>
+                        <p class="note">\( v_{particle,max} = A\omega \) — unrelated to the wave speed.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>42. Phase difference</h4>
+                        <div class="math-block">\[ \Delta\phi = \frac{2\pi}{\lambda}\Delta x = \frac{2\pi}{T}\Delta t \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>43. Standing wave</h4>
+                        <div class="math-block">\[ y = 2A\sin(\omega t)\cos(kx) \]</div>
+                        <p class="note">Nodes at \( \lambda/4, 3\lambda/4,\ldots \); antinodes at \( 0, \lambda/2,\ldots \)</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>44. Lissajous figures</h4>
+                        <div class="math-block">\[ x = A_1\cos\omega t,\ \ y = A_2\cos(\omega t+\phi) \]</div>
+                        <p class="note">\( \phi=0 \) → line; \( \phi=\pi/2 \) → ellipse (circle if \( A_1=A_2 \)).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PROBLEM TYPES ================= -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">🧮 B. Problem Types to Expect</h2>
+            <div class="collapsible-body">
+                <ul class="checklist" data-group="problems">
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> SHM parameter extraction from an equation</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> SHM energy: \(E\), \(K\), \(U\), and \(v(x)\)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Simple / compound pendulum period</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> DHM parameter extraction from an equation</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> DHM: given \(m,k,b\) find everything (the P9 type)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Read a DHM graph → build \(x(t)\) → compute</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Get \(b\) from the logarithmic decrement</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Amplitude / energy decay ratio problems</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Resonance frequency and Q factor</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> LC circuit frequency / period</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> RLC series oscillatory check + frequencies</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> RLC parallel characteristics</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Critical damping resistance</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Progressive wave: \(A, \lambda, f, T, v, v_{max}, a_{max}\)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Phase difference from \(\Delta x\) or \(\Delta t\)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Phase shift / phase difference graph drawing</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> DHM differential equation &amp; solution characteristics</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Types of damping condition</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Mechanical–electrical analogy</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Wave equation derivation</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Standing waves: nodes &amp; antinodes</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Lissajous figures: line vs ellipse</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ================= PRACTICE ROUTE ================= -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">📝 C. Which Practice Problems to Do</h2>
+            <div class="collapsible-body">
+                <p>Unlike Quiz-2, the midterm includes the <strong>wave problems too</strong> — so the whole of
+                <a href="quiz2-problems.html">Practice Sheet 2</a> is now fair game. Work them in this order:</p>
+
+                <table class="tbl">
+                    <tr><th>Do these</th><th>Why</th></tr>
+                    <tr><td><strong>P9</strong></td><td>The master DHM problem — 21 parts covering nearly every damping formula</td></tr>
+                    <tr><td><strong>P29</strong></td><td>The master graph problem — read \(A_0\) and \(T_d\), build \(x(t)\), compute everything</td></tr>
+                    <tr><td><strong>P3</strong></td><td>The master wave problem — amplitude, \(\lambda\), \(f\), \(T\), \(v\), \(v_{max}\), \(a_{max}\), instantaneous velocity</td></tr>
+                    <tr><td><strong>P14</strong> &amp; <strong>P16</strong></td><td>RLC series + parallel + critical damping; P16 is the non-oscillatory case</td></tr>
+                    <tr><td><strong>P27</strong></td><td>Read \(\alpha, \omega_d, \phi\) straight off a given DHM equation</td></tr>
+                    <tr><td><strong>P12</strong></td><td>The amplitude ratio trick (1/27 → 1/3), two lines of work</td></tr>
+                    <tr><td><strong>P19</strong></td><td>Amplitude and energy after \(n\) complete oscillations</td></tr>
+                    <tr><td><strong>P21</strong>, <strong>P25</strong>, <strong>P26</strong></td><td>Wave period/frequency/speed, phase difference, and the \(v_{max}=A\omega\) trap</td></tr>
+                    <tr><td><strong>P36</strong></td><td>Graph where \(b\) is <em>not</em> given — use the logarithmic decrement</td></tr>
+                    <tr><td><strong>P33</strong></td><td>Graph starting at zero → <strong>sine</strong>, not cosine</td></tr>
+                    <tr><td><strong>P7</strong></td><td>Sketching the three damping regimes</td></tr>
+                </table>
+
+                <p style="margin-top:1rem;">Largely redundant once the above are done: P30, P31, P32, P34 (same method as P29);
+                P13, P15, P17, P18 (same as P14); P1, P2, P4, P5, P20, P22, P23, P24 (same as P3); P8, P10, P11, P28.</p>
+
+                <div class="good-box">
+                    <h4>📖 Also revise</h4>
+                    <p>The 32 slide examples in Section 1 of the <a href="quiz2-problems.html">solved problems page</a> —
+                    they came from the same lecture set and match the midterm content closely.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= LAST-MINUTE ================= -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">⚡ D. Last-Minute Checks</h2>
+            <div class="collapsible-body">
+                <div class="warning-box">
+                    <h4>Traps that cost easy marks</h4>
+                    <ul>
+                        <li><strong>\( \tau = m/b \)</strong>, not \( 2m/b \) — energy definition (formula #16).</li>
+                        <li><strong>Parallel RLC flips the inequality</strong> and uses \( \alpha = 1/2RC \) (#33, #34).</li>
+                        <li><strong>Particle speed \( A\omega \) has nothing to do with wave speed \( f\lambda \)</strong> (#41).</li>
+                        <li><strong>Overdamped is slower than critical</strong>, not faster.</li>
+                        <li><strong>Convert units first:</strong> gm → kg, gm/s → kg/s, μF and mH → F and H, dyne/cm → N/m
+                        (\( 65000\ \text{dyne/cm} = 65\ \text{N/m} \)).</li>
+                        <li><strong>Graph starting at a peak → cosine; starting at zero → sine.</strong></li>
+                        <li><strong>\( \omega_d &lt; \omega_0 \) always</strong>, so the damped period is <em>longer</em>.</li>
+                    </ul>
+                </div>
+                <div class="warning-box">
+                    <h4>⚠️ Exam admin</h4>
+                    <p>Write your <strong>Name + ID + Section + Course code</strong> on the answer script. The Quiz-2 notice
+                    carried an explicit penalty for missing these — assume the same applies.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleCheck(li) {
+            const cb = li.querySelector('input[type="checkbox"]');
+            cb.checked = !cb.checked;
+            li.classList.toggle('checked', cb.checked);
+            updateProgress(); saveState();
+        }
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            const body = header.nextElementSibling;
+            if (body) body.classList.toggle('collapsed');
+        }
+        function updateProgress() {
+            const all = document.querySelectorAll('.checklist input[type="checkbox"]');
+            const done = document.querySelectorAll('.checklist input[type="checkbox"]:checked');
+            const pct = all.length ? (done.length / all.length) * 100 : 0;
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('progressText').textContent =
+                done.length + ' / ' + all.length + ' topics checked';
+        }
+        function saveState() {
+            const state = [...document.querySelectorAll('.checklist input[type="checkbox"]')].map(cb => cb.checked);
+            try { localStorage.setItem('phy2105-midterm-prep', JSON.stringify(state)); } catch (e) {}
+        }
+        function loadState() {
+            let state = null;
+            try { state = JSON.parse(localStorage.getItem('phy2105-midterm-prep')); } catch (e) {}
+            if (!state) { updateProgress(); return; }
+            document.querySelectorAll('.checklist input[type="checkbox"]').forEach((cb, i) => {
+                if (state[i]) { cb.checked = true; cb.closest('li').classList.add('checked'); }
+            });
+            updateProgress();
+        }
+        loadState();
+    </script>
+</body>
+</html>

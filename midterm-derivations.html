@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midterm Derivation Sheet — PHY-2105</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255, 255, 255, 0.05); padding: 1.2rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.2rem 0; font-size: 1.1rem; overflow-x: auto; text-align: center; }
+        .formula-card { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+        .formula-card h4 { color: var(--accent-color); margin-bottom: 0.5rem; font-size: 1.05rem; }
+        .badge { display: inline-block; padding: 0.2rem 0.7rem; border-radius: 20px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-core { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+        .badge-q2 { background: rgba(99, 102, 241, 0.2); color: #818cf8; }
+        .badge-check { background: rgba(245, 158, 11, 0.18); color: #f59e0b; }
+        .notes-section { margin-bottom: 3rem; }
+        .notes-container { max-width: 820px; margin: 0 auto; padding: 2rem; }
+        .nav-bar { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; padding: 1rem 0; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .nav-bar a { color: var(--accent-color); text-decoration: none; font-weight: 600; }
+        .nav-bar a:hover { text-decoration: underline; }
+        .step { margin: 0.9rem 0; padding-left: 1rem; border-left: 2px solid rgba(255,255,255,0.12); }
+        .step-label { color: var(--accent-color); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.4px; display: block; margin-bottom: 0.3rem; }
+        .result { background: rgba(34, 197, 94, 0.10); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 10px; padding: 0.8rem 1.2rem; margin-top: 1rem; }
+        .result-label { color: #4ade80; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .warning-box { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 12px; padding: 1.1rem 1.4rem; margin: 1.2rem 0; }
+        .warning-box h4 { color: #f59e0b; margin-bottom: 0.4rem; }
+        .excluded-box { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.28); border-radius: 12px; padding: 1.1rem 1.4rem; margin: 1.2rem 0; }
+        .excluded-box h4 { color: #ef4444; margin-bottom: 0.4rem; }
+        .part-header { color: var(--accent-color); border-bottom: 2px solid rgba(99,102,241,0.35); padding-bottom: 0.4rem; margin: 3rem 0 1.5rem; }
+        .toc { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.2rem 1.6rem; margin-bottom: 2.5rem; }
+        .toc ul { margin: 0.4rem 0 1rem 1.2rem; line-height: 1.8; }
+        .toc a { color: var(--text-primary); text-decoration: none; }
+        .toc a:hover { color: var(--accent-color); text-decoration: underline; }
+        .toc strong.part { color: var(--accent-color); display: block; margin-top: 0.8rem; }
+        table.analogy { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+        table.analogy th, table.analogy td { padding: 0.55rem 0.7rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        table.analogy th { color: var(--accent-color); }
+    </style>
+</head>
+<body>
+    <div class="container notes-container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn"><span>←</span> Back to Home</a>
+            <a href="midterm-prep.html">Midterm Prep Guide</a>
+            <a href="quiz2-problems.html">Solved Problems</a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>🧾 Midterm Derivation Sheet</h1>
+            <p class="subtitle">PHY-2105 • SHM · DHM · LC · RLC · Wave Equation — worked from first principles</p>
+        </header>
+
+        <div class="warning-box">
+            <h4>📌 Scope and notation</h4>
+            <p><strong>Syllabus:</strong> everything in the shared slides &mdash; SHM, DHM, driven oscillations and resonance,
+            LC and RLC circuits, phase, and the Wave Equation &mdash; <em>except</em> the two excluded sections below.
+            Electricity &amp; Magnetism is not in the midterm.</p>
+            <p style="margin-top:0.6rem;"><strong>Notation:</strong> \( \alpha = \gamma = \dfrac{b}{2m} \) is the damping factor and
+            \( \omega_0 \) the natural angular frequency. Your slides use \( \alpha \). Also note
+            \( \tau = \dfrac{m}{b} = \dfrac{1}{2\alpha} \) is defined by the <em>energy</em> falling to \(1/e\) &mdash; see B4.</p>
+            <p style="margin-top:0.6rem;">Badges: <span class="badge badge-core">Midterm</span> new since Quiz-2 &nbsp;
+            <span class="badge badge-q2">Quiz-2 too</span> you already revised this</p>
+        </div>
+
+        <div class="excluded-box">
+            <h4>🚫 Not in the Mid Exam</h4>
+            <p><strong>Classification of Motion</strong> and <strong>Classification of Waves</strong> are excluded &mdash; you can skip
+            those slides entirely. Nothing on this sheet depends on them.</p>
+        </div>
+
+        <div class="toc">
+            <strong>Contents</strong>
+            <strong class="part">Part A — Simple Harmonic Motion</strong>
+            <ul>
+                <li><a href="#a1">A1. SHM differential equation and its solution</a></li>
+                <li><a href="#a2">A2. Energy in SHM &mdash; \( E = \tfrac{1}{2}kA^2 \)</a></li>
+                <li><a href="#a3">A3. Simple pendulum &mdash; \( T = 2\pi\sqrt{L/g} \)</a></li>
+                <li><a href="#a4">A4. General (compound) pendulum</a></li>
+            </ul>
+            <strong class="part">Part B — Damped Harmonic Motion</strong>
+            <ul>
+                <li><a href="#b1">B1. The DHM differential equation</a></li>
+                <li><a href="#b2">B2. Solving it &mdash; solution characteristics</a></li>
+                <li><a href="#b3">B3. The three types of damping condition</a></li>
+                <li><a href="#b4">B4. Amplitude decay, energy decay, relaxation time</a></li>
+                <li><a href="#b5">B5. Logarithmic decrement &mdash; \( \alpha \) from a graph</a></li>
+            </ul>
+            <strong class="part">Part C — Forced Oscillations &amp; Resonance</strong>
+            <ul>
+                <li><a href="#c1">C1. The driven equation and its steady state</a></li>
+                <li><a href="#c2">C2. Resonance and the Q factor</a></li>
+            </ul>
+            <strong class="part">Part D — LC and RLC Circuits</strong>
+            <ul>
+                <li><a href="#d1">D1. LC circuit &mdash; undamped electrical SHM</a></li>
+                <li><a href="#d2">D2. Series RLC &mdash; the differential equation</a></li>
+                <li><a href="#d3">D3. Series RLC &mdash; damping conditions</a></li>
+                <li><a href="#d4">D4. Parallel RLC &mdash; why the inequality flips</a></li>
+                <li><a href="#d5">D5. Mechanical &harr; electrical analogy</a></li>
+            </ul>
+            <strong class="part">Part E — Wave Equation</strong>
+            <ul>
+                <li><a href="#e1">E1. The progressive wave equation</a></li>
+                <li><a href="#e2">E2. The differential equation of wave motion</a></li>
+                <li><a href="#e3">E3. Particle velocity vs. wave velocity</a></li>
+                <li><a href="#e4">E4. Stationary (standing) waves</a></li>
+                <li><a href="#e5">E5. Superposition &amp; Lissajous figures</a></li>
+            </ul>
+            <strong class="part">Part F — Phase</strong>
+            <ul>
+                <li><a href="#f1">F1. Phase difference and phase shift</a></li>
+            </ul>
+        </div>
+
+        <!-- ============ PART A ============ -->
+        <h2 class="part-header">Part A — Simple Harmonic Motion</h2>
+
+        <section class="notes-section" id="a1">
+            <h2>A1. SHM differential equation and its solution <span class="badge badge-core">Midterm</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Set up</span>
+                    <p>A mass \( m \) on a spring of stiffness \( k \). The spring pulls back toward equilibrium, so the restoring force is proportional to displacement and opposite in sign:</p>
+                    <div class="math-block">\[ F = -kx \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Newton's second law</span>
+                    <div class="math-block">\[ m\frac{d^2x}{dt^2} = -kx \quad\Longrightarrow\quad \frac{d^2x}{dt^2} + \frac{k}{m}x = 0 \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Solve</span>
+                    <p>Write \( \omega_0^2 = \dfrac{k}{m} \), giving \( \ddot{x} + \omega_0^2x = 0 \). Trying \( x = e^{\lambda t} \) gives \( \lambda^2 + \omega_0^2 = 0 \), so \( \lambda = \pm i\omega_0 \). Combining into real form:</p>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result</span>
+                    <div class="math-block" style="margin-bottom:0;">\[ x(t) = A\cos(\omega_0 t + \phi), \qquad \omega_0 = \sqrt{\frac{k}{m}}, \qquad T = 2\pi\sqrt{\frac{m}{k}} \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;">Differentiating: \( v = -A\omega_0\sin(\omega_0t+\phi) \) so \( v_{max} = A\omega_0 \), and \( a = -A\omega_0^2\cos(\omega_0t+\phi) = -\omega_0^2x \) so \( a_{max} = A\omega_0^2 \).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="a2">
+            <h2>A2. Energy in SHM <span class="badge badge-core">Midterm</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Write both energies</span>
+                    <p>With \( x = A\cos(\omega_0t+\phi) \) and \( v = -A\omega_0\sin(\omega_0t+\phi) \):</p>
+                    <div class="math-block">\[ K = \tfrac{1}{2}mv^2 = \tfrac{1}{2}mA^2\omega_0^2\sin^2(\omega_0t+\phi) \]</div>
+                    <div class="math-block">\[ U = \tfrac{1}{2}kx^2 = \tfrac{1}{2}kA^2\cos^2(\omega_0t+\phi) \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Add them</span>
+                    <p>Since \( k = m\omega_0^2 \), the two prefactors are <em>equal</em>: \( \tfrac{1}{2}mA^2\omega_0^2 = \tfrac{1}{2}kA^2 \). So:</p>
+                    <div class="math-block">\[ E = K + U = \tfrac{1}{2}kA^2\left[\sin^2(\omega_0t+\phi) + \cos^2(\omega_0t+\phi)\right] \]</div>
+                    <p>The bracket is 1 by the Pythagorean identity &mdash; and that is the whole trick.</p>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result</span>
+                    <div class="math-block" style="margin-bottom:0;">\[ E = \tfrac{1}{2}kA^2 = \tfrac{1}{2}m\omega_0^2A^2 = \text{constant} \]</div>
+                </div>
+                <div class="step" style="margin-top:1rem;">
+                    <span class="step-label">Useful corollary — velocity at any position</span>
+                    <p>Energy conservation says \( \tfrac{1}{2}mv^2 + \tfrac{1}{2}kx^2 = \tfrac{1}{2}kA^2 \). Solving for \( v \):</p>
+                    <div class="math-block">\[ v(x) = \pm\omega_0\sqrt{A^2 - x^2} \]</div>
+                    <p style="font-size:0.92rem;">Maximum at \( x=0 \) (gives \( A\omega_0 \)), zero at \( x = \pm A \). Note \( K \) and \( U \) each average to \( \tfrac{1}{4}kA^2 \) over a cycle.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="a3">
+            <h2>A3. Simple pendulum <span class="badge badge-q2">Quiz-2 too</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Set up</span>
+                    <p>A bob of mass \( m \) on a light string of length \( L \), displaced by angle \( \theta \). The component of gravity along the arc is \( mg\sin\theta \), directed back toward equilibrium, so \( F = -mg\sin\theta \).</p>
+                </div>
+                <div class="step">
+                    <span class="step-label">Take torques about the pivot</span>
+                    <div class="math-block">\[ \tau = -mgL\sin\theta, \qquad I = mL^2 \]</div>
+                    <p>Using \( \tau = I\ddot{\theta} \):</p>
+                    <div class="math-block">\[ mL^2\ddot{\theta} = -mgL\sin\theta \quad\Longrightarrow\quad \ddot{\theta} = -\frac{g}{L}\sin\theta \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Small-angle approximation</span>
+                    <p>For small \( \theta \) in radians, \( \sin\theta \approx \theta \). This is the step that makes it SHM:</p>
+                    <div class="math-block">\[ \ddot{\theta} + \frac{g}{L}\theta = 0 \]</div>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result</span>
+                    <div class="math-block" style="margin-bottom:0;">\[ \omega_0 = \sqrt{\frac{g}{L}}, \qquad T = 2\pi\sqrt{\frac{L}{g}} \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;">Independent of the bob's mass, and (for small swings) of the amplitude.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="a4">
+            <h2>A4. General (compound) pendulum <span class="badge badge-core">Midterm</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Energy method</span>
+                    <p>For a rigid body pivoted a distance \( L \) from its centre of mass, the gravitational PE is \( mgL(1-\cos\theta) \). Using \( \cos\theta \approx 1 - \dfrac{\theta^2}{2} \) for small angles, this becomes \( \tfrac{1}{2}mgL\theta^2 \). With moment of inertia \( I \):</p>
+                    <div class="math-block">\[ E = \tfrac{1}{2}I\dot{\theta}^2 + \tfrac{1}{2}mgL\theta^2 = \text{constant} \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Differentiate with respect to time</span>
+                    <p>The total energy is constant, so its time derivative is zero:</p>
+                    <div class="math-block">\[ I\dot{\theta}\ddot{\theta} + mgL\theta\dot{\theta} = 0 \]</div>
+                    <p>Divide through by \( \dot{\theta} \) (non-zero except at the turning points):</p>
+                    <div class="math-block">\[ I\ddot{\theta} + mgL\theta = 0 \quad\Longrightarrow\quad \ddot{\theta} = -\frac{mgL}{I}\theta \]</div>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result</span>
+                    <div class="math-block" style="margin-bottom:0;">\[ \omega_0 = \sqrt{\frac{mgL}{I}}, \qquad T = 2\pi\sqrt{\frac{I}{mgL}} \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;"><strong>Check:</strong> for a simple pendulum all the mass sits at distance \( L \), so \( I = mL^2 \) and \( \omega_0 = \sqrt{mgL/mL^2} = \sqrt{g/L} \) ✓ &mdash; A3 is the special case.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PART B ============ -->
+        <h2 class="part-header">Part B — Damped Harmonic Motion</h2>
+
+        <section class="notes-section" id="b1">
+            <h2>B1. The DHM differential equation <span class="badge badge-q2">Quiz-2 too</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Identify the forces</span>
+                    <ul>
+                        <li><strong>Restoring force</strong> from the spring: \( F_s = -kx \)</li>
+                        <li><strong>Damping force</strong> from friction or viscous drag. It opposes the <em>motion</em>, so it is proportional to velocity and opposite in sign: \( F_d = -b\dfrac{dx}{dt} \)</li>
+                    </ul>
+                    <p>Here \( b \) is the damping coefficient, units kg/s.</p>
+                </div>
+                <div class="step">
+                    <span class="step-label">Newton's second law, then rearrange</span>
+                    <div class="math-block">\[ m\frac{d^2x}{dt^2} = -kx - b\frac{dx}{dt} \quad\Longrightarrow\quad m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = 0 \]</div>
+                    <p>Divide by \( m \) and put \( \alpha = \dfrac{b}{2m} \), \( \omega_0^2 = \dfrac{k}{m} \):</p>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result — the DHM equation</span>
+                    <div class="math-block" style="margin-bottom:0;">\[ m\ddot{x} + b\dot{x} + kx = 0 \qquad\Longleftrightarrow\qquad \ddot{x} + 2\alpha\dot{x} + \omega_0^2x = 0 \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;">The factor of 2 in \( 2\alpha \) is chosen so the solution comes out clean in B2 &mdash; that is the <em>only</em> reason \( \alpha = b/2m \) rather than \( b/m \).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="b2">
+            <h2>B2. Solving it — solution characteristics <span class="badge badge-q2">Quiz-2 too</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Trial solution</span>
+                    <p>Linear with constant coefficients, so try \( x = e^{\lambda t} \). Then \( \dot{x} = \lambda e^{\lambda t} \), \( \ddot{x} = \lambda^2 e^{\lambda t} \), and substituting:</p>
+                    <div class="math-block">\[ \left(\lambda^2 + 2\alpha\lambda + \omega_0^2\right)e^{\lambda t} = 0 \]</div>
+                    <p>Since \( e^{\lambda t} \neq 0 \), the bracket must vanish.</p>
+                </div>
+                <div class="step">
+                    <span class="step-label">Auxiliary equation</span>
+                    <div class="math-block">\[ \lambda^2 + 2\alpha\lambda + \omega_0^2 = 0 \quad\Longrightarrow\quad \lambda = -\alpha \pm \sqrt{\alpha^2 - \omega_0^2} \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">General solution</span>
+                    <div class="math-block">\[ x(t) = e^{-\alpha t}\left[C_1 e^{\sqrt{\alpha^2-\omega_0^2}\;t} + C_2 e^{-\sqrt{\alpha^2-\omega_0^2}\;t}\right] \]</div>
+                </div>
+                <div class="result">
+                    <span class="result-label">The key observation</span>
+                    <p>Everything hinges on the sign of \( \alpha^2 - \omega_0^2 \) under the root:</p>
+                    <ul style="margin-top:0.5rem;">
+                        <li>\( \alpha &lt; \omega_0 \) &rarr; root <strong>imaginary</strong> &rarr; oscillation</li>
+                        <li>\( \alpha = \omega_0 \) &rarr; root <strong>zero</strong> &rarr; repeated root</li>
+                        <li>\( \alpha &gt; \omega_0 \) &rarr; root <strong>real</strong> &rarr; pure decay</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="b3">
+            <h2>B3. The three types of damping condition <span class="badge badge-q2">Quiz-2 too</span></h2>
+
+            <div class="formula-card">
+                <h4>Case 1 — Underdamped (oscillatory): \( \alpha &lt; \omega_0 \), i.e. \( b^2 &lt; 4mk \)</h4>
+                <p>Write \( \sqrt{\alpha^2-\omega_0^2} = i\omega_d \) with \( \omega_d = \sqrt{\omega_0^2-\alpha^2} \) real. The bracket becomes a sum of \( e^{\pm i\omega_dt} \), which combines into a cosine:</p>
+                <div class="math-block">\[ x(t) = A_0e^{-\alpha t}\cos(\omega_d t + \phi), \qquad \omega_d = \sqrt{\omega_0^2 - \alpha^2} \]</div>
+                <p><strong>Characteristics:</strong> oscillates inside a shrinking envelope \( \pm A_0e^{-\alpha t} \). The damped period \( T_d = \dfrac{2\pi}{\omega_d} \) is slightly <em>longer</em> than the undamped one since \( \omega_d &lt; \omega_0 \). The only case that crosses the time axis.</p>
+            </div>
+
+            <div class="formula-card">
+                <h4>Case 2 — Critically damped: \( \alpha = \omega_0 \), i.e. \( b^2 = 4mk \)</h4>
+                <p>The root vanishes and both solutions collapse to \( \lambda = -\alpha \). For a repeated root the second independent solution carries a factor \( t \):</p>
+                <div class="math-block">\[ x(t) = (C_1 + C_2t)e^{-\alpha t} \]</div>
+                <p>From \( \dfrac{b_c}{2m} = \sqrt{\dfrac{k}{m}} \):</p>
+                <div class="math-block">\[ b_c = 2m\omega_0 = 2\sqrt{mk} \]</div>
+                <p><strong>Characteristics:</strong> no oscillation, and it returns to equilibrium <em>faster than any other case</em>. The boundary between oscillating and not.</p>
+            </div>
+
+            <div class="formula-card">
+                <h4>Case 3 — Overdamped: \( \alpha &gt; \omega_0 \), i.e. \( b^2 &gt; 4mk \)</h4>
+                <div class="math-block">\[ x(t) = C_1e^{\lambda_1t} + C_2e^{\lambda_2t}, \qquad \lambda_{1,2} = -\alpha \pm \sqrt{\alpha^2-\omega_0^2} \]</div>
+                <p><strong>Characteristics:</strong> no oscillation, returns <em>slower</em> than critical damping. Only the slower root \( \lambda_1 \) is visible &mdash; the other term dies almost immediately.</p>
+                <div class="warning-box" style="margin-top:1rem;">
+                    <h4>⚠️ The counter-intuitive bit</h4>
+                    <p>More damping does <strong>not</strong> mean a faster return. Past critical damping, extra damping makes the system <em>slower</em> to settle: for heavy damping the slow root tends to \( -\dfrac{\omega_0^2}{2\alpha} \), which shrinks as \( \alpha \) grows.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="b4">
+            <h2>B4. Amplitude decay, energy decay, relaxation time <span class="badge badge-q2">Quiz-2 too</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Amplitude, then energy</span>
+                    <p>From Case 1 the cosine runs between \( \pm 1 \), so the amplitude is the envelope \( A(t) = A_0e^{-\alpha t} \). Since \( E = \tfrac{1}{2}kA^2 \), squaring gives:</p>
+                    <div class="math-block">\[ E(t) = \tfrac{1}{2}kA_0^2e^{-2\alpha t} = E_0e^{-2\alpha t} = E_0e^{-\frac{bt}{m}} \]</div>
+                    <p><strong>Energy decays at twice the rate of amplitude.</strong> Every factor-of-2 confusion in this topic traces back to that one line.</p>
+                </div>
+                <div class="step">
+                    <span class="step-label">Relaxation time (lifetime)</span>
+                    <p>Defined as the time for the <strong>energy</strong> to fall to \( 1/e \). Setting \( e^{-2\alpha\tau} = e^{-1} \):</p>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result</span>
+                    <div class="math-block" style="margin-bottom:0;">\[ \tau = \frac{1}{2\alpha} = \frac{m}{b} \]</div>
+                </div>
+                <div class="warning-box" style="margin-top:1rem;">
+                    <h4>⚠️ Two decay times — know which is asked</h4>
+                    <p>If a question asks when the <strong>amplitude</strong> falls to \( 1/e \), set \( e^{-\alpha t} = e^{-1} \) instead, giving \( t = \dfrac{1}{\alpha} = \dfrac{2m}{b} \) &mdash; twice as long.</p>
+                    <p style="margin-top:0.5rem;">Likewise "amplitude halves" is \( \dfrac{\ln 2}{\alpha} \) but "energy halves" is \( \dfrac{\ln 2}{2\alpha} \).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="b5">
+            <h2>B5. Logarithmic decrement — \( \alpha \) from a graph <span class="badge badge-q2">Quiz-2 too</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Ratio of successive peaks</span>
+                    <p>Consecutive peaks are one damped period \( T_d \) apart and both touch the envelope:</p>
+                    <div class="math-block">\[ \frac{A_n}{A_{n+1}} = \frac{A_0e^{-\alpha t}}{A_0e^{-\alpha(t+T_d)}} = e^{\alpha T_d} \]</div>
+                    <p>The ratio is the <em>same</em> for every pair &mdash; which is why a damped curve's peaks fall by a constant factor.</p>
+                </div>
+                <div class="step">
+                    <span class="step-label">Take logs</span>
+                    <div class="math-block">\[ \delta = \ln\!\left(\frac{A_n}{A_{n+1}}\right) = \alpha T_d \]</div>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result — the graph-reading recipe</span>
+                    <div class="math-block" style="margin-bottom:0;">\[ \alpha = \frac{\delta}{T_d} = \frac{1}{T_d}\ln\!\left(\frac{A_n}{A_{n+1}}\right), \qquad b = 2m\alpha \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;">Read \( T_d \) as the peak-to-peak spacing, \( A_n \) and \( A_{n+1} \) as consecutive peak heights.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PART C ============ -->
+        <h2 class="part-header">Part C — Forced Oscillations &amp; Resonance</h2>
+
+        <div class="warning-box">
+            <h4>✅ Confirmed in scope</h4>
+            <p>Part 1 of the &ldquo;Waves and Oscillation&rdquo; slide is listed as
+            <em>Simple harmonic oscillators &middot; Damped oscillators &middot; <strong>Driven oscillators</strong> &middot; <strong>Resonance</strong> &middot; The Wave Equation</em>,
+            so this part is definitely in. (That also answers the &ldquo;DHO?&rdquo; question &mdash; <strong>D</strong>riven <strong>H</strong>armonic <strong>O</strong>scillation.)</p>
+        </div>
+
+        <section class="notes-section" id="c1">
+            <h2>C1. The driven equation and its steady state <span class="badge badge-core">Midterm</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Add a driving force</span>
+                    <p>Take the DHM equation of B1 and add a periodic external force \( F_0\sin\omega t \), where \( \omega \) is the <em>driving</em> frequency (not the natural one):</p>
+                    <div class="math-block">\[ m\ddot{x} + b\dot{x} + kx = F_0\sin\omega t \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Steady state</span>
+                    <p>The homogeneous part (Part B) decays away as \( e^{-\alpha t} \). What survives is the particular solution, oscillating at the <strong>driving</strong> frequency but lagging it by a phase \( \phi_0 \):</p>
+                    <div class="math-block">\[ x(t) = A_0\sin(\omega t + \phi_0) \]</div>
+                    <p>Substituting this in and collecting the \( \sin\omega t \) and \( \cos\omega t \) terms gives the amplitude:</p>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result</span>
+                    <div class="math-block">\[ A_0 = \frac{F_0}{m\sqrt{\left(\omega^2 - \omega_0^2\right)^2 + \left(\dfrac{b\omega}{m}\right)^2}} \]</div>
+                    <div class="math-block" style="margin-bottom:0;">\[ \tan\phi_0 = \frac{b\omega}{m\left(\omega_0^2 - \omega^2\right)} \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;">Note the amplitude depends on how far the driving frequency sits from \( \omega_0 \) &mdash; the \( (\omega^2-\omega_0^2)^2 \) term. That is what makes resonance happen.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="c2">
+            <h2>C2. Resonance and the Q factor <span class="badge badge-core">Midterm</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Maximise the amplitude</span>
+                    <p>\( A_0 \) is largest when the quantity under the root is <em>smallest</em>. Differentiate it with respect to \( \omega \) and set to zero:</p>
+                    <div class="math-block">\[ \frac{d}{d\omega}\left[\left(\omega^2-\omega_0^2\right)^2 + \frac{b^2\omega^2}{m^2}\right] = 4\omega\left(\omega^2-\omega_0^2\right) + \frac{2b^2\omega}{m^2} = 0 \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Solve for the resonant frequency</span>
+                    <p>Divide by \( 2\omega \) and rearrange, using \( \dfrac{b}{2m} = \alpha \) so \( \dfrac{b^2}{m^2} = 4\alpha^2 \):</p>
+                    <div class="math-block">\[ 2\left(\omega^2-\omega_0^2\right) + 4\alpha^2 = 0 \quad\Longrightarrow\quad \omega^2 = \omega_0^2 - 2\alpha^2 \]</div>
+                </div>
+                <div class="result">
+                    <span class="result-label">Results</span>
+                    <div class="math-block">\[ \omega_r = \sqrt{\omega_0^2 - 2\alpha^2} \quad\text{(amplitude resonance)} \]</div>
+                    <p><strong>Velocity resonance</strong> occurs exactly at \( \omega = \omega_0 \) &mdash; unshifted by damping. The <strong>Q factor</strong> measures how sharp the peak is:</p>
+                    <div class="math-block" style="margin-bottom:0;">\[ Q = \frac{m\omega_0}{b} = \frac{\omega_0}{2\alpha} \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;">Light damping &rarr; large \( Q \) &rarr; tall narrow peak, and \( \omega_r \to \omega_0 \). Heavy damping &rarr; small \( Q \) &rarr; broad flat peak. If \( 2\alpha^2 &gt; \omega_0^2 \) there is no peak at all.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PART D ============ -->
+        <h2 class="part-header">Part D — LC and RLC Circuits</h2>
+
+        <section class="notes-section" id="d1">
+            <h2>D1. LC circuit — undamped electrical SHM <span class="badge badge-core">Midterm</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Kirchhoff's voltage law</span>
+                    <p>A charged capacitor \( C \) discharging through an inductor \( L \), with no resistance. The two voltages sum to zero:</p>
+                    <div class="math-block">\[ L\frac{di}{dt} + \frac{Q}{C} = 0 \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Write in terms of charge</span>
+                    <p>With \( i = \dfrac{dQ}{dt} \), so \( \dfrac{di}{dt} = \dfrac{d^2Q}{dt^2} \):</p>
+                    <div class="math-block">\[ L\frac{d^2Q}{dt^2} + \frac{Q}{C} = 0 \quad\Longrightarrow\quad \frac{d^2Q}{dt^2} + \frac{1}{LC}Q = 0 \]</div>
+                    <p>This is <em>exactly</em> the SHM equation of A1 with \( x \to Q \) and \( \omega_0^2 = \dfrac{1}{LC} \).</p>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result</span>
+                    <div class="math-block">\[ Q(t) = Q_0\cos(\omega_0t + \phi), \qquad \omega_0 = \frac{1}{\sqrt{LC}} \]</div>
+                    <div class="math-block" style="margin-bottom:0;">\[ f_0 = \frac{1}{2\pi\sqrt{LC}}, \qquad T = 2\pi\sqrt{LC} \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;"><strong>Energy view:</strong> \( \dfrac{Q^2}{2C} \) in the capacitor and \( \dfrac{1}{2}Li^2 \) in the inductor trade back and forth, total constant &mdash; the exact analogue of PE &harr; KE in A2. With no \( R \) there is nothing to dissipate it, so it never dies.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="d2">
+            <h2>D2. Series RLC — the differential equation <span class="badge badge-q2">Quiz-2 too</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Kirchhoff's voltage law</span>
+                    <p>Now add a resistor. Around the loop, \( V_L + V_R + V_C = 0 \), with \( V_L = L\dfrac{di}{dt} \), \( V_R = iR \), \( V_C = \dfrac{Q}{C} \):</p>
+                    <div class="math-block">\[ L\frac{di}{dt} + iR + \frac{Q}{C} = 0 \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Express in charge and divide by L</span>
+                    <div class="math-block">\[ L\frac{d^2Q}{dt^2} + R\frac{dQ}{dt} + \frac{Q}{C} = 0 \quad\Longrightarrow\quad \frac{d^2Q}{dt^2} + \frac{R}{L}\frac{dQ}{dt} + \frac{1}{LC}Q = 0 \]</div>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result — identical in form to B1</span>
+                    <p>Compare term by term with \( \ddot{x} + 2\alpha\dot{x} + \omega_0^2x = 0 \):</p>
+                    <div class="math-block" style="margin-bottom:0;">\[ \alpha = \frac{R}{2L}, \qquad \omega_0 = \frac{1}{\sqrt{LC}} \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;">Because the equation has the same form, <strong>every result from B2&ndash;B5 carries over unchanged</strong> &mdash; just swap in the new \( \alpha \) and \( \omega_0 \). Setting \( R = 0 \) recovers D1.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="d3">
+            <h2>D3. Series RLC — damping conditions <span class="badge badge-q2">Quiz-2 too</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Apply the B3 condition</span>
+                    <p>Oscillatory when \( \alpha &lt; \omega_0 \). Substituting the series values:</p>
+                    <div class="math-block">\[ \frac{R}{2L} &lt; \frac{1}{\sqrt{LC}} \quad\Longrightarrow\quad R &lt; \frac{2L}{\sqrt{LC}} = 2\sqrt{\frac{L}{C}} \]</div>
+                </div>
+                <div class="result">
+                    <span class="result-label">Results</span>
+                    <div class="math-block">\[ \text{oscillatory if } R &lt; 2\sqrt{\frac{L}{C}}, \qquad R_c = 2\sqrt{\frac{L}{C}} \]</div>
+                    <div class="math-block" style="margin-bottom:0;">\[ f_d = \frac{1}{2\pi}\sqrt{\frac{1}{LC} - \left(\frac{R}{2L}\right)^2}, \qquad f_0 = \frac{1}{2\pi\sqrt{LC}} \]</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="d4">
+            <h2>D4. Parallel RLC — why the inequality flips <span class="badge badge-q2">Quiz-2 too</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Kirchhoff's current law</span>
+                    <p>With \( R \), \( L \), \( C \) all across the same node pair, the branch currents sum to zero:</p>
+                    <div class="math-block">\[ \frac{V}{R} + \frac{1}{L}\int V\,dt + C\frac{dV}{dt} = 0 \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Differentiate to remove the integral, then divide by C</span>
+                    <div class="math-block">\[ \frac{d^2V}{dt^2} + \frac{1}{RC}\frac{dV}{dt} + \frac{1}{LC}V = 0 \]</div>
+                    <div class="math-block">\[ \Longrightarrow\quad \alpha = \frac{1}{2RC}, \qquad \omega_0 = \frac{1}{\sqrt{LC}}\ \text{(unchanged)} \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Apply the oscillatory condition</span>
+                    <div class="math-block">\[ \frac{1}{2RC} &lt; \frac{1}{\sqrt{LC}} \quad\Longrightarrow\quad R &gt; \frac{\sqrt{LC}}{2C} = \frac{1}{2}\sqrt{\frac{L}{C}} \]</div>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result — and the reason it flips</span>
+                    <div class="math-block">\[ \text{oscillatory if } R &gt; \frac{1}{2}\sqrt{\frac{L}{C}}, \qquad f_d = \frac{1}{2\pi}\sqrt{\frac{1}{LC} - \frac{1}{4R^2C^2}} \]</div>
+                    <p style="margin-top:0.6rem;"><strong>Why the sign reverses:</strong> in series \( R \) is in the <em>numerator</em> of \( \alpha = R/2L \), so raising \( R \) adds damping. In parallel it is in the <em>denominator</em> of \( \alpha = 1/2RC \), so raising \( R \) <em>removes</em> damping. Physically, a large parallel resistor draws almost no current, so it barely dissipates.</p>
+                    <p style="margin-top:0.5rem;">The two critical resistances differ by a factor of 4: \( 2\sqrt{L/C} \) versus \( \tfrac{1}{2}\sqrt{L/C} \).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="d5">
+            <h2>D5. Mechanical ↔ electrical analogy <span class="badge badge-q2">Quiz-2 too</span></h2>
+            <div class="formula-card">
+                <p>B1 and D2 produce the same differential equation, so the systems map term by term. Know one, know the other.</p>
+                <table class="analogy">
+                    <tr><th>Mechanical</th><th>Electrical (series)</th><th>Why</th></tr>
+                    <tr><td>displacement \( x \)</td><td>charge \( Q \)</td><td>the variable solved for</td></tr>
+                    <tr><td>velocity \( \dot{x} \)</td><td>current \( i = \dot{Q} \)</td><td>its first derivative</td></tr>
+                    <tr><td>mass \( m \)</td><td>inductance \( L \)</td><td>resists change &mdash; inertia</td></tr>
+                    <tr><td>damping \( b \)</td><td>resistance \( R \)</td><td>dissipates energy</td></tr>
+                    <tr><td>stiffness \( k \)</td><td>\( 1/C \)</td><td>stores potential energy</td></tr>
+                    <tr><td>force \( F \)</td><td>EMF \( \varepsilon \)</td><td>the driving term</td></tr>
+                    <tr><td>\( \tfrac{1}{2}mv^2 \)</td><td>\( \tfrac{1}{2}Li^2 \)</td><td>kinetic ↔ magnetic energy</td></tr>
+                    <tr><td>\( \tfrac{1}{2}kx^2 \)</td><td>\( \tfrac{Q^2}{2C} \)</td><td>potential ↔ electric energy</td></tr>
+                    <tr><td>\( \alpha = b/2m \)</td><td>\( \alpha = R/2L \)</td><td>damping factor</td></tr>
+                    <tr><td>\( \omega_0 = \sqrt{k/m} \)</td><td>\( \omega_0 = 1/\sqrt{LC} \)</td><td>natural frequency</td></tr>
+                    <tr><td>\( b_c = 2\sqrt{mk} \)</td><td>\( R_c = 2\sqrt{L/C} \)</td><td>critical damping</td></tr>
+                </table>
+                <p style="font-size:0.92rem; color:var(--text-secondary);">Check the last row: substituting \( m\to L \), \( k\to 1/C \) into \( 2\sqrt{mk} \) gives \( 2\sqrt{L/C} \). ✓</p>
+            </div>
+        </section>
+
+        <!-- ============ PART E ============ -->
+        <h2 class="part-header">Part E — Wave Equation</h2>
+
+        <div class="warning-box">
+            <h4>✅ Explicitly included</h4>
+            <p>The contents taught in the <strong>Wave Equation</strong> section of the &ldquo;Waves and Oscillations&rdquo; slide
+            are in the Mid Exam. <em>Classification of Waves</em> is not &mdash; so skip the types-of-waves slide, but know everything below.</p>
+        </div>
+
+        <section class="notes-section" id="e1">
+            <h2>E1. The progressive wave equation <span class="badge badge-core">Midterm</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Start at the origin</span>
+                    <p>A particle at \( x=0 \) executes SHM as the wave passes: \( y = A\sin\omega t \).</p>
+                </div>
+                <div class="step">
+                    <span class="step-label">A particle further along lags behind</span>
+                    <p>A wave travelling left to right with speed \( v \) reaches \( x \) later, so that particle repeats the same motion but delayed &mdash; it lags in phase by</p>
+                    <div class="math-block">\[ \phi = \frac{2\pi x}{\lambda} \]</div>
+                    <p>(one whole wavelength of separation = one full cycle of lag = \( 2\pi \)).</p>
+                </div>
+                <div class="step">
+                    <span class="step-label">Subtract the lag</span>
+                    <div class="math-block">\[ y = A\sin\left(\omega t - \frac{2\pi x}{\lambda}\right) \]</div>
+                    <p>Using \( \omega = \dfrac{2\pi}{T} \), factor out \( 2\pi \):</p>
+                    <div class="math-block">\[ y = A\sin 2\pi\left(\frac{t}{T} - \frac{x}{\lambda}\right) \]</div>
+                    <p>and using \( v = \dfrac{\lambda}{T} = f\lambda \), factor out \( \dfrac{2\pi}{\lambda} \):</p>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result — the same wave, three ways</span>
+                    <div class="math-block" style="margin-bottom:0;">\[ y = A\sin(\omega t - kx) = A\sin 2\pi\left(\frac{t}{T} - \frac{x}{\lambda}\right) = A\sin\left[\frac{2\pi}{\lambda}(vt - x)\right] \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;">with \( k = \dfrac{2\pi}{\lambda} \) the wave number and \( v = \dfrac{\omega}{k} = f\lambda \) the wave speed.
+                    A <strong>minus</strong> sign before \( x \) means travelling in \( +x \); a plus sign means \( -x \).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="e2">
+            <h2>E2. The differential equation of wave motion <span class="badge badge-core">Midterm</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Differentiate twice with respect to t</span>
+                    <p>Starting from \( y = A\sin\left[\frac{2\pi}{\lambda}(vt-x)\right] \):</p>
+                    <div class="math-block">\[ \frac{\partial y}{\partial t} = A\frac{2\pi v}{\lambda}\cos\left[\frac{2\pi}{\lambda}(vt-x)\right] \]</div>
+                    <div class="math-block">\[ \frac{\partial^2y}{\partial t^2} = -A\frac{4\pi^2v^2}{\lambda^2}\sin\left[\frac{2\pi}{\lambda}(vt-x)\right] \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Differentiate twice with respect to x</span>
+                    <div class="math-block">\[ \frac{\partial y}{\partial x} = -A\frac{2\pi}{\lambda}\cos\left[\frac{2\pi}{\lambda}(vt-x)\right] \]</div>
+                    <div class="math-block">\[ \frac{\partial^2y}{\partial x^2} = -A\frac{4\pi^2}{\lambda^2}\sin\left[\frac{2\pi}{\lambda}(vt-x)\right] \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Compare</span>
+                    <p>Both second derivatives contain the same sine factor. Dividing one by the other, everything cancels except \( v^2 \):</p>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result — the wave equation</span>
+                    <div class="math-block" style="margin-bottom:0;">\[ \frac{\partial^2y}{\partial t^2} = v^2\frac{\partial^2y}{\partial x^2} \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;">Any function of the form \( y = f(vt \mp x) \) satisfies this &mdash; not just sines. That is why it is <em>the</em> wave equation: the coefficient of \( \partial^2y/\partial x^2 \) is always the square of the wave speed.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="e3">
+            <h2>E3. Particle velocity vs. wave velocity <span class="badge badge-core">Midterm</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Two different things called "velocity"</span>
+                    <ul>
+                        <li><strong>Wave velocity</strong> \( v = f\lambda \) &mdash; how fast the <em>pattern</em> moves along \( x \). Constant.</li>
+                        <li><strong>Particle velocity</strong> \( \dfrac{\partial y}{\partial t} \) &mdash; how fast one particle moves up and down. Oscillates.</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <span class="step-label">Relate them</span>
+                    <p>Take the two first derivatives from E2 and divide:</p>
+                    <div class="math-block">\[ \frac{\partial y}{\partial t} = A\frac{2\pi v}{\lambda}\cos[\cdot], \qquad \frac{\partial y}{\partial x} = -A\frac{2\pi}{\lambda}\cos[\cdot] \]</div>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result</span>
+                    <div class="math-block" style="margin-bottom:0;">\[ \frac{\partial y}{\partial t} = -v\frac{\partial y}{\partial x} \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;">Particle velocity = &minus;(wave velocity) &times; (slope of the waveform). Its maximum is \( v_{max} = A\omega \),
+                    which has <strong>nothing to do with</strong> the wave speed &mdash; a common exam trap. Maximum particle acceleration is \( A\omega^2 \).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="e4">
+            <h2>E4. Stationary (standing) waves <span class="badge badge-core">Midterm</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Superpose two opposite-travelling waves</span>
+                    <p>Same amplitude and frequency, opposite directions:</p>
+                    <div class="math-block">\[ y_1 = A\sin(\omega t - kx), \qquad y_2 = A\sin(\omega t + kx) \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Add using the sum-to-product identity</span>
+                    <p>\( \sin P + \sin Q = 2\sin\dfrac{P+Q}{2}\cos\dfrac{P-Q}{2} \). Here \( \dfrac{P+Q}{2} = \omega t \) and \( \dfrac{P-Q}{2} = -kx \), and cosine is even:</p>
+                    <div class="math-block">\[ y = y_1 + y_2 = 2A\sin(\omega t)\cos(kx) \]</div>
+                </div>
+                <div class="result">
+                    <span class="result-label">Result — and why it does not travel</span>
+                    <div class="math-block">\[ y = \underbrace{2A\cos kx}_{\text{amplitude, depends on }x}\ \cdot\ \underbrace{\sin\omega t}_{\text{same for all }x} \]</div>
+                    <p>The \( x \) and \( t \) dependence have <strong>separated</strong>. Every particle oscillates in step; only the amplitude varies with position. So the profile does not move, and no energy is transported.</p>
+                    <ul style="margin-top:0.6rem;">
+                        <li><strong>Nodes</strong> (always still): \( \cos kx = 0 \Rightarrow x = \dfrac{\lambda}{4}, \dfrac{3\lambda}{4}, \dfrac{5\lambda}{4},\ldots \)</li>
+                        <li><strong>Antinodes</strong> (maximum swing \( 2A \)): \( \cos kx = \pm 1 \Rightarrow x = 0, \dfrac{\lambda}{2}, \lambda,\ldots \)</li>
+                    </ul>
+                    <p style="margin-top:0.5rem; font-size:0.92rem;">Adjacent nodes are \( \lambda/2 \) apart; a node and its neighbouring antinode are \( \lambda/4 \) apart.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="notes-section" id="e5">
+            <h2>E5. Superposition &amp; Lissajous figures <span class="badge badge-core">Midterm</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">Two perpendicular SHMs</span>
+                    <p>A particle driven simultaneously by two SHMs at right angles traces a Lissajous figure:</p>
+                    <div class="math-block">\[ x = A_1\cos\omega t, \qquad y = A_2\cos(\omega t + \phi) \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">Case \( \phi = 0 \) — in phase</span>
+                    <p>Then \( \dfrac{x}{A_1} = \dfrac{y}{A_2} \), so \( y = \dfrac{A_2}{A_1}x \) &mdash; a <strong>straight line</strong> through the origin.</p>
+                </div>
+                <div class="step">
+                    <span class="step-label">Case \( \phi = \pi/2 \) — quarter cycle apart</span>
+                    <p>\( y = A_2\cos(\omega t + \pi/2) = -A_2\sin\omega t \). Then \( \dfrac{x}{A_1} = \cos\omega t \) and \( \dfrac{y}{A_2} = -\sin\omega t \). Squaring and adding kills the time dependence:</p>
+                    <div class="math-block">\[ \frac{x^2}{A_1^2} + \frac{y^2}{A_2^2} = \cos^2\omega t + \sin^2\omega t = 1 \]</div>
+                    <p>An <strong>ellipse</strong> &mdash; and a <strong>circle</strong> if \( A_1 = A_2 \).</p>
+                </div>
+                <div class="result">
+                    <span class="result-label">Summary</span>
+                    <p>The shape depends on the ratio of the two periods, the phase difference, and the two amplitudes.
+                    For equal frequencies: \( \phi = 0 \) or \( \pi \) gives a line, \( \phi = \pi/2 \) gives an ellipse or circle, and anything between gives a tilted ellipse.</p>
+                    <p style="margin-top:0.5rem; font-size:0.92rem;">Lissajous figures were excluded from Quiz-2 but are <strong>back in</strong> for the midterm &mdash; they sit in the Waves and Oscillation slide, not in the excluded &ldquo;Classification of Waves&rdquo; section.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PART F ============ -->
+        <h2 class="part-header">Part F — Phase</h2>
+
+        <section class="notes-section" id="f1">
+            <h2>F1. Phase difference and phase shift <span class="badge badge-q2">Quiz-2 too</span></h2>
+            <div class="formula-card">
+                <div class="step">
+                    <span class="step-label">The phase</span>
+                    <div class="math-block">\[ y = A\sin(\omega t - kx + \phi_0), \qquad k = \frac{2\pi}{\lambda},\ \ \omega = \frac{2\pi}{T} \]</div>
+                    <p>The whole bracket is the <strong>phase</strong>. Anything that changes it changes where in the cycle the particle sits.</p>
+                </div>
+                <div class="step">
+                    <span class="step-label">Two points at the same instant (path → phase)</span>
+                    <p>Freeze time, move a distance \( \Delta x \). Only \( -kx \) changes:</p>
+                    <div class="math-block">\[ \Delta\phi = k\,\Delta x = \frac{2\pi}{\lambda}\Delta x \]</div>
+                </div>
+                <div class="step">
+                    <span class="step-label">One point at two instants (time → phase)</span>
+                    <p>Stay put, let time advance by \( \Delta t \). Only \( \omega t \) changes:</p>
+                    <div class="math-block">\[ \Delta\phi = \omega\,\Delta t = \frac{2\pi}{T}\Delta t \]</div>
+                </div>
+                <div class="result">
+                    <span class="result-label">The two you actually use</span>
+                    <div class="math-block" style="margin-bottom:0;">\[ \Delta\phi = \frac{2\pi}{\lambda}\Delta x \qquad\text{and}\qquad \Delta\phi = \frac{2\pi}{T}\Delta t \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;">Phase <em>shift</em> \( \phi_0 \) slides the whole curve sideways: \( +\phi_0 \) shifts it <strong>left</strong> (leads),
+                    \( -\phi_0 \) shifts it <strong>right</strong> (lags). A shift of \( \phi_0 \) is a horizontal move of \( \dfrac{\phi_0}{2\pi}T \) on a \(y\)&ndash;\(t\) graph
+                    or \( \dfrac{\phi_0}{2\pi}\lambda \) on a \(y\)&ndash;\(x\) graph.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="warning-box">
+            <h4>🎯 The spine of the whole syllabus</h4>
+            <p>Almost every derivation above is one equation wearing a different costume:</p>
+            <div class="math-block">\[ \ddot{x} + 2\alpha\dot{x} + \omega_0^2 x = 0 \]</div>
+            <ul>
+                <li>Set \( \alpha = 0 \) &rarr; <strong>SHM</strong> (A1) and the <strong>LC circuit</strong> (D1)</li>
+                <li>Keep \( \alpha \) &rarr; <strong>DHM</strong> (B1) and the <strong>RLC circuit</strong> (D2)</li>
+                <li>Put a driving term on the right &rarr; <strong>forced oscillation</strong> and resonance (C1)</li>
+                <li>Swap \( m\to L,\ b\to R,\ k\to 1/C \) &rarr; every mechanical result becomes an electrical one (D5)</li>
+            </ul>
+            <p style="margin-top:0.6rem;">The sign of \( \alpha^2 - \omega_0^2 \) decides underdamped / critical / overdamped, every single time.
+            Waves (Part E) are the one genuinely separate strand.</p>
+        </div>
+
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
