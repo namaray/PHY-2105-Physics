@@ -176,6 +176,8 @@
             <a href="index.html" class="back-btn">
                 <span>←</span> Back to Home
             </a>
+            <a href="quiz2-derivations.html">Derivation Sheet</a>
+            <a href="quiz2-problems.html">Solved Problems</a>
             <a href="Damped Harmonic Motion_DHM_b.pdf" target="_blank" class="pdf-btn">
                 View Slides PDF
             </a>
@@ -329,12 +331,14 @@
                             <div class="math-block">\[ \omega_1 = \sqrt{\omega_0^2 - \alpha^2} \]</div>
                         </div>
                         <div class="formula-card">
-                            <h4>7. Lifetime</h4>
+                            <h4>7. Lifetime / Relaxation Time</h4>
                             <div class="math-block">\[ \tau = \frac{m}{b} = \frac{1}{2\alpha} \]</div>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);"><strong>Use this one.</strong> It is the time for the <em>energy</em> to fall to \(1/e\). The <em>amplitude</em> takes twice as long, \(2m/b = 1/\alpha\) &mdash; see the note below.</p>
                         </div>
                         <div class="formula-card">
-                            <h4>8. Energy Decay</h4>
-                            <div class="math-block">\[ E(t) = E_0e^{-\frac{bt}{m}} \]</div>
+                            <h4>8. Amplitude &amp; Energy Decay</h4>
+                            <div class="math-block">\[ A(t) = A_0e^{-\alpha t}, \quad E(t) = E_0e^{-2\alpha t} = E_0e^{-\frac{bt}{m}} \]</div>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);">Energy \(\propto A^2\), so it decays at twice the rate of the amplitude.</p>
                         </div>
                         <div class="formula-card">
                             <h4>9. RLC Equation</h4>
@@ -394,12 +398,34 @@
                     </div>
 
                     <div class="warning-box" style="margin-top: 1rem;">
-                        <h4>⚠️ Two different &ldquo;relaxation time&rdquo; conventions</h4>
-                        <p>Card 7 above (from the course slides) defines \( \tau = m/b = 1/2\alpha \) &mdash; the time for the
-                        <strong>energy</strong> to fall to \(1/e\). Some books instead use \( \tau = 2m/b = 1/\alpha \) &mdash; the time for the
-                        <strong>amplitude</strong> to fall to \(1/e\). They differ by a factor of 2.</p>
-                        <p style="margin-top:0.6rem;"><strong>In the exam, use your slide value \( \tau = m/b \)</strong> unless the question
-                        explicitly says amplitude. Note the worked solutions on the problems page currently use the amplitude convention \(1/\alpha\).</p>
+                        <h4>⚠️ Two decay times &mdash; don't mix them up</h4>
+                        <p>The amplitude and the energy do <strong>not</strong> decay at the same rate, so &ldquo;falls to \(1/e\)&rdquo;
+                        gives two different times. Both get called \(\tau\) in different books, which is where the confusion comes from:</p>
+                        <table style="width:100%; margin-top:0.8rem; border-collapse:collapse; font-size:0.9rem;">
+                            <tr style="border-bottom:1px solid rgba(255,255,255,0.15);">
+                                <th style="text-align:left; padding:0.4rem;">what decays</th>
+                                <th style="text-align:left; padding:0.4rem;">law</th>
+                                <th style="text-align:left; padding:0.4rem;">time to reach \(1/e\)</th>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.4rem;">amplitude</td>
+                                <td style="padding:0.4rem;">\(A_0e^{-\alpha t}\)</td>
+                                <td style="padding:0.4rem;">\(1/\alpha = 2m/b\)</td>
+                            </tr>
+                            <tr style="background:rgba(245,158,11,0.12);">
+                                <td style="padding:0.4rem;"><strong>energy</strong> &larr; card 7</td>
+                                <td style="padding:0.4rem;">\(E_0e^{-2\alpha t}\)</td>
+                                <td style="padding:0.4rem;"><strong>\(1/2\alpha = m/b\)</strong></td>
+                            </tr>
+                        </table>
+                        <p style="margin-top:0.8rem;">Your slides define lifetime by the <strong>energy</strong>, so
+                        <strong>use \( \tau = m/b \)</strong> unless a question explicitly asks when the <em>amplitude</em> drops to \(1/e\).
+                        Sanity check: card 8 gives \(E = E_0e^{-bt/m}\), and at \(t = m/b\) that is exactly \(E_0/e\). ✓</p>
+                        <p style="margin-top:0.6rem;"><strong>Notation:</strong> \( \alpha \) and \( \gamma \) are the same quantity, \(b/2m\).
+                        Your slides use \( \alpha \); some of the worked solutions on the problems page write \( \gamma \). Same number.</p>
+                        <p style="margin-top:0.6rem; color:var(--text-secondary); font-size:0.88rem;">Heads-up: the worked solutions currently quote
+                        lifetime using \(1/\alpha\). Where they say &ldquo;life time&rdquo; &mdash; P9(iv, vi), P28(vii), P32(vii), P33(viii), P34(iii), P36(ii) &mdash;
+                        halve the value to match your slides.</p>
                     </div>
                 </div>
             </section>
