@@ -387,6 +387,42 @@
                         </div>
                     </div>
 
+                    <h3 style="color: var(--accent-color); margin-top: 2rem;">Mechanical ↔ Electrical Analogy</h3>
+                    <p>The spring-mass system and the series RLC circuit obey the <em>same</em> differential equation,
+                    so every mechanical formula becomes an electrical one under three swaps:</p>
+                    <div class="math-block">\[ m \to L, \qquad b \to R, \qquad k \to \frac{1}{C} \]</div>
+                    <table style="width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.93rem;">
+                        <tr style="border-bottom:1px solid rgba(255,255,255,0.18);">
+                            <th style="text-align:left; padding:0.5rem; color:var(--accent-color);">Quantity</th>
+                            <th style="text-align:left; padding:0.5rem; color:var(--accent-color);">Mechanical</th>
+                            <th style="text-align:left; padding:0.5rem; color:var(--accent-color);">Electrical (series)</th>
+                        </tr>
+                        <tr><td style="padding:0.45rem;">the variable</td><td style="padding:0.45rem;">displacement \(x\)</td><td style="padding:0.45rem;">charge \(Q\)</td></tr>
+                        <tr><td style="padding:0.45rem;">its rate</td><td style="padding:0.45rem;">velocity \( \frac{dx}{dt} \)</td><td style="padding:0.45rem;">current \( i = \frac{dQ}{dt} \)</td></tr>
+                        <tr><td style="padding:0.45rem;">inertia</td><td style="padding:0.45rem;">mass \(m\)</td><td style="padding:0.45rem;">inductance \(L\)</td></tr>
+                        <tr><td style="padding:0.45rem;">dissipation</td><td style="padding:0.45rem;">damping \(b\)</td><td style="padding:0.45rem;">resistance \(R\)</td></tr>
+                        <tr><td style="padding:0.45rem;">restoring</td><td style="padding:0.45rem;">stiffness \(k\)</td><td style="padding:0.45rem;">\( 1/C \) <em>(not \(C\))</em></td></tr>
+                        <tr style="background:rgba(99,102,241,0.10);"><td style="padding:0.45rem;"><strong>equation</strong></td>
+                            <td style="padding:0.45rem;">\( m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = 0 \)</td>
+                            <td style="padding:0.45rem;">\( L\frac{d^2Q}{dt^2} + R\frac{dQ}{dt} + \frac{Q}{C} = 0 \)</td></tr>
+                        <tr><td style="padding:0.45rem;">natural frequency</td><td style="padding:0.45rem;">\( \omega_0 = \sqrt{k/m} \)</td><td style="padding:0.45rem;">\( \omega_0 = 1/\sqrt{LC} \)</td></tr>
+                        <tr><td style="padding:0.45rem;">damping factor</td><td style="padding:0.45rem;">\( \alpha = b/2m \)</td><td style="padding:0.45rem;">\( \alpha = R/2L \)</td></tr>
+                        <tr><td style="padding:0.45rem;">critical damping</td><td style="padding:0.45rem;">\( b_c = 2\sqrt{mk} \)</td><td style="padding:0.45rem;">\( R_c = 2\sqrt{L/C} \)</td></tr>
+                        <tr><td style="padding:0.45rem;">"kinetic" energy</td><td style="padding:0.45rem;">\( \tfrac{1}{2}mv^2 \)</td><td style="padding:0.45rem;">\( \tfrac{1}{2}Li^2 \)</td></tr>
+                        <tr><td style="padding:0.45rem;">"potential" energy</td><td style="padding:0.45rem;">\( \tfrac{1}{2}kx^2 \)</td><td style="padding:0.45rem;">\( \tfrac{Q^2}{2C} \)</td></tr>
+                        <tr><td style="padding:0.45rem;">relaxation time</td><td style="padding:0.45rem;">\( \tau = m/b \)</td><td style="padding:0.45rem;">\( \tau = L/R \)</td></tr>
+                        <tr><td style="padding:0.45rem;">undamped limit</td><td style="padding:0.45rem;">\( b=0 \) → SHM</td><td style="padding:0.45rem;">\( R=0 \) → LC circuit</td></tr>
+                    </table>
+                    <div class="warning-box">
+                        <h4>⚠️ \( k \to 1/C \), and \( g \) is not in the table</h4>
+                        <p>Stiffness maps to the <em>reciprocal</em> of capacitance &mdash; a stiff spring behaves like a
+                        <strong>small</strong> capacitor. The symbol \( g \) never appears; it enters only via the pendulum,
+                        where \( g/L_{pend} \) plays the same role as \( k/m \) and \( 1/LC \):</p>
+                        <div class="math-block">\[ \omega_0^2 \;=\; \frac{k}{m} \;=\; \frac{g}{L_{pend}} \;=\; \frac{1}{LC} \]</div>
+                        <p>Beware too that \( L \) is <strong>inductance</strong> in a circuit but <strong>length</strong> in a pendulum.
+                        And this substitution is for the <em>series</em> circuit only &mdash; parallel RLC has \( \alpha = \frac{1}{2RC} \).</p>
+                    </div>
+
                     <div class="warning-box" style="margin-top: 1.5rem;">
                         <h4>⚡ Series vs. parallel &mdash; the one thing to remember</h4>
                         <p>Both use the same \( \omega_0 = 1/\sqrt{LC} \). Only the damping term changes:
