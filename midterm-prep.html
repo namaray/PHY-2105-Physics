@@ -335,6 +335,62 @@
                         <p class="note">\( \phi=0 \) → line; \( \phi=\pi/2 \) → ellipse (circle if \( A_1=A_2 \)).</p>
                     </div>
                 </div>
+
+                <h3 class="part-header">A6 — Mechanical ↔ Electrical Analogy</h3>
+
+                <p>The spring-mass system and the series RLC circuit obey the <em>same</em> differential equation, so every
+                mechanical result becomes an electrical one under three swaps:</p>
+
+                <div class="math-block">\[ m \to L, \qquad b \to R, \qquad k \to \frac{1}{C} \]</div>
+
+                <p>Learn those three and you get the rest of the table for free.</p>
+
+                <table class="tbl">
+                    <tr><th>Quantity</th><th>Mechanical (spring–mass)</th><th>Electrical (series RLC)</th></tr>
+                    <tr><td>the variable</td><td>displacement \( x \)</td><td>charge \( Q \)</td></tr>
+                    <tr><td>its rate of change</td><td>velocity \( \dfrac{dx}{dt} \)</td><td>current \( i = \dfrac{dQ}{dt} \)</td></tr>
+                    <tr><td>inertia term</td><td>mass \( m \)</td><td>inductance \( L \)</td></tr>
+                    <tr><td>dissipation term</td><td>damping \( b \)</td><td>resistance \( R \)</td></tr>
+                    <tr><td>restoring term</td><td>stiffness \( k \)</td><td>\( \dfrac{1}{C} \) &nbsp;<em>(not \(C\) itself)</em></td></tr>
+                    <tr><td>driving term</td><td>force \( F_0\sin\omega t \)</td><td>EMF \( \varepsilon_0\sin\omega t \)</td></tr>
+                    <tr style="background:rgba(99,102,241,0.10);"><td><strong>equation of motion</strong></td>
+                        <td>\( m\dfrac{d^2x}{dt^2} + b\dfrac{dx}{dt} + kx = 0 \)</td>
+                        <td>\( L\dfrac{d^2Q}{dt^2} + R\dfrac{dQ}{dt} + \dfrac{Q}{C} = 0 \)</td></tr>
+                    <tr><td>natural frequency</td><td>\( \omega_0 = \sqrt{\dfrac{k}{m}} \)</td><td>\( \omega_0 = \dfrac{1}{\sqrt{LC}} \)</td></tr>
+                    <tr><td>damping factor</td><td>\( \alpha = \dfrac{b}{2m} \)</td><td>\( \alpha = \dfrac{R}{2L} \)</td></tr>
+                    <tr><td>damped frequency</td><td>\( \sqrt{\omega_0^2-\alpha^2} \)</td><td>\( \sqrt{\dfrac{1}{LC}-\left(\dfrac{R}{2L}\right)^2} \)</td></tr>
+                    <tr><td>critical damping</td><td>\( b_c = 2\sqrt{mk} \)</td><td>\( R_c = 2\sqrt{\dfrac{L}{C}} \)</td></tr>
+                    <tr><td>&ldquo;kinetic&rdquo; energy</td><td>\( \tfrac{1}{2}mv^2 \)</td><td>\( \tfrac{1}{2}Li^2 \) (magnetic)</td></tr>
+                    <tr><td>&ldquo;potential&rdquo; energy</td><td>\( \tfrac{1}{2}kx^2 \)</td><td>\( \dfrac{Q^2}{2C} \) (electric)</td></tr>
+                    <tr><td>total energy</td><td>\( \tfrac{1}{2}kA^2 \)</td><td>\( \dfrac{Q_0^2}{2C} \)</td></tr>
+                    <tr><td>maximum rate</td><td>\( v_{max} = A\omega_0 \)</td><td>\( i_{max} = Q_0\omega_0 \)</td></tr>
+                    <tr><td>relaxation time</td><td>\( \tau = \dfrac{m}{b} \)</td><td>\( \tau = \dfrac{L}{R} \)</td></tr>
+                    <tr><td>quality factor</td><td>\( Q = \dfrac{m\omega_0}{b} \)</td><td>\( Q = \dfrac{\omega_0 L}{R} = \dfrac{1}{R}\sqrt{\dfrac{L}{C}} \)</td></tr>
+                    <tr><td>undamped case</td><td>\( b = 0 \) → SHM</td><td>\( R = 0 \) → LC circuit</td></tr>
+                </table>
+
+                <div class="warning-box">
+                    <h4>⚠️ Two things people get wrong here</h4>
+                    <p><strong>1. \( k \) maps to \( 1/C \), not to \( C \) and not to \( g \).</strong> A stiff spring (large \(k\))
+                    behaves like a <em>small</em> capacitor. The letter \( g \) never appears in the analogy at all &mdash; it only
+                    enters through the pendulum, where \( \omega_0^2 = \dfrac{g}{L_{pend}} \) plays the same role that
+                    \( \dfrac{k}{m} \) does for a spring and \( \dfrac{1}{LC} \) does for a circuit:</p>
+                    <div class="math-block">\[ \omega_0^2 \;=\; \frac{k}{m} \;=\; \frac{g}{L_{pend}} \;=\; \frac{1}{LC} \]</div>
+                    <p><strong>2. \( L \) means two different things.</strong> In circuits it is <em>inductance</em> (henries);
+                    in pendulum formulas it is <em>length</em> (metres). Same letter, unrelated quantities &mdash; check which
+                    system the question is about before substituting.</p>
+                </div>
+
+                <div class="good-box">
+                    <h4>💡 How to use it in the exam</h4>
+                    <p>If you are given an RLC problem and blank on the formula, write down the mechanical version you
+                    <em>do</em> remember and swap \( m\to L,\ b\to R,\ k\to 1/C \).</p>
+                    <p style="margin-top:0.5rem;">Example: mechanical critical damping is \( b_c = 2\sqrt{mk} \). Substituting gives
+                    \( R_c = 2\sqrt{L\cdot\tfrac{1}{C}} = 2\sqrt{\dfrac{L}{C}} \) — which is exactly formula #30. It works for
+                    every row in the table.</p>
+                    <p style="margin-top:0.5rem;"><strong>Caution:</strong> this shortcut is for the <em>series</em> circuit only.
+                    The parallel circuit has \( \alpha = \dfrac{1}{2RC} \) and does not follow the same substitution.</p>
+                </div>
             </div>
         </section>
 

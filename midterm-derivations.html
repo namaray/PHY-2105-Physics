@@ -498,7 +498,9 @@
         <section class="notes-section" id="d5">
             <h2>D5. Mechanical ↔ electrical analogy <span class="badge badge-q2">Quiz-2 too</span></h2>
             <div class="formula-card">
-                <p>B1 and D2 produce the same differential equation, so the systems map term by term. Know one, know the other.</p>
+                <p>B1 and D2 produce the same differential equation, so the systems map term by term. The whole analogy rests on three swaps:</p>
+                <div class="math-block">\[ m \to L, \qquad b \to R, \qquad k \to \frac{1}{C} \]</div>
+                <p>Everything else in the table follows by substituting those into a formula you already know.</p>
                 <table class="analogy">
                     <tr><th>Mechanical</th><th>Electrical (series)</th><th>Why</th></tr>
                     <tr><td>displacement \( x \)</td><td>charge \( Q \)</td><td>the variable solved for</td></tr>
@@ -509,11 +511,25 @@
                     <tr><td>force \( F \)</td><td>EMF \( \varepsilon \)</td><td>the driving term</td></tr>
                     <tr><td>\( \tfrac{1}{2}mv^2 \)</td><td>\( \tfrac{1}{2}Li^2 \)</td><td>kinetic ↔ magnetic energy</td></tr>
                     <tr><td>\( \tfrac{1}{2}kx^2 \)</td><td>\( \tfrac{Q^2}{2C} \)</td><td>potential ↔ electric energy</td></tr>
+                    <tr><td>\( E = \tfrac{1}{2}kA^2 \)</td><td>\( E = \tfrac{Q_0^2}{2C} \)</td><td>total energy</td></tr>
+                    <tr><td>\( v_{max} = A\omega_0 \)</td><td>\( i_{max} = Q_0\omega_0 \)</td><td>maximum rate</td></tr>
                     <tr><td>\( \alpha = b/2m \)</td><td>\( \alpha = R/2L \)</td><td>damping factor</td></tr>
                     <tr><td>\( \omega_0 = \sqrt{k/m} \)</td><td>\( \omega_0 = 1/\sqrt{LC} \)</td><td>natural frequency</td></tr>
                     <tr><td>\( b_c = 2\sqrt{mk} \)</td><td>\( R_c = 2\sqrt{L/C} \)</td><td>critical damping</td></tr>
+                    <tr><td>\( \tau = m/b \)</td><td>\( \tau = L/R \)</td><td>relaxation time</td></tr>
+                    <tr><td>\( Q = m\omega_0/b \)</td><td>\( Q = \omega_0L/R \)</td><td>quality factor</td></tr>
+                    <tr><td>\( b = 0 \) → SHM (A1)</td><td>\( R = 0 \) → LC (D1)</td><td>undamped limit</td></tr>
                 </table>
-                <p style="font-size:0.92rem; color:var(--text-secondary);">Check the last row: substituting \( m\to L \), \( k\to 1/C \) into \( 2\sqrt{mk} \) gives \( 2\sqrt{L/C} \). ✓</p>
+                <p style="font-size:0.92rem; color:var(--text-secondary);">Check a row: substituting \( m\to L \), \( k\to 1/C \) into \( b_c = 2\sqrt{mk} \) gives \( R_c = 2\sqrt{L/C} \) ✓ &mdash; which is exactly D3.</p>
+                <div class="warning-box">
+                    <h4>⚠️ \( k \to 1/C \), and \( g \) is not in the table</h4>
+                    <p>Stiffness maps to the <em>reciprocal</em> of capacitance, so a stiff spring behaves like a <strong>small</strong> capacitor.
+                    The symbol \( g \) never appears in the analogy &mdash; it enters only through the pendulum, where \( g/L_{pend} \) plays
+                    the same role as \( k/m \) and \( 1/LC \):</p>
+                    <div class="math-block">\[ \omega_0^2 \;=\; \frac{k}{m} \;=\; \frac{g}{L_{pend}} \;=\; \frac{1}{LC} \]</div>
+                    <p>Also beware that \( L \) is <strong>inductance</strong> in a circuit but <strong>length</strong> in a pendulum &mdash; same letter, unrelated quantities.</p>
+                    <p style="margin-top:0.5rem;">Finally, this substitution is for the <em>series</em> circuit only. Parallel RLC has \( \alpha = \dfrac{1}{2RC} \) (D4) and does not follow it.</p>
+                </div>
             </div>
         </section>
 
