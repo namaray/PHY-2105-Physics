@@ -102,7 +102,7 @@
                 <div class="formula-grid">
                     <div class="formula-card">
                         <h4>1. SHM equation</h4>
-                        <div class="math-block">\[ \ddot{x} + \omega_0^2x = 0 \]</div>
+                        <div class="math-block">\[ \frac{d^2x}{dt^2} + \omega_0^2x = 0 \]</div>
                     </div>
                     <div class="formula-card">
                         <h4>2. Solution</h4>
@@ -141,8 +141,8 @@
                 <div class="formula-grid">
                     <div class="formula-card">
                         <h4>9. DHM equation</h4>
-                        <div class="math-block">\[ m\ddot{x} + b\dot{x} + kx = 0 \]</div>
-                        <p class="note">i.e. \( \ddot{x} + 2\alpha\dot{x} + \omega_0^2x = 0 \)</p>
+                        <div class="math-block">\[ m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = 0 \]</div>
+                        <p class="note">i.e. \( \frac{d^2x}{dt^2} + 2\alpha\frac{dx}{dt} + \omega_0^2x = 0 \)</p>
                     </div>
                     <div class="formula-card">
                         <h4>10. Damping factor</h4>
@@ -202,7 +202,7 @@
                 <div class="formula-grid">
                     <div class="formula-card">
                         <h4>19. Driven equation</h4>
-                        <div class="math-block">\[ m\ddot{x} + b\dot{x} + kx = F_0\sin\omega t \]</div>
+                        <div class="math-block">\[ m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = F_0\sin\omega t \]</div>
                         <p class="note">\( \omega \) is the <em>driving</em> frequency, not \( \omega_0 \).</p>
                     </div>
                     <div class="formula-card">
@@ -234,7 +234,7 @@
                 <div class="formula-grid">
                     <div class="formula-card">
                         <h4>25. LC circuit</h4>
-                        <div class="math-block">\[ \ddot{Q} + \frac{1}{LC}Q = 0 \]</div>
+                        <div class="math-block">\[ \frac{d^2Q}{dt^2} + \frac{1}{LC}Q = 0 \]</div>
                         <p class="note">Electrical SHM — no damping at all.</p>
                     </div>
                     <div class="formula-card">
@@ -313,11 +313,11 @@
                     </div>
                     <div class="formula-card">
                         <h4>40. Differential wave equation</h4>
-                        <div class="math-block">\[ \frac{\partial^2y}{\partial t^2} = v^2\frac{\partial^2y}{\partial x^2} \]</div>
+                        <div class="math-block">\[ \frac{d^2y}{dt^2} = v^2\frac{d^2y}{dx^2} \]</div>
                     </div>
                     <div class="formula-card">
                         <h4>41. Particle velocity</h4>
-                        <div class="math-block">\[ \frac{\partial y}{\partial t} = -v\frac{\partial y}{\partial x} \]</div>
+                        <div class="math-block">\[ \frac{dy}{dt} = -v\frac{dy}{dx} \]</div>
                         <p class="note">\( v_{particle,max} = A\omega \) — unrelated to the wave speed.</p>
                     </div>
                     <div class="formula-card">

@@ -368,7 +368,7 @@
                 <div id="solution-Ex29" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                 <p><strong>Given:</strong> \(y = 0.3 \sin(27.1x - 2.72t) \text{ m}\).</p>
                 <p><strong>(i) Particle velocity at \(x = 22.5 \text{ cm} = 0.225 \text{ m}\) and \(t = 18.9 \text{ s}\):</strong></p>
-                <p>\(v_p = \frac{\partial y}{\partial t} = -0.3(2.72) \cos(27.1x - 2.72t) = -0.816 \cos(27.1x - 2.72t)\)</p>
+                <p>\(v_p = \frac{dy}{dt} = -0.3(2.72) \cos(27.1x - 2.72t) = -0.816 \cos(27.1x - 2.72t)\)</p>
                 <p>\(\text{Phase} = 27.1(0.225) - 2.72(18.9) = 6.0975 - 51.408 = -45.3105 \text{ rad}\)</p>
                 <p>\(v_p = -0.816 \cos(-45.3105) \approx -0.816 \times 0.245 \approx -0.20 \text{ m/s}\)</p>
                 <p><strong>(ii) Maximum speed of the particle at origin:</strong></p>
@@ -588,7 +588,7 @@
                         <li>(viii) <strong>Maximum acceleration:</strong> \( a_{max} = A\omega^2 = 5(100\pi)^2 = 50000\pi^2 \approx 4.93 \times 10^5 \) m/s\(^2\)</li>
                         <li>(ix) <strong>Phase velocity:</strong> same as the wave velocity \( = 250 \) m/s</li>
                         <li>(x) <strong>Instantaneous particle velocity at \(t=3\) s, \(x=2\) m:</strong><br>
-                            \( v_y = \dfrac{\partial y}{\partial t} = 500\pi\cos(100\pi t - 0.4\pi x) \)<br>
+                            \( v_y = \dfrac{dy}{dt} = 500\pi\cos(100\pi t - 0.4\pi x) \)<br>
                             Phase \( = 300\pi - 0.8\pi = 299.2\pi \). Subtracting \( 150\times 2\pi \) gives \( -0.8\pi \), and \( \cos(-0.8\pi) = -0.809 \).<br>
                             \( v_y = 500\pi \times (-0.809) \approx -1270.8 \) m/s</li>
                     </ul>
@@ -652,7 +652,7 @@
                 <summary style="cursor: pointer; color: var(--accent-color); font-weight: 600; padding: 0.5rem 0;">📝 Show Solution</summary>
                 <div id="solution-P7" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                     <p><strong>Solution:</strong></p>
-                    <p>For a damped oscillator \( m\ddot{x} + b\dot{x} + kx = 0 \), write \( \gamma = \dfrac{b}{2m} \) and \( \omega = \sqrt{k/m} \). The ratio \( \omega/\gamma \) fixes the character of the motion:</p>
+                    <p>For a damped oscillator \( m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = 0 \), write \( \gamma = \dfrac{b}{2m} \) and \( \omega = \sqrt{k/m} \). The ratio \( \omega/\gamma \) fixes the character of the motion:</p>
                     <ul>
                         <li><strong>\( \omega/\gamma = 10 \implies \gamma = 0.1\omega \) — underdamped.</strong> \( \omega' = \sqrt{\omega^2 - \gamma^2} = 0.995\,\omega \). Draw a cosine of period \( T' = 2\pi/\omega' \) squeezed inside the slowly shrinking envelope \( \pm A_0 e^{-\gamma t} \). The amplitude falls by \( e^{-0.1 \times 2\pi} = 0.53 \) each cycle, so several oscillations are clearly visible.</li>
                         <li><strong>\( \omega/\gamma = 0.5 \implies \gamma = 2\omega \) — overdamped.</strong> \( \gamma > \omega \), so \( \omega' \) is imaginary and there is no oscillation. Draw a single curve falling from \( A_0 \) to zero without ever crossing the axis; it is the sum of two decaying exponentials \( e^{-(\gamma \mp \sqrt{\gamma^2-\omega^2})t} \), the slower one decaying as \( e^{-0.268\,\gamma t} \).</li>
@@ -935,7 +935,7 @@
                 <div id="solution-P22" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
                     <p><strong>Solution:</strong></p>
                     <p>Given \( y(x,t) = 0.3\sin(27.1x - 2.72t) \) m, so \( A = 0.3 \) m, \( k = 27.1 \) rad/m, \( \omega = 2.72 \) rad/s.</p>
-                    <p>(i) Particle velocity: \( v_y = \dfrac{\partial y}{\partial t} = -(0.3)(2.72)\cos(27.1x - 2.72t) = -0.816\cos(27.1x - 2.72t) \)</p>
+                    <p>(i) Particle velocity: \( v_y = \dfrac{dy}{dt} = -(0.3)(2.72)\cos(27.1x - 2.72t) = -0.816\cos(27.1x - 2.72t) \)</p>
                     <p>At \( x = 0.225 \) m and \( t = 18.9 \) s:</p>
                     <p>Phase \( = 27.1(0.225) - 2.72(18.9) = 6.0975 - 51.408 = -45.311 \) rad</p>
                     <p>Reducing modulo \( 2\pi \): \( -45.311 + 8(2\pi) = 4.9215 \) rad, and \( \cos(-45.311) = \cos(45.311) = 0.2402 \).</p>

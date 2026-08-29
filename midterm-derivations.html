@@ -131,7 +131,7 @@
                 </div>
                 <div class="step">
                     <span class="step-label">Solve</span>
-                    <p>Write \( \omega_0^2 = \dfrac{k}{m} \), giving \( \ddot{x} + \omega_0^2x = 0 \). Trying \( x = e^{\lambda t} \) gives \( \lambda^2 + \omega_0^2 = 0 \), so \( \lambda = \pm i\omega_0 \). Combining into real form:</p>
+                    <p>Write \( \omega_0^2 = \dfrac{k}{m} \), giving \( \frac{d^2x}{dt^2} + \omega_0^2x = 0 \). Trying \( x = e^{\lambda t} \) gives \( \lambda^2 + \omega_0^2 = 0 \), so \( \lambda = \pm i\omega_0 \). Combining into real form:</p>
                 </div>
                 <div class="result">
                     <span class="result-label">Result</span>
@@ -179,13 +179,13 @@
                 <div class="step">
                     <span class="step-label">Take torques about the pivot</span>
                     <div class="math-block">\[ \tau = -mgL\sin\theta, \qquad I = mL^2 \]</div>
-                    <p>Using \( \tau = I\ddot{\theta} \):</p>
-                    <div class="math-block">\[ mL^2\ddot{\theta} = -mgL\sin\theta \quad\Longrightarrow\quad \ddot{\theta} = -\frac{g}{L}\sin\theta \]</div>
+                    <p>Using \( \tau = I\frac{d^2\theta}{dt^2} \):</p>
+                    <div class="math-block">\[ mL^2\frac{d^2\theta}{dt^2} = -mgL\sin\theta \quad\Longrightarrow\quad \frac{d^2\theta}{dt^2} = -\frac{g}{L}\sin\theta \]</div>
                 </div>
                 <div class="step">
                     <span class="step-label">Small-angle approximation</span>
                     <p>For small \( \theta \) in radians, \( \sin\theta \approx \theta \). This is the step that makes it SHM:</p>
-                    <div class="math-block">\[ \ddot{\theta} + \frac{g}{L}\theta = 0 \]</div>
+                    <div class="math-block">\[ \frac{d^2\theta}{dt^2} + \frac{g}{L}\theta = 0 \]</div>
                 </div>
                 <div class="result">
                     <span class="result-label">Result</span>
@@ -201,14 +201,14 @@
                 <div class="step">
                     <span class="step-label">Energy method</span>
                     <p>For a rigid body pivoted a distance \( L \) from its centre of mass, the gravitational PE is \( mgL(1-\cos\theta) \). Using \( \cos\theta \approx 1 - \dfrac{\theta^2}{2} \) for small angles, this becomes \( \tfrac{1}{2}mgL\theta^2 \). With moment of inertia \( I \):</p>
-                    <div class="math-block">\[ E = \tfrac{1}{2}I\dot{\theta}^2 + \tfrac{1}{2}mgL\theta^2 = \text{constant} \]</div>
+                    <div class="math-block">\[ E = \tfrac{1}{2}I\left(\frac{d\theta}{dt}\right)^2 + \tfrac{1}{2}mgL\theta^2 = \text{constant} \]</div>
                 </div>
                 <div class="step">
                     <span class="step-label">Differentiate with respect to time</span>
                     <p>The total energy is constant, so its time derivative is zero:</p>
-                    <div class="math-block">\[ I\dot{\theta}\ddot{\theta} + mgL\theta\dot{\theta} = 0 \]</div>
-                    <p>Divide through by \( \dot{\theta} \) (non-zero except at the turning points):</p>
-                    <div class="math-block">\[ I\ddot{\theta} + mgL\theta = 0 \quad\Longrightarrow\quad \ddot{\theta} = -\frac{mgL}{I}\theta \]</div>
+                    <div class="math-block">\[ I\frac{d\theta}{dt}\frac{d^2\theta}{dt^2} + mgL\theta\frac{d\theta}{dt} = 0 \]</div>
+                    <p>Divide through by \( \frac{d\theta}{dt} \) (non-zero except at the turning points):</p>
+                    <div class="math-block">\[ I\frac{d^2\theta}{dt^2} + mgL\theta = 0 \quad\Longrightarrow\quad \frac{d^2\theta}{dt^2} = -\frac{mgL}{I}\theta \]</div>
                 </div>
                 <div class="result">
                     <span class="result-label">Result</span>
@@ -239,7 +239,7 @@
                 </div>
                 <div class="result">
                     <span class="result-label">Result — the DHM equation</span>
-                    <div class="math-block" style="margin-bottom:0;">\[ m\ddot{x} + b\dot{x} + kx = 0 \qquad\Longleftrightarrow\qquad \ddot{x} + 2\alpha\dot{x} + \omega_0^2x = 0 \]</div>
+                    <div class="math-block" style="margin-bottom:0;">\[ m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = 0 \qquad\Longleftrightarrow\qquad \frac{d^2x}{dt^2} + 2\alpha\frac{dx}{dt} + \omega_0^2x = 0 \]</div>
                     <p style="margin-top:0.6rem; font-size:0.92rem;">The factor of 2 in \( 2\alpha \) is chosen so the solution comes out clean in B2 &mdash; that is the <em>only</em> reason \( \alpha = b/2m \) rather than \( b/m \).</p>
                 </div>
             </div>
@@ -250,7 +250,7 @@
             <div class="formula-card">
                 <div class="step">
                     <span class="step-label">Trial solution</span>
-                    <p>Linear with constant coefficients, so try \( x = e^{\lambda t} \). Then \( \dot{x} = \lambda e^{\lambda t} \), \( \ddot{x} = \lambda^2 e^{\lambda t} \), and substituting:</p>
+                    <p>Linear with constant coefficients, so try \( x = e^{\lambda t} \). Then \( \frac{dx}{dt} = \lambda e^{\lambda t} \), \( \frac{d^2x}{dt^2} = \lambda^2 e^{\lambda t} \), and substituting:</p>
                     <div class="math-block">\[ \left(\lambda^2 + 2\alpha\lambda + \omega_0^2\right)e^{\lambda t} = 0 \]</div>
                     <p>Since \( e^{\lambda t} \neq 0 \), the bracket must vanish.</p>
                 </div>
@@ -366,7 +366,7 @@
                 <div class="step">
                     <span class="step-label">Add a driving force</span>
                     <p>Take the DHM equation of B1 and add a periodic external force \( F_0\sin\omega t \), where \( \omega \) is the <em>driving</em> frequency (not the natural one):</p>
-                    <div class="math-block">\[ m\ddot{x} + b\dot{x} + kx = F_0\sin\omega t \]</div>
+                    <div class="math-block">\[ m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = F_0\sin\omega t \]</div>
                 </div>
                 <div class="step">
                     <span class="step-label">Steady state</span>
@@ -446,7 +446,7 @@
                 </div>
                 <div class="result">
                     <span class="result-label">Result — identical in form to B1</span>
-                    <p>Compare term by term with \( \ddot{x} + 2\alpha\dot{x} + \omega_0^2x = 0 \):</p>
+                    <p>Compare term by term with \( \frac{d^2x}{dt^2} + 2\alpha\frac{dx}{dt} + \omega_0^2x = 0 \):</p>
                     <div class="math-block" style="margin-bottom:0;">\[ \alpha = \frac{R}{2L}, \qquad \omega_0 = \frac{1}{\sqrt{LC}} \]</div>
                     <p style="margin-top:0.6rem; font-size:0.92rem;">Because the equation has the same form, <strong>every result from B2&ndash;B5 carries over unchanged</strong> &mdash; just swap in the new \( \alpha \) and \( \omega_0 \). Setting \( R = 0 \) recovers D1.</p>
                 </div>
@@ -502,7 +502,7 @@
                 <table class="analogy">
                     <tr><th>Mechanical</th><th>Electrical (series)</th><th>Why</th></tr>
                     <tr><td>displacement \( x \)</td><td>charge \( Q \)</td><td>the variable solved for</td></tr>
-                    <tr><td>velocity \( \dot{x} \)</td><td>current \( i = \dot{Q} \)</td><td>its first derivative</td></tr>
+                    <tr><td>velocity \( \frac{dx}{dt} \)</td><td>current \( i = \frac{dQ}{dt} \)</td><td>its first derivative</td></tr>
                     <tr><td>mass \( m \)</td><td>inductance \( L \)</td><td>resists change &mdash; inertia</td></tr>
                     <tr><td>damping \( b \)</td><td>resistance \( R \)</td><td>dissipates energy</td></tr>
                     <tr><td>stiffness \( k \)</td><td>\( 1/C \)</td><td>stores potential energy</td></tr>
@@ -561,13 +561,13 @@
                 <div class="step">
                     <span class="step-label">Differentiate twice with respect to t</span>
                     <p>Starting from \( y = A\sin\left[\frac{2\pi}{\lambda}(vt-x)\right] \):</p>
-                    <div class="math-block">\[ \frac{\partial y}{\partial t} = A\frac{2\pi v}{\lambda}\cos\left[\frac{2\pi}{\lambda}(vt-x)\right] \]</div>
-                    <div class="math-block">\[ \frac{\partial^2y}{\partial t^2} = -A\frac{4\pi^2v^2}{\lambda^2}\sin\left[\frac{2\pi}{\lambda}(vt-x)\right] \]</div>
+                    <div class="math-block">\[ \frac{dy}{dt} = A\frac{2\pi v}{\lambda}\cos\left[\frac{2\pi}{\lambda}(vt-x)\right] \]</div>
+                    <div class="math-block">\[ \frac{d^2y}{dt^2} = -A\frac{4\pi^2v^2}{\lambda^2}\sin\left[\frac{2\pi}{\lambda}(vt-x)\right] \]</div>
                 </div>
                 <div class="step">
                     <span class="step-label">Differentiate twice with respect to x</span>
-                    <div class="math-block">\[ \frac{\partial y}{\partial x} = -A\frac{2\pi}{\lambda}\cos\left[\frac{2\pi}{\lambda}(vt-x)\right] \]</div>
-                    <div class="math-block">\[ \frac{\partial^2y}{\partial x^2} = -A\frac{4\pi^2}{\lambda^2}\sin\left[\frac{2\pi}{\lambda}(vt-x)\right] \]</div>
+                    <div class="math-block">\[ \frac{dy}{dx} = -A\frac{2\pi}{\lambda}\cos\left[\frac{2\pi}{\lambda}(vt-x)\right] \]</div>
+                    <div class="math-block">\[ \frac{d^2y}{dx^2} = -A\frac{4\pi^2}{\lambda^2}\sin\left[\frac{2\pi}{\lambda}(vt-x)\right] \]</div>
                 </div>
                 <div class="step">
                     <span class="step-label">Compare</span>
@@ -575,8 +575,8 @@
                 </div>
                 <div class="result">
                     <span class="result-label">Result — the wave equation</span>
-                    <div class="math-block" style="margin-bottom:0;">\[ \frac{\partial^2y}{\partial t^2} = v^2\frac{\partial^2y}{\partial x^2} \]</div>
-                    <p style="margin-top:0.6rem; font-size:0.92rem;">Any function of the form \( y = f(vt \mp x) \) satisfies this &mdash; not just sines. That is why it is <em>the</em> wave equation: the coefficient of \( \partial^2y/\partial x^2 \) is always the square of the wave speed.</p>
+                    <div class="math-block" style="margin-bottom:0;">\[ \frac{d^2y}{dt^2} = v^2\frac{d^2y}{dx^2} \]</div>
+                    <p style="margin-top:0.6rem; font-size:0.92rem;">Any function of the form \( y = f(vt \mp x) \) satisfies this &mdash; not just sines. That is why it is <em>the</em> wave equation: the coefficient of \( d^2y/dx^2 \) is always the square of the wave speed.</p>
                 </div>
             </div>
         </section>
@@ -588,17 +588,17 @@
                     <span class="step-label">Two different things called "velocity"</span>
                     <ul>
                         <li><strong>Wave velocity</strong> \( v = f\lambda \) &mdash; how fast the <em>pattern</em> moves along \( x \). Constant.</li>
-                        <li><strong>Particle velocity</strong> \( \dfrac{\partial y}{\partial t} \) &mdash; how fast one particle moves up and down. Oscillates.</li>
+                        <li><strong>Particle velocity</strong> \( \dfrac{dy}{dt} \) &mdash; how fast one particle moves up and down. Oscillates.</li>
                     </ul>
                 </div>
                 <div class="step">
                     <span class="step-label">Relate them</span>
                     <p>Take the two first derivatives from E2 and divide:</p>
-                    <div class="math-block">\[ \frac{\partial y}{\partial t} = A\frac{2\pi v}{\lambda}\cos[\cdot], \qquad \frac{\partial y}{\partial x} = -A\frac{2\pi}{\lambda}\cos[\cdot] \]</div>
+                    <div class="math-block">\[ \frac{dy}{dt} = A\frac{2\pi v}{\lambda}\cos[\cdot], \qquad \frac{dy}{dx} = -A\frac{2\pi}{\lambda}\cos[\cdot] \]</div>
                 </div>
                 <div class="result">
                     <span class="result-label">Result</span>
-                    <div class="math-block" style="margin-bottom:0;">\[ \frac{\partial y}{\partial t} = -v\frac{\partial y}{\partial x} \]</div>
+                    <div class="math-block" style="margin-bottom:0;">\[ \frac{dy}{dt} = -v\frac{dy}{dx} \]</div>
                     <p style="margin-top:0.6rem; font-size:0.92rem;">Particle velocity = &minus;(wave velocity) &times; (slope of the waveform). Its maximum is \( v_{max} = A\omega \),
                     which has <strong>nothing to do with</strong> the wave speed &mdash; a common exam trap. Maximum particle acceleration is \( A\omega^2 \).</p>
                 </div>
@@ -692,7 +692,7 @@
         <div class="warning-box">
             <h4>🎯 The spine of the whole syllabus</h4>
             <p>Almost every derivation above is one equation wearing a different costume:</p>
-            <div class="math-block">\[ \ddot{x} + 2\alpha\dot{x} + \omega_0^2 x = 0 \]</div>
+            <div class="math-block">\[ \frac{d^2x}{dt^2} + 2\alpha\frac{dx}{dt} + \omega_0^2 x = 0 \]</div>
             <ul>
                 <li>Set \( \alpha = 0 \) &rarr; <strong>SHM</strong> (A1) and the <strong>LC circuit</strong> (D1)</li>
                 <li>Keep \( \alpha \) &rarr; <strong>DHM</strong> (B1) and the <strong>RLC circuit</strong> (D2)</li>
