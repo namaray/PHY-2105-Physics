@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz-3 Preparation Guide — PHY-2105</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255,255,255,0.05); padding: 0.9rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 0.8rem 0; font-size: 1.05rem; overflow-x: auto; text-align: center; }
+        .formula-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1rem 0; }
+        .formula-card h4 { color: var(--accent-color); margin-bottom: 0.4rem; font-size: 0.98rem; }
+        .formula-card p.note { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.4rem; }
+        .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 768px) { .formula-grid { grid-template-columns: 1fr; } }
+        .badge { display:inline-block; padding:0.2rem 0.7rem; border-radius:20px; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; }
+        .badge-math { background: rgba(99,102,241,0.2); color:#818cf8; }
+        .badge-short { background: rgba(236,72,153,0.2); color:#f472b6; }
+        .badge-graph { background: rgba(34,197,94,0.2); color:#4ade80; }
+        .notes-section { margin-bottom: 3rem; }
+        .notes-container { max-width: 880px; margin: 0 auto; padding: 2rem; }
+        .nav-bar { display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; padding:1rem 0; margin-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .nav-bar a { color: var(--accent-color); text-decoration:none; font-weight:600; }
+        .nav-bar a:hover { text-decoration: underline; }
+        .warning-box { background: rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .warning-box h4 { color:#f59e0b; margin-bottom:0.4rem; }
+        .excluded-box { background: rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.28); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .excluded-box h4 { color:#ef4444; margin-bottom:0.4rem; }
+        .good-box { background: rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.3); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .good-box h4 { color:#4ade80; margin-bottom:0.4rem; }
+        .exam-banner { background: linear-gradient(135deg, rgba(255,65,108,0.15), rgba(255,75,43,0.15)); border:1px solid rgba(255,65,108,0.3); border-radius:16px; padding:1.8rem; margin-bottom:2rem; text-align:center; }
+        .exam-banner h2 { color:#ff416c; margin-bottom:0.4rem; font-size:1.5rem; }
+        .exam-banner .exam-date { font-size:1.2rem; font-weight:700; }
+        .exam-banner .exam-meta { color: var(--text-secondary); margin-top:0.4rem; font-size:0.95rem; }
+        .marks-bar { display:flex; border-radius:12px; overflow:hidden; margin:1.2rem 0; height:38px; font-weight:700; font-size:0.85rem; }
+        .marks-math { background: linear-gradient(90deg,#6366f1,#8b5cf6); flex:7.5; display:flex; align-items:center; justify-content:center; color:#fff; }
+        .marks-short { background: linear-gradient(90deg,#f59e0b,#ef4444); flex:2.5; display:flex; align-items:center; justify-content:center; color:#fff; }
+        .collapsible-header { cursor:pointer; user-select:none; }
+        .collapsible-header::after { content:' ▾'; font-size:0.8em; color:var(--text-secondary); }
+        .collapsible-header.collapsed::after { content:' ▸'; }
+        .collapsible-body.collapsed { display:none; }
+        .checklist { list-style:none; padding:0; }
+        .checklist li { display:flex; gap:0.7rem; align-items:center; padding:0.6rem 0.9rem; margin:0.35rem 0; background:rgba(255,255,255,0.04); border-left:3px solid rgba(255,255,255,0.12); border-radius:8px; cursor:pointer; transition:all 0.2s ease; }
+        .checklist li:hover { background:rgba(255,255,255,0.07); transform:translateX(4px); }
+        .checklist li input[type="checkbox"] { width:18px; height:18px; accent-color:var(--accent-color); cursor:pointer; flex-shrink:0; }
+        .checklist li.checked { opacity:0.5; text-decoration:line-through; border-left-color:#22c55e; }
+        .progress-bar-container { width:100%; height:10px; background:rgba(255,255,255,0.1); border-radius:5px; overflow:hidden; }
+        .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,#6366f1,#a855f7); transition:width 0.4s ease; }
+        .progress-text { font-size:0.85rem; color:var(--text-secondary); text-align:right; margin-top:0.3rem; }
+        table.tbl { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.93rem; }
+        table.tbl th, table.tbl td { padding:0.55rem 0.7rem; text-align:left; border-bottom:1px solid rgba(255,255,255,0.1); }
+        table.tbl th { color: var(--accent-color); }
+        .part-header { color:var(--accent-color); border-bottom:2px solid rgba(99,102,241,0.35); padding-bottom:0.4rem; margin:2.5rem 0 1.2rem; font-size:1.15rem; }
+        .qa { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:0.9rem 1.2rem; margin:0.8rem 0; }
+        .qa .q { color:#f472b6; font-weight:600; margin-bottom:0.35rem; }
+        .ex { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .ex h4 { color:var(--accent-color); margin-bottom:0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="container notes-container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn"><span>←</span> Back to Home</a>
+            <a href="coulombs-law.html">Coulomb's Law Notes</a>
+            <a href="electric-fields.html">Electric Fields Notes</a>
+            <a href="Coulombs law_b.pdf" target="_blank">Slides PDF</a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>⚡ Quiz-3 Preparation Guide</h1>
+            <p class="subtitle">PHY-2105 • Coulomb's Law</p>
+        </header>
+
+        <div class="exam-banner">
+            <h2>Quiz-3</h2>
+            <div class="exam-date">19 September 2026 (Saturday)</div>
+            <div class="exam-meta">At the time of Lecture 17/18 &nbsp;•&nbsp; Off-line exam</div>
+        </div>
+
+        <section class="notes-section">
+            <h2>📊 Marks Distribution</h2>
+            <div class="marks-bar">
+                <div class="marks-math">70–80% Maths Problems</div>
+                <div class="marks-short">20–30% Short Q</div>
+            </div>
+            <p>It is a <strong>maths-dominated</strong> quiz. Spend most of your time on the worked examples below.</p>
+        </section>
+
+        <section class="notes-section">
+            <h2>🎯 Scope</h2>
+            <div class="good-box">
+                <h4>✅ Included</h4>
+                <p><strong>Chapter: Coulomb's Law</strong> — short questions + maths problems.</p>
+                <p style="margin-top:0.5rem;">Slide problems: <strong>Example-1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 14, 16, 17, 18,
+                20, 21, 22, 23, 24, 25, 26, 27</strong> (from the main slide, or similar problems). Total = 23 problems.</p>
+                <p style="margin-top:0.5rem;">N.B. 4: <strong>different types of graph drawings / graphical analysis are included.</strong></p>
+                <p style="margin-top:0.5rem;">N.B. 3: only "short questions" that have been <strong>taught and mentioned up to the last Lecture</strong>.</p>
+            </div>
+
+            <div class="excluded-box">
+                <h4>🚫 Excluded</h4>
+                <p>N.B. 1: <strong>Broad question / Proof / "Show that" / Derivation is NOT included in Quiz-3.</strong>
+                So don't spend tonight memorising derivations — only the results and how to use them.</p>
+                <p style="margin-top:0.5rem;"><strong>Practice Problem Sheet-3 is struck out</strong> in the notice (item 2, along with
+                its "Total Problems=16"), so that explicit list is not examinable.</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Two things to be careful about in the notice</h4>
+                <p><strong>1.</strong> Although the Practice Sheet-3 list is crossed out, <strong>N.B. 7 still says</strong>
+                similar types of problems may come from Assignment-2 / Practice Problem Sheet-3 "whichever is suitable or
+                applicable or available up to the contents, if it is already provided." So the <em>problem types</em> from that
+                sheet can still appear — just not that specific numbered list.</p>
+                <p style="margin-top:0.5rem;"><strong>2.</strong> The slide deck in this folder
+                (<em>Coulombs law_b.pdf</em>) contains <strong>Examples 1–6 only</strong>. The notice references examples up to
+                27, so the lecturer's "main slide" numbering goes beyond what has been shared here. Everything below covers
+                Examples 1–6 in full plus every standard problem type in the chapter — but if you have a fuller slide deck,
+                check Examples 7–27 against it.</p>
+            </div>
+        </section>
+
+        <section class="notes-section">
+            <h2>📈 Study Progress</h2>
+            <div class="progress-bar-container"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="progress-text" id="progressText">0 / 0 checked</div>
+        </section>
+
+        <!-- ============ FORMULA SHEET ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">📋 A. Formula Sheet</h2>
+            <div class="collapsible-body">
+                <h3 class="part-header">A1 — Constants to memorise</h3>
+                <table class="tbl">
+                    <tr><th>Constant</th><th>Value</th></tr>
+                    <tr><td>Coulomb constant \( k \)</td><td>\( 8.99\times10^{9} \approx 9\times10^{9} \) N·m²/C² &nbsp;(slides often use \( \approx 10^{10} \))</td></tr>
+                    <tr><td>Permittivity \( \varepsilon_0 \)</td><td>\( 8.85\times10^{-12} \) C²/N·m²</td></tr>
+                    <tr><td>Elementary charge \( e \)</td><td>\( 1.6\times10^{-19} \) C</td></tr>
+                    <tr><td>Electron mass \( m_e \)</td><td>\( 9.11\times10^{-31} \) kg</td></tr>
+                    <tr><td>Proton mass \( m_p \)</td><td>\( 1.67\times10^{-27} \) kg</td></tr>
+                    <tr><td>Gravitational constant \( G \)</td><td>\( 6.67\times10^{-11} \) N·m²/kg²</td></tr>
+                    <tr><td>Avogadro \( N_A \)</td><td>\( 6.022\times10^{23} \) /mol</td></tr>
+                </table>
+
+                <h3 class="part-header">A2 — Core formulas</h3>
+                <div class="formula-grid">
+                    <div class="formula-card">
+                        <h4>1. Coulomb's Law</h4>
+                        <div class="math-block">\[ F = \frac{kq_1q_2}{r^2} \]</div>
+                        <p class="note">Like charges repel, unlike attract.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>2. Coulomb constant</h4>
+                        <div class="math-block">\[ k = \frac{1}{4\pi\varepsilon_0} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>3. Quantization</h4>
+                        <div class="math-block">\[ Q = Ne \;\Longrightarrow\; N = \frac{Q}{e} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>4. Superposition</h4>
+                        <div class="math-block">\[ \vec F_{net} = \vec F_1 + \vec F_2 + \cdots \]</div>
+                        <p class="note">Vector sum — resolve into components.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>5. Components &amp; resultant</h4>
+                        <div class="math-block">\[ F = \sqrt{F_x^2 + F_y^2},\quad \theta = \tan^{-1}\frac{F_y}{F_x} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>6. Two spheres of radius R</h4>
+                        <div class="math-block">\[ F = \frac{kq^2}{(r+2R)^2} \]</div>
+                        <p class="note">If \(r\) is surface-to-surface. Centre-to-centre → use \(r\) directly.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>7. Current</h4>
+                        <div class="math-block">\[ I = \frac{q}{t} = \frac{dq}{dt} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>8. Charge from a current graph</h4>
+                        <div class="math-block">\[ Q = \int i\,dt \]</div>
+                        <p class="note">= area under the \(i\)–\(t\) graph. ← graph question</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>9. Voltage</h4>
+                        <div class="math-block">\[ V = \frac{dW}{dQ} \]</div>
+                        <p class="note">volts = joules/coulomb</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>10. Power</h4>
+                        <div class="math-block">\[ P = VI = \frac{dW}{dt},\quad W=\int P\,dt \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>11. Gravity (for comparison problems)</h4>
+                        <div class="math-block">\[ F_g = \frac{Gm_1m_2}{r^2} \]</div>
+                    </div>
+                    <div class="formula-card">
+                        <h4>12. Force ratio</h4>
+                        <div class="math-block">\[ \frac{F_c}{F_g} = \frac{kq_1q_2}{Gm_1m_2} \]</div>
+                        <p class="note">\(r^2\) cancels — independent of distance.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>13. Charge on a sample of matter</h4>
+                        <div class="math-block">\[ q = \left(\frac{m}{M}N_A\right)\!Z\,e \]</div>
+                        <p class="note">\(m\)=mass, \(M\)=molar mass, \(Z\)=protons/atom.</p>
+                    </div>
+                    <div class="formula-card">
+                        <h4>14. Newton's second law (pairs with Coulomb)</h4>
+                        <div class="math-block">\[ a = \frac{F}{m} \]</div>
+                        <p class="note">"find their acceleration as they separate".</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ WORKED EXAMPLES ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">🧮 B. The Six Slide Examples — Fully Worked</h2>
+            <div class="collapsible-body">
+                <p>These are Examples 1–6 from <em>Coulombs law_b.pdf</em>. Example-5 is the most likely to appear in some form —
+                it is the only 2-D vector one.</p>
+
+                <div class="ex">
+                    <h4>Example-1 — Quantization &nbsp;<span class="badge badge-math">Easy</span></h4>
+                    <p><em>Charge an object with 1 nC. How many elementary charges?</em></p>
+                    <div class="math-block">\[ N = \frac{Q}{e} = \frac{10^{-9}}{1.6\times10^{-19}} \approx 6\times10^{9} \]</div>
+                    <p><strong>Ans:</strong> ≈ 6 billion electrons.</p>
+                </div>
+
+                <div class="ex">
+                    <h4>Example-2 — Two positive charges &nbsp;<span class="badge badge-math">Easy</span></h4>
+                    <p><em>Two charges of 1 nC each, 1 cm apart.</em></p>
+                    <div class="math-block">\[ F = \frac{(10^{10})(10^{-9})(10^{-9})}{(10^{-2})^2} = 10^{-4}\ \text{N (repulsion)} \]</div>
+                    <p>Equivalent to the weight of ~10 mg. <strong>Why so weak?</strong> Because a nanocoulomb is a minute
+                    amount of charge — \(k\) is huge, but \(q^2\) is far smaller.</p>
+                </div>
+
+                <div class="ex">
+                    <h4>Example-3 — Two pennies stripped of electrons &nbsp;<span class="badge badge-math">Medium</span></h4>
+                    <p><em>Two 3 g copper pennies, 1 m apart, all electrons removed. (i) Force? (ii) Acceleration as they separate?</em></p>
+                    <p>Cu: \(Z = 29\), \(M = 63.5\) g/mol.</p>
+                    <div class="math-block">\[ q = \frac{3}{63.5}(6\times10^{23})(29)(1.6\times10^{-19}) \approx 1.4\times10^{5}\ \text{C} \]</div>
+                    <div class="math-block">\[ F = \frac{(10^{10})(1.4\times10^{5})^2}{1^2} \approx 2\times10^{20}\ \text{N} \]</div>
+                    <div class="math-block">\[ a = \frac{F}{m} = \frac{2\times10^{20}}{3\times10^{-3}} \approx 7\times10^{22}\ \text{m/s}^2 \]</div>
+                </div>
+
+                <div class="ex">
+                    <h4>Example-4 — Three charges in a line &nbsp;<span class="badge badge-math">Likely</span></h4>
+                    <p><em>\( q_1=+25 \) nC at 0, \( q_2=-12 \) nC at \(x=2\) m, \( q_3=+18 \) nC at \(x=3\) m. Net force on \(q_1\)?</em></p>
+                    <p>\(q_2\) is opposite → <strong>attracts</strong> \(q_1\) toward \(+x\). \(q_3\) is like → <strong>repels</strong> toward \(-x\).</p>
+                    <div class="math-block">\[ F = kq_1\!\left[\frac{|q_2|}{2^2} - \frac{q_3}{3^2}\right] = (10^{10})(25\times10^{-9})\!\left[\frac{12\times10^{-9}}{4}-\frac{18\times10^{-9}}{9}\right] \]</div>
+                    <p><strong>Ans:</strong> \( +2.5\times10^{-7} \) N along \(+x\) &nbsp;(\(2.2\times10^{-7}\) N if you use \(k=8.99\times10^9\)).</p>
+                </div>
+
+                <div class="ex">
+                    <h4>Example-5 — Three charges in 2-D &nbsp;<span class="badge badge-math">★ Most likely</span></h4>
+                    <p><em>\( q_1=+1 \) nC at origin, \( q_2=+1 \) nC at 1 cm along \(+x\), \( q_3=-2 \) nC at 1 cm across and 2 cm up
+                    (so \( r_{13}=\sqrt5 \) cm). Net force on \( q_1 \) and its direction?</em></p>
+
+                    <p><strong>1. Force from \(q_2\)</strong> — repulsive, purely along \(x\):</p>
+                    <div class="math-block">\[ F_{12} = \frac{(10^{10})(10^{-9})^2}{(10^{-2})^2} = 1\times10^{-4}\,\text{N},\qquad F_{12y}=0 \]</div>
+
+                    <p><strong>2. Force from \(q_3\)</strong> — attractive, at an angle:</p>
+                    <div class="math-block">\[ F_{13} = \frac{(10^{10})(2\times10^{-9})(10^{-9})}{(\sqrt5\times10^{-2})^2} = 0.40\times10^{-4}\,\text{N} \]</div>
+                    <p>With the 1 : 2 : \(\sqrt5\) triangle, \( \cos\theta = 1/\sqrt5 \), \( \sin\theta = 2/\sqrt5 \):</p>
+                    <div class="math-block">\[ F_{13x} = 0.179\times10^{-4}\,\text{N},\qquad F_{13y} = 0.358\times10^{-4}\,\text{N} \]</div>
+
+                    <p><strong>3. Add components</strong> (the \(x\) parts oppose):</p>
+                    <div class="math-block">\[ F_{x} = (1-0.179)\times10^{-4} = 0.821\times10^{-4}\,\text{N} \]</div>
+                    <div class="math-block">\[ F_{y} = 0.358\times10^{-4}\,\text{N} \]</div>
+
+                    <p><strong>4. Resultant</strong>:</p>
+                    <div class="math-block">\[ F_{net} = \sqrt{(0.821)^2+(0.358)^2}\times10^{-4} = \sqrt{0.802}\times10^{-4} = 0.896\times10^{-4}\,\text{N} \]</div>
+                    <div class="math-block">\[ \theta = \tan^{-1}\!\frac{0.358}{0.821} = 23.6^\circ \text{ from the } -x \text{ axis} \]</div>
+
+                    <div class="warning-box">
+                        <h4>⚠️ The slide's final number is wrong — know both</h4>
+                        <p>The slide prints \( F_{net} = 0.802\times10^{-4} \) N, but \(0.802\) is
+                        \( (0.821)^2+(0.358)^2 \) — the <strong>square root was never taken</strong>.
+                        The correct answer is \( \sqrt{0.802} = 0.896 \), i.e. \( \mathbf{0.896\times10^{-4}\ N} \).</p>
+                        <p style="margin-top:0.4rem;">Write the square-root line out explicitly so your working defends itself
+                        whichever number the marker expects. The angle 23.6° on the slide is correct.</p>
+                    </div>
+                </div>
+
+                <div class="ex">
+                    <h4>Example-6 — Electric vs gravitational force &nbsp;<span class="badge badge-math">Likely</span></h4>
+                    <p><em>Ratio of Coulomb force to gravity for two electrons separated by \(r\)?</em></p>
+                    <div class="math-block">\[ \frac{F_c}{F_g} = \frac{ke^2/r^2}{Gm_e^2/r^2} = \frac{ke^2}{Gm_e^2} \]</div>
+                    <div class="math-block">\[ = \frac{(8.99\times10^{9})(1.6\times10^{-19})^2}{(6.67\times10^{-11})(9.11\times10^{-31})^2} \approx 4\times10^{42} \]</div>
+                    <p><strong>Key insight:</strong> the \(r^2\) cancels, so the ratio is <strong>independent of separation</strong>.
+                    Gravity is utterly negligible inside an atom.</p>
+                    <p class="note">Variant: electron–proton gives \( \approx 2\times10^{39} \) (use \(m_e m_p\) on the bottom).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SHORT QUESTIONS ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">💬 C. Short-Question Bank</h2>
+            <div class="collapsible-body">
+                <p>20–30% of the marks. These come straight off the slides.</p>
+
+                <div class="qa"><div class="q">Q. What are the four empirical facts electrostatics is based on?</div>
+                <p>Conservation of charge; quantization of charge; Coulomb's law; the principle of superposition.</p></div>
+
+                <div class="qa"><div class="q">Q. State Coulomb's law. Who discovered it and how?</div>
+                <p>\( F = kq_1q_2/r^2 \). Charles Augustin Coulomb, 1785, reported to the Royal Academy using a
+                <strong>torsion balance</strong> with two charged mulberry-pith balls, finding the force varied inversely
+                with the square of the distance.</p></div>
+
+                <div class="qa"><div class="q">Q. What is meant by quantization of charge?</div>
+                <p>Charge exists only in indivisible lumps of \(e\), so \(Q = Ne\). Discovered by
+                <strong>Robert A. Millikan in 1911</strong> in the <strong>oil-drop experiment</strong>. The unit is so tiny
+                we never notice the graininess.</p></div>
+
+                <div class="qa"><div class="q">Q. State conservation of charge with examples.</div>
+                <p>Charge is never created, only transferred. Rubbing transfers it (teflon −, silk +).
+                Examples: \( 0 = e^+ + e^- \); \( ^{238}_{92}U \rightarrow\ ^{234}_{90}Th + ^{4}_{2}He \);
+                \( e^- + p^+ \rightarrow e^- + p^+ + n^0 \).</p></div>
+
+                <div class="qa"><div class="q">Q. What is the principle of superposition?</div>
+                <p>The force between two charges is unaffected by the presence of others, so the net force on a charge is the
+                <strong>vector sum</strong> of the individual forces.</p></div>
+
+                <div class="qa"><div class="q">Q. Name the three methods of charging.</div>
+                <p><strong>Friction</strong> (rubbing — objects become oppositely charged and attract),
+                <strong>contact/conduction</strong> (touching — same sign), and <strong>induction</strong> (bringing a charge
+                near without touching).</p></div>
+
+                <div class="qa"><div class="q">Q. Distinguish conductors and insulators.</div>
+                <p>Conductors: electrons flow easily between atoms, <strong>1–3</strong> valence electrons (silver, copper, gold,
+                aluminium). Insulators: flow is difficult, electrons tightly bound, <strong>5–8</strong> valence electrons
+                (mica, glass, quartz). A <strong>semiconductor</strong> has a few free electrons and is in between.</p></div>
+
+                <div class="qa"><div class="q">Q. What is the triboelectric series?</div>
+                <p>An ordering of materials by how easily they lose electrons. Materials at the positive end lose electrons
+                easily and charge positive; those at the negative end gain electrons.</p></div>
+
+                <div class="qa"><div class="q">Q. Why does a charged object attract a neutral one?</div>
+                <p>Charged objects <strong>always</strong> attract neutral objects — the nearby charge induces a rearrangement
+                of charge in the neutral object, bringing opposite charge closer and like charge further away, so attraction wins.</p></div>
+
+                <div class="qa"><div class="q">Q. Define electric current and give its direction convention.</div>
+                <p>Current is the movement of charge through a substance, \( I = q/t \) (amps = C/s). Its direction was
+                <strong>historically defined as the direction positive charges move</strong>. In metals only electrons move,
+                so conventional current is opposite to the electron flow. In conductive liquids both signs carry current.</p></div>
+
+                <div class="qa"><div class="q">Q. Difference between AC and DC?</div>
+                <p>DC has a constant value. AC changes sinusoidally in value <em>and direction</em>, so
+                <strong>no net charge is transferred</strong>.</p></div>
+
+                <div class="qa"><div class="q">Q. Define voltage and power.</div>
+                <p>\( V = dW/dQ \) — joules per coulomb; the potential energy per unit charge that drives current. Always
+                measured as a <strong>difference</strong> relative to <strong>ground</strong>. Also called EMF.
+                \( P = VI = dW/dt \), in watts.</p></div>
+
+                <div class="qa"><div class="q">Q. Why can spheres be treated as point charges?</div>
+                <p>For uniformly charged spheres the force is the same as if all the charge were concentrated at the centre,
+                so use the centre-to-centre distance.</p></div>
+
+                <div class="qa"><div class="q">Q. What is electrostatics?</div>
+                <p>The study of electricity when charges are <strong>not in motion</strong>. We know charge exists only because
+                electric forces cause objects to move in experiments.</p></div>
+
+                <div class="qa"><div class="q">Q. Why is an object electrically neutral, and what is excess charge?</div>
+                <p>Neutral means equal amounts of positive and negative charge. Net (excess) charge is the imbalance — a tiny
+                imbalance causes static electricity.</p></div>
+            </div>
+        </section>
+
+        <!-- ============ PROBLEM TYPES ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">✅ D. Problem Types Checklist</h2>
+            <div class="collapsible-body">
+                <ul class="checklist" data-group="types">
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> \(N = Q/e\) — number of elementary charges</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Force between two point charges</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Charge on a mass of material (moles → atoms → protons)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Acceleration from Coulomb force (\(a=F/m\))</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Three charges in a line — signed 1-D sum</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Charges in 2-D — resolve, add components, resultant + angle</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Coulomb vs gravity ratio</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Two charged spheres of radius \(R\) (\(r+2R\))</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Current from charge and time</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Charge = area under the \(i\)–\(t\) graph</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Current = slope of the \(q\)–\(t\) graph</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Sketch AC vs DC current</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Force vs distance (\(1/r^2\)) curve</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Power / energy from \(P=VI\), \(W=\int P\,dt\)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> The four empirical facts</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Methods of charging</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Conductors vs insulators vs semiconductors</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Quantization / Millikan; conservation of charge</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Current direction convention; AC vs DC</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============ TRAPS ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">⚡ E. Last-Minute Traps</h2>
+            <div class="collapsible-body">
+                <div class="warning-box">
+                    <h4>Things that cost easy marks</h4>
+                    <ul>
+                        <li><strong>Convert cm → m before squaring.</strong> 1 cm = \(10^{-2}\) m, so \(r^2 = 10^{-4}\) m².
+                        This is the single most common slip.</li>
+                        <li><strong>nC → C:</strong> 1 nC = \(10^{-9}\) C. Also μC = \(10^{-6}\), pC = \(10^{-12}\).</li>
+                        <li><strong>Forces are vectors.</strong> Put the direction on the diagram <em>first</em>: like charges push
+                        apart, unlike pull together. Then assign signs.</li>
+                        <li><strong>Don't add magnitudes at angles.</strong> Resolve into \(x\) and \(y\), add separately,
+                        then \( \sqrt{F_x^2+F_y^2} \).</li>
+                        <li><strong>Take the square root at the end</strong> — the slide itself forgot this in Example-5.</li>
+                        <li><strong>State the direction</strong> as well as the magnitude when asked for a net force.</li>
+                        <li><strong>\(k\) vs \(1/4\pi\varepsilon_0\)</strong> are the same thing. Slides use \(k \approx 10^{10}\)
+                        for speed; \(8.99\times10^9\) is exact. Say which you used.</li>
+                        <li><strong>In the force ratio, \(r^2\) cancels</strong> — don't waste time hunting for a separation.</li>
+                        <li><strong>Sphere problems:</strong> if the gap is surface-to-surface, the centre-to-centre distance is
+                        \( r + 2R \).</li>
+                    </ul>
+                </div>
+                <div class="warning-box">
+                    <h4>⚠️ Exam admin — there is an explicit penalty</h4>
+                    <p>Write your <strong>Name + ID + Section + Course code</strong> on the front or inside of your answer script.
+                    The notice states you <em>will</em> be penalised if ID + Section + Course code are missing.</p>
+                    <p style="margin-top:0.4rem;">Also: <strong>arrive sharply</strong> — the notice asks you to be on time so the
+                    exam finishes properly.</p>
+                </div>
+                <div class="good-box">
+                    <h4>🎯 If you only have 30 minutes</h4>
+                    <p>Do <strong>Example-5</strong> (2-D vector sum) and <strong>Example-4</strong> (1-D signed sum) with a pen.
+                    Those two cover the mechanics of every Coulomb's-law maths problem. Then read the
+                    <strong>four empirical facts</strong> and the <strong>conductors/insulators</strong> table for the short questions.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleCheck(li) {
+            const cb = li.querySelector('input[type="checkbox"]');
+            cb.checked = !cb.checked;
+            li.classList.toggle('checked', cb.checked);
+            updateProgress(); saveState();
+        }
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            const body = header.nextElementSibling;
+            if (body) body.classList.toggle('collapsed');
+        }
+        function updateProgress() {
+            const all = document.querySelectorAll('.checklist input[type="checkbox"]');
+            const done = document.querySelectorAll('.checklist input[type="checkbox"]:checked');
+            const pct = all.length ? (done.length / all.length) * 100 : 0;
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('progressText').textContent = done.length + ' / ' + all.length + ' checked';
+        }
+        function saveState() {
+            const s = [...document.querySelectorAll('.checklist input[type="checkbox"]')].map(cb => cb.checked);
+            try { localStorage.setItem('phy2105-quiz3-prep', JSON.stringify(s)); } catch (e) {}
+        }
+        function loadState() {
+            let s = null;
+            try { s = JSON.parse(localStorage.getItem('phy2105-quiz3-prep')); } catch (e) {}
+            if (!s) { updateProgress(); return; }
+            document.querySelectorAll('.checklist input[type="checkbox"]').forEach((cb, i) => {
+                if (s[i]) { cb.checked = true; cb.closest('li').classList.add('checked'); }
+            });
+            updateProgress();
+        }
+        loadState();
+    </script>
+</body>
+</html>

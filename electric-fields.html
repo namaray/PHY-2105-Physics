@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electric Fields</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255,255,255,0.05); padding: 1.3rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.2rem 0; font-size: 1.12rem; overflow-x: auto; text-align: center; }
+        .math-inline { font-style: italic; background: rgba(255,255,255,0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+        .fact-box { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px; padding: 1.1rem 1.4rem; margin: 1.2rem 0; }
+        .fact-box h4 { color: #4ade80; margin-bottom: 0.4rem; }
+        .warning-box { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); border-radius: 12px; padding: 1.1rem 1.4rem; margin: 1.2rem 0; }
+        .warning-box h4 { color: #f59e0b; margin-bottom: 0.4rem; }
+        table.tbl { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.93rem; }
+        table.tbl th, table.tbl td { padding: 0.55rem 0.7rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        table.tbl th { color: var(--accent-color); }
+        .ex { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem 1.4rem; margin: 1.3rem 0; }
+        .ex h4 { color: var(--accent-color); margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn"><span>←</span> Back to Home</a>
+            <a href="coulombs-law.html" class="pdf-btn">Coulomb's Law</a>
+            <a href="Electric Fields_b.pdf" target="_blank" class="pdf-btn">View Original PDF</a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>🧲 Electric Fields</h1>
+            <p class="subtitle">PHY-2105 • Halliday Ch. 22 — field, field lines, point charges, dipoles</p>
+        </header>
+
+        <main>
+            <div class="warning-box">
+                <h4>📌 Scope note</h4>
+                <p>The Quiz-3 notice names <strong>Coulomb's Law</strong> as the chapter. This deck was uploaded the same day
+                as the Coulomb one, so it is most likely the <em>next</em> lecture rather than Quiz-3 material.
+                Treat it as a head start — but N.B. 3 says short questions cover material "taught and mentioned up to the last
+                Lecture", so skim section 1 and 2 below if you have spare time.</p>
+            </div>
+
+            <section class="notes-section">
+                <h2>1. The Electric Field (22-2)</h2>
+                <p>Temperature at every point in a room has a definite value — that distribution is a <strong>scalar field</strong>.
+                Air pressure is another. The electric field works the same way, but it is a <strong>vector field</strong>:
+                it consists of a distribution of vectors, one for each point in the region around a charged object.</p>
+
+                <h3>Definition via a test charge</h3>
+                <p>To define the field at a point \( P \):</p>
+                <ol>
+                    <li>Place a small <strong>positive test charge</strong> \( q_0 \) at \( P \)</li>
+                    <li>Measure the electrostatic force \( \vec F \) acting on it</li>
+                    <li>Divide out the test charge</li>
+                </ol>
+                <div class="math-block">\[ \vec E = \frac{\vec F}{q_0} \qquad\text{(electric field)} \]</div>
+                <p>The magnitude is \( E = F/q_0 \), and the <strong>direction of \( \vec E \) is the direction of the force on a
+                <em>positive</em> test charge</strong>. The SI unit is the <strong>newton per coulomb (N/C)</strong>.</p>
+
+                <table class="tbl">
+                    <tr><th>Situation</th><th>Field (N/C)</th></tr>
+                    <tr><td>At the surface of a uranium nucleus</td><td>\( 3\times10^{21} \)</td></tr>
+                    <tr><td>Within a hydrogen atom, \( r = 5.29\times10^{-11} \) m</td><td>\( 5\times10^{11} \)</td></tr>
+                    <tr><td>Electric breakdown occurs in air</td><td>\( 3\times10^{6} \)</td></tr>
+                    <tr><td>Near the charged drum of a photocopier</td><td>\( 10^{5} \)</td></tr>
+                    <tr><td>Near a charged comb</td><td>\( 10^{3} \)</td></tr>
+                    <tr><td>In the lower atmosphere</td><td>\( 10^{2} \)</td></tr>
+                    <tr><td>Inside the copper wire of household circuits</td><td>\( 10^{-2} \)</td></tr>
+                </table>
+            </section>
+
+            <section class="notes-section">
+                <h2>2. Electric Field Lines (22-3)</h2>
+                <p><strong>Michael Faraday</strong> introduced the idea in the 19th century, imagining the space around a charged
+                body as filled with <em>lines of force</em>.</p>
+
+                <div class="fact-box">
+                    <h4>★ The rule to quote</h4>
+                    <p>Electric field lines <strong>extend away from positive charge</strong> (where they originate) and
+                    <strong>toward negative charge</strong> (where they terminate).</p>
+                </div>
+
+                <p>The relation between field lines and field vectors:</p>
+                <ol>
+                    <li>At any point, the direction of a straight field line — or the tangent to a curved one — gives the direction of \( \vec E \) at that point.</li>
+                    <li>The lines are drawn so the <strong>number of lines per unit area</strong> (measured perpendicular to the lines) is proportional to the <strong>magnitude</strong> of \( \vec E \).</li>
+                </ol>
+                <p>So \( E \) is <strong>large where field lines are close together</strong> and small where they are far apart.</p>
+
+                <table class="tbl">
+                    <tr><th>Configuration</th><th>Pattern</th></tr>
+                    <tr><td>Single positive charge</td><td>Lines radiate straight outward in all directions</td></tr>
+                    <tr><td>Single negative charge / uniform negative sphere</td><td>Lines point radially inward, toward the centre</td></tr>
+                    <tr><td>Two equal positive charges</td><td>Lines repel each other and bend away; rotational symmetry about the axis through both</td></tr>
+                    <tr><td>Equal positive and negative (dipole)</td><td>Lines leave the positive, curve round, and terminate on the negative</td></tr>
+                    <tr><td>Large uniformly charged sheet</td><td>Uniform, parallel, evenly spaced lines perpendicular to the sheet</td></tr>
+                </table>
+            </section>
+
+            <section class="notes-section">
+                <h2>3. Field Due to a Point Charge (22-4)</h2>
+                <p>Put a positive test charge \( q_0 \) a distance \( r \) from a point charge \( q \). From Coulomb's law the force is
+                \( F = \dfrac{1}{4\pi\varepsilon_0}\dfrac{qq_0}{r^2} \). Dividing by \( q_0 \):</p>
+                <div class="math-block">\[ E = \frac{1}{4\pi\varepsilon_0}\,\frac{q}{r^2} = \frac{kq}{r^2} \qquad\text{(point charge)} \]</div>
+                <p>The direction is <strong>directly away</strong> from the point charge if \( q \) is positive, and
+                <strong>toward</strong> it if \( q \) is negative.</p>
+
+                <h3>Superposition of fields</h3>
+                <p>For \( n \) point charges, the net force on a test charge is \( \vec F_0 = \vec F_{01} + \vec F_{02} + \cdots \).
+                Dividing through by \( q_0 \) gives the same rule for fields:</p>
+                <div class="math-block">\[ \vec E = \vec E_1 + \vec E_2 + \cdots + \vec E_n \]</div>
+                <p>Here \( \vec E_i \) is the field that point charge \( i \) would set up acting alone. <strong>The principle of
+                superposition applies to electric fields exactly as it does to electrostatic forces.</strong></p>
+            </section>
+
+            <section class="notes-section">
+                <h2>4. Worked Problems from the Slides</h2>
+
+                <div class="ex">
+                    <h4>Problem-1 — Net field at an empty point</h4>
+                    <p><em>Three particles with charges \( q_1 = +2Q \), \( q_2 = -2Q \), \( q_3 = -4Q \), each a distance
+                    \( d \) from the origin. What net field \( \vec E \) is produced at the origin?</em></p>
+                    <p><strong>Key idea:</strong> each charge produces its own field vector at the origin; the net field is the
+                    <strong>vector sum</strong> \( \vec E = \vec E_1 + \vec E_2 + \vec E_3 \). Find magnitudes and directions first.</p>
+                    <div class="math-block">\[ E_1 = \frac{1}{4\pi\varepsilon_0}\frac{2Q}{d^2} \]</div>
+                    <p>and similarly for \( E_2 \) and \( E_3 \). Then resolve each into components using the given angles
+                    (30° in the figure) and add.</p>
+                    <div class="warning-box">
+                        <h4>Direction trap</h4>
+                        <p>The field from a <strong>positive</strong> charge points <em>away</em> from it; from a
+                        <strong>negative</strong> charge it points <em>toward</em> it. Get these directions right on the diagram
+                        <em>before</em> you start adding components.</p>
+                    </div>
+                </div>
+
+                <div class="ex">
+                    <h4>Problem-2 — Charged arc (integration)</h4>
+                    <p><em>A plastic rod with uniformly distributed charge \( -Q \) is bent into a 120° circular arc of radius \( r \),
+                    with the axis of symmetry along \( x \) and the origin at the centre of curvature \( P \).
+                    What is \( \vec E \) at \( P \)?</em></p>
+                    <p>The rod is not a particle — but each small element \( ds \) of it <em>can</em> be treated as one.
+                    With linear charge density \( \lambda \):</p>
+                    <div class="math-block">\[ dq = \lambda\,ds \]</div>
+                    <div class="math-block">\[ dE = \frac{1}{4\pi\varepsilon_0}\frac{dq}{r^2} = \frac{1}{4\pi\varepsilon_0}\frac{\lambda\,ds}{r^2} \]</div>
+                    <p>Then integrate over the arc. By symmetry the components perpendicular to the axis cancel, leaving only
+                    the component along the axis of symmetry.</p>
+                </div>
+
+                <div class="ex">
+                    <h4>Problem-3 — The water molecule dipole ★</h4>
+                    <p><em>A neutral water molecule (H₂O) in its vapour state has a dipole moment of magnitude
+                    \( 6.2\times10^{-30} \) C·m.</em></p>
+                    <p><strong>(a) How far apart are the centres of positive and negative charge?</strong></p>
+                    <p>There are 10 electrons and 10 protons in a neutral water molecule, so the dipole moment is
+                    \( p = qd = (10e)(d) \):</p>
+                    <div class="math-block">\[ d = \frac{p}{10e} = \frac{6.2\times10^{-30}}{(10)(1.60\times10^{-19})} = 3.9\times10^{-12}\ \text{m} = 3.9\ \text{pm} \]</div>
+                    <p>Not only is this small — it is <strong>smaller than the radius of a hydrogen atom</strong>.</p>
+
+                    <p><strong>(b) Maximum torque in a field of \( 1.5\times10^{4} \) N/C?</strong></p>
+                    <p>Torque is maximum when \( \theta = 90^\circ \), so \( \tau_{max} = pE \):</p>
+                    <div class="math-block">\[ \tau_{max} = (6.2\times10^{-30})(1.5\times10^{4}) = 9.3\times10^{-26}\ \text{N·m} \]</div>
+                </div>
+            </section>
+
+            <section class="notes-section">
+                <h2>5. Electric Dipole in a Field</h2>
+                <p>A dipole is two equal and opposite charges \( +q \) and \( -q \) rigidly separated by a distance \( d \).
+                Its <strong>dipole moment</strong> is</p>
+                <div class="math-block">\[ p = qd \]</div>
+                <p>pointing from the negative toward the positive charge.</p>
+
+                <h3>Why it feels torque but no net force</h3>
+                <p>Electrostatic forces act on the charged ends: \( F = qE \) on each. Because the field is
+                <strong>uniform</strong>, those forces act in opposite directions with the <em>same</em> magnitude, so:</p>
+                <ul>
+                    <li>The <strong>net force is zero</strong> — the centre of mass does not move</li>
+                    <li>But they <strong>do produce a net torque</strong> about the centre of mass, twisting the dipole into alignment</li>
+                </ul>
+                <p>With the centre of mass a distance \( x \) from one end and \( d-x \) from the other:</p>
+                <div class="math-block">\[ \tau = Fx\sin\theta + F(d-x)\sin\theta = Fd\sin\theta \]</div>
+                <p>and since \( F = qE \) and \( p = qd \):</p>
+                <div class="math-block">\[ \tau = pE\sin\theta \qquad\text{or}\qquad \vec\tau = \vec p \times \vec E \]</div>
+
+                <h3>Potential energy</h3>
+                <p>Choosing \( U = 0 \) at \( \theta = 90^\circ \), the potential energy of the dipole is</p>
+                <div class="math-block">\[ U = -pE\cos\theta \qquad\text{or}\qquad U = -\vec p \cdot \vec E \]</div>
+                <table class="tbl">
+                    <tr><th>Orientation</th><th>\( \theta \)</th><th>Torque</th><th>Energy</th></tr>
+                    <tr><td>Aligned with field</td><td>0°</td><td>0</td><td>\( -pE \) (minimum — stable)</td></tr>
+                    <tr><td>Perpendicular</td><td>90°</td><td>\( pE \) (maximum)</td><td>0</td></tr>
+                    <tr><td>Anti-aligned</td><td>180°</td><td>0</td><td>\( +pE \) (maximum — unstable)</td></tr>
+                </table>
+            </section>
+
+            <section class="notes-section">
+                <h2>6. Quick Reference</h2>
+                <table class="tbl">
+                    <tr><th>Quantity</th><th>Formula</th><th>Unit</th></tr>
+                    <tr><td>Electric field (definition)</td><td>\( \vec E = \vec F / q_0 \)</td><td>N/C</td></tr>
+                    <tr><td>Force on a charge in a field</td><td>\( \vec F = q\vec E \)</td><td>N</td></tr>
+                    <tr><td>Field of a point charge</td><td>\( E = kq/r^2 \)</td><td>N/C</td></tr>
+                    <tr><td>Superposition</td><td>\( \vec E = \sum \vec E_i \)</td><td>N/C</td></tr>
+                    <tr><td>Field from a charge element</td><td>\( dE = \dfrac{1}{4\pi\varepsilon_0}\dfrac{\lambda\,ds}{r^2} \)</td><td>N/C</td></tr>
+                    <tr><td>Dipole moment</td><td>\( p = qd \)</td><td>C·m</td></tr>
+                    <tr><td>Torque on a dipole</td><td>\( \tau = pE\sin\theta \)</td><td>N·m</td></tr>
+                    <tr><td>Dipole potential energy</td><td>\( U = -pE\cos\theta \)</td><td>J</td></tr>
+                </table>
+            </section>
+        </main>
+
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+</body>
+</html>

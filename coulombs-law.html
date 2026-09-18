@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coulomb's Law &amp; Electric Charge</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255,255,255,0.05); padding: 1.3rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 1.2rem 0; font-size: 1.12rem; overflow-x: auto; text-align: center; }
+        .math-inline { font-style: italic; background: rgba(255,255,255,0.08); padding: 0.1rem 0.4rem; border-radius: 4px; }
+        .fact-box { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.3); border-radius: 12px; padding: 1.1rem 1.4rem; margin: 1.2rem 0; }
+        .fact-box h4 { color: #4ade80; margin-bottom: 0.4rem; }
+        .warning-box { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); border-radius: 12px; padding: 1.1rem 1.4rem; margin: 1.2rem 0; }
+        .warning-box h4 { color: #f59e0b; margin-bottom: 0.4rem; }
+        table.tbl { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.93rem; }
+        table.tbl th, table.tbl td { padding: 0.55rem 0.7rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        table.tbl th { color: var(--accent-color); }
+        .ex { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem 1.4rem; margin: 1.3rem 0; }
+        .ex h4 { color: var(--accent-color); margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn"><span>←</span> Back to Home</a>
+            <a href="quiz3-prep.html" class="pdf-btn">Quiz-3 Guide</a>
+            <a href="Coulombs law_b.pdf" target="_blank" class="pdf-btn">View Original PDF</a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>⚡ Coulomb's Law &amp; Electric Charge</h1>
+            <p class="subtitle">PHY-2105 • Lecture on Electricity — Introduction to Electricity: Coulomb's Law</p>
+        </header>
+
+        <main>
+            <section class="notes-section">
+                <h2>1. What is Charge?</h2>
+                <p><strong>Electrostatics</strong> is the study of electricity when charges are <em>not</em> in motion.
+                We only know charge exists because, in experiments, electric forces cause objects to move.</p>
+
+                <h3>The three particles</h3>
+                <table class="tbl">
+                    <tr><th>Particle</th><th>Charge</th><th>Mass</th><th>Size</th></tr>
+                    <tr><td>Electron</td><td>\( -e = -1.6\times10^{-19} \) C</td><td>\( m_e = 9.11\times10^{-31} \) kg</td><td>point object, radius &lt; \(10^{-18}\) m</td></tr>
+                    <tr><td>Proton</td><td>\( +e = +1.6\times10^{-19} \) C</td><td>\( m_p = 1.67\times10^{-27} \) kg</td><td>finite, \( \approx 0.88\times10^{-15} \) m</td></tr>
+                    <tr><td>Neutron</td><td>0 (net)</td><td>\( \approx m_p \)</td><td>similar to proton</td></tr>
+                </table>
+                <p class="note">The neutron has zero <em>total</em> charge, but positive and negative charges exist inside it.</p>
+
+                <h3>Neutral, charged, and excess charge</h3>
+                <ul>
+                    <li>All ordinary matter contains <strong>both</strong> positive and negative charge.</li>
+                    <li>An object is <strong>electrically neutral</strong> when it has equal amounts of both.</li>
+                    <li>Objects can lose or gain charge. The net charge is also called <strong>excess charge</strong>.</li>
+                    <li>A tiny imbalance in either type of charge is the cause of <strong>static electricity</strong>.</li>
+                    <li>The SI unit of charge is the <strong>coulomb (C)</strong>. Always write the sign with the quantity.</li>
+                </ul>
+            </section>
+
+            <section class="notes-section">
+                <h2>2. The Four Empirical Facts of Electrostatics</h2>
+                <div class="fact-box">
+                    <h4>★ Memorise this list — it is the backbone of the whole chapter</h4>
+                    <ol>
+                        <li><strong>Conservation of charge</strong></li>
+                        <li><strong>Quantization of charge</strong></li>
+                        <li><strong>Coulomb's Law</strong></li>
+                        <li><strong>The principle of superposition</strong></li>
+                    </ol>
+                </div>
+
+                <h3>Conservation of charge</h3>
+                <p>Rubbing does not <em>create</em> charge — it is <strong>transferred</strong> from one object to another.
+                Charge is conserved in every process:</p>
+                <ul>
+                    <li>Teflon becomes negative, silk positive; acrylic positive, silk negative</li>
+                    <li>Pair production: \( 0 = e^+ + e^- \)</li>
+                    <li>Radioactive decay: \( ^{238}_{92}\text{U} \rightarrow\ ^{234}_{90}\text{Th} + {}^{4}_{2}\text{He} \)</li>
+                    <li>High-energy reaction: \( e^- + p^+ \rightarrow e^- + p^+ + n^0 \)</li>
+                </ul>
+
+                <h3>Quantization of charge</h3>
+                <p>Discovered in <strong>1911 by Robert A. Millikan</strong> in the <strong>oil-drop experiment</strong>.
+                Charge comes in indivisible lumps of \( e \); the unit is so tiny we never notice the graininess.</p>
+                <div class="math-block">\[ Q = N e \qquad\Longrightarrow\qquad N = \frac{Q}{e} \]</div>
+            </section>
+
+            <section class="notes-section">
+                <h2>3. Methods of Charging</h2>
+                <p>Normally atoms sit in the lowest energy state with equal electrons and protons, so material is neutral.
+                There are three ways to change that:</p>
+                <table class="tbl">
+                    <tr><th>Method</th><th>What happens</th></tr>
+                    <tr><td><strong>Friction</strong></td><td>Two neutral objects are rubbed; charge transfers from one to the other and they become <em>oppositely</em> charged, so they attract each other.</td></tr>
+                    <tr><td><strong>Contact (conduction)</strong></td><td>A charged object touches another; charge flows across and both end up with the <em>same</em> sign.</td></tr>
+                    <tr><td><strong>Induction</strong></td><td>A charged object is brought <em>near</em> without touching; charges inside rearrange. Can be demonstrated on spheres with an electrometer.</td></tr>
+                </table>
+
+                <div class="fact-box">
+                    <h4>Key demonstration facts</h4>
+                    <ul>
+                        <li>Silk (+) on teflon (−); silk (−) on acrylic (+)</li>
+                        <li>Wood doesn't charge</li>
+                        <li><strong>Charged objects always attract neutral objects</strong></li>
+                        <li>Not only chemical composition matters — surface structure matters too (a monolayer of molecules is involved; a quantum/nanotechnology effect)</li>
+                    </ul>
+                </div>
+
+                <h3>Triboelectric series</h3>
+                <p>An ordering of materials by how readily they give up electrons. Top of the list loses electrons easily and becomes <strong>positive</strong>; bottom gains electrons and becomes <strong>negative</strong>.</p>
+                <p><em>Positive end (lose electrons easily):</em> air, human hands, asbestos, rabbit fur, glass, mica, acrylic, human hair, nylon, wool, steel, wood, amber, sealing wax, hard rubber, nickel, copper, brass, silver, gold, platinum, sulfur, acetate, rayon, polyester &hellip; <em>(negative end)</em></p>
+
+                <h3>The electroscope</h3>
+                <p>The forces between the two kinds of charge can be observed with an <strong>electroscope</strong>. Charge can be transferred to it by <strong>conduction</strong>.</p>
+            </section>
+
+            <section class="notes-section">
+                <h2>4. Conductors, Insulators &amp; Semiconductors</h2>
+                <p>All materials contain electrons. What differs is whether those electrons are <em>free to move</em>.</p>
+                <table class="tbl">
+                    <tr><th></th><th>Conductors</th><th>Insulators</th></tr>
+                    <tr><td>Electron flow</td><td>Flows easily between atoms</td><td>Difficult between atoms — electrons tightly bound inside atoms</td></tr>
+                    <tr><td>Valence electrons</td><td><strong>1–3</strong> in outer orbit</td><td><strong>5–8</strong> in outer orbit</td></tr>
+                    <tr><td>Examples</td><td>Silver, Copper, Gold, Aluminium</td><td>Mica, Glass, Quartz</td></tr>
+                </table>
+                <p><strong>Semiconductor:</strong> has a few free electrons plus atoms with bound electrons that act as insulators — in between the two.</p>
+            </section>
+
+            <section class="notes-section">
+                <h2>5. Current, Voltage &amp; Power</h2>
+                <h3>Current</h3>
+                <p>Current is the movement of electric charge through a substance.</p>
+                <div class="math-block">\[ I = \frac{q}{t} \qquad\text{(amps = coulombs/second)} \]</div>
+                <p>More generally, current is the slope of the charge–time graph, and charge is the area under the current–time graph:</p>
+                <div class="math-block">\[ i = \frac{dq}{dt}, \qquad Q = \int i\,dt \]</div>
+                <p>One ampere corresponds to \( 6.242\times10^{18} \) electrons per second, since
+                \( (6.242\times10^{18})(1.602\times10^{-19}) = 1 \) C/s.</p>
+
+                <div class="warning-box">
+                    <h4>⚠️ Direction convention</h4>
+                    <p>The direction of current was <strong>historically defined as the direction positive charges move</strong>.
+                    Both positive and negative charges can carry current:</p>
+                    <ul>
+                        <li>In conductive liquids (salt water) <strong>both</strong> signs carry current</li>
+                        <li>In solid metal conductors only electrons move, so current is carried by the flow of <strong>negative</strong> electrons — which is why conventional current points opposite to the electron flow</li>
+                    </ul>
+                </div>
+
+                <h3>AC and DC</h3>
+                <ul>
+                    <li><strong>DC</strong> — constant value</li>
+                    <li><strong>AC</strong> — changes sinusoidally in both value <em>and direction</em>, so <strong>no net charge is transferred</strong></li>
+                </ul>
+
+                <h3>Voltage</h3>
+                <p>A voltage source provides the energy (work) required to produce a current.</p>
+                <div class="math-block">\[ V = \frac{dW}{dQ} \qquad\text{(volts = joules/coulomb)} \]</div>
+                <ul>
+                    <li>Voltage measures the potential energy that drives current through a transducer</li>
+                    <li>It is always measured as a <strong>difference</strong> with respect to an arbitrary common point called <strong>ground</strong></li>
+                    <li>Outside engineering it is also called <strong>electromotive force (EMF)</strong></li>
+                </ul>
+
+                <h3>Power</h3>
+                <p>The rate at which energy is transferred from a source or used by a passive device:</p>
+                <div class="math-block">\[ P = \frac{dW}{dt} = V\cdot I = \frac{dW}{dQ}\cdot\frac{dQ}{dt} \qquad\text{(watts = volts × amps)} \]</div>
+                <div class="math-block">\[ W = \int P\,dt \qquad\text{(area under the power–time graph)} \]</div>
+
+                <div class="fact-box">
+                    <h4>The river analogy (how to think about circuits)</h4>
+                    <ul>
+                        <li><strong>Voltage</strong> — the force pushing current round the circuit (gravity)</li>
+                        <li><strong>Resistance</strong> — friction impeding the flow (rocks in the river)</li>
+                        <li><strong>Current</strong> — the actual substance flowing through the wires (electrons)</li>
+                    </ul>
+                    <p>The central concept is the <strong>closed circuit</strong> — current must have a complete path back to the source.
+                    Current flows from the higher-voltage terminal of the source into the higher-voltage terminal of the transducer
+                    before returning. The source expends energy and the transducer converts it into something useful.</p>
+                </div>
+            </section>
+
+            <section class="notes-section">
+                <h2>6. Coulomb's Law</h2>
+                <p>In <strong>1785 Charles Augustin Coulomb</strong> reported to the Royal Academy that, using a
+                <strong>torsion balance</strong>, two charged mulberry-pith balls repelled each other with a force
+                inversely proportional to the square of the distance.</p>
+
+                <div class="math-block">\[ F = \frac{k\,q_1q_2}{r^2}, \qquad k = 8.99\times10^{9}\ \text{N·m}^2/\text{C}^2 \;\approx\; 10^{10}\ \text{N·m}^2/\text{C}^2 \]</div>
+
+                <p>The slides use the rounded value \( k \approx 10^{10} \) for quick estimates. You may also see it written with
+                the permittivity of free space:</p>
+                <div class="math-block">\[ k = \frac{1}{4\pi\varepsilon_0}, \qquad \varepsilon_0 = 8.85\times10^{-12}\ \text{C}^2/\text{N·m}^2 \]</div>
+
+                <table class="tbl">
+                    <tr><th>Charges</th><th>Force</th></tr>
+                    <tr><td>+ and +</td><td>Repulsion</td></tr>
+                    <tr><td>+ and −</td><td>Attraction</td></tr>
+                    <tr><td>− and −</td><td>Repulsion</td></tr>
+                </table>
+
+                <div class="fact-box">
+                    <h4>Spheres behave as points</h4>
+                    <p>For <strong>uniformly charged metal spheres</strong>, the force is the same as if all the charge sat at the
+                    centre — so you may treat them as point charges separated by their centre-to-centre distance:</p>
+                    <div class="math-block">\[ F = \frac{kq^2}{r^2} \]</div>
+                    <p>If instead the separation is measured between the <em>near surfaces</em> of two spheres of radius \(R\),
+                    the centre-to-centre distance is \( r + 2R \) and the force becomes \( F = \dfrac{kq^2}{(r+2R)^2} \).</p>
+                </div>
+
+                <h3>Principle of superposition</h3>
+                <p>The force between any two charges is the same as if all the others were not there. The total force on a
+                charge is the <strong>vector sum</strong> of the individual forces:</p>
+                <div class="math-block">\[ \vec{F}_{net} = \vec{F}_1 + \vec{F}_2 + \vec{F}_3 + \cdots \]</div>
+                <div class="warning-box">
+                    <h4>⚠️ Vector sum, not scalar sum</h4>
+                    <p>Add forces along a line with signs; add forces at angles by resolving into \(x\) and \(y\) components.
+                    Never just add the magnitudes unless the forces are genuinely parallel.</p>
+                </div>
+            </section>
+
+            <section class="notes-section">
+                <h2>7. Worked Examples from the Slides</h2>
+
+                <div class="ex">
+                    <h4>Example-1 — Quantization</h4>
+                    <p><em>We charge an object with a nanocoulomb (\(10^{-9}\) C). How many elementary units of charge is this?</em></p>
+                    <div class="math-block">\[ N = \frac{Q}{e} = \frac{10^{-9}}{1.6\times10^{-19}} \approx 6\times10^{9} \]</div>
+                    <p><strong>Answer:</strong> about 6 billion elementary charges (6 billion electrons).</p>
+                </div>
+
+                <div class="ex">
+                    <h4>Example-2 — Two positive charges</h4>
+                    <p><em>Force between two charges of 1 nC each, 1 cm apart. Why is it so weak?</em></p>
+                    <div class="math-block">\[ F = \frac{kq_1q_2}{r^2} = \frac{(10^{10})(10^{-9})(10^{-9})}{(10^{-2})^2} = 10^{-4}\ \text{N} \quad \text{(repulsion)} \]</div>
+                    <p>That is equivalent to the weight of a mass of \(10^{-5}\) kg = 10 mg — about a long strand of hair.
+                    It is weak because a nanocoulomb is a <em>tiny</em> amount of charge.</p>
+                </div>
+
+                <div class="ex">
+                    <h4>Example-3 — Two pennies without electrons</h4>
+                    <p><em>Two 3 g copper pennies 1 m apart, with all electrons removed.</em></p>
+                    <p>Copper has 29 protons per atom and molar mass 63.5 g/mol, so a 3 g penny holds</p>
+                    <div class="math-block">\[ N_{atoms} = \frac{3}{63.5}(6\times10^{23}) \approx 2.8\times10^{22} \quad\Longrightarrow\quad q = 29 N_{atoms}\,e \approx 1.4\times10^{5}\ \text{C} \]</div>
+                    <div class="math-block">\[ F = \frac{kq^2}{r^2} = \frac{(10^{10})(1.4\times10^{5})^2}{1^2} \approx 2\times10^{20}\ \text{N} \]</div>
+                    <p>An absurdly large force — which is exactly the point: matter is neutral to extraordinary precision.</p>
+                </div>
+
+                <div class="ex">
+                    <h4>Example-4 — Three charges in a line (superposition)</h4>
+                    <p><em>\( q_1 = +25 \) nC at the origin, \( q_2 = -12 \) nC at \( x = 2 \) m, \( q_3 = +18 \) nC at \( x = 3 \) m.
+                    What is the net force on \( q_1 \)?</em></p>
+                    <p>Take \(+x\) as positive. \( q_2 \) is opposite in sign so it <strong>attracts</strong> \( q_1 \) toward \(+x\);
+                    \( q_3 \) has the same sign so it <strong>repels</strong> \( q_1 \) toward \(-x\).</p>
+                    <div class="math-block">\[ F = k q_1\left[\frac{|q_2|}{(2)^2} - \frac{q_3}{(3)^2}\right] \]</div>
+                    <div class="math-block">\[ F = (10^{10})(25\times10^{-9})\left[\frac{12\times10^{-9}}{4} - \frac{18\times10^{-9}}{9}\right] = +2.5\times10^{-7}\ \text{N} \]</div>
+                    <p><strong>Answer:</strong> \( 2.5\times10^{-7} \) N in the \(+x\) direction
+                    (using \( k = 8.99\times10^{9} \) gives \( 2.2\times10^{-7} \) N).</p>
+                </div>
+
+                <div class="ex">
+                    <h4>Example-5 — Three point charges in 2-D ★ the important one</h4>
+                    <p><em>\( q_1 = +1 \) nC at the origin, \( q_2 = +1 \) nC at 1 cm along \(+x\), \( q_3 = -2 \) nC
+                    positioned 1 cm across and 2 cm up (so \( r_{13} = \sqrt{5} \) cm). Find the net force on \( q_1 \).</em></p>
+
+                    <p><strong>Step 1 — force from \( q_2 \)</strong> (repulsive, along the \(x\) axis only):</p>
+                    <div class="math-block">\[ F_{12} = \frac{(10^{10})(10^{-9})^2}{(10^{-2})^2} = 1\times10^{-4}\ \text{N}, \qquad F_{12y}=0 \]</div>
+
+                    <p><strong>Step 2 — force from \( q_3 \)</strong> (attractive, at an angle):</p>
+                    <div class="math-block">\[ F_{13} = \frac{(10^{10})(2\times10^{-9})(10^{-9})}{(\sqrt5\times10^{-2})^2} = 0.40\times10^{-4}\ \text{N} \]</div>
+                    <p>Resolve it using the 1 cm : 2 cm : \(\sqrt5\) cm triangle, so \( \cos\theta = 1/\sqrt5 \), \( \sin\theta = 2/\sqrt5 \):</p>
+                    <div class="math-block">\[ F_{13x} = 0.179\times10^{-4}\ \text{N}, \qquad F_{13y} = 0.358\times10^{-4}\ \text{N} \]</div>
+
+                    <p><strong>Step 3 — add components</strong> (the two \(x\) contributions oppose each other):</p>
+                    <div class="math-block">\[ F_{x,net} = (1 - 0.179)\times10^{-4} = 0.821\times10^{-4}\ \text{N} \]</div>
+                    <div class="math-block">\[ F_{y,net} = (0 + 0.358)\times10^{-4} = 0.358\times10^{-4}\ \text{N} \]</div>
+
+                    <p><strong>Step 4 — magnitude and direction</strong>:</p>
+                    <div class="math-block">\[ F_{net} = \sqrt{(0.821)^2 + (0.358)^2}\times10^{-4} = \sqrt{0.802}\times10^{-4} = 0.896\times10^{-4}\ \text{N} \]</div>
+                    <div class="math-block">\[ \theta = \tan^{-1}\!\left(\frac{0.358}{0.821}\right) = 23.6^\circ \ \text{from the } -x \text{ axis} \]</div>
+
+                    <div class="warning-box">
+                        <h4>⚠️ The slide has an arithmetic slip here</h4>
+                        <p>The slide prints \( F_{net} = 0.802\times10^{-4} \) N — but \( 0.802 \) is the value of
+                        \( (0.821)^2 + (0.358)^2 \), i.e. the sum of squares <em>before</em> taking the square root.
+                        The correct magnitude is \( \sqrt{0.802} = 0.896 \), so \( F_{net} = 0.896\times10^{-4}\ \text{N} \approx 0.90\times10^{-4} \) N.</p>
+                        <p>The angle \( 23.6^\circ \) on the slide is correct. Show your working for the square root and you are safe either way.</p>
+                    </div>
+                </div>
+
+                <div class="ex">
+                    <h4>Example-6 — Electric force vs gravity</h4>
+                    <p><em>In an atom, can we neglect the gravitational force between electrons and protons?
+                    Find the ratio of the Coulomb force to the gravitational force for two electrons a distance \(r\) apart.</em></p>
+                    <div class="math-block">\[ F_c = \frac{ke^2}{r^2}, \qquad F_g = \frac{Gm^2}{r^2} \]</div>
+                    <p>The \( r^2 \) cancels — <strong>the ratio does not depend on the separation at all</strong>:</p>
+                    <div class="math-block">\[ \frac{F_c}{F_g} = \frac{ke^2}{Gm_e^2} = \frac{(8.99\times10^{9})(1.6\times10^{-19})^2}{(6.67\times10^{-11})(9.11\times10^{-31})^2} \approx 4\times10^{42} \]</div>
+                    <p><strong>Answer:</strong> the electric force is about \( 10^{42} \) times stronger, so yes — gravity is
+                    completely negligible inside an atom.</p>
+                </div>
+            </section>
+
+            <section class="notes-section">
+                <h2>8. Quick Reference</h2>
+                <table class="tbl">
+                    <tr><th>Quantity</th><th>Formula</th><th>Unit</th></tr>
+                    <tr><td>Coulomb's law</td><td>\( F = kq_1q_2/r^2 \)</td><td>N</td></tr>
+                    <tr><td>Coulomb constant</td><td>\( k = 1/4\pi\varepsilon_0 = 8.99\times10^{9} \)</td><td>N·m²/C²</td></tr>
+                    <tr><td>Permittivity</td><td>\( \varepsilon_0 = 8.85\times10^{-12} \)</td><td>C²/N·m²</td></tr>
+                    <tr><td>Quantization</td><td>\( Q = Ne \)</td><td>C</td></tr>
+                    <tr><td>Elementary charge</td><td>\( e = 1.6\times10^{-19} \)</td><td>C</td></tr>
+                    <tr><td>Current</td><td>\( I = q/t = dq/dt \)</td><td>A</td></tr>
+                    <tr><td>Charge from current</td><td>\( Q = \int i\,dt \)</td><td>C</td></tr>
+                    <tr><td>Voltage</td><td>\( V = dW/dQ \)</td><td>V = J/C</td></tr>
+                    <tr><td>Power</td><td>\( P = VI = dW/dt \)</td><td>W</td></tr>
+                    <tr><td>Superposition</td><td>\( \vec F_{net} = \sum \vec F_i \)</td><td>N</td></tr>
+                </table>
+            </section>
+        </main>
+
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
