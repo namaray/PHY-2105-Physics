@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz-3 Solved Problems — PHY-2105</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 0.9rem 0; font-size: 1.05rem; overflow-x: auto; text-align: center; }
+        .formula-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.3rem 0; }
+        .formula-card h4 { color: var(--accent-color); margin-bottom: 0.5rem; font-size: 1.02rem; }
+        .badge { display:inline-block; padding:0.2rem 0.7rem; border-radius:20px; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; }
+        .badge-slide { background: rgba(99,102,241,0.2); color:#818cf8; }
+        .badge-deck  { background: rgba(168,85,247,0.2); color:#c084fc; }
+        .badge-prac  { background: rgba(34,197,94,0.2); color:#4ade80; }
+        .badge-star  { background: rgba(236,72,153,0.2); color:#f472b6; }
+        .notes-section { margin-bottom: 3rem; }
+        .notes-container { max-width: 860px; margin: 0 auto; padding: 2rem; }
+        .nav-bar { display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; padding:1rem 0; margin-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .nav-bar a { color: var(--accent-color); text-decoration:none; font-weight:600; }
+        .nav-bar a:hover { text-decoration: underline; }
+        .warning-box { background: rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .warning-box h4 { color:#f59e0b; margin-bottom:0.4rem; }
+        .good-box { background: rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.3); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .good-box h4 { color:#4ade80; margin-bottom:0.4rem; }
+        .ans { background: rgba(34,197,94,0.10); border:1px solid rgba(34,197,94,0.3); border-radius:10px; padding:0.7rem 1.1rem; margin-top:0.9rem; }
+        .ans strong { color:#4ade80; }
+        table.tbl { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.93rem; }
+        table.tbl th, table.tbl td { padding:0.55rem 0.7rem; text-align:left; border-bottom:1px solid rgba(255,255,255,0.1); }
+        table.tbl th { color: var(--accent-color); }
+        .part-header { color:var(--accent-color); border-bottom:2px solid rgba(99,102,241,0.35); padding-bottom:0.4rem; margin:2.5rem 0 1.2rem; }
+        summary { cursor:pointer; color:var(--accent-color); font-weight:600; padding:0.5rem 0; }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="container notes-container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn"><span>←</span> Back to Home</a>
+            <a href="quiz3-prep.html">Quiz-3 Guide</a>
+            <a href="coulombs-law.html">Coulomb's Law Notes</a>
+            <a href="Coulombs law_b.pdf" target="_blank">Slides PDF</a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>✏️ Quiz-3 Solved Problems</h1>
+            <p class="subtitle">PHY-2105 • Coulomb's Law — every slide example plus a practice set, fully worked</p>
+        </header>
+
+        <div class="warning-box">
+            <h4>📌 What's here, and where it came from</h4>
+            <table class="tbl">
+                <tr><th>Section</th><th>Source</th><th>Count</th></tr>
+                <tr><td><span class="badge badge-slide">Section 1</span></td><td>Examples 1–6 from <em>Coulombs law_b.pdf</em></td><td>6</td></tr>
+                <tr><td><span class="badge badge-deck">Section 2</span></td><td>The Halliday Fig. 21-7 sample problem embedded in the deck (pp. 46–47)</td><td>3 parts</td></tr>
+                <tr><td><span class="badge badge-prac">Section 3</span></td><td>Practice problems I built to cover every problem type — <em>not</em> from the slides</td><td>13</td></tr>
+            </table>
+            <p><strong>Note on numbering:</strong> the Quiz-3 notice lists slide problems up to Example-27, but the deck shared in
+            this folder contains <strong>Examples 1–6 only</strong>. Section 3 exists to fill that gap — the notice says
+            "<em>or similar problem</em>", so practising the <em>types</em> is the next best thing. If you have a fuller deck,
+            check Examples 7–27 against it.</p>
+            <p style="margin-top:0.5rem;">Every numerical answer below has been computed and checked.
+            \( k = 8.99\times10^9 \) N·m²/C² unless a slide uses its \( \approx 10^{10} \) shortcut.</p>
+        </div>
+
+        <!-- ================= SECTION 1 ================= -->
+        <h2 class="part-header">SECTION 1: Slide Examples 1–6</h2>
+
+        <div class="formula-card">
+            <h4>Example-1 <span class="badge badge-slide">Slide</span></h4>
+            <p><strong>Problem:</strong> Suppose in a typical experiment we charge an object with a nanocoulomb of charge
+            (\(10^{-9}\) C). How many elementary units of charge is this?</p>
+            <details open>
+                <summary>📝 Solution</summary>
+                <p>Charge is quantized, so \( Q = Ne \):</p>
+                <div class="math-block">\[ N = \frac{Q}{e} = \frac{10^{-9}\ \text{C}}{1.6\times10^{-19}\ \text{C}} = 6.25\times10^{9} \approx 6\times10^{9} \]</div>
+                <div class="ans"><strong>Answer:</strong> about \( 6\times10^{9} \) elementary charges — six billion electrons.</div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>Example-2 <span class="badge badge-slide">Slide</span></h4>
+            <p><strong>Problem:</strong> What is the force between two positive charges of 1 nC each, 1 cm apart in a typical
+            demonstration? Why is the force so weak here?</p>
+            <details open>
+                <summary>📝 Solution</summary>
+                <p>Convert first: \( q_1 = q_2 = 10^{-9} \) C, \( r = 1\ \text{cm} = 10^{-2} \) m.</p>
+                <div class="math-block">\[ F = \frac{kq_1q_2}{r^2} = \frac{(10^{10})(10^{-9})(10^{-9})}{(10^{-2})^2} = \frac{10^{-8}}{10^{-4}} = 10^{-4}\ \text{N} \]</div>
+                <p>(With the exact \( k = 8.99\times10^9 \) this is \( 8.99\times10^{-5} \) N.) The charges are both positive, so it is a
+                <strong>repulsion</strong>.</p>
+                <p><strong>Why so weak?</strong> \( 10^{-4} \) N is the weight of a mass of about \( 10^{-5} \) kg = 10 mg — roughly a long
+                strand of hair. Even though \( k \) is enormous, a nanocoulomb is a <em>minute</em> quantity of charge, and the product
+                \( q_1q_2 = 10^{-18} \) crushes it.</p>
+                <div class="ans"><strong>Answer:</strong> \( F = 10^{-4} \) N, repulsive.</div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>Example-3 <span class="badge badge-slide">Slide</span></h4>
+            <p><strong>Problem:</strong> (i) What is the force between two 3 gm pennies one meter apart if we remove all the
+            electrons from the copper atoms? (ii) What is their acceleration as they separate?</p>
+            <details open>
+                <summary>📝 Solution</summary>
+                <p><strong>(i)</strong> First find how much charge a 3 g copper penny holds. Copper has \( Z = 29 \) protons per atom
+                and molar mass \( M = 63.5 \) g/mol:</p>
+                <div class="math-block">\[ N_{atoms} = \frac{m}{M}N_A = \frac{3}{63.5}\,(6\times10^{23}) \approx 2.8\times10^{22} \]</div>
+                <div class="math-block">\[ q = N_{atoms}\,Z\,e = (2.8\times10^{22})(29)(1.6\times10^{-19}) \approx 1.4\times10^{5}\ \text{C} \]</div>
+                <p>Now apply Coulomb's law with \( r = 1 \) m:</p>
+                <div class="math-block">\[ F = \frac{kq^2}{r^2} = \frac{(10^{10})(1.4\times10^{5})^2}{1^2} \approx 2\times10^{20}\ \text{N} \]</div>
+                <p><strong>(ii)</strong> From Newton's second law, with \( m = 3\ \text{g} = 3\times10^{-3} \) kg:</p>
+                <div class="math-block">\[ a = \frac{F}{m} = \frac{2\times10^{20}}{3\times10^{-3}} \approx 7\times10^{22}\ \text{m/s}^2 \]</div>
+                <div class="ans"><strong>Answer:</strong> \( F \approx 2\times10^{20} \) N, \( a \approx 7\times10^{22} \) m/s².
+                An absurd result — which is the point: matter is neutral to extraordinary precision, and stripping it is impossible.</div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>Example-4 — Charges in a line <span class="badge badge-slide">Slide</span> <span class="badge badge-star">Likely</span></h4>
+            <p><strong>Problem:</strong> Three charges lie on the x axis: \( q_1 = +25 \) nC at the origin, \( q_2 = -12 \) nC at
+            \( x = 2 \) m, \( q_3 = +18 \) nC at \( x = 3 \) m. What is the net force on \( q_1 \)?</p>
+            <details open>
+                <summary>📝 Solution</summary>
+                <p><strong>Step 1 — directions first, before any arithmetic.</strong> Take \(+x\) as the positive direction.</p>
+                <ul>
+                    <li>\( q_2 \) is <em>negative</em> and sits at \(+x\) → it <strong>attracts</strong> \( q_1 \) toward \(+x\)</li>
+                    <li>\( q_3 \) is <em>positive</em> and sits at \(+x\) → it <strong>repels</strong> \( q_1 \) toward \(-x\)</li>
+                </ul>
+                <p>The two forces oppose, so this is a signed 1-D sum:</p>
+                <div class="math-block">\[ F = kq_1\left[\frac{|q_2|}{(2)^2} - \frac{q_3}{(3)^2}\right] \]</div>
+                <div class="math-block">\[ F = (10^{10})(25\times10^{-9})\left[\frac{12\times10^{-9}}{4} - \frac{18\times10^{-9}}{9}\right] \]</div>
+                <div class="math-block">\[ = (10^{10})(25\times10^{-9})\left[3\times10^{-9} - 2\times10^{-9}\right] = (250)(10^{-9}) = 2.5\times10^{-7}\ \text{N} \]</div>
+                <p>With the exact \( k = 8.99\times10^9 \) this becomes \( 2.25\times10^{-7} \) N.</p>
+                <div class="ans"><strong>Answer:</strong> \( F = 2.5\times10^{-7} \) N directed along \( +x \)
+                (toward \( q_2 \)) — the attraction wins because \( q_2 \) is closer.</div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>Example-5 — Three point charges in 2-D <span class="badge badge-slide">Slide</span> <span class="badge badge-star">★ Most likely</span></h4>
+            <p><strong>Problem:</strong> \( q_1 = +1 \) nC at the origin, \( q_2 = +1 \) nC at 1 cm along \(+x\),
+            \( q_3 = -2 \) nC placed 1 cm across and 2 cm up (so \( r_{13} = \sqrt5 \) cm). What is the net force on \( q_1 \),
+            and in what direction?</p>
+            <details open>
+                <summary>📝 Solution</summary>
+                <p><strong>Step 1 — force from \( q_2 \).</strong> Both positive → repulsion, and since \( q_2 \) lies on the
+                \(x\) axis this force has no \(y\) component:</p>
+                <div class="math-block">\[ F_{12} = \frac{kq_1q_2}{r_{12}^2} = \frac{(10^{10})(10^{-9})(10^{-9})}{(10^{-2})^2} = 1\times10^{-4}\ \text{N} \]</div>
+                <div class="math-block">\[ F_{12x} = 1\times10^{-4}\ \text{N}, \qquad F_{12y} = 0 \]</div>
+
+                <p><strong>Step 2 — force from \( q_3 \).</strong> Opposite signs → attraction, pulling \( q_1 \) toward \( q_3 \).
+                With \( r_{13} = \sqrt5 \times 10^{-2} \) m so \( r_{13}^2 = 5\times10^{-4} \) m²:</p>
+                <div class="math-block">\[ F_{13} = \frac{(10^{10})(2\times10^{-9})(1\times10^{-9})}{5\times10^{-4}} = 0.40\times10^{-4}\ \text{N} \]</div>
+
+                <p><strong>Step 3 — resolve it.</strong> The 1 cm across, 2 cm up geometry gives a 1 : 2 : \( \sqrt5 \) triangle:</p>
+                <div class="math-block">\[ \cos\theta = \frac{1}{\sqrt5} = 0.447, \qquad \sin\theta = \frac{2}{\sqrt5} = 0.894 \]</div>
+                <div class="math-block">\[ F_{13x} = (0.40\times10^{-4})(0.447) = 0.179\times10^{-4}\ \text{N} \]</div>
+                <div class="math-block">\[ F_{13y} = (0.40\times10^{-4})(0.894) = 0.358\times10^{-4}\ \text{N} \]</div>
+
+                <p><strong>Step 4 — add the components.</strong> The two \(x\) contributions point in <em>opposite</em> directions
+                (repulsion from \( q_2 \) one way, attraction toward \( q_3 \) the other), so they subtract:</p>
+                <div class="math-block">\[ F_{x,net} = (1 - 0.179)\times10^{-4} = 0.821\times10^{-4}\ \text{N} \]</div>
+                <div class="math-block">\[ F_{y,net} = (0 + 0.358)\times10^{-4} = 0.358\times10^{-4}\ \text{N} \]</div>
+
+                <p><strong>Step 5 — resultant and angle.</strong></p>
+                <div class="math-block">\[ F_{net} = \sqrt{F_x^2 + F_y^2} = \sqrt{(0.821)^2 + (0.358)^2}\times10^{-4} \]</div>
+                <div class="math-block">\[ = \sqrt{0.674 + 0.128}\times10^{-4} = \sqrt{0.802}\times10^{-4} = 0.896\times10^{-4}\ \text{N} \]</div>
+                <div class="math-block">\[ \theta = \tan^{-1}\!\left(\frac{F_y}{F_x}\right) = \tan^{-1}\!\left(\frac{0.358}{0.821}\right) = 23.6^\circ \]</div>
+
+                <div class="ans"><strong>Answer:</strong> \( F_{net} = 0.896\times10^{-4}\ \text{N} \approx 0.90\times10^{-4} \) N,
+                at \( 23.6^\circ \) from the \( -x \) axis.</div>
+
+                <div class="warning-box">
+                    <h4>⚠️ The slide's final number is wrong — be ready for both</h4>
+                    <p>The slide prints \( F_{net} = 0.802\times10^{-4} \) N. But \( 0.802 \) is the value of
+                    \( (0.821)^2 + (0.358)^2 \) — the <strong>square root was never taken</strong>. The correct magnitude is
+                    \( \sqrt{0.802} = 0.896 \).</p>
+                    <p style="margin-top:0.4rem;">Write the \( \sqrt{\ } \) line out explicitly. Then your working is defensible
+                    whichever number the marker is expecting. The angle \( 23.6^\circ \) on the slide is correct.</p>
+                </div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>Example-6 — Electric force vs gravity <span class="badge badge-slide">Slide</span> <span class="badge badge-star">Likely</span></h4>
+            <p><strong>Problem:</strong> In an atom, can we neglect the gravitational force between the electrons and protons?
+            What is the ratio of Coulomb's electric force to Newton's gravitational force for two electrons separated by a
+            distance \( r \)?</p>
+            <details open>
+                <summary>📝 Solution</summary>
+                <div class="math-block">\[ F_c = \frac{ke^2}{r^2}, \qquad F_g = \frac{Gm_e^2}{r^2} \]</div>
+                <p>Both go as \( 1/r^2 \), so when you divide, <strong>the \( r^2 \) cancels completely</strong>:</p>
+                <div class="math-block">\[ \frac{F_c}{F_g} = \frac{ke^2}{Gm_e^2} \]</div>
+                <div class="math-block">\[ = \frac{(8.99\times10^{9})(1.6\times10^{-19})^2}{(6.67\times10^{-11})(9.11\times10^{-31})^2} = \frac{2.30\times10^{-28}}{5.54\times10^{-71}} \]</div>
+                <div class="ans"><strong>Answer:</strong> \( \dfrac{F_c}{F_g} \approx 4\times10^{42} \). The electric force is about
+                \( 10^{42} \) times stronger, so <strong>yes — gravity is completely negligible inside an atom</strong>.
+                The ratio does not depend on the separation at all.</div>
+                <p style="margin-top:0.8rem;"><strong>Common variant:</strong> for an <em>electron and a proton</em> (i.e. hydrogen),
+                put \( m_em_p \) on the bottom instead and the ratio becomes \( \approx 2.3\times10^{39} \).</p>
+            </details>
+        </div>
+
+        <!-- ================= SECTION 2 ================= -->
+        <h2 class="part-header">SECTION 2: The Halliday Sample Problem in the Deck (Fig. 21-7)</h2>
+
+        <div class="warning-box">
+            <h4>Why this one matters</h4>
+            <p>Pages 46–47 of the deck embed this Halliday sample problem. It builds from easy to hard with the
+            <em>same</em> particle 1 each time: one force → two opposing forces → two forces at different angles.
+            As the deck itself says: <em>"The key to all three examples is to draw the forces correctly <strong>before</strong>
+            you reach for a calculator, otherwise you may be calculating nonsense."</em></p>
+        </div>
+
+        <div class="formula-card">
+            <h4>Setup <span class="badge badge-deck">In the deck</span></h4>
+            <table class="tbl">
+                <tr><th>Particle</th><th>Charge</th><th>Position</th><th>Effect on particle 1</th></tr>
+                <tr><td>1 (the one of interest)</td><td>\( q_1 = +1.60\times10^{-19} \) C</td><td>origin</td><td>&mdash;</td></tr>
+                <tr><td>2</td><td>\( q_2 = +3.20\times10^{-19} \) C</td><td>\( x = R = 0.0200 \) m</td><td>same sign → <strong>pushed away</strong> (along \(-x\))</td></tr>
+                <tr><td>3</td><td>\( q_3 = -3.20\times10^{-19} \) C</td><td>\( x = \tfrac34 R \)</td><td>opposite sign → <strong>pulled toward</strong> (along \(+x\))</td></tr>
+                <tr><td>4</td><td>\( q_4 = -3.20\times10^{-19} \) C</td><td>\( \tfrac34 R \) at \( \theta = 60^\circ \)</td><td>opposite sign → <strong>pulled toward</strong> (up and right)</td></tr>
+            </table>
+            <p>Read the signs off the figure before anything else — that is what fixes every direction below.</p>
+        </div>
+
+        <div class="formula-card">
+            <h4>(a) Two particles — a single force</h4>
+            <details open>
+                <summary>📝 Solution</summary>
+                <div class="math-block">\[ F_{12} = \frac{1}{4\pi\varepsilon_0}\frac{|q_1||q_2|}{R^2} = (8.99\times10^{9})\frac{(1.60\times10^{-19})(3.20\times10^{-19})}{(0.0200)^2} \]</div>
+                <div class="math-block">\[ F_{12} = 1.15\times10^{-24}\ \text{N} \]</div>
+                <p>Both charges are <strong>positive</strong>, so particle 1 is <strong>pushed away</strong> from particle 2.
+                Since particle 2 lies on the \(+x\) side, that force points along \(-x\).</p>
+                <div class="ans"><strong>Answer:</strong> \( 1.15\times10^{-24} \) N at \( 180^\circ \), i.e.
+                \( \vec F_{12} = -(1.15\times10^{-24}\ \text{N})\,\hat{i} \)</div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>(b) Three particles — two forces, opposite directions</h4>
+            <details open>
+                <summary>📝 Solution</summary>
+                <p>Particle 3 sits closer, at \( \tfrac34 R \), so its force is larger even for the same charge magnitude:</p>
+                <div class="math-block">\[ F_{13} = \frac{1}{4\pi\varepsilon_0}\frac{|q_1||q_3|}{\left(\frac34 R\right)^2} = (8.99\times10^{9})\frac{(1.60\times10^{-19})(3.20\times10^{-19})}{\left(\frac34\right)^2(0.0200)^2} \]</div>
+                <div class="math-block">\[ F_{13} = 2.05\times10^{-24}\ \text{N} \quad \text{along } +x, \quad \vec F_{13} = (2.05\times10^{-24}\,\text{N})\,\hat i \]</div>
+                <p>Both lie on the \(x\) axis, so here you <em>may</em> combine magnitudes with signs:</p>
+                <div class="math-block">\[ \vec F_{1,net} = \vec F_{12} + \vec F_{13} = (-1.15 + 2.05)\times10^{-24} = 9.00\times10^{-25}\ \text{N} \]</div>
+                <div class="ans"><strong>Answer:</strong> \( 9.00\times10^{-25} \) N at \( 0^\circ \) (along \(+x\)).</div>
+                <p class="note" style="margin-top:0.6rem;"><em>Notice the \( (3/4)^2 = 9/16 \) in the denominator — moving a charge to
+                three-quarters of the distance multiplies its force by \( 16/9 = 1.78 \).</em></p>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>(c) Four particles — two forces at different angles <span class="badge badge-star">★</span></h4>
+            <details open>
+                <summary>📝 Solution</summary>
+                <p>Particle 4 is at the same distance \( \tfrac34 R \), so its magnitude matches \( F_{13} \):</p>
+                <div class="math-block">\[ F_{14} = 2.05\times10^{-24}\ \text{N}, \qquad \theta = 60^\circ \]</div>
+                <p>Now \( \vec F_{12} \) and \( \vec F_{14} \) are <strong>not along the same axis</strong>, so you
+                <strong>cannot</strong> add magnitudes. Resolve into components:</p>
+                <div class="math-block">\[ F_{14x} = F_{14}\cos 60^\circ = 1.03\times10^{-24}\ \text{N} \]</div>
+                <div class="math-block">\[ F_{14y} = F_{14}\sin 60^\circ = 1.77\times10^{-24}\ \text{N} \]</div>
+                <p>Add \( \vec F_{12} = -1.15\times10^{-24}\,\hat i \) component by component:</p>
+                <div class="math-block">\[ F_{x} = (-1.15 + 1.03)\times10^{-24} = -1.3\times10^{-25}\ \text{N} \]</div>
+                <div class="math-block">\[ F_{y} = 1.77\times10^{-24}\ \text{N} \]</div>
+                <div class="math-block">\[ \vec F_{1,net} \approx (-1.3\times10^{-25}\,\text{N})\,\hat i + (1.77\times10^{-24}\,\text{N})\,\hat j \]</div>
+                <p>If a magnitude and angle are wanted:</p>
+                <div class="math-block">\[ |\vec F_{1,net}| = \sqrt{(1.3\times10^{-25})^2 + (1.77\times10^{-24})^2} = 1.78\times10^{-24}\ \text{N} \]</div>
+                <div class="math-block">\[ \theta = \tan^{-1}\!\frac{1.77\times10^{-24}}{-1.3\times10^{-25}} = 94.1^\circ \]</div>
+                <div class="ans"><strong>Answer:</strong> \( \vec F_{1,net} = (-1.3\times10^{-25})\hat i + (1.77\times10^{-24})\hat j \) N,
+                magnitude \( 1.78\times10^{-24} \) N at \( 94.1^\circ \) from \(+x\).</div>
+                <p style="margin-top:0.7rem;"><strong>Watch the quadrant:</strong> \( F_x \) is negative and \( F_y \) positive, so the
+                resultant is in the <em>second</em> quadrant. A calculator's \( \tan^{-1} \) returns \( -85.9^\circ \) — you must add
+                \( 180^\circ \) to land in the right quadrant.</p>
+            </details>
+        </div>
+
+        <!-- ================= SECTION 3 ================= -->
+        <h2 class="part-header">SECTION 3: Practice Set — One Per Problem Type</h2>
+
+        <div class="good-box">
+            <h4>How to use this section</h4>
+            <p>These are <strong>not</strong> from the slides — I wrote them to cover every problem type in the chapter, since the
+            notice allows "<em>or similar problem</em>". Cover the solution, try it, then check. Each one drills a different skill.</p>
+        </div>
+
+        <div class="formula-card">
+            <h4>P1 — Counting elementary charges <span class="badge badge-prac">Practice</span></h4>
+            <p>A glass rod is rubbed with silk and acquires a charge of \( +2.0\ \mu\text{C} \). How many electrons were removed from it?</p>
+            <details><summary>📝 Show Solution</summary>
+                <p>A <em>positive</em> charge means electrons were <em>removed</em>. Using \( Q = Ne \):</p>
+                <div class="math-block">\[ N = \frac{Q}{e} = \frac{2.0\times10^{-6}}{1.6\times10^{-19}} = 1.25\times10^{13} \]</div>
+                <div class="ans"><strong>Answer:</strong> \( 1.25\times10^{13} \) electrons removed.</div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>P2 — Force between two point charges <span class="badge badge-prac">Practice</span></h4>
+            <p>\( q_1 = +3.0\ \mu\text{C} \) and \( q_2 = -5.0\ \mu\text{C} \) are 20 cm apart. Find the magnitude and nature of the force.</p>
+            <details><summary>📝 Show Solution</summary>
+                <p>Convert: \( r = 0.20 \) m, so \( r^2 = 0.040 \) m².</p>
+                <div class="math-block">\[ F = \frac{kq_1q_2}{r^2} = \frac{(8.99\times10^{9})(3.0\times10^{-6})(5.0\times10^{-6})}{0.040} \]</div>
+                <div class="math-block">\[ = \frac{(8.99\times10^{9})(1.5\times10^{-11})}{0.040} = \frac{0.1348}{0.040} = 3.37\ \text{N} \]</div>
+                <div class="ans"><strong>Answer:</strong> \( F = 3.37 \) N, <strong>attractive</strong> (opposite signs).</div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>P3 — Working backwards to find the charge <span class="badge badge-prac">Practice</span></h4>
+            <p>Two identical small spheres 10 cm apart repel each other with a force of 0.90 N. What charge does each carry?</p>
+            <details><summary>📝 Show Solution</summary>
+                <p>Identical spheres means \( q_1 = q_2 = q \), so \( F = kq^2/r^2 \). Rearranging:</p>
+                <div class="math-block">\[ q = \sqrt{\frac{Fr^2}{k}} = \sqrt{\frac{(0.90)(0.10)^2}{8.99\times10^{9}}} = \sqrt{1.00\times10^{-12}} \]</div>
+                <div class="ans"><strong>Answer:</strong> \( q = 1.0\times10^{-6} \) C \( = 1.0\ \mu\text{C} \) on each sphere.
+                Since they repel, both have the <em>same</em> sign.</div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>P4 — Three charges in a line <span class="badge badge-prac">Practice</span> <span class="badge badge-star">★</span></h4>
+            <p>\( q_1 = +4.0\ \mu\text{C} \) at \( x=0 \), \( q_2 = -3.0\ \mu\text{C} \) at \( x = 0.20 \) m,
+            \( q_3 = +2.0\ \mu\text{C} \) at \( x = 0.50 \) m. Find the net force on \( \mathbf{q_2} \).</p>
+            <details><summary>📝 Show Solution</summary>
+                <p><strong>Directions first.</strong> \( q_2 \) is negative:</p>
+                <ul>
+                    <li>\( q_1 \) is positive and sits to the left → <strong>attracts</strong> \( q_2 \) toward \(-x\)</li>
+                    <li>\( q_3 \) is positive and sits to the right → <strong>attracts</strong> \( q_2 \) toward \(+x\)</li>
+                </ul>
+                <p>Distances: \( r_{12} = 0.20 \) m, \( r_{23} = 0.50-0.20 = 0.30 \) m.</p>
+                <div class="math-block">\[ F_{21} = \frac{(8.99\times10^{9})(4.0\times10^{-6})(3.0\times10^{-6})}{(0.20)^2} = 2.70\ \text{N (toward } -x) \]</div>
+                <div class="math-block">\[ F_{23} = \frac{(8.99\times10^{9})(3.0\times10^{-6})(2.0\times10^{-6})}{(0.30)^2} = 0.599\ \text{N (toward } +x) \]</div>
+                <div class="math-block">\[ F_{net} = -2.70 + 0.599 = -2.10\ \text{N} \]</div>
+                <div class="ans"><strong>Answer:</strong> \( 2.10 \) N directed toward \( -x \) (toward \( q_1 \)).</div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>P5 — Equilateral triangle <span class="badge badge-prac">Practice</span> <span class="badge badge-star">★ Classic</span></h4>
+            <p>Three charges of \( +5.0\ \mu\text{C} \) each sit at the corners of an equilateral triangle of side 0.50 m.
+            Find the magnitude of the net force on any one of them.</p>
+            <details><summary>📝 Show Solution</summary>
+                <p>By symmetry, each of the other two pushes with the same magnitude:</p>
+                <div class="math-block">\[ F = \frac{kq^2}{r^2} = \frac{(8.99\times10^{9})(5.0\times10^{-6})^2}{(0.50)^2} = \frac{0.2248}{0.25} = 0.899\ \text{N} \]</div>
+                <p>In an equilateral triangle the two forces are separated by \( 60^\circ \). For two equal vectors at angle
+                \( \phi \) the resultant is \( 2F\cos(\phi/2) \):</p>
+                <div class="math-block">\[ F_{net} = 2F\cos 30^\circ = 2(0.899)(0.866) = 1.56\ \text{N} \]</div>
+                <div class="ans"><strong>Answer:</strong> \( F_{net} = 1.56 \) N, directed <strong>outward along the bisector</strong>
+                — i.e. directly away from the centre of the triangle.</div>
+                <p style="margin-top:0.6rem;"><em>Shortcut worth memorising:</em> two equal forces at \( 60^\circ \) give
+                \( \sqrt3\,F = 1.732F \). Check: \( 1.732 \times 0.899 = 1.56 \) ✓</p>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>P6 — Where is the net force zero? <span class="badge badge-prac">Practice</span> <span class="badge badge-star">★ Classic</span></h4>
+            <p>\( q_1 = +9.0\ \mu\text{C} \) is at \( x = 0 \) and \( q_2 = +4.0\ \mu\text{C} \) is at \( x = 1.0 \) m.
+            At what point on the line joining them is the net force on a third charge zero?</p>
+            <details><summary>📝 Show Solution</summary>
+                <p>Both charges are positive, so the point must lie <strong>between</strong> them — only there do the two pushes
+                oppose. Let it be a distance \( x \) from \( q_1 \), hence \( (1-x) \) from \( q_2 \). Setting the magnitudes equal
+                (the test charge \( q \) and \( k \) cancel):</p>
+                <div class="math-block">\[ \frac{9}{x^2} = \frac{4}{(1-x)^2} \]</div>
+                <p>Take the square root of both sides — much faster than expanding:</p>
+                <div class="math-block">\[ \frac{3}{x} = \frac{2}{1-x} \;\Longrightarrow\; 3(1-x) = 2x \;\Longrightarrow\; 3 = 5x \]</div>
+                <div class="ans"><strong>Answer:</strong> \( x = 0.60 \) m from the \( 9\ \mu\text{C} \) charge
+                (equivalently 0.40 m from the \( 4\ \mu\text{C} \) one).
+                <br>Check: \( 9/0.6^2 = 25 \) and \( 4/0.4^2 = 25 \) ✓</div>
+                <p style="margin-top:0.6rem;"><strong>Note:</strong> if the two charges had <em>opposite</em> signs, the zero point
+                would lie <em>outside</em> the pair, on the side of the <em>smaller</em> magnitude charge.</p>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>P7 — Coulomb vs gravity in hydrogen <span class="badge badge-prac">Practice</span></h4>
+            <p>Find the ratio of the electric force to the gravitational force between the electron and the proton in a hydrogen atom.</p>
+            <details><summary>📝 Show Solution</summary>
+                <div class="math-block">\[ \frac{F_c}{F_g} = \frac{ke^2/r^2}{Gm_em_p/r^2} = \frac{ke^2}{Gm_em_p} \]</div>
+                <div class="math-block">\[ = \frac{(8.99\times10^{9})(1.6\times10^{-19})^2}{(6.67\times10^{-11})(9.11\times10^{-31})(1.67\times10^{-27})} \]</div>
+                <div class="math-block">\[ = \frac{2.30\times10^{-28}}{1.01\times10^{-67}} \approx 2.3\times10^{39} \]</div>
+                <div class="ans"><strong>Answer:</strong> \( \approx 2.3\times10^{39} \). Note you were never told \( r \) —
+                you don't need it, because \( r^2 \) cancels.</div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>P8 — Charge hidden in ordinary matter <span class="badge badge-prac">Practice</span></h4>
+            <p>If one electron were removed from every atom in a 1.0 g copper coin, what charge would it carry?
+            (\( M_{Cu} = 63.5 \) g/mol)</p>
+            <details><summary>📝 Show Solution</summary>
+                <div class="math-block">\[ N_{atoms} = \frac{m}{M}N_A = \frac{1.0}{63.5}(6.022\times10^{23}) = 9.48\times10^{21} \]</div>
+                <div class="math-block">\[ q = N_{atoms}\,e = (9.48\times10^{21})(1.6\times10^{-19}) \approx 1.5\times10^{3}\ \text{C} \]</div>
+                <div class="ans"><strong>Answer:</strong> about \( 1.5\times10^{3} \) C — around 1500 coulombs from a single gram,
+                which is why a "large" charge in the lab is only microcoulombs.</div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>P9 — Charged spheres, surface separation <span class="badge badge-prac">Practice</span> <span class="badge badge-star">Trap</span></h4>
+            <p>Two metal spheres, each of radius 2.0 cm and carrying \( 3.0\ \mu\text{C} \), are placed so that their
+            <strong>surfaces</strong> are 6.0 cm apart. Find the force between them.</p>
+            <details><summary>📝 Show Solution</summary>
+                <p>Uniformly charged spheres act as point charges <em>at their centres</em> — so you must use the
+                <strong>centre-to-centre</strong> distance, not the surface gap:</p>
+                <div class="math-block">\[ r = 6.0 + 2(2.0) = 10.0\ \text{cm} = 0.10\ \text{m} \]</div>
+                <div class="math-block">\[ F = \frac{kq^2}{r^2} = \frac{(8.99\times10^{9})(3.0\times10^{-6})^2}{(0.10)^2} = \frac{0.0809}{0.010} = 8.09\ \text{N} \]</div>
+                <div class="ans"><strong>Answer:</strong> \( F = 8.09 \) N, repulsive.</div>
+                <p style="margin-top:0.6rem;"><strong>The trap:</strong> using \( r = 6 \) cm gives 22.5 N — nearly three times too big.
+                Always ask whether a stated separation is surface-to-surface or centre-to-centre.</p>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>P10 — Current and electron count <span class="badge badge-prac">Practice</span></h4>
+            <p>3.0 C of charge passes through a wire in 6.0 s. Find (i) the current and (ii) how many electrons passed.</p>
+            <details><summary>📝 Show Solution</summary>
+                <div class="math-block">\[ \text{(i)}\quad I = \frac{q}{t} = \frac{3.0}{6.0} = 0.50\ \text{A} \]</div>
+                <div class="math-block">\[ \text{(ii)}\quad N = \frac{q}{e} = \frac{3.0}{1.6\times10^{-19}} = 1.9\times10^{19} \]</div>
+                <div class="ans"><strong>Answer:</strong> \( I = 0.50 \) A; \( N = 1.9\times10^{19} \) electrons.</div>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>P11 — Charge from a current graph <span class="badge badge-prac">Practice</span> <span class="badge badge-star">Graph</span></h4>
+            <p>A current is constant at 4.0 A for the first 3.0 s, then falls linearly to zero over the next 4.0 s.
+            How much charge is delivered in total?</p>
+            <details><summary>📝 Show Solution</summary>
+                <p>Since \( Q = \int i\,dt \), the charge is the <strong>area under the current–time graph</strong>. Split it into a
+                rectangle and a triangle:</p>
+                <div class="math-block">\[ Q_{rect} = (4.0)(3.0) = 12\ \text{C} \]</div>
+                <div class="math-block">\[ Q_{tri} = \tfrac12(4.0)(4.0) = 8.0\ \text{C} \]</div>
+                <div class="math-block">\[ Q_{total} = 12 + 8 = 20\ \text{C} \]</div>
+                <div class="ans"><strong>Answer:</strong> \( Q = 20 \) C.</div>
+                <p style="margin-top:0.6rem;"><em>The mirror-image question:</em> given a charge–time graph, the current is its
+                <strong>slope</strong>, \( i = dq/dt \).</p>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>P12 — Force and acceleration in a nucleus <span class="badge badge-prac">Practice</span></h4>
+            <p>Two protons in a nucleus are \( 1.0\times10^{-15} \) m apart. Find the electric force between them and the
+            resulting acceleration of one proton.</p>
+            <details><summary>📝 Show Solution</summary>
+                <div class="math-block">\[ F = \frac{ke^2}{r^2} = \frac{(8.99\times10^{9})(1.6\times10^{-19})^2}{(1.0\times10^{-15})^2} = \frac{2.30\times10^{-28}}{1.0\times10^{-30}} = 230\ \text{N} \]</div>
+                <div class="math-block">\[ a = \frac{F}{m_p} = \frac{230}{1.67\times10^{-27}} = 1.4\times10^{29}\ \text{m/s}^2 \]</div>
+                <div class="ans"><strong>Answer:</strong> \( F \approx 230 \) N (repulsive), \( a \approx 1.4\times10^{29} \) m/s².</div>
+                <p style="margin-top:0.6rem;">230 N on a single proton is enormous — which raises the obvious question of why nuclei
+                hold together at all. The answer is the strong nuclear force, which beats electrostatic repulsion at this range.</p>
+            </details>
+        </div>
+
+        <div class="formula-card">
+            <h4>P13 — Symmetry (no calculation needed) <span class="badge badge-prac">Practice</span></h4>
+            <p>Two equal charges \( +q \) are fixed a distance \( d \) apart. A third charge \( Q \) is placed exactly midway
+            between them. (i) What is the net force on \( Q \)? (ii) What happens if one of the \( +q \) charges is doubled?</p>
+            <details><summary>📝 Show Solution</summary>
+                <p><strong>(i)</strong> Each \( +q \) is the same distance \( d/2 \) from \( Q \) and carries the same charge, so the two
+                forces have equal magnitude \( kqQ/(d/2)^2 \) but point in <strong>opposite</strong> directions along the line.</p>
+                <div class="math-block">\[ F_{net} = 0 \]</div>
+                <p><strong>(ii)</strong> If one becomes \( 2q \), that side's force doubles while the other is unchanged, so:</p>
+                <div class="math-block">\[ F_{net} = \frac{k(2q)Q}{(d/2)^2} - \frac{kqQ}{(d/2)^2} = \frac{kqQ}{(d/2)^2} = \frac{4kqQ}{d^2} \]</div>
+                <div class="ans"><strong>Answer:</strong> (i) zero by symmetry; (ii) \( 4kqQ/d^2 \), directed <em>away</em> from the
+                doubled charge if \( Q \) is positive (toward it if \( Q \) is negative).</div>
+            </details>
+        </div>
+
+        <div class="warning-box">
+            <h4>⚡ The five mistakes that cost the most marks</h4>
+            <ol>
+                <li><strong>Not converting cm to m before squaring.</strong> \( r = 2\ \text{cm} \Rightarrow r^2 = 4\times10^{-4}\ \text{m}^2 \), not \( 4 \).</li>
+                <li><strong>Adding magnitudes when the forces are at an angle.</strong> Resolve → add components → then \( \sqrt{F_x^2+F_y^2} \).</li>
+                <li><strong>Forgetting the square root</strong> at the end of a resultant (the slide itself did this in Example-5).</li>
+                <li><strong>Using a surface gap as the centre distance</strong> in sphere problems — see P9.</li>
+                <li><strong>Giving a magnitude with no direction</strong> when a <em>net force</em> was asked for.</li>
+            </ol>
+        </div>
+
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
