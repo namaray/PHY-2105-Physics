@@ -32,6 +32,9 @@
         table.tbl th { color: var(--accent-color); }
         .part-header { color:var(--accent-color); border-bottom:2px solid rgba(99,102,241,0.35); padding-bottom:0.4rem; margin:2.5rem 0 1.2rem; }
         summary { cursor:pointer; color:var(--accent-color); font-weight:600; padding:0.5rem 0; }
+        .slide-fig { display:block; width:100%; max-width:600px; margin:1.1rem auto; background:#fff; border-radius:10px; padding:0.6rem; }
+        .svg-fig { display:block; width:100%; max-width:560px; margin:1.1rem auto; }
+        .fig-cap { text-align:center; font-size:0.85rem; color:var(--text-secondary); margin-top:-0.5rem; margin-bottom:1rem; }
     </style>
 </head>
 <body>
@@ -59,7 +62,7 @@
                 <tr><th>Section</th><th>Source</th><th>Count</th></tr>
                 <tr><td><span class="badge badge-slide">Section 1</span></td><td>Examples 1–6 from <em>Coulombs law_b.pdf</em></td><td>6</td></tr>
                 <tr><td><span class="badge badge-deck">Section 2</span></td><td>The Halliday Fig. 21-7 sample problem embedded in the deck (pp. 46–47)</td><td>3 parts</td></tr>
-                <tr><td><span class="badge badge-prac">Section 3</span></td><td>Practice problems I built to cover every problem type — <em>not</em> from the slides</td><td>13</td></tr>
+                <tr><td><span class="badge badge-prac">Section 3</span></td><td>Practice problems I built to cover every problem type — <em>not</em> from the slides</td><td>14</td></tr>
             </table>
             <p><strong>Note on numbering:</strong> the Quiz-3 notice lists slide problems up to Example-27, but the deck shared in
             this folder contains <strong>Examples 1–6 only</strong>. Section 3 exists to fill that gap — the notice says
@@ -126,6 +129,38 @@
             \( x = 2 \) m, \( q_3 = +18 \) nC at \( x = 3 \) m. What is the net force on \( q_1 \)?</p>
             <details open>
                 <summary>📝 Solution</summary>
+
+                <svg class="svg-fig" viewBox="0 0 620 210" xmlns="http://www.w3.org/2000/svg" role="img"
+                     aria-label="Number line with q1 at origin, q2 minus 12 nC at 2 m, q3 plus 18 nC at 3 m, and the two opposing forces on q1">
+                    <line x1="40" y1="130" x2="580" y2="130" stroke="#e5e7eb" stroke-width="2"/>
+                    <polygon points="580,130 570,125 570,135" fill="#e5e7eb"/>
+                    <text x="586" y="135" fill="#e5e7eb" font-size="14" font-style="italic">x</text>
+                    <g stroke="#e5e7eb" stroke-width="1.5">
+                        <line x1="100" y1="124" x2="100" y2="136"/><line x1="300" y1="124" x2="300" y2="136"/><line x1="400" y1="124" x2="400" y2="136"/>
+                    </g>
+                    <text x="100" y="152" fill="#9ca3af" font-size="13" text-anchor="middle">0</text>
+                    <text x="300" y="152" fill="#9ca3af" font-size="13" text-anchor="middle">2 m</text>
+                    <text x="400" y="152" fill="#9ca3af" font-size="13" text-anchor="middle">3 m</text>
+                    <circle cx="100" cy="130" r="9" fill="#ef4444"/><text x="100" y="135" fill="#fff" font-size="13" text-anchor="middle">+</text>
+                    <circle cx="300" cy="130" r="9" fill="#3b82f6"/><text x="300" y="135" fill="#fff" font-size="14" text-anchor="middle">&#8722;</text>
+                    <circle cx="400" cy="130" r="9" fill="#ef4444"/><text x="400" y="135" fill="#fff" font-size="13" text-anchor="middle">+</text>
+                    <text x="100" y="176" fill="#e5e7eb" font-size="13" text-anchor="middle">q₁ = +25 nC</text>
+                    <text x="300" y="176" fill="#e5e7eb" font-size="13" text-anchor="middle">q₂ = &#8722;12 nC</text>
+                    <text x="400" y="176" fill="#e5e7eb" font-size="13" text-anchor="middle">q₃ = +18 nC</text>
+                    <g stroke="#fbbf24" stroke-width="3" fill="#fbbf24">
+                        <line x1="100" y1="96" x2="175" y2="96"/><polygon points="183,96 172,90 172,102"/>
+                    </g>
+                    <text x="140" y="86" fill="#fbbf24" font-size="12.5" text-anchor="middle">attraction from q₂ (3 units)</text>
+                    <g stroke="#f472b6" stroke-width="3" fill="#f472b6">
+                        <line x1="100" y1="66" x2="50" y2="66"/><polygon points="42,66 53,60 53,72"/>
+                    </g>
+                    <text x="150" y="58" fill="#f472b6" font-size="12.5" text-anchor="middle">repulsion from q₃ (2 units)</text>
+                    <g stroke="#4ade80" stroke-width="3.5" fill="#4ade80">
+                        <line x1="100" y1="30" x2="125" y2="30"/><polygon points="133,30 122,24 122,36"/>
+                    </g>
+                    <text x="205" y="26" fill="#4ade80" font-size="12.5">net = 1 unit toward +x</text>
+                </svg>
+                <p class="fig-cap">The two forces on q₁ oppose. The attraction wins because q₂ is closer.</p>
                 <p><strong>Step 1 — directions first, before any arithmetic.</strong> Take \(+x\) as the positive direction.</p>
                 <ul>
                     <li>\( q_2 \) is <em>negative</em> and sits at \(+x\) → it <strong>attracts</strong> \( q_1 \) toward \(+x\)</li>
@@ -148,6 +183,34 @@
             and in what direction?</p>
             <details open>
                 <summary>📝 Solution</summary>
+
+                <img class="slide-fig" src="quiz3-figures/ex5-slide.png"
+                     alt="Slide diagram: q1 +1 nC at origin, q2 +1 nC at 1 cm on the x axis, q3 -2 nC at 1 cm across and 2 cm up, with F12 pointing left, F13 up-right and Fnet up-left">
+                <p class="fig-cap">The original slide figure (Coulombs law_b.pdf, p. 48).</p>
+
+                <svg class="svg-fig" viewBox="0 0 520 370" xmlns="http://www.w3.org/2000/svg" role="img"
+                     aria-label="Geometry: q1 at origin, q2 one centimetre right, q3 one right and two up, hypotenuse root five centimetres">
+                    <line x1="50" y1="280" x2="470" y2="280" stroke="#e5e7eb" stroke-width="2"/>
+                    <polygon points="470,280 460,275 460,285" fill="#e5e7eb"/>
+                    <text x="476" y="285" fill="#e5e7eb" font-size="14" font-style="italic">+x</text>
+                    <line x1="130" y1="330" x2="130" y2="40" stroke="#e5e7eb" stroke-width="2"/>
+                    <polygon points="130,40 125,50 135,50" fill="#e5e7eb"/>
+                    <text x="140" y="50" fill="#e5e7eb" font-size="14" font-style="italic">+y</text>
+                    <line x1="230" y1="280" x2="230" y2="80" stroke="#9ca3af" stroke-width="1.4" stroke-dasharray="5,4"/>
+                    <line x1="130" y1="280" x2="230" y2="80" stroke="#a78bfa" stroke-width="2"/>
+                    <circle cx="130" cy="280" r="10" fill="#ef4444"/><text x="130" y="285" fill="#fff" font-size="14" text-anchor="middle">+</text>
+                    <circle cx="230" cy="280" r="10" fill="#ef4444"/><text x="230" y="285" fill="#fff" font-size="14" text-anchor="middle">+</text>
+                    <circle cx="230" cy="80"  r="10" fill="#3b82f6"/><text x="230" y="86" fill="#fff" font-size="15" text-anchor="middle">&#8722;</text>
+                    <text x="120" y="308" fill="#e5e7eb" font-size="13" text-anchor="end">q₁ = +1 nC</text>
+                    <text x="248" y="308" fill="#e5e7eb" font-size="13">q₂ = +1 nC</text>
+                    <text x="248" y="70"  fill="#e5e7eb" font-size="13">q₃ = &#8722;2 nC</text>
+                    <text x="180" y="300" fill="#9ca3af" font-size="12.5" text-anchor="middle">1 cm</text>
+                    <text x="243" y="185" fill="#9ca3af" font-size="12.5">2 cm</text>
+                    <text x="150" y="172" fill="#a78bfa" font-size="13">&#8730;5 cm</text>
+                    <text x="300" y="150" fill="#9ca3af" font-size="12">legs 1 and 2 &#8594; hypotenuse &#8730;5</text>
+                    <text x="300" y="170" fill="#9ca3af" font-size="12">so cos&#952; = 1/&#8730;5, sin&#952; = 2/&#8730;5</text>
+                </svg>
+                <p class="fig-cap"><strong>Step 0 — the geometry.</strong> This 1 : 2 : &#8730;5 triangle is what sets every angle.</p>
                 <p><strong>Step 1 — force from \( q_2 \).</strong> Both positive → repulsion, and since \( q_2 \) lies on the
                 \(x\) axis this force has no \(y\) component:</p>
                 <div class="math-block">\[ F_{12} = \frac{kq_1q_2}{r_{12}^2} = \frac{(10^{10})(10^{-9})(10^{-9})}{(10^{-2})^2} = 1\times10^{-4}\ \text{N} \]</div>
@@ -167,6 +230,37 @@
                 <div class="math-block">\[ F_{x,net} = (1 - 0.179)\times10^{-4} = 0.821\times10^{-4}\ \text{N} \]</div>
                 <div class="math-block">\[ F_{y,net} = (0 + 0.358)\times10^{-4} = 0.358\times10^{-4}\ \text{N} \]</div>
 
+
+                <svg class="svg-fig" viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg" role="img"
+                     aria-label="Force vectors on q1: F12 of 1.0 units to the left, F13 of 0.40 units up and right, resultant 0.896 units up and left at 23.6 degrees">
+                    <line x1="40" y1="240" x2="520" y2="240" stroke="#6b7280" stroke-width="1.6"/>
+                    <line x1="300" y1="310" x2="300" y2="40" stroke="#6b7280" stroke-width="1.6"/>
+                    <text x="526" y="245" fill="#9ca3af" font-size="13" font-style="italic">x</text>
+                    <text x="308" y="48"  fill="#9ca3af" font-size="13" font-style="italic">y</text>
+                    <line x1="193" y1="240" x2="193" y2="193" stroke="#a78bfa" stroke-width="1.3" stroke-dasharray="4,4"/>
+                    <line x1="193" y1="193" x2="300" y2="193" stroke="#a78bfa" stroke-width="1.3" stroke-dasharray="4,4"/>
+                    <g stroke="#fbbf24" stroke-width="3.5" fill="#fbbf24">
+                        <line x1="300" y1="240" x2="180" y2="240"/><polygon points="170,240 183,233 183,247"/>
+                    </g>
+                    <text x="205" y="262" fill="#fbbf24" font-size="13" text-anchor="middle">F₁₂ = 1.00</text>
+                    <g stroke="#fbbf24" stroke-width="3.5" fill="#fbbf24">
+                        <line x1="300" y1="240" x2="321" y2="198"/><polygon points="325,190 315,199 327,205"/>
+                    </g>
+                    <text x="336" y="196" fill="#fbbf24" font-size="13">F₁₃ = 0.40</text>
+                    <g stroke="#4ade80" stroke-width="4" fill="#4ade80">
+                        <line x1="300" y1="240" x2="203" y2="198"/><polygon points="193,193 207,192 203,205"/>
+                    </g>
+                    <text x="150" y="186" fill="#4ade80" font-size="13.5" font-weight="bold">F&#8345;&#8337;&#8348; = 0.896</text>
+                    <path d="M 250 240 A 50 50 0 0 1 256 217" fill="none" stroke="#4ade80" stroke-width="1.6"/>
+                    <text x="228" y="226" fill="#4ade80" font-size="12.5">23.6°</text>
+                    <circle cx="300" cy="240" r="9" fill="#ef4444"/><text x="300" y="245" fill="#fff" font-size="13" text-anchor="middle">+</text>
+                    <text x="300" y="276" fill="#e5e7eb" font-size="13" text-anchor="middle">q₁</text>
+                    <text x="245" y="185" fill="#a78bfa" font-size="11.5" text-anchor="middle">F&#8347; = 0.358</text>
+                    <text x="176" y="220" fill="#a78bfa" font-size="11.5" text-anchor="end">F&#8339; = 0.821</text>
+                    <text x="40" y="308" fill="#9ca3af" font-size="11.5">all magnitudes in units of 10&#8315;&#8308; N; vector lengths drawn to scale</text>
+                </svg>
+                <p class="fig-cap"><strong>The vector picture.</strong> F₁₂ (left) and the x-part of F₁₃ (right) fight each other;
+                only F₁₃ has a y-part, so F&#8345;&#8337;&#8348; tilts up and to the left.</p>
                 <p><strong>Step 5 — resultant and angle.</strong></p>
                 <div class="math-block">\[ F_{net} = \sqrt{F_x^2 + F_y^2} = \sqrt{(0.821)^2 + (0.358)^2}\times10^{-4} \]</div>
                 <div class="math-block">\[ = \sqrt{0.674 + 0.128}\times10^{-4} = \sqrt{0.802}\times10^{-4} = 0.896\times10^{-4}\ \text{N} \]</div>
@@ -225,6 +319,11 @@
                 <tr><td>3</td><td>\( q_3 = -3.20\times10^{-19} \) C</td><td>\( x = \tfrac34 R \)</td><td>opposite sign → <strong>pulled toward</strong> (along \(+x\))</td></tr>
                 <tr><td>4</td><td>\( q_4 = -3.20\times10^{-19} \) C</td><td>\( \tfrac34 R \) at \( \theta = 60^\circ \)</td><td>opposite sign → <strong>pulled toward</strong> (up and right)</td></tr>
             </table>
+
+            <img class="slide-fig" style="max-width:660px;" src="quiz3-figures/fig21-7-slide.png"
+                 alt="Halliday Figure 21-7: three arrangements of charged particles with the free-body diagram for particle 1 beneath each">
+            <p class="fig-cap">Figure 21-7 as it appears in the deck (p. 46). The free-body diagram under each
+            arrangement is the part that matters.</p>
             <p>Read the signs off the figure before anything else — that is what fixes every direction below.</p>
         </div>
 
@@ -345,6 +444,33 @@
             <p>Three charges of \( +5.0\ \mu\text{C} \) each sit at the corners of an equilateral triangle of side 0.50 m.
             Find the magnitude of the net force on any one of them.</p>
             <details><summary>📝 Show Solution</summary>
+
+                <svg class="svg-fig" viewBox="0 0 480 400" xmlns="http://www.w3.org/2000/svg" role="img"
+                     aria-label="Equilateral triangle of three positive charges with the two forces on the top charge and their resultant along the bisector">
+                    <polygon points="240,150 140,323 340,323" fill="none" stroke="#6b7280" stroke-width="1.6" stroke-dasharray="5,4"/>
+                    <line x1="240" y1="150" x2="240" y2="323" stroke="#6b7280" stroke-width="1.2" stroke-dasharray="3,4"/>
+                    <g stroke="#fbbf24" stroke-width="3" fill="#fbbf24">
+                        <line x1="240" y1="150" x2="268" y2="102"/><polygon points="273,94 262,103 274,109"/>
+                        <line x1="240" y1="150" x2="212" y2="102"/><polygon points="207,94 206,109 218,103"/>
+                    </g>
+                    <g stroke="#4ade80" stroke-width="4" fill="#4ade80">
+                        <line x1="240" y1="150" x2="240" y2="56"/><polygon points="240,46 233,59 247,59"/>
+                    </g>
+                    <path d="M 258 122 A 40 40 0 0 0 222 122" fill="none" stroke="#9ca3af" stroke-width="1.4"/>
+                    <text x="240" y="137" fill="#9ca3af" font-size="12" text-anchor="middle">60°</text>
+                    <circle cx="240" cy="150" r="11" fill="#ef4444"/><text x="240" y="155" fill="#fff" font-size="14" text-anchor="middle">+</text>
+                    <circle cx="140" cy="323" r="11" fill="#ef4444"/><text x="140" y="328" fill="#fff" font-size="14" text-anchor="middle">+</text>
+                    <circle cx="340" cy="323" r="11" fill="#ef4444"/><text x="340" y="328" fill="#fff" font-size="14" text-anchor="middle">+</text>
+                    <text x="290" y="96"  fill="#fbbf24" font-size="12.5">0.899 N</text>
+                    <text x="190" y="96"  fill="#fbbf24" font-size="12.5" text-anchor="end">0.899 N</text>
+                    <text x="252" y="48"  fill="#4ade80" font-size="13.5" font-weight="bold">F&#8345;&#8337;&#8348; = 1.56 N</text>
+                    <text x="240" y="352" fill="#9ca3af" font-size="12.5" text-anchor="middle">0.50 m</text>
+                    <text x="163" y="245" fill="#9ca3af" font-size="12.5" text-anchor="end">0.50 m</text>
+                    <text x="318" y="245" fill="#9ca3af" font-size="12.5">0.50 m</text>
+                    <text x="240" y="380" fill="#9ca3af" font-size="12" text-anchor="middle">each charge +5.0 &#956;C</text>
+                </svg>
+                <p class="fig-cap">Both forces push the top charge <em>away</em> from the other two, so the resultant runs
+                straight out along the bisector.</p>
                 <p>By symmetry, each of the other two pushes with the same magnitude:</p>
                 <div class="math-block">\[ F = \frac{kq^2}{r^2} = \frac{(8.99\times10^{9})(5.0\times10^{-6})^2}{(0.50)^2} = \frac{0.2248}{0.25} = 0.899\ \text{N} \]</div>
                 <p>In an equilateral triangle the two forces are separated by \( 60^\circ \). For two equal vectors at angle
@@ -362,6 +488,35 @@
             <p>\( q_1 = +9.0\ \mu\text{C} \) is at \( x = 0 \) and \( q_2 = +4.0\ \mu\text{C} \) is at \( x = 1.0 \) m.
             At what point on the line joining them is the net force on a third charge zero?</p>
             <details><summary>📝 Show Solution</summary>
+
+                <svg class="svg-fig" viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" role="img"
+                     aria-label="Number line with plus 9 microcoulomb at origin and plus 4 microcoulomb at one metre, zero-force point at 0.60 metres">
+                    <line x1="50" y1="120" x2="570" y2="120" stroke="#e5e7eb" stroke-width="2"/>
+                    <g stroke="#e5e7eb" stroke-width="1.5">
+                        <line x1="100" y1="114" x2="100" y2="126"/><line x1="500" y1="114" x2="500" y2="126"/>
+                    </g>
+                    <line x1="340" y1="106" x2="340" y2="134" stroke="#4ade80" stroke-width="2"/>
+                    <circle cx="100" cy="120" r="11" fill="#ef4444"/><text x="100" y="125" fill="#fff" font-size="14" text-anchor="middle">+</text>
+                    <circle cx="500" cy="120" r="11" fill="#ef4444"/><text x="500" y="125" fill="#fff" font-size="14" text-anchor="middle">+</text>
+                    <text x="100" y="152" fill="#e5e7eb" font-size="13" text-anchor="middle">+9.0 &#956;C</text>
+                    <text x="500" y="152" fill="#e5e7eb" font-size="13" text-anchor="middle">+4.0 &#956;C</text>
+                    <text x="100" y="172" fill="#9ca3af" font-size="12" text-anchor="middle">x = 0</text>
+                    <text x="500" y="172" fill="#9ca3af" font-size="12" text-anchor="middle">x = 1.0 m</text>
+                    <text x="340" y="172" fill="#4ade80" font-size="12.5" text-anchor="middle">P at x = 0.60 m</text>
+                    <g stroke="#fbbf24" stroke-width="3" fill="#fbbf24">
+                        <line x1="345" y1="86" x2="405" y2="86"/><polygon points="413,86 402,80 402,92"/>
+                        <line x1="335" y1="86" x2="275" y2="86"/><polygon points="267,86 278,80 278,92"/>
+                    </g>
+                    <text x="430" y="90" fill="#fbbf24" font-size="12">push from 9 &#956;C</text>
+                    <text x="258" y="90" fill="#fbbf24" font-size="12" text-anchor="end">push from 4 &#956;C</text>
+                    <text x="340" y="66" fill="#4ade80" font-size="12.5" text-anchor="middle">equal and opposite &#8594; net zero</text>
+                    <g stroke="#9ca3af" stroke-width="1.2">
+                        <line x1="100" y1="140" x2="340" y2="140"/><line x1="340" y1="140" x2="500" y2="140"/>
+                    </g>
+                    <text x="220" y="136" fill="#9ca3af" font-size="11.5" text-anchor="middle">0.60 m</text>
+                    <text x="420" y="136" fill="#9ca3af" font-size="11.5" text-anchor="middle">0.40 m</text>
+                </svg>
+                <p class="fig-cap">With two like charges the null point sits <em>between</em> them, nearer the weaker one.</p>
                 <p>Both charges are positive, so the point must lie <strong>between</strong> them — only there do the two pushes
                 oppose. Let it be a distance \( x \) from \( q_1 \), hence \( (1-x) \) from \( q_2 \). Setting the magnitudes equal
                 (the test charge \( q \) and \( k \) cancel):</p>
@@ -430,6 +585,43 @@
             <p>A current is constant at 4.0 A for the first 3.0 s, then falls linearly to zero over the next 4.0 s.
             How much charge is delivered in total?</p>
             <details><summary>📝 Show Solution</summary>
+
+                <svg class="svg-fig" viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" role="img"
+                     aria-label="Current versus time graph: constant 4 amps for 3 seconds then a linear ramp to zero at 7 seconds">
+                    <g stroke="rgba(255,255,255,0.10)" stroke-width="1">
+                        <line x1="130" y1="270" x2="130" y2="50"/><line x1="190" y1="270" x2="190" y2="50"/>
+                        <line x1="250" y1="270" x2="250" y2="50"/><line x1="310" y1="270" x2="310" y2="50"/>
+                        <line x1="370" y1="270" x2="370" y2="50"/><line x1="430" y1="270" x2="430" y2="50"/>
+                        <line x1="490" y1="270" x2="490" y2="50"/>
+                        <line x1="70" y1="220" x2="510" y2="220"/><line x1="70" y1="170" x2="510" y2="170"/>
+                        <line x1="70" y1="120" x2="510" y2="120"/><line x1="70" y1="70" x2="510" y2="70"/>
+                    </g>
+                    <polygon points="70,270 70,70 250,70 250,270" fill="rgba(99,102,241,0.30)" stroke="none"/>
+                    <polygon points="250,270 250,70 490,270" fill="rgba(34,197,94,0.28)" stroke="none"/>
+                    <polyline points="70,70 250,70 490,270" fill="none" stroke="#fbbf24" stroke-width="3.5"/>
+                    <line x1="70" y1="270" x2="520" y2="270" stroke="#e5e7eb" stroke-width="2"/>
+                    <polygon points="520,270 510,265 510,275" fill="#e5e7eb"/>
+                    <line x1="70" y1="290" x2="70" y2="45" stroke="#e5e7eb" stroke-width="2"/>
+                    <polygon points="70,45 65,55 75,55" fill="#e5e7eb"/>
+                    <text x="70"  y="290" fill="#9ca3af" font-size="12" text-anchor="middle">0</text>
+                    <text x="190" y="290" fill="#9ca3af" font-size="12" text-anchor="middle">2</text>
+                    <text x="250" y="290" fill="#9ca3af" font-size="12" text-anchor="middle">3</text>
+                    <text x="370" y="290" fill="#9ca3af" font-size="12" text-anchor="middle">5</text>
+                    <text x="490" y="290" fill="#9ca3af" font-size="12" text-anchor="middle">7</text>
+                    <text x="295" y="312" fill="#e5e7eb" font-size="13" text-anchor="middle">time t (s)</text>
+                    <text x="60"  y="275" fill="#9ca3af" font-size="12" text-anchor="end">0</text>
+                    <text x="60"  y="224" fill="#9ca3af" font-size="12" text-anchor="end">1</text>
+                    <text x="60"  y="174" fill="#9ca3af" font-size="12" text-anchor="end">2</text>
+                    <text x="60"  y="124" fill="#9ca3af" font-size="12" text-anchor="end">3</text>
+                    <text x="60"  y="75"  fill="#9ca3af" font-size="12" text-anchor="end">4</text>
+                    <text x="26"  y="165" fill="#e5e7eb" font-size="13" transform="rotate(-90 26 165)" text-anchor="middle">current i (A)</text>
+                    <text x="160" y="180" fill="#c7d2fe" font-size="15" font-weight="bold" text-anchor="middle">rectangle</text>
+                    <text x="160" y="202" fill="#c7d2fe" font-size="15" font-weight="bold" text-anchor="middle">4 × 3 = 12 C</text>
+                    <text x="330" y="205" fill="#86efac" font-size="15" font-weight="bold" text-anchor="middle">triangle</text>
+                    <text x="330" y="227" fill="#86efac" font-size="15" font-weight="bold" text-anchor="middle">½ × 4 × 4 = 8 C</text>
+                </svg>
+                <p class="fig-cap">Charge = area under the curve. Split it into shapes you can compute:
+                <strong>12 C + 8 C = 20 C</strong>.</p>
                 <p>Since \( Q = \int i\,dt \), the charge is the <strong>area under the current–time graph</strong>. Split it into a
                 rectangle and a triangle:</p>
                 <div class="math-block">\[ Q_{rect} = (4.0)(3.0) = 12\ \text{C} \]</div>
@@ -466,6 +658,53 @@
                 <div class="math-block">\[ F_{net} = \frac{k(2q)Q}{(d/2)^2} - \frac{kqQ}{(d/2)^2} = \frac{kqQ}{(d/2)^2} = \frac{4kqQ}{d^2} \]</div>
                 <div class="ans"><strong>Answer:</strong> (i) zero by symmetry; (ii) \( 4kqQ/d^2 \), directed <em>away</em> from the
                 doubled charge if \( Q \) is positive (toward it if \( Q \) is negative).</div>
+            </details>
+        </div>
+
+
+        <div class="formula-card">
+            <h4>P14 — Sketching the force–distance curve <span class="badge badge-prac">Practice</span> <span class="badge badge-star">Graph</span></h4>
+            <p>Sketch how the Coulomb force between two fixed charges varies with their separation \( r \).
+            (i) What shape is the curve? (ii) If the separation is doubled, what happens to the force?
+            (iii) If it is halved?</p>
+            <details><summary>📝 Show Solution</summary>
+                <p>Since \( F = kq_1q_2/r^2 \) with \( k, q_1, q_2 \) all fixed, \( F \propto 1/r^2 \) — an
+                <strong>inverse-square curve</strong>. It falls steeply at small \( r \) and flattens toward zero,
+                approaching but never touching the \( r \) axis.</p>
+                <svg class="svg-fig" viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" role="img"
+                     aria-label="Inverse square curve of force against separation, showing that doubling r quarters the force">
+                    <g stroke="rgba(255,255,255,0.10)" stroke-width="1">
+                        <line x1="170" y1="270" x2="170" y2="40"/><line x1="260" y1="270" x2="260" y2="40"/>
+                        <line x1="350" y1="270" x2="350" y2="40"/><line x1="440" y1="270" x2="440" y2="40"/>
+                        <line x1="80" y1="225" x2="520" y2="225"/><line x1="80" y1="90" x2="520" y2="90"/>
+                    </g>
+                    <path d="M 161.0,47.8 L 165.5,70.6 L 170.0,90.0 L 174.5,106.7 L 179.0,121.2 L 183.5,133.9 L 188.0,145.0 L 192.5,154.8 L 197.0,163.5 L 201.5,171.2 L 206.0,178.2 L 210.5,184.4 L 215.0,190.0 L 219.5,195.1 L 224.0,199.7 L 228.5,203.9 L 233.0,207.7 L 237.5,211.2 L 242.0,214.4 L 246.5,217.4 L 251.0,220.1 L 255.5,222.7 L 260.0,225.0 L 264.5,227.2 L 269.0,229.2 L 273.5,231.1 L 278.0,232.8 L 282.5,234.4 L 287.0,236.0 L 291.5,237.4 L 296.0,238.8 L 300.5,240.0 L 305.0,241.2 L 309.5,242.3 L 314.0,243.4 L 318.5,244.4 L 323.0,245.3 L 327.5,246.2 L 332.0,247.0 L 336.5,247.8 L 341.0,248.6 L 345.5,249.3 L 350.0,250.0 L 354.5,250.7 L 359.0,251.3 L 363.5,251.9 L 368.0,252.4 L 372.5,253.0 L 377.0,253.5 L 381.5,254.0 L 386.0,254.4 L 390.5,254.9 L 395.0,255.3 L 399.5,255.7 L 404.0,256.1 L 408.5,256.5 L 413.0,256.9 L 417.5,257.2 L 422.0,257.5 L 426.5,257.9 L 431.0,258.2 L 435.5,258.5 L 440.0,258.7 L 444.5,259.0 L 449.0,259.3 L 453.5,259.5 L 458.0,259.8 L 462.5,260.0 L 467.0,260.3 L 471.5,260.5 L 476.0,260.7 L 480.5,260.9 L 485.0,261.1 L 489.5,261.3" fill="none" stroke="#fbbf24" stroke-width="3.5"/>
+                    <line x1="80" y1="270" x2="525" y2="270" stroke="#e5e7eb" stroke-width="2"/>
+                    <polygon points="525,270 515,265 515,275" fill="#e5e7eb"/>
+                    <line x1="80" y1="290" x2="80" y2="35" stroke="#e5e7eb" stroke-width="2"/>
+                    <polygon points="80,35 75,45 85,45" fill="#e5e7eb"/>
+                    <g stroke="#4ade80" stroke-width="1.5" stroke-dasharray="5,4">
+                        <line x1="170" y1="270" x2="170" y2="90"/><line x1="80" y1="90" x2="170" y2="90"/>
+                        <line x1="260" y1="270" x2="260" y2="225"/><line x1="80" y1="225" x2="260" y2="225"/>
+                    </g>
+                    <circle cx="170" cy="90" r="5" fill="#4ade80"/>
+                    <circle cx="260" cy="225" r="5" fill="#4ade80"/>
+                    <text x="170" y="290" fill="#9ca3af" font-size="12.5" text-anchor="middle">r</text>
+                    <text x="260" y="290" fill="#9ca3af" font-size="12.5" text-anchor="middle">2r</text>
+                    <text x="350" y="290" fill="#9ca3af" font-size="12.5" text-anchor="middle">3r</text>
+                    <text x="440" y="290" fill="#9ca3af" font-size="12.5" text-anchor="middle">4r</text>
+                    <text x="300" y="314" fill="#e5e7eb" font-size="13" text-anchor="middle">separation r</text>
+                    <text x="72" y="95"  fill="#4ade80" font-size="12.5" text-anchor="end">F</text>
+                    <text x="72" y="230" fill="#4ade80" font-size="12.5" text-anchor="end">F/4</text>
+                    <text x="26" y="160" fill="#e5e7eb" font-size="13" transform="rotate(-90 26 160)" text-anchor="middle">force F</text>
+                    <text x="330" y="120" fill="#4ade80" font-size="13" font-weight="bold">double r &#8594; quarter F</text>
+                    <text x="330" y="142" fill="#9ca3af" font-size="12">the curve never reaches zero</text>
+                </svg>
+                <div class="ans"><strong>Answer:</strong> (i) an inverse-square (hyperbola-like) curve, \( F \propto 1/r^2 \);
+                (ii) doubling \( r \) gives \( F/4 \); (iii) halving \( r \) gives \( 4F \).</div>
+                <p style="margin-top:0.6rem;"><strong>Drawing tips for marks:</strong> label both axes, make the curve steep near
+                the origin and clearly asymptotic to the \( r \) axis, and <em>never let it touch either axis</em>.
+                Mark one pair of points such as \( (r, F) \) and \( (2r, F/4) \) to show you understand the square law.</p>
             </details>
         </div>
 
