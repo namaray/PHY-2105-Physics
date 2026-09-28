@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz-4 Preparation Guide — PHY-2105</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255,255,255,0.05); padding: 0.9rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 0.8rem 0; font-size: 1.05rem; overflow-x: auto; overflow-y: hidden; text-align: center; }
+        .formula-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1rem 0; }
+        .formula-card h4 { color: var(--accent-color); margin-bottom: 0.4rem; font-size: 0.98rem; }
+        .formula-card p.note { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.4rem; }
+        .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 768px) { .formula-grid { grid-template-columns: 1fr; } }
+        .badge { display:inline-block; padding:0.2rem 0.7rem; border-radius:20px; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; }
+        .badge-math { background: rgba(99,102,241,0.2); color:#818cf8; }
+        .badge-short { background: rgba(236,72,153,0.2); color:#f472b6; }
+        .badge-graph { background: rgba(34,197,94,0.2); color:#4ade80; }
+        .notes-section { margin-bottom: 3rem; }
+        .notes-container { max-width: 880px; margin: 0 auto; padding: 2rem; }
+        .nav-bar { display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; padding:1rem 0; margin-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .nav-bar a { color: var(--accent-color); text-decoration:none; font-weight:600; }
+        .nav-bar a:hover { text-decoration: underline; }
+        .warning-box { background: rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .warning-box h4 { color:#f59e0b; margin-bottom:0.4rem; }
+        .excluded-box { background: rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.28); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .excluded-box h4 { color:#ef4444; margin-bottom:0.4rem; }
+        .good-box { background: rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.3); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .good-box h4 { color:#4ade80; margin-bottom:0.4rem; }
+        .exam-banner { background: linear-gradient(135deg, rgba(255,65,108,0.15), rgba(255,75,43,0.15)); border:1px solid rgba(255,65,108,0.3); border-radius:16px; padding:1.8rem; margin-bottom:2rem; text-align:center; }
+        .exam-banner h2 { color:#ff416c; margin-bottom:0.4rem; font-size:1.5rem; }
+        .exam-banner .exam-date { font-size:1.2rem; font-weight:700; }
+        .exam-banner .exam-meta { color: var(--text-secondary); margin-top:0.4rem; font-size:0.95rem; }
+        .marks-bar { display:flex; border-radius:12px; overflow:hidden; margin:1.2rem 0; height:38px; font-weight:700; font-size:0.85rem; }
+        .marks-math { background: linear-gradient(90deg,#6366f1,#8b5cf6); flex:7.5; display:flex; align-items:center; justify-content:center; color:#fff; }
+        .marks-short { background: linear-gradient(90deg,#f59e0b,#ef4444); flex:2.5; display:flex; align-items:center; justify-content:center; color:#fff; }
+        .collapsible-header { cursor:pointer; user-select:none; }
+        .collapsible-header::after { content:' ▾'; font-size:0.8em; color:var(--text-secondary); }
+        .collapsible-header.collapsed::after { content:' ▸'; }
+        .collapsible-body.collapsed { display:none; }
+        .checklist { list-style:none; padding:0; }
+        .checklist li { display:flex; gap:0.7rem; align-items:center; padding:0.6rem 0.9rem; margin:0.35rem 0; background:rgba(255,255,255,0.04); border-left:3px solid rgba(255,255,255,0.12); border-radius:8px; cursor:pointer; transition:all 0.2s ease; }
+        .checklist li:hover { background:rgba(255,255,255,0.07); transform:translateX(4px); }
+        .checklist li input[type="checkbox"] { width:18px; height:18px; accent-color:var(--accent-color); cursor:pointer; flex-shrink:0; }
+        .checklist li.checked { opacity:0.5; text-decoration:line-through; border-left-color:#22c55e; }
+        .progress-bar-container { width:100%; height:10px; background:rgba(255,255,255,0.1); border-radius:5px; overflow:hidden; }
+        .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,#6366f1,#a855f7); transition:width 0.4s ease; }
+        .progress-text { font-size:0.85rem; color:var(--text-secondary); text-align:right; margin-top:0.3rem; }
+        table.tbl { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.93rem; }
+        table.tbl th, table.tbl td { padding:0.55rem 0.7rem; text-align:left; border-bottom:1px solid rgba(255,255,255,0.1); }
+        table.tbl th { color: var(--accent-color); }
+        .part-header { color:var(--accent-color); border-bottom:2px solid rgba(99,102,241,0.35); padding-bottom:0.4rem; margin:2.5rem 0 1.2rem; font-size:1.15rem; }
+        .qa { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:0.9rem 1.2rem; margin:0.8rem 0; }
+        .qa .q { color:#f472b6; font-weight:600; margin-bottom:0.35rem; }
+        .ex { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .ex h4 { color:var(--accent-color); margin-bottom:0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="container notes-container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn"><span>←</span> Back to Home</a>
+            <a href="quiz4-problems.html">Solved Problems</a>
+            <a href="electric-fields.html">Electric Fields Notes</a>
+            <a href="Electric Fields_b.pdf" target="_blank">Slides PDF</a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>🧲 Quiz-4 Preparation Guide</h1>
+            <p class="subtitle">PHY-2105 • Electric Field</p>
+        </header>
+
+        <div class="exam-banner">
+            <h2>Quiz-4</h2>
+            <div class="exam-date">29 September 2026 (Tuesday)</div>
+            <div class="exam-meta">Off-line exam</div>
+        </div>
+
+        <section class="notes-section">
+            <h2>📊 Marks Distribution</h2>
+            <div class="marks-bar">
+                <div class="marks-math">70–80% Maths Problems</div>
+                <div class="marks-short">20–30% Short Q</div>
+            </div>
+            <p>Maths-dominated again. Most of your time belongs on the <a href="quiz4-problems.html">solved problems</a>.</p>
+        </section>
+
+        <section class="notes-section">
+            <h2>🎯 Scope</h2>
+            <div class="good-box">
+                <h4>✅ Included</h4>
+                <p><strong>Chapter: Electric Field</strong> — all short questions + maths problems.</p>
+                <p style="margin-top:0.5rem;">Slide problems: <strong>1, 3, 4, 5, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+                22, 23, 24, 25</strong> (21 problems), "or similar problem".</p>
+                <p style="margin-top:0.5rem;">N.B. 4: <strong>graph drawings / field graph / field intensity / U field / graphical
+                analysis are included</strong> — see <a href="quiz4-problems.html#graphs">Section 3 of the solved problems</a>.</p>
+            </div>
+
+            <div class="excluded-box">
+                <h4>🚫 Excluded</h4>
+                <ul>
+                    <li>N.B. 1: <strong>Broad question / Proof / "Show that" / Derivation.</strong> Know the results, not their derivations.</li>
+                    <li><strong>Assignment-2</strong> (8, 9, 10, 11) and <strong>Practice Problem Sheet-4's list</strong> are both struck out.</li>
+                    <li>N.B. 3: topics <strong>not mentioned in class</strong> — the notice names <em>Electric Field Review</em> and
+                    <em>Electric Potential gradient application</em> as examples. That rules out \( E = V/d \) problems such as PPS-4 #23.</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>🔢 What the numbering tells you</h4>
+                <p>The slide deck in this folder (<em>Electric Fields_b.pdf</em>) contains <strong>Problems 1, 2 and 3</strong>.
+                The list includes 1 and 3 and <strong>skips 2</strong> — the charged-arc integration, which fits N.B. 1. That's the
+                same pattern as Quiz-3 (which skipped Example-5), so the deck numbering almost certainly matches the lecturer's.
+                Problems 4–25 are in a fuller slide set that isn't in this folder.</p>
+                <p style="margin-top:0.5rem;"><strong>So Practice Sheet-4 is your best material.</strong> Its list is crossed out, but
+                it's the lecturer's own problem set on this chapter and "similar problem" still applies. The 19 originally listed
+                (3, 4, 5, 9, 11, 12, 14, 15, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28) are the ones to prioritise.</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ One topic to check with your lecturer</h4>
+                <p>PPS-4 #17 and #18 are about an <strong>electron moving through a uniform field</strong> (\( a = eE/m \) plus
+                kinematics). That isn't anywhere in the slide deck. Both were on the lecturer's original list, so it was probably
+                covered in class — but if it wasn't, N.B. 3 excludes it.</p>
+            </div>
+        </section>
+
+        <section class="notes-section">
+            <h2>📈 Study Progress</h2>
+            <div class="progress-bar-container"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="progress-text" id="progressText">0 / 0 checked</div>
+        </section>
+
+        <!-- ============ FORMULA SHEET ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">📋 A. Formula Sheet</h2>
+            <div class="collapsible-body">
+                <h3 class="part-header">A1 — Constants</h3>
+                <table class="tbl">
+                    <tr><th>Constant</th><th>Value</th></tr>
+                    <tr><td>Coulomb constant \( k = 1/4\pi\varepsilon_0 \)</td><td>\( 8.99\times10^{9} \) N·m²/C²</td></tr>
+                    <tr><td>Permittivity \( \varepsilon_0 \)</td><td>\( 8.85\times10^{-12} \) C²/N·m²</td></tr>
+                    <tr><td>Elementary charge \( e \)</td><td>\( 1.6\times10^{-19} \) C</td></tr>
+                    <tr><td>Electron mass \( m_e \)</td><td>\( 9.11\times10^{-31} \) kg</td></tr>
+                    <tr><td>Proton mass \( m_p \)</td><td>\( 1.67\times10^{-27} \) kg</td></tr>
+                </table>
+
+                <h3 class="part-header">A2 — The field itself</h3>
+                <div class="formula-grid">
+                    <div class="formula-card"><h4>1. Definition</h4>
+                        <div class="math-block">\[ \vec E = \frac{\vec F}{q_0} \]</div>
+                        <p class="note">Unit N/C. \(q_0\) is a positive test charge.</p></div>
+                    <div class="formula-card"><h4>2. Point charge</h4>
+                        <div class="math-block">\[ E = \frac{1}{4\pi\varepsilon_0}\frac{|q|}{r^2} = \frac{k|q|}{r^2} \]</div>
+                        <p class="note">Away from +, toward −.</p></div>
+                    <div class="formula-card"><h4>3. Superposition</h4>
+                        <div class="math-block">\[ \vec E = \vec E_1 + \vec E_2 + \cdots + \vec E_n \]</div>
+                        <p class="note">A vector sum — resolve into components.</p></div>
+                    <div class="formula-card"><h4>4. Resultant</h4>
+                        <div class="math-block">\[ E = \sqrt{E_x^2+E_y^2},\quad \theta = \tan^{-1}\frac{E_y}{E_x} \]</div>
+                        <p class="note">Check the quadrant from the signs of \(E_x\), \(E_y\).</p></div>
+                    <div class="formula-card"><h4>5. Two equal fields at angle φ</h4>
+                        <div class="math-block">\[ E_{net} = 2E\cos\frac{\varphi}{2} \]</div>
+                        <p class="note">60° apart → \( \sqrt3\,E \); 90° apart → \( \sqrt2\,E \).</p></div>
+                    <div class="formula-card"><h4>6. Null point between like charges</h4>
+                        <div class="math-block">\[ \frac{q_1}{x^2} = \frac{q_2}{(d-x)^2} \]</div>
+                        <p class="note">Take square roots — no quadratic needed.</p></div>
+                </div>
+
+                <h3 class="part-header">A3 — Force and motion in a field</h3>
+                <div class="formula-grid">
+                    <div class="formula-card"><h4>7. Force on a charge</h4>
+                        <div class="math-block">\[ \vec F = q\vec E \]</div>
+                        <p class="note">Electron: \( \vec F \) is <strong>opposite</strong> to \( \vec E \).</p></div>
+                    <div class="formula-card"><h4>8. Acceleration</h4>
+                        <div class="math-block">\[ a = \frac{|q|E}{m} \]</div>
+                        <p class="note">Then \( v = v_0 + at \), \( x = v_0t + \tfrac12at^2 \). (Not in the slides.)</p></div>
+                </div>
+
+                <h3 class="part-header">A4 — Continuous charge</h3>
+                <div class="formula-grid">
+                    <div class="formula-card"><h4>9. Linear charge density</h4>
+                        <div class="math-block">\[ dq = \lambda\,ds,\quad dE = \frac{1}{4\pi\varepsilon_0}\frac{\lambda\,ds}{r^2} \]</div></div>
+                    <div class="formula-card"><h4>10. Ring, on its axis</h4>
+                        <div class="math-block">\[ E = \frac{kqz}{(z^2+R^2)^{3/2}} \]</div>
+                        <p class="note">\( E = 0 \) at the centre; \( E \to kq/z^2 \) for \( z \gg R \).</p></div>
+                </div>
+
+                <h3 class="part-header">A5 — Electric dipole</h3>
+                <div class="formula-grid">
+                    <div class="formula-card"><h4>11. Dipole moment</h4>
+                        <div class="math-block">\[ p = qd \]</div>
+                        <p class="note">Points from the <strong>negative</strong> to the <strong>positive</strong> charge. Unit C·m.</p></div>
+                    <div class="formula-card"><h4>12. Dipole field (far, on axis)</h4>
+                        <div class="math-block">\[ E = \frac{1}{2\pi\varepsilon_0}\frac{p}{z^3} \]</div>
+                        <p class="note">Falls as \( 1/z^3 \), faster than a point charge.</p></div>
+                    <div class="formula-card"><h4>13. Torque</h4>
+                        <div class="math-block">\[ \tau = pE\sin\theta,\quad \vec\tau = \vec p\times\vec E \]</div>
+                        <p class="note">Maximum \( pE \) at 90°.</p></div>
+                    <div class="formula-card"><h4>14. Potential energy</h4>
+                        <div class="math-block">\[ U = -pE\cos\theta = -\vec p\cdot\vec E \]</div>
+                        <p class="note">\(-pE\) at 0° (stable), \(+pE\) at 180° (unstable).</p></div>
+                    <div class="formula-card"><h4>15. Work</h4>
+                        <div class="math-block">\[ W_{field} = -\Delta U,\qquad W_{agent} = U_f - U_i \]</div>
+                        <p class="note">0° → 180° costs \( 2pE \); 0° → θ costs \( pE(1-\cos\theta) \).</p></div>
+                    <div class="formula-card"><h4>16. Molecule dipole (slide method)</h4>
+                        <div class="math-block">\[ d = \frac{p}{Ne} \]</div>
+                        <p class="note">\(N\) = electrons in the molecule (10 for H₂O).</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SHORT QUESTIONS ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">💬 B. Short-Question Bank</h2>
+            <div class="collapsible-body">
+                <p>20–30% of the marks. All of these come straight off the slides.</p>
+
+                <div class="qa"><div class="q">Q. Define the electric field. What is its unit?</div>
+                <p>Place a positive test charge \( q_0 \) at a point and measure the force on it; the field is \( \vec E = \vec F/q_0 \).
+                Its direction is the direction of the force on the <em>positive</em> test charge. SI unit: <strong>N/C</strong>.</p></div>
+
+                <div class="qa"><div class="q">Q. Is the electric field a scalar or a vector field? Give examples of each.</div>
+                <p>A <strong>vector</strong> field — a vector at every point. Temperature in a room and air pressure in the atmosphere
+                are <strong>scalar</strong> fields.</p></div>
+
+                <div class="qa"><div class="q">Q. State the rules relating field lines to the field.</div>
+                <p>(1) The tangent to a field line at any point gives the direction of \( \vec E \) there. (2) The number of lines per unit
+                area, measured perpendicular to the lines, is proportional to the magnitude of \( \vec E \) — so \(E\) is large where lines
+                are close together. Lines extend <strong>away from positive</strong> charge (where they start) and <strong>toward negative</strong>
+                charge (where they end).</p></div>
+
+                <div class="qa"><div class="q">Q. Why can two field lines never cross?</div>
+                <p>At a crossing the field would have two directions at one point, which is impossible — \( \vec E \) has one value everywhere.</p></div>
+
+                <div class="qa"><div class="q">Q. Who introduced field lines?</div>
+                <p><strong>Michael Faraday</strong>, in the 19th century — he pictured the space around a charged body as filled with
+                "lines of force".</p></div>
+
+                <div class="qa"><div class="q">Q. Describe the field lines of a uniformly charged sphere and of a large charged sheet.</div>
+                <p>Sphere: radial — outward if positive, inward if negative. Large uniformly charged sheet: parallel, evenly spaced lines
+                perpendicular to the sheet, so the field is uniform.</p></div>
+
+                <div class="qa"><div class="q">Q. What is an electric dipole and its dipole moment?</div>
+                <p>Two charges of equal magnitude and opposite sign, \( \pm q \), separated by \( d \). The dipole moment \( \vec p \) has
+                magnitude \( p = qd \) and points <strong>from the negative to the positive</strong> charge. Unit: C·m.</p></div>
+
+                <div class="qa"><div class="q">Q. Why does a dipole's field fall off faster than a point charge's?</div>
+                <p>Far away, the fields of \( +q \) and \( -q \) almost cancel, leaving only the small difference: \( E \propto 1/z^3 \)
+                instead of \( 1/r^2 \).</p></div>
+
+                <div class="qa"><div class="q">Q. A dipole sits in a uniform field. Why is there a torque but no net force?</div>
+                <p>The forces on the two ends are \( qE \) each, equal and opposite, so the net force is zero and the centre of mass doesn't
+                move. But they act along different lines, so they form a couple: \( \tau = pE\sin\theta \), which rotates \( \vec p \)
+                toward \( \vec E \).</p></div>
+
+                <div class="qa"><div class="q">Q. When is a dipole in stable and in unstable equilibrium?</div>
+                <p><strong>Stable</strong> at \( \theta = 0^\circ \) (\( \vec p \) along \( \vec E \)), where \( U = -pE \) is least.
+                <strong>Unstable</strong> at \( \theta = 180^\circ \), where \( U = +pE \) is greatest. Torque is zero at both. The slides
+                compare it to a pendulum, which has least potential energy at its lowest point.</p></div>
+
+                <div class="qa"><div class="q">Q. Why is a water molecule a dipole? How does a microwave oven heat food?</div>
+                <p>In H₂O the electrons crowd toward the oxygen, so the oxygen side is negative and the hydrogen side positive; the two
+                O–H bonds make 105°. \( \vec p \) points from the oxygen side to the hydrogen side. A microwave oven sets up a rapidly
+                oscillating field; the torque keeps flipping the water dipoles, breaking hydrogen bonds between molecules, and that energy
+                ends up as heat. No dipoles, no microwave ovens.</p></div>
+
+                <div class="qa"><div class="q">Q. What is the field at the centre of a uniformly charged ring, and far away from it?</div>
+                <p><strong>Zero</strong> at the centre — the field of each element is cancelled by the element opposite it. Far away
+                (\( z \gg R \)) the ring "looks like" a point charge: \( E \to kq/z^2 \).</p></div>
+
+                <div class="qa"><div class="q">Q. What is linear charge density?</div>
+                <p>Charge per unit length, \( \lambda \) (C/m). A continuous charge is split into elements \( dq = \lambda\,ds \), each
+                treated as a point charge, and their fields are added (integrated).</p></div>
+
+                <div class="qa"><div class="q">Q. Give some typical field strengths.</div>
+                <p>Surface of a uranium nucleus \( 3\times10^{21} \) N/C; inside a hydrogen atom \( 5\times10^{11} \); electric breakdown
+                of air \( 3\times10^{6} \); near a photocopier drum \( 10^{5} \); near a charged comb \( 10^{3} \); lower atmosphere
+                \( 10^{2} \); inside household copper wire \( 10^{-2} \) N/C.</p></div>
+            </div>
+        </section>
+
+        <!-- ============ PROBLEM TYPES ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">✅ C. Problem Types Checklist</h2>
+            <div class="collapsible-body">
+                <ul class="checklist">
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Field of a point charge, or charge from a field (PPS 4, 8)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Null point between two charges (PPS 2)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Two charges, field at a point off the line (PPS 3, 7, 9, 12, 16, 20)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Three charges — slide Problem-1 and its rotated twin (PPS 32)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Triangles (PPS 1, 13, 24)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Squares, including symmetry shortcuts (PPS 5, 6, 28, 29, 31)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Charges on an arc (PPS 15) and symmetric cancellation (PPS 25)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Dipole: \(d\) from \(p\), maximum torque, work (slide Problem-3, PPS 10, 11)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Dipole in vector form: \( -\vec p\cdot\vec E \), \( \vec p\times\vec E \) (PPS 14)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Change in dipole energy with angles from the horizontal (PPS 22)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> \(F = qE\) and comparing with gravity (PPS 21, 30)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Electron moving in a uniform field (PPS 17, 18) — check it was taught</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Charged ring far away (PPS 19)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Field-line diagrams: +, −, two like charges, dipole</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Reading field-line density (PPS 26)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> \(E\) vs \(r\) — \(1/r^2\) and dipole \(1/r^3\)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Ring field along its axis</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Dipole \(U\) and \(\tau\) vs angle</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Field definition, field-line rules, dipole, equilibrium, microwave</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============ PRIORITY ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">🎯 D. If Time Is Short</h2>
+            <div class="collapsible-body">
+                <table class="tbl">
+                    <tr><th>Do these</th><th>Why</th></tr>
+                    <tr><td><a href="quiz4-problems.html#slide-1">Slide P1</a> + <a href="quiz4-problems.html#pps-32">PPS 32</a></td><td>On the list; the same three-charge method twice</td></tr>
+                    <tr><td><a href="quiz4-problems.html#slide-3">Slide P3</a> + <a href="quiz4-problems.html#pps-11">PPS 11</a></td><td>On the list; every dipole formula in one problem</td></tr>
+                    <tr><td><a href="quiz4-problems.html#pps-5">PPS 5</a>, <a href="quiz4-problems.html#pps-13">13</a>, <a href="quiz4-problems.html#pps-15">15</a></td><td>Symmetry does most of the work — fast marks if you spot it</td></tr>
+                    <tr><td><a href="quiz4-problems.html#pps-12">PPS 12</a>, <a href="quiz4-problems.html#pps-20">20</a></td><td>Two charges off-axis: the bread-and-butter component problem</td></tr>
+                    <tr><td><a href="quiz4-problems.html#pps-14">PPS 14</a></td><td>Dot and cross product for \(U\) and \(\tau\)</td></tr>
+                    <tr><td><a href="quiz4-problems.html#pps-21">PPS 21</a>, <a href="quiz4-problems.html#pps-26">26</a></td><td>Quick \(F = qE\) and field-line-density marks</td></tr>
+                    <tr><td><a href="quiz4-problems.html#graphs">Graphs G1–G4</a></td><td>N.B. 4 explicitly includes them</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============ TRAPS ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">⚡ E. Last-Minute Traps</h2>
+            <div class="collapsible-body">
+                <div class="warning-box">
+                    <h4>Things that cost easy marks</h4>
+                    <ul>
+                        <li><strong>Draw every arrow before calculating.</strong> Away from +, toward −. Most wrong answers here are direction errors, not arithmetic.</li>
+                        <li><strong>Look for symmetry first.</strong> Equal charges at equal distances on opposite sides cancel.</li>
+                        <li><strong>Resolve, then add.</strong> Never add magnitudes of fields at an angle.</li>
+                        <li><strong>Electron force is opposite to \(\vec E\).</strong></li>
+                        <li><strong>Dipole angle is from \(\vec E\).</strong> If the figure measures from the horizontal and \(\vec E\) is vertical, convert (PPS 22).</li>
+                        <li><strong>External agent: \( W = U_f - U_i \).</strong> The field's own work has the opposite sign.</li>
+                        <li><strong>Convert units</strong>: cm → m, nC → \(10^{-9}\), μC → \(10^{-6}\), nm → \(10^{-9}\), fm → \(10^{-15}\).</li>
+                        <li><strong>Give direction as well as magnitude</strong> — an angle from \(+x\), a unit vector, or "toward the ... charge".</li>
+                    </ul>
+                </div>
+                <div class="warning-box">
+                    <h4>⚠️ Exam admin</h4>
+                    <p>Write your <strong>Name + ID + Section + Course code</strong> on the answer script. Recent notices carried an
+                    explicit penalty for missing ID/Section/Course code — assume the same applies.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleCheck(li) {
+            const cb = li.querySelector('input[type="checkbox"]');
+            cb.checked = !cb.checked;
+            li.classList.toggle('checked', cb.checked);
+            updateProgress(); saveState();
+        }
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            const body = header.nextElementSibling;
+            if (body) body.classList.toggle('collapsed');
+        }
+        function updateProgress() {
+            const all = document.querySelectorAll('.checklist input[type="checkbox"]');
+            const done = document.querySelectorAll('.checklist input[type="checkbox"]:checked');
+            const pct = all.length ? (done.length / all.length) * 100 : 0;
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('progressText').textContent = done.length + ' / ' + all.length + ' checked';
+        }
+        function saveState() {
+            const s = [...document.querySelectorAll('.checklist input[type="checkbox"]')].map(cb => cb.checked);
+            try { localStorage.setItem('phy2105-quiz4-prep', JSON.stringify(s)); } catch (e) {}
+        }
+        function loadState() {
+            let s = null;
+            try { s = JSON.parse(localStorage.getItem('phy2105-quiz4-prep')); } catch (e) {}
+            if (!s) { updateProgress(); return; }
+            document.querySelectorAll('.checklist input[type="checkbox"]').forEach((cb, i) => {
+                if (s[i]) { cb.checked = true; cb.closest('li').classList.add('checked'); }
+            });
+            updateProgress();
+        }
+        loadState();
+    </script>
+</body>
+</html>

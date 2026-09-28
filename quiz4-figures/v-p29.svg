@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 538" role="img" aria-label="P29 square">
+<rect width="540" height="538" rx="12" fill="#161a26"/>
+<line x1="153.2" y1="153.2" x2="270.0" y2="270.0" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="5,4"/>
+<line x1="386.8" y1="153.2" x2="270.0" y2="270.0" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="5,4"/>
+<line x1="153.2" y1="386.8" x2="270.0" y2="270.0" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="5,4"/>
+<line x1="386.8" y1="386.8" x2="270.0" y2="270.0" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="5,4"/>
+<line x1="270.0" y1="270.0" x2="295.8" y2="295.8" stroke="#fbbf24" stroke-width="3"/>
+<polygon points="303.6,303.6 291.9,299.7 299.7,291.9" fill="#fbbf24"/>
+<text x="314.9" y="318.9" fill="#fbbf24" font-size="12.5" text-anchor="start" font-weight="normal" font-family="Inter,Arial,sans-serif">E1</text>
+<line x1="270.0" y1="270.0" x2="329.4" y2="210.6" stroke="#fbbf24" stroke-width="3"/>
+<polygon points="337.2,202.8 333.3,214.5 325.5,206.7" fill="#fbbf24"/>
+<text x="348.5" y="195.5" fill="#fbbf24" font-size="12.5" text-anchor="start" font-weight="normal" font-family="Inter,Arial,sans-serif">E2</text>
+<line x1="270.0" y1="270.0" x2="244.2" y2="295.8" stroke="#fbbf24" stroke-width="3"/>
+<polygon points="236.4,303.6 240.3,291.9 248.1,299.7" fill="#fbbf24"/>
+<text x="225.1" y="318.9" fill="#fbbf24" font-size="12.5" text-anchor="end" font-weight="normal" font-family="Inter,Arial,sans-serif">E3</text>
+<line x1="270.0" y1="270.0" x2="210.6" y2="210.6" stroke="#fbbf24" stroke-width="3"/>
+<polygon points="202.8,202.8 214.5,206.7 206.7,214.5" fill="#fbbf24"/>
+<text x="191.5" y="195.5" fill="#fbbf24" font-size="12.5" text-anchor="end" font-weight="normal" font-family="Inter,Arial,sans-serif">E4</text>
+<line x1="270.0" y1="270.0" x2="270.0" y2="215.8" stroke="#4ade80" stroke-width="4"/>
+<polygon points="270.0,202.8 276.5,215.8 263.5,215.8" fill="#4ade80"/>
+<text x="270.0" y="190.8" fill="#4ade80" font-size="13" text-anchor="middle" font-weight="bold" font-family="Inter,Arial,sans-serif">2.83 kq/L² (up)</text>
+<circle cx="153.2" cy="153.2" r="11" fill="#ef4444"/>
+<text x="153.2" y="158.2" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">+</text>
+<text x="134.8" y="138.8" fill="#e5e7eb" font-size="12.5" text-anchor="end" font-weight="normal" font-family="Inter,Arial,sans-serif">+q</text>
+<circle cx="386.8" cy="153.2" r="11" fill="#3b82f6"/>
+<text x="386.8" y="158.2" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">−</text>
+<text x="405.2" y="138.8" fill="#e5e7eb" font-size="12.5" text-anchor="start" font-weight="normal" font-family="Inter,Arial,sans-serif">−2q</text>
+<circle cx="153.2" cy="386.8" r="11" fill="#3b82f6"/>
+<text x="153.2" y="391.8" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">−</text>
+<text x="134.8" y="409.2" fill="#e5e7eb" font-size="12.5" text-anchor="end" font-weight="normal" font-family="Inter,Arial,sans-serif">−q</text>
+<circle cx="386.8" cy="386.8" r="11" fill="#ef4444"/>
+<text x="386.8" y="391.8" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">+</text>
+<text x="405.2" y="409.2" fill="#e5e7eb" font-size="12.5" text-anchor="start" font-weight="normal" font-family="Inter,Arial,sans-serif">+2q</text>
+<circle cx="270.0" cy="270.0" r="5" fill="#f9fafb"/>
+<text x="284.0" y="292.0" fill="#f9fafb" font-size="13" text-anchor="start" font-weight="bold" font-family="Inter,Arial,sans-serif">centre</text>
+<text x="270.0" y="494.0" fill="#9ca3af" font-size="12" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">Each diagonal joins LIKE charges, so their fields oppose, leaving 2kq/L² each.</text>
+<text x="270.0" y="512.0" fill="#9ca3af" font-size="12" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">Those leftovers are 90° apart: x-parts cancel, y-parts add → 2√2 kq/L² up.</text>
+</svg>

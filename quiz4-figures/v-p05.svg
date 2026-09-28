@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 513" role="img" aria-label="P5 square field vectors at the centre">
+<rect width="540" height="513" rx="12" fill="#161a26"/>
+<line x1="169.1" y1="144.9" x2="270.0" y2="245.8" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="5,4"/>
+<line x1="370.9" y1="144.9" x2="270.0" y2="245.8" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="5,4"/>
+<line x1="370.9" y1="346.7" x2="270.0" y2="245.8" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="5,4"/>
+<line x1="169.1" y1="346.7" x2="270.0" y2="245.8" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="5,4"/>
+<line x1="270.0" y1="245.8" x2="210.6" y2="186.4" stroke="#fbbf24" stroke-width="3"/>
+<polygon points="202.8,178.6 214.5,182.5 206.7,190.3" fill="#fbbf24"/>
+<text x="191.5" y="171.3" fill="#fbbf24" font-size="12.5" text-anchor="end" font-weight="normal" font-family="Inter,Arial,sans-serif">q1 + q3</text>
+<line x1="270.0" y1="245.8" x2="329.4" y2="186.4" stroke="#fbbf24" stroke-width="3"/>
+<polygon points="337.2,178.6 333.3,190.3 325.5,182.5" fill="#fbbf24"/>
+<text x="348.5" y="171.3" fill="#fbbf24" font-size="12.5" text-anchor="start" font-weight="normal" font-family="Inter,Arial,sans-serif">q2 + q4</text>
+<line x1="270.0" y1="245.8" x2="270.0" y2="124.4" stroke="#4ade80" stroke-width="4"/>
+<polygon points="270.0,111.4 276.5,124.4 263.5,124.4" fill="#4ade80"/>
+<text x="270.0" y="99.4" fill="#4ade80" font-size="13" text-anchor="middle" font-weight="bold" font-family="Inter,Arial,sans-serif">E = (1.02×10⁵ N/C) ĵ</text>
+<circle cx="169.1" cy="144.9" r="11" fill="#ef4444"/>
+<text x="169.1" y="149.9" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">+</text>
+<text x="150.7" y="130.5" fill="#e5e7eb" font-size="12.5" text-anchor="end" font-weight="normal" font-family="Inter,Arial,sans-serif">q1 = +10 nC</text>
+<circle cx="370.9" cy="144.9" r="11" fill="#3b82f6"/>
+<text x="370.9" y="149.9" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">−</text>
+<text x="389.3" y="130.5" fill="#e5e7eb" font-size="12.5" text-anchor="start" font-weight="normal" font-family="Inter,Arial,sans-serif">q2 = −20 nC</text>
+<circle cx="370.9" cy="346.7" r="11" fill="#ef4444"/>
+<text x="370.9" y="351.7" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">+</text>
+<text x="389.3" y="369.1" fill="#e5e7eb" font-size="12.5" text-anchor="start" font-weight="normal" font-family="Inter,Arial,sans-serif">q3 = +20 nC</text>
+<circle cx="169.1" cy="346.7" r="11" fill="#3b82f6"/>
+<text x="169.1" y="351.7" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">−</text>
+<text x="150.7" y="369.1" fill="#e5e7eb" font-size="12.5" text-anchor="end" font-weight="normal" font-family="Inter,Arial,sans-serif">q4 = −10 nC</text>
+<circle cx="270.0" cy="245.8" r="5" fill="#f9fafb"/>
+<text x="258.0" y="233.8" fill="#f9fafb" font-size="13" text-anchor="end" font-weight="bold" font-family="Inter,Arial,sans-serif">centre</text>
+<text x="270.0" y="469.0" fill="#9ca3af" font-size="12" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">Pair the diagonals: each diagonal leaves a net 0.72×10⁵ N/C.</text>
+<text x="270.0" y="487.0" fill="#9ca3af" font-size="12" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">Those two leftovers are at 90°; their x-parts cancel, y-parts add.</text>
+</svg>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz-4 Solved Problems — PHY-2105</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 0.9rem 0; font-size: 1.05rem; overflow-x: auto; overflow-y: hidden; text-align: center; }
+        .formula-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.3rem 0; }
+        .formula-card h4 { color: var(--accent-color); margin-bottom: 0.5rem; font-size: 1.02rem; }
+        .badge { display:inline-block; padding:0.2rem 0.7rem; border-radius:20px; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-left:0.2rem; }
+        .badge-slide { background: rgba(99,102,241,0.2); color:#818cf8; }
+        .badge-pick  { background: rgba(236,72,153,0.2); color:#f472b6; }
+        .badge-prac  { background: rgba(34,197,94,0.2); color:#4ade80; }
+        .badge-out   { background: rgba(239,68,68,0.18); color:#f87171; }
+        .badge-graph { background: rgba(245,158,11,0.2); color:#fbbf24; }
+        .notes-container { max-width: 880px; margin: 0 auto; padding: 2rem; }
+        .nav-bar { display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; padding:1rem 0; margin-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .nav-bar a { color: var(--accent-color); text-decoration:none; font-weight:600; }
+        .nav-bar a:hover { text-decoration: underline; }
+        .warning-box { background: rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .warning-box h4 { color:#f59e0b; margin-bottom:0.4rem; }
+        .good-box { background: rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.3); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .good-box h4 { color:#4ade80; margin-bottom:0.4rem; }
+        .flag { background: rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.28); border-radius:10px; padding:0.7rem 1.1rem; margin:0.8rem 0; font-size:0.93rem; }
+        .flag strong { color:#f87171; }
+        .ans { background: rgba(34,197,94,0.10); border:1px solid rgba(34,197,94,0.3); border-radius:10px; padding:0.7rem 1.1rem; margin-top:0.9rem; }
+        .ans strong { color:#4ade80; }
+        table.tbl { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.93rem; }
+        table.tbl th, table.tbl td { padding:0.55rem 0.7rem; text-align:left; border-bottom:1px solid rgba(255,255,255,0.1); }
+        table.tbl th { color: var(--accent-color); }
+        .part-header { color:var(--accent-color); border-bottom:2px solid rgba(99,102,241,0.35); padding-bottom:0.4rem; margin:2.8rem 0 1.2rem; }
+        summary { cursor:pointer; color:var(--accent-color); font-weight:600; padding:0.5rem 0; }
+        .slide-fig { display:block; max-width:100%; margin:1rem auto; background:#fff; border-radius:10px; padding:0.5rem; }
+        .svg-fig { display:block; width:100%; max-width:560px; margin:1rem auto; }
+        .fl-grid { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; }
+        @media (max-width: 700px) { .fl-grid { grid-template-columns: 1fr; } }
+        .fl-grid img { width:100%; display:block; }
+        .fig-cap { text-align:center; font-size:0.85rem; color:var(--text-secondary); margin-top:-0.4rem; margin-bottom:1rem; }
+        .toc a { color: var(--text-primary); text-decoration:none; }
+        .toc a:hover { color: var(--accent-color); }
+        .toc-grid { display:flex; flex-wrap:wrap; gap:0.35rem; margin-top:0.6rem; }
+        .toc-grid a { display:inline-block; min-width:2.6rem; text-align:center; padding:0.25rem 0.45rem; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); font-size:0.85rem; }
+        .toc-grid a.pick { border-color: rgba(236,72,153,0.5); color:#f9a8d4; }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+    <div class="container notes-container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn"><span>←</span> Back to Home</a>
+            <a href="quiz4-prep.html">Quiz-4 Guide</a>
+            <a href="electric-fields.html">Electric Fields Notes</a>
+            <a href="Electric Fields_b.pdf" target="_blank">Slides PDF</a>
+            <a href="Electric Field Practice Questions.pdf" target="_blank">Practice Sheet-4 PDF</a>
+        </nav>
+        <header class="notes-header">
+            <h1>✏️ Quiz-4 Solved Problems</h1>
+            <p class="subtitle">PHY-2105 • Electric Field — slide problems, all of Practice Sheet-4, and the graph questions</p>
+        </header>
+
+        <div class="warning-box">
+            <h4>📌 What's here, and how it maps to your syllabus</h4>
+            <table class="tbl">
+                <tr><th>Section</th><th>Source</th><th>Status in the Quiz-4 notice</th></tr>
+                <tr><td><span class="badge badge-slide">1</span></td><td>Problems 1–3 from <em>Electric Fields_b.pdf</em></td>
+                    <td>Syllabus list includes <strong>1</strong> and <strong>3</strong> but skips <strong>2</strong></td></tr>
+                <tr><td><span class="badge badge-prac">2</span></td><td>All 32 problems on Practice Problem Sheet-4</td>
+                    <td>The sheet's list is <strong>struck out</strong> — but "…similar problem" still applies</td></tr>
+                <tr><td><span class="badge badge-graph">3</span></td><td>Field lines, E-vs-r, ring field, dipole U and τ</td>
+                    <td>N.B. 4: "graph drawings / field graph / field intensity / U field" are <strong>included</strong></td></tr>
+            </table>
+            <p><strong>About the numbering.</strong> The notice lists slide problems 1, 3, 4, 5, 7, 8, 11–25 (21 problems), but
+            the slide deck in this folder contains <strong>Problems 1, 2 and 3 only</strong>. Exactly as with Quiz-3, the list
+            skips a number the deck does contain — here Problem-2, the charged-arc integration — which fits N.B. 1 excluding
+            derivations. Problems 4–25 come from the lecturer's fuller slide set, which isn't in this folder.</p>
+            <p style="margin-top:0.5rem;"><strong>That makes Practice Sheet-4 your best material.</strong> Its list is crossed out,
+            but it is the lecturer's own problem set on this exact chapter, and the notice still allows "similar problem".
+            The 19 the lecturer had originally picked are badged <span class="badge badge-pick">Lecturer's pick</span> —
+            do those first.</p>
+            <p style="margin-top:0.5rem;">\( k = 8.99\times10^9 \) N·m²/C², \( e = 1.6\times10^{-19} \) C. Every numerical answer
+            below was computed and checked; several match Halliday's published answers exactly (P5, P7, P13, P14, P15, P21, P22).</p>
+        </div>
+<div class="warning-box toc"><h4>Jump to a problem</h4><p style="font-size:0.9rem;">Slide: <a href="#slide-1">P1</a> <a href="#slide-2">P2</a> <a href="#slide-3">P3</a> &nbsp;·&nbsp; <a href="#graphs">Graphs</a></p><div class="toc-grid"><a href="#pps-1" class="">1</a><a href="#pps-2" class="">2</a><a href="#pps-3" class="pick">3</a><a href="#pps-4" class="pick">4</a><a href="#pps-5" class="pick">5</a><a href="#pps-6" class="">6</a><a href="#pps-7" class="">7</a><a href="#pps-8" class="">8</a><a href="#pps-9" class="pick">9</a><a href="#pps-10" class="">10</a><a href="#pps-11" class="pick">11</a><a href="#pps-12" class="pick">12</a><a href="#pps-13" class="">13</a><a href="#pps-14" class="pick">14</a><a href="#pps-15" class="pick">15</a><a href="#pps-16" class="">16</a><a href="#pps-17" class="pick">17</a><a href="#pps-18" class="pick">18</a><a href="#pps-19" class="pick">19</a><a href="#pps-20" class="pick">20</a><a href="#pps-21" class="pick">21</a><a href="#pps-22" class="">22</a><a href="#pps-23" class="pick">23</a><a href="#pps-24" class="pick">24</a><a href="#pps-25" class="pick">25</a><a href="#pps-26" class="pick">26</a><a href="#pps-27" class="pick">27</a><a href="#pps-28" class="pick">28</a><a href="#pps-29" class="">29</a><a href="#pps-30" class="">30</a><a href="#pps-31" class="">31</a><a href="#pps-32" class="">32</a></div><p style="font-size:0.82rem;color:var(--text-secondary);margin-top:0.5rem;">Pink = one of the lecturer's 19 original picks.</p></div><h2 class="part-header">SECTION 1: Slide Problems</h2>
+        <div class="formula-card" id="slide-1">
+            <h4>Slide Problem-1 — Net field from three charges <span class="badge badge-slide">Slide</span><span class="badge badge-pick">On the list</span></h4>
+            <p><strong>Problem:</strong> Three particles with charges \( q_1 = +2Q \), \( q_2 = -2Q \) and \( q_3 = -4Q \) are each a distance \( d \) from the origin, at the angles shown (each line makes 30° with the \(x\) axis). What net electric field \( \vec E \) is produced at the origin?</p>
+            <img class="slide-fig" style="max-width:560px" src="quiz4-figures/slide-p1-fig.png" alt="Slide figure 22-7 for problem 1"><p class="fig-cap">Slide figure (Electric Fields_b.pdf, Fig. 22-7).</p>
+            <details open>
+                <summary>📝 Solution</summary>
+                <p><strong>Step 1 — magnitudes.</strong> Each charge is a point charge at distance \(d\):</p>
+<div class="math-block">\[ E_1 = \frac{1}{4\pi\varepsilon_0}\frac{2Q}{d^2},\qquad E_2 = \frac{1}{4\pi\varepsilon_0}\frac{2Q}{d^2},\qquad E_3 = \frac{1}{4\pi\varepsilon_0}\frac{4Q}{d^2} \]</div>
+<p><strong>Step 2 — directions (the part people get wrong).</strong> Put the tail of each vector at the origin.</p>
+<ul>
+<li>\(q_1\) is positive → \(\vec E_1\) points <em>away</em> from it, i.e. down-right along −30°.</li>
+<li>\(q_2\) is negative → \(\vec E_2\) points <em>toward</em> it — also down-right along −30°.</li>
+<li>\(q_3\) is negative → \(\vec E_3\) points toward it, up-right along +30°.</li>
+</ul>
+<p><strong>Step 3 — combine.</strong> \(\vec E_1\) and \(\vec E_2\) are parallel, so they simply add:</p>
+<div class="math-block">\[ E_1 + E_2 = \frac{1}{4\pi\varepsilon_0}\frac{4Q}{d^2}\quad\text{(which equals } E_3\text{)} \]</div>
+<p>So we have two vectors of equal size at ±30° to the \(x\) axis. Their \(y\)-parts cancel and their \(x\)-parts add:</p>
+<div class="math-block">\[ E = 2E_3\cos30^\circ = 2\,\frac{1}{4\pi\varepsilon_0}\frac{4Q}{d^2}\,(0.866) = \frac{6.93\,Q}{4\pi\varepsilon_0 d^2} \]</div><img class="svg-fig" src="quiz4-figures/v-slide-p1.svg" alt="Field vectors at the origin for slide problem 1"><div class="ans"><strong>Answer:</strong> \( E = \dfrac{6.93\,Q}{4\pi\varepsilon_0 d^2} \), in the \(+x\) direction.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="slide-2">
+            <h4>Slide Problem-2 — Field of a charged arc <span class="badge badge-slide">Slide</span><span class="badge badge-out">Not on the list</span></h4>
+            <p><strong>Problem:</strong> A plastic rod with uniformly distributed charge \( -Q \) is bent into a 120° circular arc of radius \( r \). The axis of symmetry lies along \(x\) and the origin is at the centre of curvature \(P\). In terms of \(Q\) and \(r\), what is \( \vec E \) at \(P\)?</p>
+            <img class="slide-fig" style="max-width:600px" src="quiz4-figures/slide-p2-fig.png" alt="Slide figure 22-11 for problem 2">
+            <details open>
+                <summary>📝 Solution</summary>
+                <div class="flag"><strong>Probably not examinable:</strong> the syllabus list skips Problem-2, and it needs an integration — N.B. 1 excludes derivations. The method is shown briefly so you recognise it.</div>
+<p>Treat a small element \(ds\) as a point charge \(dq = \lambda\,ds\), with \( \lambda = Q\big/\tfrac{2\pi r}{3} = \dfrac{3Q}{2\pi r} \). By symmetry the \(y\)-components cancel, so only \(dE\cos\theta\) survives. With \(ds = r\,d\theta\):</p>
+<div class="math-block">\[ E = \int_{-60^\circ}^{60^\circ}\frac{1}{4\pi\varepsilon_0}\frac{\lambda\,r\,d\theta}{r^2}\cos\theta = \frac{\lambda}{4\pi\varepsilon_0 r}\,(2\sin60^\circ) = \frac{1.73\,\lambda}{4\pi\varepsilon_0 r} \]</div><div class="math-block">\[ E = \frac{1.73}{4\pi\varepsilon_0 r}\cdot\frac{3Q}{2\pi r} = \frac{0.83\,Q}{4\pi\varepsilon_0 r^2} \]</div><div class="ans"><strong>Answer:</strong> \( E = \dfrac{0.83\,Q}{4\pi\varepsilon_0 r^2} \), directed toward the rod (the rod is negative).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="slide-3">
+            <h4>Slide Problem-3 — The water molecule as a dipole <span class="badge badge-slide">Slide</span><span class="badge badge-pick">On the list</span></h4>
+            <p><strong>Problem:</strong> A neutral water molecule (H₂O) in its vapour state has an electric dipole moment of magnitude \( 6.2\times10^{-30} \) C·m. (a) How far apart are the molecule's centres of positive and negative charge? (b) If the molecule is placed in an electric field of \( 1.5\times10^{4} \) N/C, what maximum torque can the field exert on it? (c) How much work must an external agent do to rotate this molecule by 180° in this field, starting from its fully aligned position (\(\theta = 0\))?</p>
+            
+            <details open>
+                <summary>📝 Solution</summary>
+                <p><strong>(a)</strong> A neutral water molecule has 10 electrons and 10 protons, so \( p = qd = (10e)\,d \):</p>
+<div class="math-block">\[ d = \frac{p}{10e} = \frac{6.2\times10^{-30}}{(10)(1.60\times10^{-19})} = 3.9\times10^{-12}\ \text{m} = 3.9\ \text{pm} \]</div>
+<p>That is smaller than the radius of a hydrogen atom.</p>
+<p><strong>(b)</strong> Torque is \( \tau = pE\sin\theta \), largest at \( \theta = 90^\circ \):</p>
+<div class="math-block">\[ \tau_{max} = pE = (6.2\times10^{-30})(1.5\times10^{4}) = 9.3\times10^{-26}\ \text{N·m} \]</div>
+<p><strong>(c)</strong> Work by an external agent is \( W_a = U_f - U_i \), with \( U = -pE\cos\theta \):</p>
+<div class="math-block">\[ W_a = (-pE\cos180^\circ) - (-pE\cos0^\circ) = 2pE = 2(6.2\times10^{-30})(1.5\times10^{4}) = 1.9\times10^{-25}\ \text{J} \]</div><div class="ans"><strong>Answer:</strong> (a) \(3.9\) pm; (b) \(9.3\times10^{-26}\) N·m; (c) \(1.9\times10^{-25}\) J.</div>
+            </details>
+        </div>
+<h2 class="part-header">SECTION 2: Practice Problem Sheet-4</h2><div class="good-box"><h4>How to use this section</h4><p>Solutions are collapsed so you can try each first. Do the <span class="badge badge-pick">Lecturer's pick</span> problems before the others — those are the 19 the notice originally listed.</p></div>
+        <div class="formula-card" id="pps-1">
+            <h4>P1 — Two charges at the corners of an equilateral triangle <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> Two equal charges \( q = 12\times10^{-7} \) C are placed at two corners of an equilateral triangle of side \( r = 10 \) cm. Draw the triangle with charges. Find the resultant electric field and its direction at the third corner.</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>Each charge is 0.10 m from the third corner:</p><div class="math-block">\[ E_1 = E_2 = \frac{kq}{r^2} = \frac{(8.99\times10^9)(1.2\times10^{-6})}{(0.10)^2} = 1.08\times10^{6}\ \text{N/C} \]</div><p>Both charges are positive, so each field points <em>away</em> from its charge. In an equilateral triangle the two fields make 60° with each other; their components along the base cancel and the perpendicular components add:</p><div class="math-block">\[ E = 2E_1\cos30^\circ = \sqrt3\,E_1 = 1.87\times10^{6}\ \text{N/C} \]</div><img class="svg-fig" src="quiz4-figures/v-p01.svg" alt="Triangle field vectors"><div class="ans"><strong>Answer:</strong> \( 1.87\times10^6 \) N/C, along the perpendicular bisector of the base, pointing away from the side joining the two charges.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-2">
+            <h4>P2 — Where is the field zero? <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> Two point charges \( +4q \) and \( +q \) are placed 30 cm apart. At what point on the line joining them is the electric field zero?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>Both are positive, so the null point lies <strong>between</strong> them (only there do the two fields oppose). Let it be \(x\) from \(+4q\):</p><div class="math-block">\[ \frac{k(4q)}{x^2} = \frac{kq}{(0.30-x)^2}\ \Longrightarrow\ \frac{2}{x} = \frac{1}{0.30-x}\ \Longrightarrow\ 0.60 - 2x = x \]</div><div class="ans"><strong>Answer:</strong> \( x = 0.20 \) m = 20 cm from the \(+4q\) charge (10 cm from \(+q\)). The null point is always nearer the <em>smaller</em> charge.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-3">
+            <h4>P3 — Two equal charges, field on the y axis <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> Two equal charges of \( 10\times10^{-5} \) C are shown in the figure; each produces an electric field at point \(P\) on the \(y\) axis. (i) What is the magnitude of the field of each charge at \(P\)? (ii) What is the direction of each field? (iii) What is the magnitude of the net field at \(P\)? (iv) What is its direction? (v) Find the \(x\) and \(y\) components of the field vectors.</p>
+            <img class="slide-fig" style="max-width:420px" src="quiz4-figures/p03.png" alt="Figure for problem 3">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="flag"><strong>Sign:</strong> the text gives only the size, but the figure labels both charges \(-q\). The solution follows the figure.</div><p>Each charge is at \( (\pm0.10, 0) \) m and \(P\) at \( (0, 0.10) \) m, so \( r^2 = 0.10^2 + 0.10^2 = 0.020 \) m².</p><div class="math-block">\[ \text{(i)}\quad E_1 = E_2 = \frac{kq}{r^2} = \frac{(8.99\times10^9)(1.0\times10^{-4})}{0.020} = 4.50\times10^{7}\ \text{N/C} \]</div><p><strong>(ii)</strong> Negative charges → each field points <em>toward</em> its charge, i.e. down-left and down-right, at 45° below the horizontal.</p>
+<p><strong>(v)</strong> Components (each \( 4.50\times10^7\times\cos45^\circ = 3.18\times10^7 \)):</p><div class="math-block">\[ \vec E_{left} = (-3.18\,\hat i - 3.18\,\hat j)\times10^{7},\qquad \vec E_{right} = (+3.18\,\hat i - 3.18\,\hat j)\times10^{7}\ \text{N/C} \]</div><div class="math-block">\[ \text{(iii)}\quad \vec E_{net} = (0)\,\hat i - (6.36\times10^{7})\,\hat j\ \text{N/C} \]</div><img class="svg-fig" src="quiz4-figures/v-p03.svg" alt="P3 field vectors"><div class="ans"><strong>Answer:</strong> (i) \(4.50\times10^7\) N/C each; (ii) toward each charge, 45° below horizontal; (iii) \(6.36\times10^7\) N/C; (iv) along \(-y\), toward the origin; (v) as above — \(x\)-parts cancel.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-4">
+            <h4>P4 — Finding the charge from the field <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> A charged particle produces an electric field with a magnitude of 5.0 N/C at a point 60 cm away. What is the magnitude of the particle's charge?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="math-block">\[ E = \frac{k|q|}{r^2}\ \Longrightarrow\ |q| = \frac{Er^2}{k} = \frac{(5.0)(0.60)^2}{8.99\times10^9} = 2.0\times10^{-10}\ \text{C} \]</div><div class="ans"><strong>Answer:</strong> \( |q| = 2.0\times10^{-10} \) C (0.20 nC).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-5">
+            <h4>P5 — Four charges on a square — unit-vector answer <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> The four particles form a square of edge \( a = 5.00 \) cm with \( q_1 = +10.0 \) nC, \( q_2 = -20.0 \) nC, \( q_3 = +20.0 \) nC and \( q_4 = -10.0 \) nC. In unit-vector notation, what net electric field do they produce at the square's centre? What is its direction?</p>
+            <img class="slide-fig" style="max-width:420px" src="quiz4-figures/p05.png" alt="Figure for problem 5">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>Each charge is \( a/\sqrt2 \) from the centre, so \( r^2 = a^2/2 = 1.25\times10^{-3} \) m² and \( k/r^2 = 7.19\times10^{12} \).</p>
+<p><strong>Pair the diagonals.</strong> \(q_1\) (+10) and \(q_3\) (+20) share a diagonal and are both positive, so their fields oppose; the stronger one wins by \(10\) nC-worth. Likewise \(q_2\) (−20) and \(q_4\) (−10) oppose, leaving \(10\) nC-worth. Each leftover is</p><div class="math-block">\[ E_{diag} = \frac{k(10\times10^{-9})}{r^2} = 7.19\times10^{4}\ \text{N/C} \]</div><p>The two leftovers point along the two diagonals — up-left and up-right — at 90° to each other, so their \(x\)-parts cancel and \(y\)-parts add:</p><div class="math-block">\[ E_y = 2\,(7.19\times10^4)\cos45^\circ = 1.02\times10^{5}\ \text{N/C} \]</div><img class="svg-fig" src="quiz4-figures/v-p05.svg" alt="P5 square field vectors"><div class="ans"><strong>Answer:</strong> \( \vec E = (1.02\times10^{5}\ \text{N/C})\,\hat j \) — straight up, along \(+y\).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-6">
+            <h4>P6 — Four charges on a square — magnitude and direction <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> Four charges \(+2q\), \(+4q\), \(+2q\) and \(-2q\) are placed at the corners of a square. (i) Draw the arrangement. (ii) Calculate the magnitude and direction of the field at the intersection of the diagonals, for side 10 cm and \( q = 57\times10^{-9} \) C.</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>Label consecutive corners A (+2q), B (+4q), C (+2q), D (−2q). Each is \( r = 0.10/\sqrt2 \) from the centre, so \( r^2 = 0.0050 \) m² and \( kq/r^2 = 1.02\times10^{5} \) N/C.</p>
+<ul><li><strong>A and C</strong> are both +2q on the same diagonal → equal and opposite → <strong>cancel</strong>.</li>
+<li><strong>B and D</strong>: B (+4q) pushes away from B, D (−2q) pulls toward D. Both therefore point from B toward D and <strong>add</strong>.</li></ul><div class="math-block">\[ E = \frac{k(4q)}{r^2} + \frac{k(2q)}{r^2} = \frac{6kq}{r^2} = 6(1.02\times10^5) = 6.15\times10^{5}\ \text{N/C} \]</div><img class="svg-fig" src="quiz4-figures/v-p06.svg" alt="P6 square field vectors"><div class="ans"><strong>Answer:</strong> \( 6.15\times10^{5} \) N/C, along the diagonal from the \(+4q\) corner toward the \(-2q\) corner.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-7">
+            <h4>P7 — Two opposite charges, field on the y axis <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> \( -q = -4.8\times10^{-19} \) C is at \( x = -3.00 \) m and \( q = 4.80\times10^{-19} \) C is at \( x = +3.00 \) m. What are the (i) magnitude and (ii) direction of the net field at \(P\) on the \(y\) axis at \( y = 4.00 \) m? (iii) If \(-q\) is removed and \(+2q\) is placed at the origin, find the net field again.</p>
+            <img class="slide-fig" style="max-width:380px" src="quiz4-figures/p07.png" alt="Figure for problem 7">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>Each charge is \( \sqrt{3^2+4^2} = 5.00 \) m from \(P\):</p><div class="math-block">\[ E = \frac{kq}{r^2} = \frac{(8.99\times10^9)(4.8\times10^{-19})}{25} = 1.73\times10^{-10}\ \text{N/C each} \]</div><p>\(+q\) pushes \(P\) away — along \( (-3, 4)/5 \). \(-q\) pulls toward itself — along \( (-3, -4)/5 \). The \(y\)-parts cancel; the \(x\)-parts add:</p><div class="math-block">\[ E_{net} = 2(1.73\times10^{-10})(0.6) = 2.07\times10^{-10}\ \text{N/C} \]</div><img class="svg-fig" src="quiz4-figures/v-p07.svg" alt="P7 field vectors"><p><strong>(iii)</strong> Now \(+q\) at (3, 0) gives \( 1.73\times10^{-10}(-0.6,\,0.8) \), and \(+2q\) at the origin (4 m below \(P\)) gives \( \dfrac{k(2q)}{16} = 5.39\times10^{-10} \) straight up:</p><div class="math-block">\[ \vec E = (-1.04\times10^{-10})\,\hat i + (6.78\times10^{-10})\,\hat j,\quad |E| = 6.85\times10^{-10}\ \text{N/C at } 98.7^\circ \]</div><div class="ans"><strong>Answer:</strong> (i) \(2.07\times10^{-10}\) N/C; (ii) along \(-x\); (iii) \(6.85\times10^{-10}\) N/C at 98.7° from \(+x\) (8.7° left of \(+y\)).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-8">
+            <h4>P8 — Field of the proton in a hydrogen atom <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> Calculate the electric field due to a proton at the location of the electron in the H atom. The radius of the electron orbit is \( 0.5\times10^{-10} \) m.</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="math-block">\[ E = \frac{ke}{r^2} = \frac{(8.99\times10^9)(1.6\times10^{-19})}{(0.5\times10^{-10})^2} = 5.75\times10^{11}\ \text{N/C} \]</div><div class="ans"><strong>Answer:</strong> \( 5.75\times10^{11} \) N/C, radially outward from the proton. (Table 22-1 on the slides quotes \(5\times10^{11}\) N/C — the same order.)</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-9">
+            <h4>P9 — Two charges on the axes, field at the origin <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> A charge of \( -1.0\ \mu\text{C} \) is at (0, 2) and \( +1.0\ \mu\text{C} \) is at (1, 0) (metres). Draw the arrangement and find at the origin (i) the magnitude and (ii) the direction of \( E \).</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="math-block">\[ E_{(-)} = \frac{k(10^{-6})}{2^2} = 2248\ \text{N/C (toward it: } +y),\qquad E_{(+)} = \frac{k(10^{-6})}{1^2} = 8990\ \text{N/C (away: } -x) \]</div><div class="math-block">\[ |E| = \sqrt{8990^2 + 2248^2} = 9.27\times10^{3}\ \text{N/C},\qquad \theta = 180^\circ - \tan^{-1}\frac{2248}{8990} = 166^\circ \]</div><img class="svg-fig" src="quiz4-figures/v-p09.svg" alt="P9 field vectors"><div class="ans"><strong>Answer:</strong> (i) \(9.27\times10^3\) N/C; (ii) 166° from \(+x\), i.e. 14.0° above the \(-x\) axis.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-10">
+            <h4>P10 — Dipole: torque and work <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> A dipole has charges \(+2e\) and \(-2e\) separated by 0.75 nm in a field of \( 5.4\times10^{-8} \) N/C. (i) Find the torque when the dipole moment is (a) parallel and (b) perpendicular to the field. (ii) How much work is needed to turn it through 180° if it starts at 65°?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="math-block">\[ p = qd = (2)(1.6\times10^{-19})(0.75\times10^{-9}) = 2.4\times10^{-28}\ \text{C·m} \]</div><p><strong>(i)</strong> \( \tau = pE\sin\theta \): (a) parallel, \( \theta = 0 \) → \( \tau = 0 \). (b) perpendicular:</p><div class="math-block">\[ \tau = pE = (2.4\times10^{-28})(5.4\times10^{-8}) = 1.30\times10^{-35}\ \text{N·m} \]</div><p><strong>(ii)</strong> From 65° to 245°:</p><div class="math-block">\[ W_a = U_f - U_i = -pE\cos245^\circ + pE\cos65^\circ = 2pE\cos65^\circ = 1.10\times10^{-35}\ \text{J} \]</div><div class="ans"><strong>Answer:</strong> (i) (a) 0, (b) \(1.30\times10^{-35}\) N·m; (ii) \(1.10\times10^{-35}\) J.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-11">
+            <h4>P11 — NaCl dipole <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> A neutral NaCl molecule has a dipole moment of \( 5\times10^{-32} \) C·m. (i) How far apart are its centres of positive and negative charge? (ii) In a field of \( 2.2\times10^{5} \) N/C, what maximum torque can the field exert? (iii) How much work must an external agent do to rotate it by 170° from the fully aligned position? (iv) What is the maximum potential energy?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="flag"><strong>Which charge to use for (i)?</strong> The slide's water-molecule method counts <em>all</em> the electrons/protons (10 for H₂O). Applied to NaCl that is 11 + 17 = 28, giving \(d = p/28e\). Physically NaCl is ionic (one electron transferred), which would give \(d = p/e\). The problem is clearly modelled on slide Problem-3, so the slide method is shown first — mention the other if you want to be safe.</div><div class="math-block">\[ \text{(i)}\quad d = \frac{p}{28e} = \frac{5\times10^{-32}}{(28)(1.6\times10^{-19})} = 1.1\times10^{-14}\ \text{m}\qquad\left(\text{ionic view: } \frac{p}{e} = 3.1\times10^{-13}\ \text{m}\right) \]</div><div class="math-block">\[ \text{(ii)}\quad \tau_{max} = pE = (5\times10^{-32})(2.2\times10^{5}) = 1.1\times10^{-26}\ \text{N·m} \]</div><div class="math-block">\[ \text{(iii)}\quad W_a = U_f - U_i = -pE\cos170^\circ + pE\cos0^\circ = pE(1-\cos170^\circ) = 2.18\times10^{-26}\ \text{J} \]</div><div class="math-block">\[ \text{(iv)}\quad U_{max} = +pE = 1.1\times10^{-26}\ \text{J}\quad(\text{at } \theta = 180^\circ) \]</div><div class="ans"><strong>Answer:</strong> (i) \(1.1\times10^{-14}\) m (slide method); (ii) \(1.1\times10^{-26}\) N·m; (iii) \(2.18\times10^{-26}\) J; (iv) \(1.1\times10^{-26}\) J.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-12">
+            <h4>P12 — Two positive charges, field off the axis <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> \( q_1 = +10 \) nC is at the origin and \( q_2 = +15 \) nC at (4, 0). Find at (0, 3) m (i) the magnitude and (ii) the direction of the net field.</p>
+            <img class="slide-fig" style="max-width:460px" src="quiz4-figures/p12.png" alt="Figure for problem 12">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>This is a 3-4-5 triangle: \(q_1\) is 3 m below the point, \(q_2\) is 5 m away.</p><div class="math-block">\[ E_1 = \frac{k(10\times10^{-9})}{3^2} = 9.99\ \text{N/C}\ (+y),\qquad E_2 = \frac{k(15\times10^{-9})}{5^2} = 5.39\ \text{N/C} \]</div><p>\(E_2\) points away from \(q_2\), along \( (-4, 3)/5 \): components \( (-4.32,\ +3.24) \).</p><div class="math-block">\[ \vec E = (-4.32)\,\hat i + (9.99 + 3.24)\,\hat j = (-4.32\,\hat i + 13.2\,\hat j)\ \text{N/C} \]</div><div class="math-block">\[ |E| = 13.9\ \text{N/C},\qquad \theta = 180^\circ - \tan^{-1}\frac{13.2}{4.32} = 108^\circ \]</div><img class="svg-fig" src="quiz4-figures/v-p12.svg" alt="P12 field vectors"><div class="ans"><strong>Answer:</strong> (i) 13.9 N/C; (ii) 108° from \(+x\) (18° left of \(+y\)).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-13">
+            <h4>P13 — Three charges, field at P <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> The three particles are fixed with \( q_1 = q_2 = +e \) and \( q_3 = +2e \); distance \( a = 6.00\ \mu\text{m} \). What are the (i) magnitude and (ii) direction of the net field at \(P\)?</p>
+            <img class="slide-fig" style="max-width:300px" src="quiz4-figures/p13.png" alt="Figure for problem 13">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>\(P\) is the midpoint of the line from particle 1 to particle 2, so all three particles are \( a/\sqrt2 \) from \(P\).</p>
+<ul><li>Particles 1 and 2 are equal and on opposite sides of \(P\) along the same line → their fields <strong>cancel</strong>.</li>
+<li>Only particle 3 is left; its field points away from it at 45°.</li></ul><div class="math-block">\[ E = \frac{k(2e)}{(a/\sqrt2)^2} = \frac{4ke}{a^2} = \frac{4(8.99\times10^9)(1.6\times10^{-19})}{(6.00\times10^{-6})^2} = 160\ \text{N/C} \]</div><img class="svg-fig" src="quiz4-figures/v-p13.svg" alt="P13 field vectors"><div class="ans"><strong>Answer:</strong> (i) 160 N/C; (ii) 45° above \(+x\), directed away from particle 3.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-14">
+            <h4>P14 — Dipole in a field — vector form <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> A dipole with \( \vec p = (3\hat i + 4\hat j)(1.24\times10^{-30}) \) C·m is in a field \( \vec E = (4000\ \text{N/C})\,\hat i \). (i) What is its potential energy? (ii) What torque acts on it? (iii) If an agent turns it until \( \vec p = (-4\hat i + 3\hat j)(1.24\times10^{-30}) \) C·m, how much work does the agent do?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="math-block">\[ \text{(i)}\quad U = -\vec p\cdot\vec E = -(3)(1.24\times10^{-30})(4000) = -1.49\times10^{-26}\ \text{J} \]</div><p><strong>(ii)</strong> \( \vec\tau = \vec p\times\vec E \). Only \( p_y\hat j\times E_x\hat i = -p_yE_x\,\hat k \) survives:</p><div class="math-block">\[ \vec\tau = -(4)(1.24\times10^{-30})(4000)\,\hat k = (-1.98\times10^{-26}\ \text{N·m})\,\hat k \]</div><div class="math-block">\[ \text{(iii)}\quad U_f = -(-4)(1.24\times10^{-30})(4000) = +1.98\times10^{-26},\quad W_a = U_f - U_i = 3.47\times10^{-26}\ \text{J} \]</div><div class="ans"><strong>Answer:</strong> (i) \(-1.49\times10^{-26}\) J; (ii) \((-1.98\times10^{-26}\ \text{N·m})\,\hat k\); (iii) \(3.47\times10^{-26}\) J.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-15">
+            <h4>P15 — Electrons and protons on an arc <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> Electrons (e) and protons (p) sit on a circular arc of radius \( r = 2.00 \) cm with \( \theta_1 = 30^\circ \), \( \theta_2 = 50^\circ \), \( \theta_3 = 30^\circ \), \( \theta_4 = 20^\circ \). What are the (i) magnitude and (ii) direction (relative to \(+x\)) of the net field at the centre?</p>
+            <img class="slide-fig" style="max-width:440px" src="quiz4-figures/p15.png" alt="Figure for problem 15">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>Reading the angles off the figure, the charges sit at (from \(+x\)): e at 0°, p at 30°, p at 80°, e at 130°, p at 160°. Every charge is \(r\) from the centre, so each field has the same size:</p><div class="math-block">\[ E_0 = \frac{ke}{r^2} = \frac{(8.99\times10^9)(1.6\times10^{-19})}{(0.020)^2} = 3.60\times10^{-6}\ \text{N/C} \]</div><p>A proton at angle \(\phi\) gives a field pointing <em>away</em>, along \( \phi + 180^\circ \); an electron gives a field <em>toward</em> it, along \(\phi\). Summing the unit vectors:</p><div class="math-block">\[ \sum\cos = 0.257,\qquad \sum\sin = -1.061\quad\Longrightarrow\quad E = 3.60\times10^{-6}\sqrt{0.257^2 + 1.061^2} = 3.93\times10^{-6}\ \text{N/C} \]</div><div class="math-block">\[ \theta = \tan^{-1}\frac{-1.061}{0.257} = -76.4^\circ \]</div><img class="svg-fig" src="quiz4-figures/v-p15.svg" alt="P15 arc field vectors"><div class="ans"><strong>Answer:</strong> (i) \(3.93\times10^{-6}\) N/C; (ii) −76.4° (76.4° below the \(+x\) axis).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-16">
+            <h4>P16 — Right triangles — like vs unlike charges <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> PAD and PBD are right-angled triangles (PD = 3, AD = DB = 4, PA = PB = 5). What is the field at \(P\) on the \(y\) axis for (i) Figure-1 (+15 nC at A and B) and (ii) Figure-2 (−15 nC at A, +15 nC at B)?</p>
+            <img class="slide-fig" src="quiz4-figures/p16.png" alt="Figure for problem 16">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="flag"><strong>Units:</strong> the sheet gives no unit for the lengths 3, 4, 5 — metres are assumed below. If they are cm, multiply the answers by \(10^4\).</div><div class="math-block">\[ E_A = E_B = \frac{k(15\times10^{-9})}{5^2} = 5.39\ \text{N/C} \]</div><p><strong>(i) Like charges:</strong> both push away. Their \(x\)-parts (±0.8) cancel; \(y\)-parts (0.6) add:</p><div class="math-block">\[ E = 2(5.39)(0.6) = 6.47\ \text{N/C along } +y \]</div><img class="svg-fig" src="quiz4-figures/v-p16a.svg" alt="P16 figure 1"><p><strong>(ii) Unlike charges:</strong> A now pulls toward itself. Now the \(y\)-parts cancel and the \(x\)-parts add, both toward A:</p><div class="math-block">\[ E = 2(5.39)(0.8) = 8.63\ \text{N/C along } -x \]</div><img class="svg-fig" src="quiz4-figures/v-p16b.svg" alt="P16 figure 2"><div class="ans"><strong>Answer:</strong> (i) 6.47 N/C along \(+y\); (ii) 8.63 N/C along \(-x\) (toward the negative charge).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-17">
+            <h4>P17 — Electron moving along the field <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> An electron enters a uniform field \( E = 50 \) N/C with initial velocity 40 km/s <em>in the same direction as the field</em>. (i) What is its speed 1.5 ns later? (ii) How far does it travel in that time?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="flag"><strong>Not in the slide deck.</strong> Motion of a charge in a uniform field isn't covered in <em>Electric Fields_b.pdf</em>. N.B. 3 excludes topics not mentioned in class, so check whether your lecturer did this one. It is only \(F = qE\) plus kinematics.</div><p>The force on an electron is opposite to \(\vec E\), so it <strong>decelerates</strong>:</p><div class="math-block">\[ a = \frac{eE}{m_e} = \frac{(1.6\times10^{-19})(50)}{9.11\times10^{-31}} = 8.78\times10^{12}\ \text{m/s}^2 \]</div><div class="math-block">\[ v = v_0 - at = 4.0\times10^4 - (8.78\times10^{12})(1.5\times10^{-9}) = 2.68\times10^{4}\ \text{m/s} \]</div><div class="math-block">\[ x = v_0t - \tfrac12at^2 = (4.0\times10^4)(1.5\times10^{-9}) - \tfrac12(8.78\times10^{12})(1.5\times10^{-9})^2 = 5.0\times10^{-5}\ \text{m} \]</div><div class="ans"><strong>Answer:</strong> (i) \(2.68\times10^4\) m/s (26.8 km/s); (ii) \(5.0\times10^{-5}\) m ≈ 50 μm.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-18">
+            <h4>P18 — Electron deflected by a field <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> An electron is projected horizontally at \( v = 10^6 \) m/s, perpendicular to a downward field \( E = 2000 \) N/C. How far is it deflected after travelling 1 cm? (\( m_e = 9.1\times10^{-31} \) kg)</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="flag"><strong>Not in the slide deck</strong> — same caveat as P17.</div><p>Horizontally there's no force, so the time to cover 1 cm is \( t = x/v \). Vertically the electron is pushed <em>up</em> (opposite to \(\vec E\)):</p><div class="math-block">\[ t = \frac{0.01}{10^6} = 1.0\times10^{-8}\ \text{s},\qquad a = \frac{eE}{m_e} = \frac{(1.6\times10^{-19})(2000)}{9.1\times10^{-31}} = 3.52\times10^{14}\ \text{m/s}^2 \]</div><div class="math-block">\[ y = \tfrac12at^2 = \tfrac12(3.52\times10^{14})(1.0\times10^{-8})^2 = 1.76\times10^{-2}\ \text{m} \]</div><div class="ans"><strong>Answer:</strong> 1.76 cm, upward (opposite to the field).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-19">
+            <h4>P19 — Charged ring, seen from far away <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> An electron on the \(y\) axis is 25 nm from the centre of a charged ring of radius 1 nm. What are the field and the electrostatic force on the electron, given that it is far from the ring?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="flag"><strong>The ring's charge isn't given.</strong> The key idea is that for \( z \gg R \) the ring behaves like a point charge. The numbers below assume the ring carries \( q = e \); scale them by \(q/e\) for any other charge.</div><div class="math-block">\[ E = \frac{kqz}{(z^2+R^2)^{3/2}}\ \xrightarrow{\ z\,\gg\,R\ }\ \frac{kq}{z^2} \]</div><div class="math-block">\[ E = \frac{(8.99\times10^9)(1.6\times10^{-19})}{(25\times10^{-9})^2} = 2.30\times10^{6}\ \text{N/C},\qquad F = eE = 3.68\times10^{-13}\ \text{N} \]</div><p>Check the approximation: \( z^2 + R^2 = 625 + 1 \) nm², so ignoring \(R\) changes the answer by only about 0.2%.</p><div class="ans"><strong>Answer:</strong> \( E = kq/z^2 \); for a ring charge of \(e\): \(2.30\times10^6\) N/C and \(3.68\times10^{-13}\) N (attractive if the ring is positive).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-20">
+            <h4>P20 — Two charges above the origin <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> From the figure (\( q_1 = 3.2\times10^{-19} \) C and \( q_2 = 5.6\times10^{-19} \) C, each 0.005 m from O at 30° above the \(x\) axis), calculate (i) the magnitude and (ii) the direction of the net field at O with \( q_0 = 0 \).</p>
+            <img class="slide-fig" style="max-width:420px" src="quiz4-figures/p20.png" alt="Figure for problem 20">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="math-block">\[ E_1 = \frac{k(3.2\times10^{-19})}{(0.005)^2} = 1.15\times10^{-4},\qquad E_2 = \frac{k(5.6\times10^{-19})}{(0.005)^2} = 2.01\times10^{-4}\ \text{N/C} \]</div><p>Both positive, so the fields point away: \(E_1\) down-right, \(E_2\) down-left, each 30° below the horizontal.</p><div class="math-block">\[ E_x = (E_1 - E_2)\cos30^\circ = -7.47\times10^{-5},\qquad E_y = -(E_1 + E_2)\sin30^\circ = -1.58\times10^{-4} \]</div><div class="math-block">\[ |E| = 1.75\times10^{-4}\ \text{N/C},\qquad \theta = 180^\circ + \tan^{-1}\frac{1.58}{0.747} = 245^\circ \]</div><img class="svg-fig" src="quiz4-figures/v-p20.svg" alt="P20 field vectors"><div class="ans"><strong>Answer:</strong> (i) \(1.75\times10^{-4}\) N/C; (ii) 245° from \(+x\) — i.e. 64.7° below the \(-x\) axis, pointing down-left.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-21">
+            <h4>P21 — Charged cloud: field, force, and gravity <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> A particle of charge \( -2.0\times10^{-9} \) C feels a downward force of \( 3.0\times10^{-6} \) N. (i) What is \(E\)? For a proton in this field, what are the (ii) magnitude and (iii) direction of the electric force, (iv) the gravitational force, and (v) the ratio \(F_{el}/F_g\)?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="math-block">\[ \text{(i)}\quad E = \frac{F}{|q|} = \frac{3.0\times10^{-6}}{2.0\times10^{-9}} = 1.5\times10^{3}\ \text{N/C} \]</div><p>The particle is <em>negative</em> and pushed <em>down</em>, so \(\vec E\) points <strong>up</strong>.</p><div class="math-block">\[ \text{(ii)}\quad F_{el} = eE = (1.6\times10^{-19})(1500) = 2.4\times10^{-16}\ \text{N}\qquad\text{(iii) upward} \]</div><div class="math-block">\[ \text{(iv)}\quad F_g = m_pg = (1.67\times10^{-27})(9.8) = 1.6\times10^{-26}\ \text{N}\qquad\text{(v)}\quad \frac{F_{el}}{F_g} = 1.5\times10^{10} \]</div><div class="ans"><strong>Answer:</strong> (i) \(1.5\times10^3\) N/C (up); (ii) \(2.4\times10^{-16}\) N; (iii) up; (iv) \(1.6\times10^{-26}\) N; (v) \(1.5\times10^{10}\).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-22">
+            <h4>P22 — Dipole swinging in a field <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> A water-molecule dipole (\( d = 1.2 \) fm, \( p = 1.60\times10^{-27} \) C·m) swings from \( \theta_i = 20^\circ \) to \( \theta_f = 20^\circ \) as shown, in a field of \( 3\times10^{6} \) N/C. (i) What is the change in its potential energy? (ii) What is the electric field if the path length equals the dipole distance?</p>
+            <img class="slide-fig" style="max-width:380px" src="quiz4-figures/p22.png" alt="Figure for problem 22">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p><strong>(i)</strong> The angles are measured from the horizontal, but \(U\) needs the angle to \(\vec E\), which is vertical. So the dipole goes from \( 90^\circ + 20^\circ = 110^\circ \) to \( 90^\circ - 20^\circ = 70^\circ \):</p><div class="math-block">\[ \Delta U = -pE(\cos70^\circ - \cos110^\circ) = -2pE\cos70^\circ = -2(1.6\times10^{-27})(3\times10^6)(0.342) = -3.28\times10^{-21}\ \text{J} \]</div><div class="flag"><strong>(ii) is ambiguously worded</strong> and isn't one of the lecturer's picks. One reading: the charge is \( q = p/d = 1.33\times10^{-12} \) C, and the field that would push it through a path \(d\) doing work equal to \( |\Delta U| \) is \( E = |\Delta U|/(qd) = |\Delta U|/p = 2.05\times10^{6} \) N/C. Ask your lecturer if it matters.</div><div class="ans"><strong>Answer:</strong> (i) \( \Delta U = -3.28\times10^{-21} \) J (the energy decreases — the dipole swung toward alignment).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-23">
+            <h4>P23 — Fair-weather field from the ionosphere <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> The ionosphere is 100 km up and at \( 3\times10^{6} \) V. What electric field produces this?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="flag"><strong>Probably excluded.</strong> This is \( E = V/d \) — a <em>potential-gradient</em> application, which N.B. 3 names explicitly as not included in Quiz-4. Shown for completeness.</div><div class="math-block">\[ E = \frac{V}{d} = \frac{3\times10^{6}}{100\times10^{3}} = 30\ \text{V/m} = 30\ \text{N/C} \]</div><div class="ans"><strong>Answer:</strong> 30 N/C, directed downward.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-24">
+            <h4>P24 — Same triangle, field at particle 3 <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> Using the P13 arrangement with \( q_1 = q_2 = 5 \) nC, \( a = 5 \) nm and \( q_3 = 0 \): what are the (i) magnitude and (ii) direction of the net field at point 3?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>Point 3 is the right-angle corner. \(q_1\) is directly above it and \(q_2\) directly to its right, each \(a\) away:</p><div class="math-block">\[ E_1 = E_2 = \frac{k(5\times10^{-9})}{(5\times10^{-9})^2} = 1.80\times10^{18}\ \text{N/C} \]</div><p>Both positive: \(E_1\) points down (\(-y\)), \(E_2\) points left (\(-x\)). They are perpendicular:</p><div class="math-block">\[ E = \sqrt2\,(1.80\times10^{18}) = 2.54\times10^{18}\ \text{N/C} \]</div><div class="ans"><strong>Answer:</strong> (i) \(2.54\times10^{18}\) N/C; (ii) 225° from \(+x\) — pointing down-left, 45° below the \(-x\) axis.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-25">
+            <h4>P25 — Symmetric protons and electrons <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> From the figure, calculate the net field needed to bring a \( +2.2\ \mu\text{C} \) charge to the centre. The electrons are 0.1 cm from the centre, the protons 0.6 cm.</p>
+            <img class="slide-fig" style="max-width:380px" src="quiz4-figures/p25.png" alt="Figure for problem 25">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>The four protons sit in two opposite pairs at equal distances, and so do the four electrons. Each opposite pair gives equal and opposite fields at the centre, so <strong>everything cancels</strong>:</p><div class="math-block">\[ \vec E_{centre} = 0\quad\Longrightarrow\quad \vec F = q\vec E = 0 \]</div><div class="ans"><strong>Answer:</strong> The net field at the centre is zero, so the \(+2.2\ \mu\)C charge feels no net force there. The distances are a distraction — symmetry does all the work.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-26">
+            <h4>P26 — Reading field lines <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> The field lines on the left have twice the separation of those on the right. (i) If the field at A is 40 N/C, what is the force on a proton at A? (ii) What is the field at B?</p>
+            <img class="slide-fig" style="max-width:420px" src="quiz4-figures/p26.png" alt="Figure for problem 26">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="math-block">\[ \text{(i)}\quad F = eE_A = (1.6\times10^{-19})(40) = 6.4\times10^{-18}\ \text{N} \]</div><p><strong>(ii)</strong> Field strength is proportional to line density. On the left the lines are twice as far apart, so the density — and the field — is half:</p><div class="math-block">\[ E_B = \tfrac12 E_A = 20\ \text{N/C} \]</div><div class="ans"><strong>Answer:</strong> (i) \(6.4\times10^{-18}\) N; (ii) 20 N/C.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-27">
+            <h4>P27 — Two positive charges on the x axis <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> \( q_1 = +7\ \mu\text{C} \) is at \( x = -0.5 \) m and \( q_2 = 2q_1 = +14\ \mu\text{C} \) at \( x = +0.5 \) m. What are the magnitude and direction of the net force at the origin?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="flag"><strong>Wording:</strong> there is no charge at the origin, so there's no force to find — the question means the <em>field</em> (force per unit charge). If a charge \(q\) were placed there, \( F = qE \).</div><div class="math-block">\[ E_1 = \frac{k(7\times10^{-6})}{0.5^2} = 2.52\times10^{5}\ (+x),\qquad E_2 = \frac{k(14\times10^{-6})}{0.5^2} = 5.03\times10^{5}\ (-x) \]</div><div class="math-block">\[ E_{net} = 5.03\times10^5 - 2.52\times10^5 = 2.52\times10^{5}\ \text{N/C} \]</div><div class="ans"><strong>Answer:</strong> \(2.52\times10^5\) N/C along \(-x\) (away from the larger charge).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-28">
+            <h4>P28 — Four equal charges on a square <span class="badge badge-pick">Lecturer's pick</span></h4>
+            <p><strong>Problem:</strong> Four equal charges \(q\) are at the corners of a square. What is the field at the centre?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>Opposite corners are equidistant from the centre and carry the same charge, so each pair's fields are equal and opposite.</p><div class="ans"><strong>Answer:</strong> \( E = 0 \) — by symmetry, for any square of equal charges.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-29">
+            <h4>P29 — Unequal charges on a square <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> What are the magnitude and direction of the net field at the centre of the square below (side \(L\); \(+q\) and \(-2q\) on top, \(-q\) and \(+2q\) on the bottom)?</p>
+            <img class="slide-fig" style="max-width:260px" src="quiz4-figures/p29.png" alt="Figure for problem 29">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>Each corner is \( L/\sqrt2 \) from the centre, so a charge \(q\) gives \( kq/(L^2/2) = 2kq/L^2 \).</p>
+<p>Each diagonal joins <strong>like</strong> charges (+q with +2q; −q with −2q), so on each diagonal the fields oppose and leave \( 2kq/L^2 \):</p>
+<ul><li>+q / +2q diagonal → leftover points away from the +2q corner (up-left)</li>
+<li>−q / −2q diagonal → leftover points toward the −2q corner (up-right)</li></ul><div class="math-block">\[ E = \sqrt2\,\frac{2kq}{L^2} = \frac{2\sqrt2\,kq}{L^2} \approx 2.83\,\frac{kq}{L^2} \]</div><img class="svg-fig" src="quiz4-figures/v-p29.svg" alt="P29 square field vectors"><div class="ans"><strong>Answer:</strong> \( 2\sqrt2\,kq/L^2 \approx 2.83\,kq/L^2 \), pointing straight up — toward the midpoint of the top side.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-30">
+            <h4>P30 — Force, and the field midway <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> A 20 μC charge is 20 cm from a 60 μC charge. (i) Find the force between them. (ii) Find \(E\) midway between them. (iii) What force acts on an electron placed midway?</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <div class="math-block">\[ \text{(i)}\quad F = \frac{k(20\times10^{-6})(60\times10^{-6})}{(0.20)^2} = 270\ \text{N (repulsive)} \]</div><p><strong>(ii)</strong> Each is 0.10 m from the midpoint. The fields point away from each charge, so they oppose:</p><div class="math-block">\[ E = \frac{k(60-20)\times10^{-6}}{(0.10)^2} = 3.60\times10^{7}\ \text{N/C, toward the 20 μC charge} \]</div><div class="math-block">\[ \text{(iii)}\quad F = eE = (1.6\times10^{-19})(3.60\times10^7) = 5.75\times10^{-12}\ \text{N, toward the 60 μC charge} \]</div><div class="ans"><strong>Answer:</strong> (i) 270 N; (ii) \(3.60\times10^7\) N/C toward the 20 μC charge; (iii) \(5.75\times10^{-12}\) N — opposite to \(\vec E\), because the electron is negative.</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-31">
+            <h4>P31 — Three corners of a square, field at the fourth <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> Point charges \( 4\times10^{-6} \), \( 8\times10^{-6} \) and \( 12\times10^{-6} \) C sit at three consecutive corners of a 10 cm square. Find the net field at the fourth corner.</p>
+            
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>Put the fourth corner at the origin, the 4 μC charge at (0.1, 0), the 8 μC at (0.1, 0.1) and the 12 μC at (0, 0.1). All are positive, so every field points away from the square.</p><div class="math-block">\[ E_4 = \frac{k(4\times10^{-6})}{0.01} = 3.60\times10^{6}\ (-x),\qquad E_{12} = \frac{k(12\times10^{-6})}{0.01} = 1.08\times10^{7}\ (-y) \]</div><div class="math-block">\[ E_8 = \frac{k(8\times10^{-6})}{0.02} = 3.60\times10^{6}\ \text{along the diagonal: } (-2.54,\ -2.54)\times10^6 \]</div><div class="math-block">\[ \vec E = (-6.14\times10^{6})\,\hat i + (-1.33\times10^{7})\,\hat j,\qquad |E| = 1.47\times10^{7}\ \text{N/C} \]</div><img class="svg-fig" src="quiz4-figures/v-p31.svg" alt="P31 field vectors"><div class="ans"><strong>Answer:</strong> \( 1.47\times10^7 \) N/C, pointing away from the square at 65.3° to the side joining the fourth corner and the 4 μC charge (245° in the frame above).</div>
+            </details>
+        </div>
+
+        <div class="formula-card" id="pps-32">
+            <h4>P32 — Three charges at 60° — answer in k, Q, d <span class="badge badge-prac">Practice</span></h4>
+            <p><strong>Problem:</strong> \( q_1 = 2Q \), \( q_2 = -2Q \) and \( q_3 = 4Q \) are each a distance \(d\) from point A at the origin, arranged as shown. Find the field at A in terms of \(k\), \(Q\) and \(d\).</p>
+            <img class="slide-fig" style="max-width:360px" src="quiz4-figures/p32.png" alt="Figure for problem 32">
+            <details>
+                <summary>📝 Show Solution</summary>
+                <p>This is slide Problem-1 again, rotated. Directions at A:</p>
+<ul><li>\(q_1\) (+2Q, upper-left at 120°) → away → along 300°</li>
+<li>\(q_2\) (−2Q, lower-right at 300°) → toward → along 300°</li>
+<li>\(q_3\) (+4Q, upper-right at 60°) → away → along 240°</li></ul><div class="math-block">\[ E_1 + E_2 = \frac{4kQ}{d^2}\ \text{(along } 300^\circ),\qquad E_3 = \frac{4kQ}{d^2}\ \text{(along } 240^\circ) \]</div><p>Two equal vectors 60° apart → resultant along the bisector, 270° (straight down):</p><div class="math-block">\[ E = 2\cdot\frac{4kQ}{d^2}\cos30^\circ = \frac{6.93\,kQ}{d^2} \]</div><img class="svg-fig" src="quiz4-figures/v-p32.svg" alt="P32 field vectors"><div class="ans"><strong>Answer:</strong> \( E = 6.93\,kQ/d^2 \), pointing straight down (along \(-y\)).</div>
+            </details>
+        </div>
+
+        <h2 class="part-header" id="graphs">SECTION 3: Graph Questions (N.B. 4)</h2>
+        <div class="good-box">
+            <h4>Why this section exists</h4>
+            <p>N.B. 4 of the notice says <em>"different types of graph drawings / field graph / field intensity / U field / graphical
+            analysis"</em> are included. These are the graphs this chapter can ask for. Every one below is plotted from the actual
+            formula — the field-line pictures are traced numerically from Coulomb's law, not sketched.</p>
+        </div>
+
+        <div class="formula-card" id="g1">
+            <h4>G1 — Field-line diagrams <span class="badge badge-graph">Graph</span></h4>
+            <div class="fl-grid">
+                <img src="quiz4-figures/fl-positive.svg" alt="Field lines of a single positive charge">
+                <img src="quiz4-figures/fl-negative.svg" alt="Field lines of a single negative charge">
+                <img src="quiz4-figures/fl-two-positive.svg" alt="Field lines of two equal positive charges">
+                <img src="quiz4-figures/fl-dipole.svg" alt="Field lines of an electric dipole">
+            </div>
+            <p style="margin-top:1rem;"><strong>Rules the marker checks:</strong></p>
+            <ol>
+                <li>Lines <strong>start on positive</strong> charges and <strong>end on negative</strong> ones (or go off to infinity).</li>
+                <li>The tangent to a line gives the direction of \( \vec E \); put arrowheads on every line.</li>
+                <li><strong>Line density ∝ field strength</strong> — crowd them where \(E\) is strong (near charges, between a dipole's charges).</li>
+                <li>Lines <strong>never cross</strong> (the field has only one direction at any point).</li>
+                <li>Draw a number of lines proportional to the charge: a \(2q\) charge gets twice as many lines as \(q\).</li>
+            </ol>
+            <p>Two like charges: the lines bend away from each other and none passes through the midpoint, where \( E = 0 \).</p>
+        </div>
+
+        <div class="formula-card" id="g2">
+            <h4>G2 — Field intensity vs distance <span class="badge badge-graph">Graph</span></h4>
+            <img class="svg-fig" src="quiz4-figures/g-E-vs-r.svg" alt="Field strength against distance for a point charge and a dipole">
+            <p>For a point charge \( E = kq/r^2 \); far from a dipole \( E = p/(2\pi\varepsilon_0 r^3) \). Mark a pair of points to show
+            the law: doubling \(r\) quarters a point charge's field but cuts a dipole's to one-eighth. Keep the curve asymptotic to both
+            axes — it never touches either.</p>
+        </div>
+
+        <div class="formula-card" id="g3">
+            <h4>G3 — Field on the axis of a charged ring <span class="badge badge-graph">Graph</span></h4>
+            <img class="svg-fig" src="quiz4-figures/g-ring.svg" alt="Field on the axis of a charged ring against distance">
+            <p>\( E = \dfrac{kqz}{(z^2+R^2)^{3/2}} \). Three features to show: <strong>zero at the centre</strong> (every element is
+            cancelled by the one opposite), a <strong>maximum at \( z = R/\sqrt2 \)</strong>, and a tail that merges with \( kq/z^2 \)
+            far away, where the ring looks like a point charge.</p>
+        </div>
+
+        <div class="formula-card" id="g4">
+            <h4>G4 — Dipole potential energy and torque vs angle ("U field") <span class="badge badge-graph">Graph</span></h4>
+            <img class="svg-fig" src="quiz4-figures/g-dipole-U-tau.svg" alt="Dipole potential energy and torque against angle">
+            <p>\( U = -pE\cos\theta \) is a minimum of \(-pE\) at 0° (<strong>stable</strong>, aligned) and a maximum of \(+pE\) at
+            180° (<strong>unstable</strong>). \( \tau = pE\sin\theta \) peaks at 90° and is zero at both equilibria. The work to turn a
+            dipole from \(\theta_i\) to \(\theta_f\) is read straight off the \(U\) curve: \( W_a = U_f - U_i \).</p>
+        </div>
+
+        <div class="warning-box" style="margin-top:2.5rem;">
+            <h4>⚡ The mistakes that cost the most marks in this chapter</h4>
+            <ol>
+                <li><strong>Direction of \(\vec E\) from a negative charge</strong> — it points <em>toward</em> the charge. Draw every arrow before calculating.</li>
+                <li><strong>Adding magnitudes at an angle.</strong> Resolve into \(x\) and \(y\), add, then \( \sqrt{E_x^2+E_y^2} \).</li>
+                <li><strong>Missing the symmetry.</strong> Equal charges at equal distances on opposite sides cancel — P13, P25, P28 need almost no arithmetic.</li>
+                <li><strong>Force on an electron is opposite to \(\vec E\).</strong> P17, P21, P30.</li>
+                <li><strong>Dipole angle is measured from \(\vec E\)</strong>, not from the horizontal — P22.</li>
+                <li><strong>\(W_a = U_f - U_i\)</strong> for an external agent; the field itself does \(W = -\Delta U\).</li>
+            </ol>
+        </div>
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
