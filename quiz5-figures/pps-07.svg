@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 178" role="img" aria-label="Point on the dipole axis (θ = 0°)">
+<rect width="460" height="178" rx="12" fill="#161a26"/>
+<line x1="68.5" y1="88.8" x2="382.0" y2="88.8" stroke="#6b7280" stroke-width="1.3" stroke-dasharray="5,4"/>
+<line x1="125.5" y1="88.8" x2="382.0" y2="88.8" stroke="#6b7280" stroke-width="1.3" stroke-dasharray="5,4"/>
+<text x="239.5" y="78.8" fill="#f59e0b" font-size="12" text-anchor="middle" font-weight="bold" font-family="Inter,Arial,sans-serif">r = 52.0 nm (from the centre)</text>
+<line x1="73.2" y1="114.8" x2="110.8" y2="114.8" stroke="#4ade80" stroke-width="2.4"/>
+<polygon points="120.8,114.8 110.8,119.8 110.8,109.8" fill="#4ade80"/>
+<text x="97.0" y="132.8" fill="#4ade80" font-size="12" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">p (from − to +)</text>
+<circle cx="68.5" cy="88.8" r="11" fill="#3b82f6"/>
+<text x="68.5" y="93.8" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">−</text>
+<text x="68.5" y="66.8" fill="#e5e7eb" font-size="12.5" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">−q</text>
+<circle cx="125.5" cy="88.8" r="11" fill="#ef4444"/>
+<text x="125.5" y="93.8" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">+</text>
+<text x="125.5" y="66.8" fill="#e5e7eb" font-size="12.5" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">+q</text>
+<circle cx="382.0" cy="88.8" r="5" fill="#f9fafb"/>
+<text x="382.0" y="74.8" fill="#f9fafb" font-size="13" text-anchor="middle" font-weight="bold" font-family="Inter,Arial,sans-serif">P</text>
+<text x="230.0" y="26.0" fill="#e5e7eb" font-size="14" text-anchor="middle" font-weight="bold" font-family="Inter,Arial,sans-serif">Point on the dipole axis (θ = 0°)</text>
+<text x="230.0" y="156.0" fill="#9ca3af" font-size="12" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">r ≫ d, so the dipole formula V = kp cosθ / r² applies.</text>
+</svg>

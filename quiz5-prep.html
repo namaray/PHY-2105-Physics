@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz-5 Preparation Guide — PHY-2105</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255,255,255,0.05); padding: 0.9rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 0.8rem 0; font-size: 1.05rem; overflow-x: auto; overflow-y: hidden; text-align: center; }
+        .formula-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1rem 0; }
+        .formula-card h4 { color: var(--accent-color); margin-bottom: 0.4rem; font-size: 0.98rem; }
+        .formula-card p.note { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.4rem; }
+        .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 768px) { .formula-grid { grid-template-columns: 1fr; } }
+        .badge { display:inline-block; padding:0.2rem 0.7rem; border-radius:20px; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; }
+        .badge-math { background: rgba(99,102,241,0.2); color:#818cf8; }
+        .badge-short { background: rgba(236,72,153,0.2); color:#f472b6; }
+        .badge-graph { background: rgba(34,197,94,0.2); color:#4ade80; }
+        .notes-section { margin-bottom: 3rem; }
+        .notes-container { max-width: 880px; margin: 0 auto; padding: 2rem; }
+        .nav-bar { display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; padding:1rem 0; margin-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .nav-bar a { color: var(--accent-color); text-decoration:none; font-weight:600; }
+        .nav-bar a:hover { text-decoration: underline; }
+        .warning-box { background: rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .warning-box h4 { color:#f59e0b; margin-bottom:0.4rem; }
+        .excluded-box { background: rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.28); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .excluded-box h4 { color:#ef4444; margin-bottom:0.4rem; }
+        .good-box { background: rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.3); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .good-box h4 { color:#4ade80; margin-bottom:0.4rem; }
+        .exam-banner { background: linear-gradient(135deg, rgba(255,65,108,0.15), rgba(255,75,43,0.15)); border:1px solid rgba(255,65,108,0.3); border-radius:16px; padding:1.8rem; margin-bottom:2rem; text-align:center; }
+        .exam-banner h2 { color:#ff416c; margin-bottom:0.4rem; font-size:1.5rem; }
+        .exam-banner .exam-date { font-size:1.2rem; font-weight:700; }
+        .exam-banner .exam-meta { color: var(--text-secondary); margin-top:0.4rem; font-size:0.95rem; }
+        .marks-bar { display:flex; border-radius:12px; overflow:hidden; margin:1.2rem 0; height:38px; font-weight:700; font-size:0.85rem; }
+        .marks-math { background: linear-gradient(90deg,#6366f1,#8b5cf6); flex:7.5; display:flex; align-items:center; justify-content:center; color:#fff; }
+        .marks-short { background: linear-gradient(90deg,#f59e0b,#ef4444); flex:2.5; display:flex; align-items:center; justify-content:center; color:#fff; }
+        .collapsible-header { cursor:pointer; user-select:none; }
+        .collapsible-header::after { content:' ▾'; font-size:0.8em; color:var(--text-secondary); }
+        .collapsible-header.collapsed::after { content:' ▸'; }
+        .collapsible-body.collapsed { display:none; }
+        .checklist { list-style:none; padding:0; }
+        .checklist li { display:flex; gap:0.7rem; align-items:center; padding:0.6rem 0.9rem; margin:0.35rem 0; background:rgba(255,255,255,0.04); border-left:3px solid rgba(255,255,255,0.12); border-radius:8px; cursor:pointer; transition:all 0.2s ease; }
+        .checklist li:hover { background:rgba(255,255,255,0.07); transform:translateX(4px); }
+        .checklist li input[type="checkbox"] { width:18px; height:18px; accent-color:var(--accent-color); cursor:pointer; flex-shrink:0; }
+        .checklist li.checked { opacity:0.5; text-decoration:line-through; border-left-color:#22c55e; }
+        .progress-bar-container { width:100%; height:10px; background:rgba(255,255,255,0.1); border-radius:5px; overflow:hidden; }
+        .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,#6366f1,#a855f7); transition:width 0.4s ease; }
+        .progress-text { font-size:0.85rem; color:var(--text-secondary); text-align:right; margin-top:0.3rem; }
+        table.tbl { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.93rem; }
+        table.tbl th, table.tbl td { padding:0.55rem 0.7rem; text-align:left; border-bottom:1px solid rgba(255,255,255,0.1); }
+        table.tbl th { color: var(--accent-color); }
+        .part-header { color:var(--accent-color); border-bottom:2px solid rgba(99,102,241,0.35); padding-bottom:0.4rem; margin:2.5rem 0 1.2rem; font-size:1.15rem; }
+        .qa { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:0.9rem 1.2rem; margin:0.8rem 0; }
+        .qa .q { color:#f472b6; font-weight:600; margin-bottom:0.35rem; }
+        .ex { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .ex h4 { color:var(--accent-color); margin-bottom:0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="container notes-container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn"><span>←</span> Back to Home</a>
+            <a href="quiz5-problems.html">Solved Problems</a>
+            <a href="electric-potential.html">Electric Potential Notes</a>
+            <a href="Electric Potential_b.pdf" target="_blank">Slides PDF</a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>🔋 Quiz-5 Preparation Guide</h1>
+            <p class="subtitle">PHY-2105 • Electric Potential</p>
+        </header>
+
+        <div class="exam-banner">
+            <h2>Quiz-5</h2>
+            <div class="exam-date">6 October 2026 (Tuesday)</div>
+            <div class="exam-meta">Lecture 24 • Off-line exam</div>
+        </div>
+
+        <section class="notes-section">
+            <h2>📊 Marks Distribution</h2>
+            <div class="marks-bar">
+                <div class="marks-math">70–80% Maths Problems</div>
+                <div class="marks-short">20–30% Short Q</div>
+            </div>
+            <p>Maths-heavy again, but this chapter's maths is lighter than Electric Field: potential is a scalar, so there are no
+            components to resolve. Spend most of your time on the <a href="quiz5-problems.html">solved problems</a>.</p>
+        </section>
+
+        <section class="notes-section">
+            <h2>🎯 Scope</h2>
+            <div class="good-box">
+                <h4>✅ Included</h4>
+                <p><strong>Chapter: Electric Potential</strong> — all short questions + maths problems.</p>
+                <p style="margin-top:0.5rem;">Slide problems: <strong>1–17</strong> (all 17).</p>
+                <p style="margin-top:0.5rem;">Practice Problem Sheet-5: <strong>8, 10, 12, 16, 17, 18</strong> (6 problems — <em>not</em>
+                struck this time). Total 17 + 0 + 6 = 23, "or similar problem".</p>
+                <p style="margin-top:0.5rem;">N.B. 4: <strong>graph drawings / field graph / field intensity / U field / graphical
+                analysis are included</strong> — see <a href="quiz5-problems.html#graphs">Section 3 of the solved problems</a>.</p>
+            </div>
+
+            <div class="excluded-box">
+                <h4>🚫 Excluded</h4>
+                <ul>
+                    <li>N.B. 1: <strong>Broad question / Proof / "Show that" / Derivation.</strong> Know the results (\(V = kq/r\),
+                    \(V = kp\cos\theta/r^2\), …), not how they're derived.</li>
+                    <li><strong>Assignment-2</strong> (14, 15) is struck out.</li>
+                    <li>N.B. 3: topics <strong>not mentioned in class</strong> — the notice names the <em>electric potential energy basic
+                    equation proof</em> and <em>electric potential gradient application</em> (\(E_s = -dV/ds\) problems).</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>🔢 What the numbering tells you</h4>
+                <p>The slide deck in this folder (<em>Electric Potential_b.pdf</em>) contains <strong>Problems 1–6</strong> (Problem-5 just
+                points back to Problem-1). Problems 7–17 are in the lecturer's fuller set, which isn't in the folder — the same gap as
+                Quiz-3 and Quiz-4.</p>
+                <p style="margin-top:0.5rem;"><strong>So Practice Sheet-5 is your best stand-in for 7–17.</strong> It's the lecturer's own
+                problem set on this chapter, and the six listed problems cover every problem type the slides teach. The other twelve
+                are good "similar problem" practice.</p>
+            </div>
+        </section>
+
+        <section class="notes-section">
+            <h2>📈 Study Progress</h2>
+            <div class="progress-bar-container"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="progress-text" id="progressText">0 / 0 checked</div>
+        </section>
+
+        <!-- ============ FORMULA SHEET ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">📋 A. Formula Sheet</h2>
+            <div class="collapsible-body">
+                <h3 class="part-header">A1 — Constants</h3>
+                <table class="tbl">
+                    <tr><th>Constant</th><th>Value</th></tr>
+                    <tr><td>Coulomb constant \( k = 1/4\pi\varepsilon_0 \)</td><td>\( 8.99\times10^{9} \) N·m²/C²</td></tr>
+                    <tr><td>Elementary charge \( e \)</td><td>\( 1.6\times10^{-19} \) C</td></tr>
+                    <tr><td>Proton mass \( m_p \)</td><td>\( 1.67\times10^{-27} \) kg</td></tr>
+                    <tr><td>Electron-volt</td><td>\( 1\ \text{eV} = 1.6\times10^{-19} \) J</td></tr>
+                    <tr><td>Prefixes</td><td>μ = \(10^{-6}\), n = \(10^{-9}\), p = \(10^{-12}\), f = \(10^{-15}\)</td></tr>
+                </table>
+
+                <h3 class="part-header">A2 — Energy and potential</h3>
+                <div class="formula-grid">
+                    <div class="formula-card"><h4>1. Potential energy and work</h4>
+                        <div class="math-block">\[ \Delta U = U_f - U_i = -W \]</div>
+                        <p class="note">\(W\) = work done by the field. Field does + work → U falls.</p></div>
+                    <div class="formula-card"><h4>2. Definition of potential</h4>
+                        <div class="math-block">\[ V = \frac{U}{q} \]</div>
+                        <p class="note">Unit volt = J/C. A scalar.</p></div>
+                    <div class="formula-card"><h4>3. Potential difference</h4>
+                        <div class="math-block">\[ \Delta V = \frac{\Delta U}{q} = -\frac{W}{q} \]</div>
+                        <p class="note">Keep the sign of \(q\) — electrons flip it.</p></div>
+                    <div class="formula-card"><h4>4. Work to bring a charge from ∞</h4>
+                        <div class="math-block">\[ W_{ext} = qV \]</div>
+                        <p class="note">Path doesn't matter — only the end point.</p></div>
+                    <div class="formula-card"><h4>5. Electron-volt</h4>
+                        <div class="math-block">\[ \Delta U\ [\text{eV}] = (q\ \text{in } e)\times(\Delta V\ \text{in V}) \]</div>
+                        <p class="note">Divide joules by \(1.6\times10^{-19}\) to get eV.</p></div>
+                    <div class="formula-card"><h4>6. Uniform field</h4>
+                        <div class="math-block">\[ \Delta V = -Ed \]</div>
+                        <p class="note">V falls along the field. (General: \( V_f - V_i = -\int \vec E\cdot d\vec s \).)</p></div>
+                </div>
+
+                <h3 class="part-header">A3 — Potential of charges</h3>
+                <div class="formula-grid">
+                    <div class="formula-card"><h4>7. Point charge</h4>
+                        <div class="math-block">\[ V = \frac{kq}{r} \]</div>
+                        <p class="note">Sign of q stays in. V = 0 at infinity.</p></div>
+                    <div class="formula-card"><h4>8. Group of charges</h4>
+                        <div class="math-block">\[ V = \sum_i \frac{kq_i}{r_i} \]</div>
+                        <p class="note">Plain sum with signs — no components, no angles.</p></div>
+                    <div class="formula-card"><h4>9. Same distance shortcut</h4>
+                        <div class="math-block">\[ V = \frac{k\,(\sum q_i)}{r} \]</div>
+                        <p class="note">Square centre (\(r = a/\sqrt2\)), arc centre, ring axis.</p></div>
+                    <div class="formula-card"><h4>10. Field ↔ potential (point charge)</h4>
+                        <div class="math-block">\[ V = Er \]</div>
+                        <p class="note">From \(E = kq/r^2\) and \(V = kq/r\).</p></div>
+                    <div class="formula-card"><h4>11. Dipole (far)</h4>
+                        <div class="math-block">\[ V = \frac{kp\cos\theta}{r^2},\quad p = qd \]</div>
+                        <p class="note">θ from the axis. On the bisector (90°) V = 0.</p></div>
+                    <div class="formula-card"><h4>12. Continuous charge</h4>
+                        <div class="math-block">\[ V = \int \frac{k\,dq}{r} \]</div>
+                        <p class="note">Recognise it; integrals are unlikely.</p></div>
+                </div>
+
+                <h3 class="part-header">A4 — Systems of charges</h3>
+                <div class="formula-grid">
+                    <div class="formula-card"><h4>13. One pair</h4>
+                        <div class="math-block">\[ U = \frac{kq_1q_2}{r} \]</div>
+                        <p class="note">Like → +, unlike → −.</p></div>
+                    <div class="formula-card"><h4>14. Three or more charges</h4>
+                        <div class="math-block">\[ U = \sum_{\text{pairs}} \frac{kq_iq_j}{r_{ij}} \]</div>
+                        <p class="note">3 charges → 3 pairs; 4 charges → 6 pairs.</p></div>
+                    <div class="formula-card"><h4>15. Closest approach</h4>
+                        <div class="math-block">\[ K_{initial} = \frac{kq_1q_2}{r_{min}} \]</div>
+                        <p class="note">Two moving particles: add both K's (slide P4, PPS 8).</p></div>
+                    <div class="formula-card"><h4>16. Gradient (excluded)</h4>
+                        <div class="math-block">\[ E_s = -\frac{dV}{ds} \]</div>
+                        <p class="note">N.B. 3 — recognise only.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SHORT QUESTIONS ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">💬 B. Short-Question Bank</h2>
+            <div class="collapsible-body">
+                <p>20–30% of the marks. All of these come from the slides.</p>
+
+                <div class="qa"><div class="q">Q. Define electric potential. What is its unit?</div>
+                <p>The work needed to move a <strong>unit positive charge</strong> from a reference point (usually Earth or infinity) to a
+                specific point in the field <strong>without producing any acceleration</strong>. Equivalently, potential energy per unit
+                charge, \(V = U/q\). Unit: volt (1 V = 1 J/C).</p></div>
+
+                <div class="qa"><div class="q">Q. Define electric potential energy.</div>
+                <p>The potential energy (in joules) that results from conservative Coulomb forces and is associated with the
+                configuration of a particular set of point charges in a system. When the configuration changes, \(\Delta U = -W\),
+                where \(W\) is the work done by the electrostatic force.</p></div>
+
+                <div class="qa"><div class="q">Q. Distinguish between electric potential and electric potential energy.</div>
+                <p>Potential is a property of the <strong>field at a point</strong> (J/C = V) and doesn't depend on any test charge.
+                Potential energy belongs to a <strong>system of charges</strong> (J) and depends on the charge placed there:
+                \(U = qV\). Dividing the charge out of U leaves V, "a property of the electric field itself".</p></div>
+
+                <div class="qa"><div class="q">Q. Is potential a scalar or a vector? Why does it matter?</div>
+                <p>A <strong>scalar</strong>. The potential of several charges is a plain sum with signs, \(V = \sum kq_i/r_i\) — no
+                components and no directions. That's why the angles in PPS-5 #12 don't matter.</p></div>
+
+                <div class="qa"><div class="q">Q. Can V be zero where E is not? Can E be zero where V is not?</div>
+                <p>Yes to both. Midway between \(+q\) and \(-q\): \(V = 0\) but \(E \ne 0\) (slide P3, PPS 10). Midway between two equal
+                positive charges: \(E = 0\) but \(V = 2kq/r \ne 0\) (PPS 18).</p></div>
+
+                <div class="qa"><div class="q">Q. What is an equipotential surface?</div>
+                <p>A surface formed by adjacent points that all have the same potential. It can be imaginary or a real, physical surface.</p></div>
+
+                <div class="qa"><div class="q">Q. Why is no work done moving a charge along an equipotential surface?</div>
+                <p>\(\Delta V = 0\) between any two points on it, so \(W = -q\Delta V = 0\).</p></div>
+
+                <div class="qa"><div class="q">Q. Why are field lines perpendicular to equipotential surfaces?</div>
+                <p>If \(\vec E\) had a component along the surface, moving a charge along the surface would take work — contradicting
+                \(\Delta V = 0\). So \(\vec E\) has no component along it: field lines cross equipotentials at 90°.</p></div>
+
+                <div class="qa"><div class="q">Q. Describe the equipotentials of a point charge, a uniform field and a dipole.</div>
+                <p>Point charge: concentric spheres (circles in a drawing). Uniform field: parallel planes perpendicular to the field.
+                Dipole: closed loops around each charge, with the perpendicular bisector as the \(V = 0\) surface.</p></div>
+
+                <div class="qa"><div class="q">Q. Which way does potential change along a field line?</div>
+                <p>It <strong>decreases</strong> in the direction of \(\vec E\). A positive charge moves toward lower V; a negative charge
+                (like an electron) moves toward higher V.</p></div>
+
+                <div class="qa"><div class="q">Q. What is an electron-volt?</div>
+                <p>The energy gained by one elementary charge moving through 1 V: \(1\ \text{eV} = 1.6\times10^{-19}\) J.</p></div>
+
+                <div class="qa"><div class="q">Q. How do V and E of a point charge fall off with distance?</div>
+                <p>\(V \propto 1/r\), \(E \propto 1/r^2\). Double the distance and V halves, while E drops to a quarter.</p></div>
+
+                <div class="qa"><div class="q">Q. What does a negative potential energy of a system mean?</div>
+                <p>The system is bound: an external agent must do positive work to pull the charges apart to infinity (slide P6: −17 mJ).</p></div>
+            </div>
+        </section>
+
+        <!-- ============ PROBLEM TYPES ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">✅ C. Problem Types Checklist</h2>
+            <div class="collapsible-body">
+                <ul class="checklist">
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> ΔU = −W and ΔV = ΔU/q for a moving charge (slide P1, PPS 13)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Potential of one point charge, V = Er shortcut (PPS 2, 5)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Uniform field V = Ed (PPS 6)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> eV conversions (PPS 3, 9)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Square / rectangle centre — add charges at equal distances (slide P2, PPS 1, 17)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Charges on an arc or around a centre (PPS 12, 18)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Two charges, V = 0 and W = qV (slide P3, PPS 10)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Mixed distances (PPS 4, 11, 14, 15)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Dipole potential (PPS 7)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Potential energy of a system — sum over pairs (slide P6, PPS 16)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-math">Math</span> Closest approach / energy conservation (slide P4, PPS 8, 9)</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> Equipotentials + field lines: point, uniform, dipole, two + charges</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> V and E against r for a point charge</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> V along the line through two charges</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-graph">Graph</span> V in a uniform field; U against separation</span></li>
+                    <li onclick="toggleCheck(this)"><input type="checkbox"> <span><span class="badge badge-short">Short Q</span> Definitions, V vs U, scalar, equipotentials, eV</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ============ PRIORITY ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">🎯 D. If Time Is Short</h2>
+            <div class="collapsible-body">
+                <table class="tbl">
+                    <tr><th>Do these</th><th>Why</th></tr>
+                    <tr><td><a href="quiz5-problems.html#pps-8">PPS 8</a>, <a href="quiz5-problems.html#pps-10">10</a>, <a href="quiz5-problems.html#pps-12">12</a>, <a href="quiz5-problems.html#pps-16">16</a>, <a href="quiz5-problems.html#pps-17">17</a>, <a href="quiz5-problems.html#pps-18">18</a></td><td>The six named on the notice — do every one</td></tr>
+                    <tr><td><a href="quiz5-problems.html#slide-1">Slide P1</a></td><td>ΔU, ΔV and the electron sign trap</td></tr>
+                    <tr><td><a href="quiz5-problems.html#slide-2">Slide P2</a>, <a href="quiz5-problems.html#slide-3">P3</a></td><td>Group of charges; V = 0 with E ≠ 0</td></tr>
+                    <tr><td><a href="quiz5-problems.html#slide-4">Slide P4</a>, <a href="quiz5-problems.html#slide-6">P6</a></td><td>Closest approach and sum over pairs</td></tr>
+                    <tr><td><a href="quiz5-problems.html#pps-3">PPS 3</a>, <a href="quiz5-problems.html#pps-5">5</a>, <a href="quiz5-problems.html#pps-7">7</a></td><td>Quick one-formula marks: eV, V = Er, dipole</td></tr>
+                    <tr><td><a href="quiz5-problems.html#graphs">Graphs G1–G5</a></td><td>N.B. 4 explicitly includes them</td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============ TRAPS ============ -->
+        <section class="notes-section">
+            <h2 class="collapsible-header" onclick="toggleSection(this)">⚡ E. Last-Minute Traps</h2>
+            <div class="collapsible-body">
+                <div class="warning-box">
+                    <h4>Things that cost easy marks</h4>
+                    <ul>
+                        <li><strong>Write the formula first</strong>, then substitute. It earns method marks even if the arithmetic slips.</li>
+                        <li><strong>Keep the sign of every charge in V and U.</strong> Negative charges give negative potential.</li>
+                        <li><strong>Don't resolve potentials into components.</strong> V is a scalar; angles don't enter \(V = \sum kq_i/r_i\).</li>
+                        <li><strong>V uses r, not r².</strong> Writing \(kq/r^2\) gives the field, not the potential.</li>
+                        <li><strong>Electrons flip signs:</strong> \(\Delta V = \Delta U/q\) with \(q = -e\). Moving against \(\vec E\) raises V but lowers the electron's U.</li>
+                        <li><strong>U of a system = one term per pair.</strong> Three charges → three terms; don't forget the third.</li>
+                        <li><strong>Find distances first</strong>: square centre \(a/\sqrt2\), rectangle corner \(\sqrt{a^2 + (a/2)^2}\), right-triangle hypotenuse \(a\sqrt2\).</li>
+                        <li><strong>Convert units</strong>: cm → m, μC/nC/pC/fC, fm → \(10^{-15}\) m, eV ↔ J.</li>
+                        <li><strong>State assumptions</strong> when the sheet is ambiguous (PPS 16: which corner holds the right angle).</li>
+                    </ul>
+                </div>
+                <div class="warning-box">
+                    <h4>⚠️ Exam admin</h4>
+                    <p>Write your <strong>Name + ID + Section + Course code</strong> on the answer script. Recent notices carried an
+                    explicit penalty for missing ID/Section/Course code — assume the same applies.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleCheck(li) {
+            const cb = li.querySelector('input[type="checkbox"]');
+            cb.checked = !cb.checked;
+            li.classList.toggle('checked', cb.checked);
+            updateProgress(); saveState();
+        }
+        function toggleSection(header) {
+            header.classList.toggle('collapsed');
+            const body = header.nextElementSibling;
+            if (body) body.classList.toggle('collapsed');
+        }
+        function updateProgress() {
+            const all = document.querySelectorAll('.checklist input[type="checkbox"]');
+            const done = document.querySelectorAll('.checklist input[type="checkbox"]:checked');
+            const pct = all.length ? (done.length / all.length) * 100 : 0;
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('progressText').textContent = done.length + ' / ' + all.length + ' checked';
+        }
+        function saveState() {
+            const s = [...document.querySelectorAll('.checklist input[type="checkbox"]')].map(cb => cb.checked);
+            try { localStorage.setItem('phy2105-quiz5-prep', JSON.stringify(s)); } catch (e) {}
+        }
+        function loadState() {
+            let s = null;
+            try { s = JSON.parse(localStorage.getItem('phy2105-quiz5-prep')); } catch (e) {}
+            if (!s) { updateProgress(); return; }
+            document.querySelectorAll('.checklist input[type="checkbox"]').forEach((cb, i) => {
+                if (s[i]) { cb.checked = true; cb.closest('li').classList.add('checked'); }
+            });
+            updateProgress();
+        }
+        loadState();
+    </script>
+</body>
+</html>
