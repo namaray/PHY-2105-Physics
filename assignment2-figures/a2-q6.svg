@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 508" role="img" aria-label="Q6: arrangement and forces on +q at the centre">
+<rect width="500" height="508" rx="12" fill="#161a26"/>
+<polyline points="133.3,361.0 133.3,127.7 366.7,127.7 366.7,361.0 133.3,361.0" fill="none" stroke="#9ca3af" stroke-width="1.5"/>
+<line x1="133.3" y1="127.7" x2="250.0" y2="244.3" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="5,4"/>
+<line x1="366.7" y1="127.7" x2="250.0" y2="244.3" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="5,4"/>
+<line x1="366.7" y1="361.0" x2="250.0" y2="244.3" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="5,4"/>
+<line x1="133.3" y1="361.0" x2="250.0" y2="244.3" stroke="#4b5563" stroke-width="1.2" stroke-dasharray="5,4"/>
+<text x="250.0" y="115.7" fill="#f59e0b" font-size="12" text-anchor="middle" font-weight="bold" font-family="Inter,Arial,sans-serif">10 cm</text>
+<text x="250.0" y="383.0" fill="#f59e0b" font-size="12" text-anchor="middle" font-weight="bold" font-family="Inter,Arial,sans-serif">a = 10 cm</text>
+<line x1="250.0" y1="244.3" x2="265.6" y2="259.9" stroke="#fbbf24" stroke-width="3"/>
+<polygon points="273.3,267.7 261.7,263.8 269.4,256.0" fill="#fbbf24"/>
+<text x="284.6" y="283.0" fill="#fbbf24" font-size="12.5" text-anchor="start" font-weight="normal" font-family="Inter,Arial,sans-serif">F₁</text>
+<line x1="240.1" y1="234.4" x2="201.2" y2="273.3" stroke="#fbbf24" stroke-width="3"/>
+<polygon points="193.4,281.1 197.3,269.4 205.1,277.2" fill="#fbbf24"/>
+<text x="182.1" y="296.4" fill="#fbbf24" font-size="12.5" text-anchor="end" font-weight="normal" font-family="Inter,Arial,sans-serif">F₂</text>
+<line x1="250.0" y1="244.3" x2="234.4" y2="228.8" stroke="#fbbf24" stroke-width="3"/>
+<polygon points="226.7,221.0 238.3,224.9 230.6,232.7" fill="#fbbf24"/>
+<text x="215.4" y="213.7" fill="#fbbf24" font-size="12.5" text-anchor="end" font-weight="normal" font-family="Inter,Arial,sans-serif">F₃</text>
+<line x1="259.9" y1="254.2" x2="244.3" y2="269.8" stroke="#fbbf24" stroke-width="3"/>
+<polygon points="236.6,277.6 240.5,265.9 248.2,273.7" fill="#fbbf24"/>
+<text x="225.3" y="292.9" fill="#fbbf24" font-size="12.5" text-anchor="end" font-weight="normal" font-family="Inter,Arial,sans-serif">F₄</text>
+<line x1="250.0" y1="244.3" x2="189.2" y2="305.1" stroke="#4ade80" stroke-width="4"/>
+<polygon points="180.0,314.3 184.6,300.5 193.8,309.7" fill="#4ade80"/>
+<text x="276.0" y="330.3" fill="#4ade80" font-size="13" text-anchor="start" font-weight="bold" font-family="Inter,Arial,sans-serif">F = 9.71×10⁻⁵ N toward q₄</text>
+<circle cx="133.3" cy="127.7" r="11" fill="#ef4444"/>
+<text x="133.3" y="132.7" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">+</text>
+<text x="114.9" y="113.3" fill="#e5e7eb" font-size="12.5" text-anchor="end" font-weight="normal" font-family="Inter,Arial,sans-serif">q₁ = +2q</text>
+<circle cx="366.7" cy="127.7" r="11" fill="#ef4444"/>
+<text x="366.7" y="132.7" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">+</text>
+<text x="385.1" y="113.3" fill="#e5e7eb" font-size="12.5" text-anchor="start" font-weight="normal" font-family="Inter,Arial,sans-serif">q₂ = +4q</text>
+<circle cx="366.7" cy="361.0" r="11" fill="#ef4444"/>
+<text x="366.7" y="366.0" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">+</text>
+<text x="385.1" y="383.4" fill="#e5e7eb" font-size="12.5" text-anchor="start" font-weight="normal" font-family="Inter,Arial,sans-serif">q₃ = +2q</text>
+<circle cx="133.3" cy="361.0" r="11" fill="#3b82f6"/>
+<text x="133.3" y="366.0" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">−</text>
+<text x="114.9" y="383.4" fill="#e5e7eb" font-size="12.5" text-anchor="end" font-weight="normal" font-family="Inter,Arial,sans-serif">q₄ = −2q</text>
+<circle cx="250.0" cy="244.3" r="11" fill="#ef4444"/>
+<text x="250.0" y="249.3" fill="#fff" font-size="15" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">+</text>
+<text x="250.0" y="26.0" fill="#e5e7eb" font-size="14" text-anchor="middle" font-weight="bold" font-family="Inter,Arial,sans-serif">Q6: arrangement and forces on +q at the centre</text>
+<text x="250.0" y="464.0" fill="#9ca3af" font-size="12" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">q₁ and q₃ push equally in opposite directions → cancel.</text>
+<text x="250.0" y="482.0" fill="#9ca3af" font-size="12" text-anchor="middle" font-weight="normal" font-family="Inter,Arial,sans-serif">q₂ pushes toward q₄; q₄ pulls toward itself → they add.</text>
+</svg>
