@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulations — PHY-2105</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body { overflow-x: hidden; }
+        .notes-container { max-width: 1040px; margin: 0 auto; padding: 2rem; }
+        .nav-bar { display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; padding:1rem 0; margin-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .nav-bar a { color: var(--accent-color); text-decoration:none; font-weight:600; }
+        .jump { display:flex; flex-wrap:wrap; gap:0.5rem; margin:0.8rem 0 0; }
+        .jump a { padding:0.3rem 0.8rem; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:var(--text-primary); text-decoration:none; font-size:0.86rem; }
+        .jump a:hover { border-color: var(--accent-color); }
+        .topic-h { border-left:4px solid; padding-left:0.8rem; margin:2.8rem 0 0.4rem; }
+        .topic-h.c1 { border-color:#f472b6; } .topic-h.c2 { border-color:#38bdf8; } .topic-h.c3 { border-color:#fbbf24; }
+        .sim { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:1.2rem 1.4rem; margin:1.3rem 0; }
+        .sim h3 { color: var(--accent-color); margin-bottom:0.3rem; }
+        .sim .lead { color: var(--text-secondary); font-size:0.93rem; margin-bottom:0.8rem; }
+        .sim canvas { width:100%; display:block; border-radius:10px; background:#161a26; touch-action:none; cursor:grab; }
+        .sim canvas.plot { cursor:default; margin-top:0.7rem; }
+        .controls { display:flex; flex-wrap:wrap; gap:0.55rem 1.1rem; align-items:center; margin:0.8rem 0 0.2rem; }
+        .controls label { font-size:0.86rem; color:var(--text-secondary); display:flex; gap:0.4rem; align-items:center; }
+        .controls input[type=range] { width:130px; accent-color: var(--accent-color); }
+        .controls select { max-width:100%; background:#1f2433; color:#e5e7eb; border:1px solid rgba(255,255,255,0.15); border-radius:6px; padding:0.2rem 0.4rem; }
+        .controls .val { font-family: ui-monospace, Menlo, monospace; color:#e5e7eb; min-width:4.6em; display:inline-block; }
+        .btn { background:rgba(99,102,241,0.18); border:1px solid rgba(99,102,241,0.45); color:#e5e7eb; border-radius:8px; padding:0.32rem 0.75rem; font-size:0.84rem; cursor:pointer; font-family:inherit; }
+        .btn:hover { background:rgba(99,102,241,0.32); }
+        .btn.pos { border-color:rgba(239,68,68,0.6); background:rgba(239,68,68,0.15); }
+        .btn.neg { border-color:rgba(59,130,246,0.6); background:rgba(59,130,246,0.15); }
+        .btn.go { border-color:rgba(74,222,128,0.6); background:rgba(74,222,128,0.14); }
+        .group { display:flex; flex-wrap:wrap; gap:0.35rem; align-items:center; }
+        .group > span.lbl { font-size:0.8rem; color:var(--text-secondary); margin-right:0.2rem; }
+        .twocol { display:grid; grid-template-columns: 3fr 2fr; gap:1.1rem; }
+        @media (max-width: 820px) { .twocol { grid-template-columns: 1fr; } }
+        .readout { font-size:0.87rem; background:rgba(0,0,0,0.28); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:0.75rem 1rem; line-height:1.65; }
+        .readout { overflow-x:auto; }
+        @media (max-width: 600px) {
+            .notes-container { padding: 1rem; }
+            .sim { padding: 0.9rem 0.8rem; }
+            .readout table { font-size: 0.74rem; }
+            .controls input[type=range] { width: 110px; }
+        }
+        .readout b { color:#fbbf24; font-weight:600; }
+        .readout .g { color:#4ade80; font-weight:600; }
+        .readout .p { color:#f472b6; }
+        .readout .m { color: var(--text-secondary); }
+        .readout table { width:100%; border-collapse:collapse; font-size:0.8rem; margin-top:0.3rem; }
+        .readout td, .readout th { padding:0.2rem 0.3rem; border-bottom:1px solid rgba(255,255,255,0.07); text-align:left; }
+        .readout th { color: var(--accent-color); font-weight:600; }
+        .try { font-size:0.88rem; color:var(--text-secondary); margin:0.7rem 0 0 1.1rem; }
+        .try li { margin:0.25rem 0; }
+        .try strong { color:#e5e7eb; }
+        .notice { background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.3); border-radius:10px; padding:0.6rem 1rem; margin-top:0.9rem; font-size:0.9rem; }
+        .notice a, .lead a { color: var(--accent-color); }
+        .legend { display:flex; flex-wrap:wrap; gap:0.9rem; font-size:0.8rem; color:var(--text-secondary); margin-top:0.45rem; }
+        .legend i { display:inline-block; width:18px; height:4px; border-radius:2px; vertical-align:middle; margin-right:0.3rem; }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="container notes-container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn"><span>←</span> Back to Home</a>
+            <a href="finals-cheatsheet.html">Finals Cheat Sheet</a>
+            <a href="coulombs-law.html">Coulomb's Law</a>
+            <a href="electric-fields.html">Electric Field</a>
+            <a href="electric-potential.html">Electric Potential</a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>🧪 Simulations</h1>
+            <p class="subtitle">PHY-2105 • See what the charges actually do — drag them, flip their signs, watch the arrows</p>
+        </header>
+
+        <div class="notice" style="margin-top:0">
+            <strong>How to use:</strong> every charge is draggable (mouse or finger). Arrows update live: <span style="color:#fbbf24">yellow</span> =
+            individual forces/fields, <span style="color:#4ade80">green</span> = the net (total). Each simulation lists a few things to try
+            and the exam questions it explains.
+            <div class="jump">
+                <a href="#sim-two">1 · Two charges</a><a href="#sim-net">2 · Net force</a>
+                <a href="#sim-field">3 · Field lines lab</a><a href="#sim-dipole">4 · Dipole in a field</a><a href="#sim-plates">5 · Charge between plates</a>
+                <a href="#sim-pot">6 · Potential map</a><a href="#sim-work">7 · Work &amp; ΔV</a><a href="#sim-approach">8 · Closest approach</a>
+            </div>
+        </div>
+
+        <!-- ===================================================== COULOMB -->
+        <h2 class="topic-h c1">Coulomb's Law</h2>
+
+        <div class="sim" id="sim-two">
+            <h3>1. Two charges: how big is the force, and which way?</h3>
+            <p class="lead">Drag either charge. Change their signs and sizes with the sliders. Press <strong>Release</strong> to let them move.</p>
+            <div class="twocol">
+                <div>
+                    <canvas class="main"></canvas>
+                    <div class="controls">
+                        <label>q₁ <input type="range" data-k="q1" min="-5" max="5" step="0.5" value="2"><span class="val" data-v="q1"></span></label>
+                        <label>q₂ <input type="range" data-k="q2" min="-5" max="5" step="0.5" value="-2"><span class="val" data-v="q2"></span></label>
+                        <button class="btn go" data-a="release">▶ Release</button>
+                        <button class="btn" data-a="reset">↺ Reset</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="readout"></div>
+                    <canvas class="plot"></canvas>
+                </div>
+            </div>
+            <ul class="try">
+                <li><strong>Unlike signs</strong> (+ and −): the arrows point <em>toward</em> each other — attraction. <strong>Like signs</strong>: they point <em>away</em> — repulsion.</li>
+                <li>Make q₁ = +5 and q₂ = −1. The two arrows stay <strong>exactly the same length</strong> — the big charge pulls the small one as hard as the small one pulls it (Newton's 3rd law).</li>
+                <li>Drag them twice as far apart: the force drops to <strong>¼</strong>, not ½. Halve the distance: ×4. The graph shows the 1/r² curve.</li>
+                <li>Set one charge to 0 — no force at all.</li>
+            </ul>
+            <div class="notice">Explains: <a href="assignment2.html#q1">Assignment-2 Q1</a>, <a href="quiz3-problems.html#ex-2">Coulomb Example-2</a>, any "attract or repel?" short question.</div>
+        </div>
+
+        <div class="sim" id="sim-net">
+            <h3>2. Several charges: the net force on one of them</h3>
+            <p class="lead">The charge with the gold ring is the one we're finding the force <em>on</em>. Each other charge gives it one yellow force; the green arrow is their vector sum. Click a charge to select it, then change its value.</p>
+            <canvas class="main"></canvas>
+            <div class="controls">
+                <div class="group"><span class="lbl">Presets:</span>
+                    <button class="btn" data-preset="line">Three in a line (A2 Q4)</button>
+                    <button class="btn" data-preset="triangle">Triangle (A2 Q2)</button>
+                    <button class="btn" data-preset="square">Square (A2 Q6)</button>
+                    <button class="btn" data-preset="null">Null point (A2 Q1)</button>
+                    <button class="btn" data-preset="cancel">Symmetric cancel</button>
+                </div>
+            </div>
+            <div class="controls">
+                <label>Selected charge <input type="range" data-k="q" min="-5" max="5" step="0.5" value="1"><span class="val" data-v="q"></span></label>
+                <button class="btn" data-a="target">◎ Make it the target</button>
+                <button class="btn pos" data-a="addp">+ Add +</button>
+                <button class="btn neg" data-a="addn">+ Add −</button>
+                <button class="btn" data-a="del">✕ Delete</button>
+                <label><input type="checkbox" data-k="comps" checked> Show x/y components</label>
+            </div>
+            <div class="readout" style="margin-top:0.7rem"></div>
+            <ul class="try">
+                <li><strong>Triangle:</strong> the two pulls are mirror images — their sideways parts cancel, so the net points straight down. Drag one corner and watch the symmetry break.</li>
+                <li><strong>Square:</strong> the two +2q corners push in opposite directions and cancel; +4q pushes and −2q pulls the same way, so they add.</li>
+                <li><strong>Null point:</strong> the net force is zero only at that one spot — nudge the target left or right and the bigger push wins.</li>
+                <li><strong>Three in a line:</strong> the target is negative, so <em>both</em> positives pull it — in opposite directions. The closer one wins.</li>
+            </ul>
+            <div class="notice">Explains: <a href="assignment2.html#q2">A2 Q2</a>, <a href="assignment2.html#q4">Q4</a>, <a href="assignment2.html#q6">Q6</a>, <a href="quiz3-problems.html#ex-5">Coulomb Example-5</a>, <a href="quiz3-problems.html#p-6">P6</a>.</div>
+        </div>
+
+        <!-- ===================================================== FIELD -->
+        <h2 class="topic-h c2">Electric Field</h2>
+
+        <div class="sim" id="sim-field">
+            <h3>3. Field lines lab</h3>
+            <p class="lead">Drag the charges, or click anywhere to move the white <strong>probe</strong>. The probe shows the field there; put a test charge on it to see the force.</p>
+            <canvas class="main"></canvas>
+            <div class="controls">
+                <div class="group"><span class="lbl">Presets:</span>
+                    <button class="btn" data-preset="pos">Single +</button>
+                    <button class="btn" data-preset="neg">Single −</button>
+                    <button class="btn" data-preset="dipole">Dipole</button>
+                    <button class="btn" data-preset="two">Two +</button>
+                    <button class="btn" data-preset="unequal">+3 and −1</button>
+                    <button class="btn" data-preset="plates">Parallel plates</button>
+                    <button class="btn" data-preset="square">Square (A2 Q6)</button>
+                </div>
+            </div>
+            <div class="controls">
+                <label>Selected charge <input type="range" data-k="q" min="-5" max="5" step="0.5" value="2"><span class="val" data-v="q"></span></label>
+                <button class="btn pos" data-a="addp">+ Add +</button>
+                <button class="btn neg" data-a="addn">+ Add −</button>
+                <button class="btn" data-a="del">✕ Delete</button>
+                <label>Test charge on probe <select data-k="test"><option value="0">none</option><option value="1">+1 μC</option><option value="-1">−1 μC (like an electron)</option></select></label>
+            </div>
+            <div class="controls">
+                <label><input type="checkbox" data-layer="lines"> Field lines</label>
+                <label><input type="checkbox" data-layer="vectors"> Field arrows grid</label>
+                <label><input type="checkbox" data-layer="contrib"> Each charge's E at the probe</label>
+                <label><input type="checkbox" data-layer="heat"> Potential colours</label>
+                <label><input type="checkbox" data-layer="equip"> Equipotentials</label>
+            </div>
+            <div class="twocol" style="margin-top:0.6rem">
+                <div class="readout"></div>
+                <ul class="try" style="margin-top:0">
+                    <li>Lines start on <strong>+</strong> and end on <strong>−</strong>, and <strong>never cross</strong>.</li>
+                    <li>Set a charge to ±4: it gets <strong>twice as many lines</strong> as a ±2 charge.</li>
+                    <li><strong>Two +:</strong> put the probe exactly midway — E is zero there (a null point). Lines from the two charges bend away from each other.</li>
+                    <li>Put a <strong>−1 μC</strong> test charge on the probe: the force arrow flips, but the field arrow doesn't — the field belongs to the place, not to the test charge.</li>
+                    <li><strong>Parallel plates:</strong> between them the lines are straight and evenly spaced — a uniform field.</li>
+                    <li>Tick "each charge's E": the yellow arrows add head-to-tail into the green one — superposition.</li>
+                </ul>
+            </div>
+            <div class="notice">Explains: field-line drawings (<a href="quiz4-problems.html#graphs">Quiz-4 graphs</a>), <a href="assignment2.html#q7">A2 Q7</a>, <a href="assignment2.html#q10">Q10</a>, <a href="quiz4-problems.html#pps-5">PPS-4 #5</a>.</div>
+        </div>
+
+        <div class="sim" id="sim-dipole">
+            <h3>4. Dipole in a uniform field: torque, energy, equilibrium</h3>
+            <p class="lead">Drag the dipole to any angle, then press <strong>Play</strong>. The field points right. p (green) points from − to +.</p>
+            <div class="twocol">
+                <div>
+                    <canvas class="main"></canvas>
+                    <div class="controls">
+                        <label>E <input type="range" data-k="E" min="0" max="40" step="1" value="20"><span class="val" data-v="E"></span></label>
+                        <label>p <input type="range" data-k="p" min="0.5" max="5" step="0.5" value="2"><span class="val" data-v="p"></span></label>
+                        <label>Damping <input type="range" data-k="b" min="0" max="1.5" step="0.1" value="0.2"><span class="val" data-v="b"></span></label>
+                    </div>
+                    <div class="controls">
+                        <button class="btn go" data-a="play">▶ Play</button>
+                        <button class="btn" data-a="a0">θ = 0°</button>
+                        <button class="btn" data-a="a90">θ = 90°</button>
+                        <button class="btn" data-a="a179">θ = 179°</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="readout"></div>
+                    <canvas class="plot"></canvas>
+                </div>
+            </div>
+            <ul class="try">
+                <li>The two yellow forces are <strong>equal and opposite</strong> — net force zero, so the dipole doesn't drift. But they don't act along the same line, so they twist it (torque).</li>
+                <li>At <strong>90°</strong> the torque is biggest (pE). At <strong>0°</strong> and <strong>180°</strong> it's zero.</li>
+                <li>Set θ = 179° and press Play with low damping: a tiny nudge sends it swinging round — <strong>unstable</strong>. At 0° it just sits — <strong>stable</strong> (lowest U).</li>
+                <li>Watch U on the graph: −pE at 0°, +pE at 180°. Turning it from 0° to 180° costs 2pE of work.</li>
+            </ul>
+            <div class="notice">Explains: <a href="quiz4-problems.html#slide-3">Field slide P3</a>, <a href="assignment2.html#q8">A2 Q8</a>, the "stable/unstable equilibrium" and "torque but no net force" short questions.</div>
+        </div>
+
+        <div class="sim" id="sim-plates">
+            <h3>5. A charged particle fired between two plates</h3>
+            <p class="lead">A particle enters a uniform field between two plates (10 cm long, 4 cm apart). Press <strong>Fire</strong>.</p>
+            <canvas class="main"></canvas>
+            <div class="controls">
+                <label>Particle <select data-k="part"><option value="e">electron</option><option value="p">proton</option></select></label>
+                <label>E <input type="range" data-k="E" min="0" max="3000" step="100" value="1500"><span class="val" data-v="E"></span></label>
+                <label>v₀ <input type="range" data-k="v" min="0.5" max="4" step="0.1" value="1.5"><span class="val" data-v="v"></span></label>
+                <button class="btn" data-a="flip">⇅ Flip plates</button>
+                <button class="btn go" data-a="fire">▶ Fire</button>
+            </div>
+            <div class="readout" style="margin-top:0.6rem"></div>
+            <ul class="try">
+                <li>The <strong>electron bends toward the + plate</strong> — its force is opposite to E. Flip the plates and it bends the other way.</li>
+                <li>Switch to a <strong>proton</strong> with the same settings: it barely bends. Same force (same |q|), but 1836× the mass → 1836× less acceleration.</li>
+                <li>Raise E or lower v₀ until the electron hits the plate. Deflection y = ½at² with t = L/v₀, so halving v₀ quadruples it.</li>
+                <li>The path is a <strong>parabola</strong> (constant sideways force, like a thrown ball), then a straight line once it leaves the plates.</li>
+            </ul>
+            <div class="notice">Explains: <a href="quiz4-problems.html#pps-17">PPS-4 #17</a>, <a href="quiz4-problems.html#pps-18">#18</a>, and F = qE, a = qE/m in general.</div>
+        </div>
+
+        <!-- ===================================================== POTENTIAL -->
+        <h2 class="topic-h c3">Electric Potential</h2>
+
+        <div class="sim" id="sim-pot">
+            <h3>6. Potential map: V is a number, E is an arrow</h3>
+            <p class="lead">Colour shows the potential: <span style="color:#f87171">red = positive V</span>, <span style="color:#60a5fa">blue = negative V</span>, dark = near zero. Gold lines are equipotentials. Move the probe to read V and E.</p>
+            <canvas class="main"></canvas>
+            <div class="controls">
+                <div class="group"><span class="lbl">Presets:</span>
+                    <button class="btn" data-preset="pos">Single +</button>
+                    <button class="btn" data-preset="neg">Single −</button>
+                    <button class="btn" data-preset="dipole">Dipole</button>
+                    <button class="btn" data-preset="two">Two +</button>
+                    <button class="btn" data-preset="unequal">+3 and −1</button>
+                    <button class="btn" data-preset="plates">Parallel plates</button>
+                    <button class="btn" data-preset="square">Square (A2 Q6)</button>
+                </div>
+            </div>
+            <div class="controls">
+                <label>Selected charge <input type="range" data-k="q" min="-5" max="5" step="0.5" value="2"><span class="val" data-v="q"></span></label>
+                <button class="btn pos" data-a="addp">+ Add +</button>
+                <button class="btn neg" data-a="addn">+ Add −</button>
+                <button class="btn" data-a="del">✕ Delete</button>
+                <label>Test charge on probe <select data-k="test"><option value="0">none</option><option value="1">+1 μC</option><option value="-1">−1 μC</option></select></label>
+            </div>
+            <div class="controls">
+                <label><input type="checkbox" data-layer="heat"> Potential colours</label>
+                <label><input type="checkbox" data-layer="equip"> Equipotentials</label>
+                <label><input type="checkbox" data-layer="lines"> Field lines</label>
+                <label><input type="checkbox" data-layer="contrib"> Each charge's contribution</label>
+            </div>
+            <div class="twocol" style="margin-top:0.6rem">
+                <div class="readout"></div>
+                <ul class="try" style="margin-top:0">
+                    <li><strong>Dipole:</strong> probe at the midpoint — <strong>V = 0 but E ≠ 0</strong>. The V = 0 line runs straight down the middle.</li>
+                    <li><strong>Two +:</strong> probe at the midpoint — <strong>E = 0 but V ≠ 0</strong>.</li>
+                    <li>Drag the probe along a gold line: V doesn't change → no work to move a charge along it.</li>
+                    <li>Turn on field lines: they cross the gold lines at <strong>90°</strong> everywhere, and point from red (high V) to blue (low V).</li>
+                    <li>Tick "each charge's contribution": the E's need arrows, the V's are just added as numbers with signs.</li>
+                    <li><strong>Parallel plates:</strong> equipotentials become flat, evenly spaced lines — V changes steadily (V = Ed).</li>
+                </ul>
+            </div>
+            <div class="notice">Explains: <a href="quiz5-problems.html#slide-3">Potential slide P3</a>, <a href="quiz5-problems.html#pps-10">PPS-5 #10</a>, <a href="quiz5-problems.html#pps-18">#18</a>, <a href="quiz5-problems.html#graphs">equipotential drawings</a>.</div>
+        </div>
+
+        <div class="sim" id="sim-work">
+            <h3>7. Moving a charge in a uniform field: ΔV, ΔU and work</h3>
+            <p class="lead">The top plate is at high potential, the bottom at 0 V; E points down. Drag the test charge anywhere — the readout compares where you started with where you are. Or press <strong>Release</strong> to let the field move it.</p>
+            <canvas class="main"></canvas>
+            <div class="controls">
+                <label>Test charge <select data-k="q"><option value="1">+1 μC</option><option value="-1">−1 μC (like an electron)</option></select></label>
+                <label>E <input type="range" data-k="E" min="200" max="2000" step="100" value="1000"><span class="val" data-v="E"></span></label>
+                <button class="btn go" data-a="release">▶ Release</button>
+                <button class="btn" data-a="reset">↺ Reset</button>
+            </div>
+            <div class="readout" style="margin-top:0.6rem"></div>
+            <ul class="try">
+                <li>Drag the <strong>+</strong> charge sideways along a dashed line: ΔV = 0, so <strong>no work</strong>.</li>
+                <li>Drag it up toward the + plate: you're moving against the force, so the field does <strong>negative</strong> work and U rises.</li>
+                <li>Switch to <strong>−1 μC</strong> and drag it up: V rises but U <strong>falls</strong> (ΔU = qΔV with q &lt; 0). That's exactly the electron in slide Problem-1.</li>
+                <li>Press Release: the charge accelerates along its force, U drops and K rises by the same amount (energy conservation).</li>
+            </ul>
+            <div class="notice">Explains: <a href="quiz5-problems.html#slide-1">Potential slide P1</a>, <a href="quiz5-problems.html#pps-6">PPS-5 #6</a>, <a href="quiz5-problems.html#pps-13">#13</a>, and W = −ΔU, ΔV = ΔU/q.</div>
+        </div>
+
+        <div class="sim" id="sim-approach">
+            <h3>8. Closest approach: kinetic energy turns into potential energy</h3>
+            <p class="lead">Two charges approach head-on. Watch the energy bars: K drains into U as they slow, then turns back into K as they fly apart.</p>
+            <canvas class="main"></canvas>
+            <div class="controls">
+                <label>Setup <select data-k="mode"><option value="A">projectile vs fixed nucleus (PPS-5 #9)</option><option value="B">proton + alpha, both moving (slide P4 / PPS-5 #8)</option></select></label>
+                <label>Charges <select data-k="sign"><option value="1">like (repel)</option><option value="-1">unlike (attract)</option></select></label>
+                <label>Speed <input type="range" data-k="v" min="2" max="8" step="0.5" value="4"><span class="val" data-v="v"></span></label>
+                <button class="btn go" data-a="go">▶ Launch</button>
+            </div>
+            <div class="readout" style="margin-top:0.6rem"></div>
+            <ul class="try">
+                <li>Double the speed: K goes up 4×, so r<sub>min</sub> = kq₁q₂/K drops to about ¼.</li>
+                <li>The <strong>total</strong> bar never changes — energy is conserved the whole way.</li>
+                <li><strong>Proton + alpha:</strong> at the closest point they do <em>not</em> both stop — they're still moving together (momentum is conserved), so less K becomes U and they don't get quite as close as the slide formula says.</li>
+                <li>Unlike charges: there's no turning point — U keeps falling, K keeps rising, and they collide.</li>
+            </ul>
+            <div class="notice">Explains: <a href="quiz5-problems.html#slide-4">Potential slide P4</a>, <a href="quiz5-problems.html#pps-8">PPS-5 #8</a>, <a href="quiz5-problems.html#pps-9">#9</a>, and the U-vs-r graph.</div>
+        </div>
+
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+
+<script>
+"use strict";
+/* ================================================================ shared helpers */
+const K = 8.99e9;
+const COL = { pos:'#ef4444', neg:'#3b82f6', vec:'#fbbf24', net:'#4ade80', txt:'#e5e7eb', muted:'#9ca3af',
+              grid:'rgba(255,255,255,0.06)', bg:'#161a26', gold:'#f59e0b', pink:'#f472b6', field:'rgba(165,180,252,0.85)' };
+const SUP = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+const SUB = ['₀','₁','₂','₃','₄','₅','₆','₇','₈','₉'];
+const sub = n => String(n).split('').map(d => SUB[+d]).join('');
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+
+function fmt(x, u = '', zero = 0) {
+    let s;
+    if (!isFinite(x)) s = '∞';
+    else {
+        const a = Math.abs(x);
+        if (a === 0 || a <= zero) s = '0';
+        else if (a >= 1e4 || a < 1e-2) {
+            let e = Math.floor(Math.log10(a)), m = x / Math.pow(10, e);
+            if (Math.abs(m) >= 9.995) { m /= 10; e += 1; }
+            s = m.toFixed(2) + '×10' + String(e).split('').map(c => SUP[c]).join('');
+        } else if (a >= 100) s = x.toFixed(0);
+        else s = x.toPrecision(3);
+    }
+    s = s.replace('-', '−');
+    return u ? s + ' ' + u : s;
+}
+const fmtS = (x, u) => (x > 0 ? '+' : '') + fmt(x, u);
+const qstr = q => (q > 0 ? '+' : q < 0 ? '−' : '') + Math.abs(q).toFixed(1) + ' μC';
+/* angle in degrees, maths convention (y up), from a screen vector (y down) */
+const ang = (x, y) => ((Math.atan2(-y, x) * 180 / Math.PI) + 360) % 360;
+
+function fitCanvas(cv, aspect) {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const a = typeof aspect === 'function' ? aspect(w) : aspect;
+    const h = Math.round(w * a);
+    cv.style.height = h + 'px';
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    const ctx = cv.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return { ctx, w, h };
+}
+function arrow(ctx, x1, y1, x2, y2, col, w = 3, head = 11, dash = null) {
+    const dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy);
+    if (L < 2) return;
+    const ux = dx / L, uy = dy / L, hd = Math.min(head, L * 0.6);
+    const bx = x2 - ux * hd, by = y2 - uy * hd;
+    ctx.save();
+    ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round';
+    if (dash) ctx.setLineDash(dash);
+    ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(bx, by); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(x2, y2);
+    ctx.lineTo(bx - uy * hd * 0.5, by + ux * hd * 0.5); ctx.lineTo(bx + uy * hd * 0.5, by - ux * hd * 0.5);
+    ctx.closePath(); ctx.fill();
+    ctx.restore();
+}
+function text(ctx, t, x, y, col = COL.txt, size = 12, align = 'left', bold = false, base = 'alphabetic') {
+    ctx.save();
+    ctx.fillStyle = col; ctx.font = `${bold ? '600 ' : ''}${size}px Inter, system-ui, sans-serif`;
+    ctx.textAlign = align; ctx.textBaseline = base;
+    ctx.fillText(t, x, y);
+    ctx.restore();
+}
+/* text with a dark halo so it stays readable on top of lines */
+function label(ctx, t, x, y, col, size = 12, align = 'center') {
+    ctx.save();
+    ctx.font = `600 ${size}px Inter, system-ui, sans-serif`; ctx.textAlign = align; ctx.textBaseline = 'middle';
+    ctx.lineWidth = 4; ctx.strokeStyle = 'rgba(22,26,38,0.85)'; ctx.strokeText(t, x, y);
+    ctx.fillStyle = col; ctx.fillText(t, x, y);
+    ctx.restore();
+}
+function chargeDot(ctx, x, y, q, r = 15, sel = false, lbl = '') {
+    ctx.save();
+    if (sel) {
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.setLineDash([4, 3]);
+        ctx.beginPath(); ctx.arc(x, y, r + 6, 0, 2 * Math.PI); ctx.stroke(); ctx.setLineDash([]);
+    }
+    const base = q > 0 ? COL.pos : q < 0 ? COL.neg : '#6b7280';
+    const g = ctx.createRadialGradient(x - r * 0.35, y - r * 0.35, r * 0.1, x, y, r);
+    g.addColorStop(0, 'rgba(255,255,255,0.55)'); g.addColorStop(0.4, base); g.addColorStop(1, base);
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, 2 * Math.PI); ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.75)'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = '#fff'; ctx.font = `700 ${Math.round(r * 1.1)}px Inter, sans-serif`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(q > 0 ? '+' : q < 0 ? '−' : '0', x, y + 1);
+    ctx.restore();
+    if (lbl) label(ctx, lbl, x, y + r + 13, COL.txt, 12);
+}
+function gridLines(ctx, w, h, s, step) {
+    ctx.save(); ctx.strokeStyle = COL.grid; ctx.lineWidth = 1;
+    const d = step * s;
+    for (let x = d; x < w; x += d) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+    for (let y = d; y < h; y += d) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+    ctx.restore();
+}
+function onDrag(cv, h) {
+    const pos = e => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+    cv.addEventListener('pointerdown', e => {
+        const [x, y] = pos(e);
+        if (h.down(x, y)) { cv.setPointerCapture(e.pointerId); cv.style.cursor = 'grabbing'; e.preventDefault(); }
+    });
+    cv.addEventListener('pointermove', e => {
+        if (!cv.hasPointerCapture(e.pointerId)) return;
+        const [x, y] = pos(e); h.move(x, y);
+    });
+    const end = e => {
+        if (cv.hasPointerCapture(e.pointerId)) cv.releasePointerCapture(e.pointerId);
+        cv.style.cursor = 'grab'; if (h.up) h.up();
+    };
+    cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end);
+}
+function bindRange(root, key, cb, show = v => v) {
+    const el = root.querySelector(`[data-k="${key}"]`), sp = root.querySelector(`[data-v="${key}"]`);
+    const f = () => { const v = parseFloat(el.value); if (sp) sp.textContent = show(v); cb(v); };
+    el.addEventListener('input', f);
+    if (sp) sp.textContent = show(parseFloat(el.value));
+    return el;
+}
+const act = (root, name, fn) => { const b = root.querySelector(`[data-a="${name}"]`); if (b) b.addEventListener('click', fn); };
+const onResize = fn => { let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(fn, 120); }); };
+
+/* small x-y plot helper */
+function plotFrame(ctx, w, h, title) {
+    ctx.clearRect(0, 0, w, h); ctx.fillStyle = COL.bg; ctx.fillRect(0, 0, w, h);
+    const P = { l: 44, r: 12, t: 22, b: 30 };
+    text(ctx, title, w / 2, 15, COL.txt, 12, 'center', true);
+    ctx.strokeStyle = COL.muted; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(P.l, P.t); ctx.lineTo(P.l, h - P.b); ctx.lineTo(w - P.r, h - P.b); ctx.stroke();
+    return P;
+}
+
+/* ================================================================ 1. two charges */
+class TwoCharges {
+    constructor(root) {
+        this.root = root; this.cv = root.querySelector('canvas.main'); this.pcv = root.querySelector('canvas.plot');
+        this.out = root.querySelector('.readout');
+        this.W = 1.0; this.R = 16; this.m = 0.02; this.msg = '';
+        this.q1 = bindRange(root, 'q1', v => { this.A.q = v; this.msg = ''; this.draw(); }, qstr);
+        this.q2 = bindRange(root, 'q2', v => { this.B.q = v; this.msg = ''; this.draw(); }, qstr);
+        act(root, 'release', () => this.release());
+        act(root, 'reset', () => { this.reset(); this.draw(); });
+        onDrag(this.cv, {
+            down: (x, y) => {
+                for (const c of [this.A, this.B])
+                    if (Math.hypot(x - c.x * this.s, y - c.y * this.s) < this.R + 10) { this.drag = c; this.running = false; this.msg = ''; return true; }
+                return false;
+            },
+            move: (x, y) => {
+                const c = this.drag; if (!c) return;
+                c.x = clamp(x / this.s, 0.03, this.W - 0.03); c.y = clamp(y / this.s, 0.03, this.H - 0.03);
+                const o = c === this.A ? this.B : this.A, minr = 2.2 * this.R / this.s;
+                const dx = c.x - o.x, dy = c.y - o.y, r = Math.hypot(dx, dy);
+                if (r < minr) { c.x = o.x + dx / (r || 1) * minr; c.y = o.y + dy / (r || 1) * minr; }
+                this.draw();
+            },
+            up: () => { this.drag = null; }
+        });
+        this.resize(); this.reset(); this.draw();
+        onResize(() => { this.resize(); this.draw(); });
+    }
+    reset() {
+        this.running = false; this.msg = '';
+        const y = (this.H || 0.42) / 2;
+        this.A = { x: 0.3, y, q: parseFloat(this.q1.value), vx: 0, vy: 0 };
+        this.B = { x: 0.7, y, q: parseFloat(this.q2.value), vx: 0, vy: 0 };
+    }
+    resize() {
+        Object.assign(this, fitCanvas(this.cv, w => w < 500 ? 0.6 : 0.42));
+        this.s = this.w / this.W; this.H = this.h / this.s;
+        const p = fitCanvas(this.pcv, w => w > 450 ? 0.36 : 0.58); this.pctx = p.ctx; this.pw = p.w; this.ph = p.h;
+        if (this.A) for (const c of [this.A, this.B]) c.y = clamp(c.y, 0.03, this.H - 0.03);
+    }
+    force() {
+        const dx = this.B.x - this.A.x, dy = this.B.y - this.A.y;
+        const r = Math.max(Math.hypot(dx, dy), 1e-4);
+        const F = K * this.A.q * this.B.q * 1e-12 / (r * r);      // > 0 repel, < 0 attract
+        return { r, F, ux: dx / r, uy: dy / r };
+    }
+    release() {
+        if (this.running) return;
+        if (this.A.q * this.B.q === 0) { this.msg = 'One charge is zero — no force, nothing moves.'; this.draw(); return; }
+        this.running = true; this.msg = '';
+        let last = performance.now();
+        const minr = 2 * this.R / this.s;
+        const step = t => {
+            if (!this.running) return;
+            const dt = Math.min(0.05, (t - last) / 1000) * 0.3; last = t;
+            const n = 60, h = dt / n;
+            for (let i = 0; i < n; i++) {
+                const f = this.force(), fx = f.F * f.ux, fy = f.F * f.uy;      // force on B
+                this.B.vx += fx / this.m * h; this.B.vy += fy / this.m * h;
+                this.A.vx -= fx / this.m * h; this.A.vy -= fy / this.m * h;
+                for (const c of [this.A, this.B]) { c.x += c.vx * h; c.y += c.vy * h; }
+                const r = Math.hypot(this.B.x - this.A.x, this.B.y - this.A.y);
+                if (r < minr) { this.running = false; this.msg = 'They touched — opposite charges pulled each other together.'; break; }
+                const out = [this.A, this.B].some(c => c.x < 0.02 || c.x > this.W - 0.02 || c.y < 0.02 || c.y > this.H - 0.02);
+                if (out) { this.running = false; this.msg = 'They flew apart — like charges pushed each other away.'; break; }
+            }
+            if (!this.running) for (const c of [this.A, this.B]) { c.vx = c.vy = 0; c.x = clamp(c.x, 0.03, this.W - 0.03); c.y = clamp(c.y, 0.03, this.H - 0.03); }
+            this.draw();
+            if (this.running) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    }
+    draw() {
+        const { ctx, w, h, s, A, B, R } = this;
+        ctx.clearRect(0, 0, w, h); ctx.fillStyle = COL.bg; ctx.fillRect(0, 0, w, h);
+        gridLines(ctx, w, h, s, 0.1);
+        text(ctx, 'grid: 10 cm', w - 8, h - 8, COL.muted, 11, 'right');
+        const ax = A.x * s, ay = A.y * s, bx = B.x * s, by = B.y * s;
+        ctx.save(); ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.setLineDash([5, 5]);
+        ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke(); ctx.restore();
+        const f = this.force();
+        label(ctx, `r = ${(f.r * 100).toFixed(1)} cm`, (ax + bx) / 2 - f.uy * 22, (ay + by) / 2 + f.ux * 22 + (f.r * s < 120 ? 18 : 0), COL.gold, 12);
+        if (f.F !== 0) {
+            const SC = 0.6 * w, rpx = f.r * s;
+            const LMAX = f.F < 0 ? Math.max(12, rpx / 2 - R - 8) : 0.25 * w;    // attraction: stop before the midpoint
+            const L = Math.min(LMAX, Math.abs(f.F) * SC), capped = Math.abs(f.F) * SC > LMAX;
+            const d = f.F > 0 ? -1 : 1;                 // on A: repel → away from B, attract → toward B
+            const ux = d * f.ux, uy = d * f.uy;
+            const draw1 = (cx, cy, vx, vy, name) => {
+                const x0 = cx + vx * (R + 3), y0 = cy + vy * (R + 3), x1 = x0 + vx * L, y1 = y0 + vy * L;
+                arrow(ctx, x0, y0, x1, y1, COL.vec, 4, 13);
+                if (rpx > 120 || f.F > 0) label(ctx, name, (x0 + x1) / 2, (y0 + y1) / 2 - 16, COL.vec, 12);
+            };
+            draw1(ax, ay, ux, uy, 'F on q₁');
+            draw1(bx, by, -ux, -uy, 'F on q₂');
+            if (capped) label(ctx, 'arrows shortened to fit — see the number', w / 2, h - 12, COL.muted, 11);
+        }
+        const close = f.r * s < 120;
+        chargeDot(ctx, ax, ay, A.q, R); chargeDot(ctx, bx, by, B.q, R);
+        label(ctx, 'q₁ = ' + qstr(A.q), ax, ay + R + 13, COL.txt, 12);
+        label(ctx, 'q₂ = ' + qstr(B.q), bx, close ? by - R - 13 : by + R + 13, COL.txt, 12);
+        if (this.msg) label(ctx, this.msg, w / 2, 16, COL.net, 13);
+        this.readout(f); this.plot(f);
+    }
+    readout(f) {
+        const { A, B } = this, F = Math.abs(f.F);
+        let type;
+        if (f.F === 0) type = '<span class="m">No force (a charge is zero).</span>';
+        else if (f.F > 0) type = '<span class="g">REPULSION</span> — like charges, each is pushed <b>away</b> from the other.';
+        else type = '<span class="g">ATTRACTION</span> — unlike charges, each is pulled <b>toward</b> the other.';
+        this.out.innerHTML =
+            `q₁ = ${qstr(A.q)}, q₂ = ${qstr(B.q)}, r = ${(f.r * 100).toFixed(1)} cm<br>` +
+            `F = k|q₁q₂|/r² = <b>${fmt(F, 'N')}</b><br>${type}<br>` +
+            (F ? `<span class="m">Force on q₁ and on q₂: same size, opposite directions (Newton's 3rd law).</span><br>` +
+                 `At 2r it would be ${fmt(F / 4, 'N')} (¼); at r/2: ${fmt(F * 4, 'N')} (×4).` : '');
+    }
+    plot(f) {
+        const ctx = this.pctx, w = this.pw, h = this.ph;
+        const P = plotFrame(ctx, w, h, 'F vs r for these two charges');
+        const kqq = K * Math.abs(this.A.q * this.B.q) * 1e-12;
+        const r0 = 0.04, r1 = 1.0, Fmax = kqq / (0.15 * 0.15);
+        const X = r => P.l + (r - r0) / (r1 - r0) * (w - P.l - P.r), Y = F => h - P.b - Math.min(F / Fmax, 1.08) * (h - P.t - P.b);
+        for (const rt of [0.2, 0.4, 0.6, 0.8]) text(ctx, (rt * 100) + ' cm', X(rt), h - P.b + 14, COL.muted, 10, 'center');
+        text(ctx, 'r', w - P.r, h - 6, COL.muted, 11, 'right');
+        text(ctx, 'F', P.l - 8, P.t + 6, COL.muted, 11, 'right');
+        if (!kqq) { text(ctx, 'no force', w / 2, h / 2, COL.muted, 12, 'center'); return; }
+        ctx.save(); ctx.beginPath(); ctx.strokeStyle = COL.net; ctx.lineWidth = 2;
+        for (let i = 0; i <= 200; i++) { const r = Math.max(r0 + (r1 - r0) * i / 200, 0.12); const x = X(r), y = Y(kqq / r / r); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+        ctx.stroke(); ctx.restore();
+        const dot = (r, col, t) => {
+            if (r > r1 || r < r0) return;
+            const F = kqq / r / r, x = X(r), y = Math.max(Y(F), P.t);
+            ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x, y, 5, 0, 7); ctx.fill();
+            label(ctx, t, x + 8, y - 12, col, 11, 'left');
+        };
+        dot(f.r, COL.vec, 'now');
+        dot(2 * f.r, COL.pink, '2r → F/4');
+    }
+}
+
+/* ================================================================ 2. net force */
+class NetForce {
+    constructor(root) {
+        this.root = root; this.cv = root.querySelector('canvas.main'); this.out = root.querySelector('.readout');
+        this.R = 15; this.sel = null;
+        this.qEl = bindRange(root, 'q', v => { if (this.sel != null) { this.ch[this.sel].q = v; this.draw(); } }, qstr);
+        this.comps = root.querySelector('[data-k="comps"]'); this.comps.onchange = () => this.draw();
+        root.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('click', () => this.preset(b.dataset.preset)));
+        act(root, 'target', () => { if (this.sel != null) { this.t = this.sel; this.draw(); } });
+        act(root, 'addp', () => this.add(1));
+        act(root, 'addn', () => this.add(-1));
+        act(root, 'del', () => {
+            if (this.sel == null || this.ch.length <= 2) return;
+            this.ch.splice(this.sel, 1);
+            if (this.t === this.sel) this.t = 0; else if (this.t > this.sel) this.t--;
+            this.sel = null; this.draw();
+        });
+        onDrag(this.cv, {
+            down: (x, y) => {
+                const i = this.ch.findIndex(c => Math.hypot(x - c.x * this.s, y - c.y * this.s) < this.R + 9);
+                this.sel = i >= 0 ? i : null;
+                if (i >= 0) { this.drag = i; this.qEl.value = this.ch[i].q; this.qEl.dispatchEvent(new Event('input')); }
+                this.draw(); return i >= 0;
+            },
+            move: (x, y) => {
+                if (this.drag == null) return;
+                const c = this.ch[this.drag];
+                c.x = clamp(x / this.s, 0.02, 0.98); c.y = clamp(y / this.s, 0.02, this.H - 0.02); this.draw();
+            },
+            up: () => { this.drag = null; }
+        });
+        this.resize(); this.preset('triangle');
+        onResize(() => { this.resize(); this.draw(); });
+    }
+    resize() {
+        Object.assign(this, fitCanvas(this.cv, w => w < 600 ? 0.85 : 0.55));
+        this.s = this.w / 1.0; this.H = this.h / this.s;
+    }
+    preset(name) {
+        const dy = (this.H - 0.6) / 2, h = 0.4 * Math.sqrt(3) / 2;
+        const P = {
+            line:     { c: [[0.15, 0.3, 2], [0.55, 0.3, -1], [0.75, 0.3, 1.5]], t: 1 },
+            triangle: { c: [[0.3, 0.3 + h / 2, -2], [0.5, 0.3 - h / 2, 2], [0.7, 0.3 + h / 2, -2]], t: 1 },
+            square:   { c: [[0.35, 0.15, 2], [0.65, 0.15, 4], [0.65, 0.45, 2], [0.35, 0.45, -2], [0.5, 0.3, 1]], t: 4 },
+            null:     { c: [[0.2, 0.3, 4], [0.8, 0.3, 1], [0.6, 0.3, 1]], t: 2 },
+            cancel:   { c: [[0.35, 0.15, 2], [0.65, 0.15, 2], [0.65, 0.45, 2], [0.35, 0.45, 2], [0.5, 0.3, 1]], t: 4 },
+        }[name];
+        this.ch = P.c.map(([x, y, q]) => ({ x, y: y + dy, q })); this.t = P.t; this.sel = P.t;
+        this.qEl.value = this.ch[P.t].q; this.qEl.dispatchEvent(new Event('input'));
+        this.draw();
+    }
+    add(sign) {
+        this.ch.push({ x: 0.12 + Math.random() * 0.2, y: this.H * (0.2 + Math.random() * 0.6), q: sign * 2 });
+        this.sel = this.ch.length - 1; this.qEl.value = sign * 2; this.qEl.dispatchEvent(new Event('input'));
+        this.draw();
+    }
+    forces() {
+        const T = this.ch[this.t];
+        return this.ch.map((c, i) => {
+            if (i === this.t) return null;
+            const dx = T.x - c.x, dy = T.y - c.y, r = Math.max(Math.hypot(dx, dy), 1e-4);
+            const F = K * T.q * c.q * 1e-12 / (r * r);     // + = pushes target away from c
+            return { i, r, F, Fx: F * dx / r, Fy: F * dy / r };
+        }).filter(Boolean);
+    }
+    draw() {
+        const { ctx, w, h, s } = this, T = this.ch[this.t];
+        ctx.clearRect(0, 0, w, h); ctx.fillStyle = COL.bg; ctx.fillRect(0, 0, w, h);
+        gridLines(ctx, w, h, s, 0.1);
+        const tx = T.x * s, ty = T.y * s;
+        ctx.save(); ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.setLineDash([5, 5]);
+        for (const c of this.ch) { ctx.beginPath(); ctx.moveTo(c.x * s, c.y * s); ctx.lineTo(tx, ty); ctx.stroke(); }
+        ctx.restore();
+        const fs = this.forces();
+        const net = fs.reduce((a, f) => [a[0] + f.Fx, a[1] + f.Fy], [0, 0]);
+        const big = Math.max(...fs.map(f => Math.abs(f.F)), 1e-30);
+        const SC = 0.15 * w / big, cap = 0.38 * w;
+        const netL = Math.hypot(...net) * SC, nsc = netL > cap ? cap / netL : 1;
+        if (this.comps.checked && Math.hypot(...net) > big * 1e-3) {
+            const ex = tx + net[0] * SC * nsc, ey = ty + net[1] * SC * nsc;
+            arrow(ctx, tx, ty, ex, ty, COL.pink, 2, 9, [6, 4]);
+            arrow(ctx, ex, ty, ex, ey, COL.pink, 2, 9, [6, 4]);
+            label(ctx, 'Fx', (tx + ex) / 2, ty + (ey > ty ? -12 : 12), COL.pink, 11);
+            label(ctx, 'Fy', ex + (ex > tx ? 16 : -16), (ty + ey) / 2, COL.pink, 11);
+        }
+        const drawn = [];
+        for (const f of fs) {
+            if (!f.F) continue;
+            const u = [f.Fx / Math.abs(f.F), f.Fy / Math.abs(f.F)];
+            const k = drawn.filter(d => d[0] * u[0] + d[1] * u[1] > 0.995).length;   // same direction as an earlier arrow?
+            drawn.push(u);
+            const off = k ? (k % 2 ? 1 : -1) * 8 * Math.ceil(k / 2) : 0, ox = -u[1] * off, oy = u[0] * off;
+            const ex = tx + ox + f.Fx * SC, ey = ty + oy + f.Fy * SC;
+            arrow(ctx, tx + ox, ty + oy, ex, ey, COL.vec, 3, 11);
+            label(ctx, 'F' + sub(f.i + 1), ex + u[0] * 14 + ox * 1.5, ey + u[1] * 14 + oy * 1.5, COL.vec, 12);
+        }
+        if (Math.hypot(...net) > big * 1e-3) {
+            const ex = tx + net[0] * SC * nsc, ey = ty + net[1] * SC * nsc;
+            arrow(ctx, tx, ty, ex, ey, COL.net, 4.5, 14);
+            const u = [net[0] / Math.hypot(...net), net[1] / Math.hypot(...net)];
+            label(ctx, 'F net', ex + u[0] * 22, ey + u[1] * 22, COL.net, 13);
+        } else label(ctx, 'net force ≈ 0', tx, ty - 34, COL.net, 13);
+        this.ch.forEach((c, i) => chargeDot(ctx, c.x * s, c.y * s, c.q, this.R, i === this.sel, `q${sub(i + 1)} ${qstr(c.q)}`));
+        ctx.save(); ctx.strokeStyle = COL.gold; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.arc(tx, ty, this.R + 4, 0, 7); ctx.stroke(); ctx.restore();
+        label(ctx, 'target', tx, ty - this.R - 12, COL.gold, 11);
+        this.readout(fs, net);
+    }
+    readout(fs, net) {
+        const T = this.ch[this.t], z = Math.max(...fs.map(f => Math.abs(f.F)), 0) * 1e-6;
+        let rows = '';
+        for (const f of fs) {
+            const c = this.ch[f.i], n = 'q' + sub(f.i + 1);
+            let why;
+            if (!f.F) why = 'zero';
+            else if (f.F > 0) why = `repels → pushed <b>away from</b> ${n}`;
+            else why = `attracts → pulled <b>toward</b> ${n}`;
+            rows += `<tr><td>${n} (${qstr(c.q)})</td><td>${(f.r * 100).toFixed(1)} cm</td><td>${fmt(Math.abs(f.F), 'N')}</td><td>${why}</td>` +
+                    `<td>${f.F ? ang(f.Fx, f.Fy).toFixed(0) + '°' : '—'}</td><td>${fmt(f.Fx, '', z)}</td><td>${fmt(-f.Fy, '', z)}</td></tr>`;
+        }
+        const Fn = Math.hypot(...net), big = Math.max(...fs.map(f => Math.abs(f.F)), 1e-30);
+        rows += `<tr><td class="g">Net</td><td></td><td class="g">${Fn > big * 1e-3 ? fmt(Fn, 'N') : '≈ 0'}</td><td class="m">vector sum</td>` +
+                `<td class="g">${Fn > big * 1e-3 ? ang(net[0], net[1]).toFixed(0) + '°' : '—'}</td><td class="g">${fmt(net[0], '', z)}</td><td class="g">${fmt(-net[1], '', z)}</td></tr>`;
+        this.out.innerHTML = `Forces on the target <b>q${sub(this.t + 1)} = ${qstr(T.q)}</b> (angles from +x, counter-clockwise; Fx, Fy in N):` +
+            `<table><tr><th>From</th><th>r</th><th>|F|</th><th>Why that direction</th><th>Angle</th><th>Fx</th><th>Fy</th></tr>${rows}</table>` +
+            (Fn <= big * 1e-3 ? '<div class="g" style="margin-top:.3rem">The forces cancel exactly here.</div>' : '');
+    }
+}
+
+/* ================================================================ 3 & 6. field / potential lab */
+const LAB_PRESETS = {
+    pos:     { c: [[0.5, 0.3, 2]], p: [0.72, 0.22] },
+    neg:     { c: [[0.5, 0.3, -2]], p: [0.72, 0.22] },
+    dipole:  { c: [[0.35, 0.3, 2], [0.65, 0.3, -2]], p: [0.5, 0.3] },
+    two:     { c: [[0.35, 0.3, 2], [0.65, 0.3, 2]], p: [0.5, 0.3] },
+    unequal: { c: [[0.38, 0.3, 3], [0.62, 0.3, -1]], p: [0.75, 0.3] },
+    plates:  { c: [...Array(10)].flatMap((_, i) => [[0.14 + 0.08 * i, 0.17, 1], [0.14 + 0.08 * i, 0.43, -1]]), p: [0.5, 0.3] },
+    square:  { c: [[0.35, 0.15, 2], [0.65, 0.15, 4], [0.65, 0.45, 2], [0.35, 0.45, -2]], p: [0.5, 0.3] },
+};
+class FieldLab {
+    constructor(root, opt) {
+        this.root = root; this.cv = root.querySelector('canvas.main'); this.out = root.querySelector('.readout'); this.opt = opt;
+        this.R = 13; this.sel = null; this.layers = { ...opt.layers };
+        root.querySelectorAll('[data-layer]').forEach(cb => {
+            cb.checked = !!this.layers[cb.dataset.layer];
+            cb.onchange = () => { this.layers[cb.dataset.layer] = cb.checked; this.dirty = true; this.draw(); };
+        });
+        this.test = root.querySelector('[data-k="test"]'); this.test.onchange = () => this.draw();
+        this.qEl = bindRange(root, 'q', v => { if (this.sel != null) { this.ch[this.sel].q = v; this.dirty = true; this.draw(); } }, qstr);
+        root.querySelectorAll('[data-preset]').forEach(b => b.addEventListener('click', () => this.preset(b.dataset.preset)));
+        act(root, 'addp', () => this.add(1));
+        act(root, 'addn', () => this.add(-1));
+        act(root, 'del', () => { if (this.sel != null) { this.ch.splice(this.sel, 1); this.sel = null; this.dirty = true; this.draw(); } });
+        onDrag(this.cv, {
+            down: (x, y) => {
+                const i = this.ch.findIndex(c => Math.hypot(x - c.x * this.s, y - c.y * this.s) < this.R + 8);
+                if (i >= 0) { this.sel = i; this.drag = 'c'; this.qEl.value = this.ch[i].q; this.qEl.dispatchEvent(new Event('input')); }
+                else { this.drag = 'p'; this.probe = { x: x / this.s, y: y / this.s }; }
+                this.draw(); return true;
+            },
+            move: (x, y) => {
+                const X = clamp(x / this.s, 0.01, 0.99), Y = clamp(y / this.s, 0.01, this.H - 0.01);
+                if (this.drag === 'c') { Object.assign(this.ch[this.sel], { x: X, y: Y }); this.dirty = true; }
+                else if (this.drag === 'p') this.probe = { x: X, y: Y };
+                this.draw();
+            },
+            up: () => { this.drag = null; }
+        });
+        this.resize(); this.preset(opt.preset);
+        onResize(() => { this.resize(); this.draw(); });
+    }
+    resize() {
+        Object.assign(this, fitCanvas(this.cv, w => w < 600 ? 0.95 : 0.58));
+        this.s = this.w / 1.0; this.H = this.h / this.s;
+        this.off = document.createElement('canvas');
+        this.off.width = Math.ceil(this.w / 3); this.off.height = Math.ceil(this.h / 3);
+        if (this.ch) for (const c of this.ch) c.y = clamp(c.y, 0.01, this.H - 0.01);
+        this.dirty = true;
+    }
+    preset(name) {
+        const dy = (this.H - 0.6) / 2, P = LAB_PRESETS[name];
+        this.ch = P.c.map(([x, y, q]) => ({ x, y: y + dy, q }));
+        this.probe = { x: P.p[0], y: P.p[1] + dy };
+        this.sel = null; this.dirty = true; this.draw();
+    }
+    add(sign) {
+        this.ch.push({ x: 0.1 + Math.random() * 0.15, y: this.H * (0.25 + Math.random() * 0.5), q: 2 * sign });
+        this.sel = this.ch.length - 1; this.qEl.value = 2 * sign; this.qEl.dispatchEvent(new Event('input'));
+        this.dirty = true; this.draw();
+    }
+    field(x, y) {
+        let Ex = 0, Ey = 0, V = 0;
+        for (const c of this.ch) {
+            if (!c.q) continue;
+            const dx = x - c.x, dy = y - c.y, r = Math.max(Math.hypot(dx, dy), 0.012), kq = K * c.q * 1e-6;
+            const e = kq / (r * r * r);
+            Ex += e * dx; Ey += e * dy; V += kq / r;
+        }
+        return [Ex, Ey, V];
+    }
+    trace(x, y, sign, start) {
+        const pts = [[x, y]], h = 0.004;
+        let end = -1;
+        for (let n = 0; n < 900; n++) {
+            let [ex, ey] = this.field(x, y), m = Math.hypot(ex, ey);
+            if (!m) break;
+            const mx = x + sign * ex / m * h / 2, my = y + sign * ey / m * h / 2;
+            [ex, ey] = this.field(mx, my); m = Math.hypot(ex, ey);
+            if (!m) break;
+            x += sign * ex / m * h; y += sign * ey / m * h; pts.push([x, y]);
+            if (x < -0.05 || x > 1.05 || y < -0.05 || y > this.H + 0.05) break;
+            let hit = -1;
+            for (let i = 0; i < this.ch.length; i++) {
+                if (i === start && n < 10) continue;
+                const c = this.ch[i];
+                if (c.q && Math.hypot(x - c.x, y - c.y) < 0.011) { hit = i; break; }
+            }
+            if (hit >= 0) { end = hit; pts.push([this.ch[hit].x, this.ch[hit].y]); break; }
+        }
+        return { pts, end };
+    }
+    compute() {
+        const L = this.layers;
+        this.lines = [];
+        if (L.lines) {
+            this.ch.forEach((c, i) => {
+                if (!c.q) return;
+                const n = Math.min(32, Math.max(4, Math.round(Math.abs(c.q) * 6))), sign = Math.sign(c.q);
+                for (let j = 0; j < n; j++) {
+                    const a = 2 * Math.PI * (j + 0.5) / n;
+                    const { pts, end } = this.trace(c.x + 0.013 * Math.cos(a), c.y + 0.013 * Math.sin(a), sign, i);
+                    if (sign < 0 && end >= 0 && this.ch[end].q > 0) continue;     // already drawn from the + side
+                    this.lines.push({ pts, sign });
+                }
+            });
+        }
+        if (L.heat) {
+            const ow = this.off.width, oh = this.off.height, oc = this.off.getContext('2d');
+            const img = oc.createImageData(ow, oh), d = img.data, V0 = 1.6e5, bg = [22, 26, 38];
+            for (let j = 0; j < oh; j++) for (let i = 0; i < ow; i++) {
+                const V = this.field((i * 3 + 1.5) / this.s, (j * 3 + 1.5) / this.s)[2];
+                const t = Math.tanh(V / V0), c = t > 0 ? [239, 68, 68] : [59, 130, 246], a = Math.abs(t) * 0.75;
+                const k = 4 * (j * ow + i);
+                d[k] = bg[0] + (c[0] - bg[0]) * a; d[k + 1] = bg[1] + (c[1] - bg[1]) * a; d[k + 2] = bg[2] + (c[2] - bg[2]) * a; d[k + 3] = 255;
+            }
+            oc.putImageData(img, 0, 0);
+        }
+        this.segs = [];
+        if (L.equip) {
+            const g = 6, nx = Math.ceil(this.w / g) + 1, ny = Math.ceil(this.h / g) + 1;
+            const grid = [];
+            for (let j = 0; j < ny; j++) { const row = []; for (let i = 0; i < nx; i++) row.push(this.field(i * g / this.s, j * g / this.s)[2]); grid.push(row); }
+            const hasPos = this.ch.some(c => c.q > 0), hasNeg = this.ch.some(c => c.q < 0);
+            // equal steps of V: pick the step from the typical |V| on screen
+            const all = grid.flat().map(Math.abs).sort((p, q) => p - q);
+            const dV = Math.max(all[Math.floor(all.length * 0.85)] / 5, 1);
+            const levels = [];
+            for (let n = 1; n <= 9; n++) { if (hasPos) levels.push(n * dV); if (hasNeg) levels.push(-n * dV); }
+            if (hasPos && hasNeg) levels.push(0);
+            this.dV = dV;
+            for (const lv of levels) {
+                for (let j = 0; j < ny - 1; j++) for (let i = 0; i < nx - 1; i++) {
+                    const v = [grid[j][i], grid[j][i + 1], grid[j + 1][i + 1], grid[j + 1][i]];
+                    if (v.some(t => Math.abs(t) > 12 * dV)) continue;
+                    const p = [[i, j], [i + 1, j], [i + 1, j + 1], [i, j + 1]], pts = [];
+                    for (const [a, b] of [[0, 1], [1, 2], [2, 3], [3, 0]])
+                        if ((v[a] - lv) * (v[b] - lv) < 0) { const t = (lv - v[a]) / (v[b] - v[a]); pts.push([(p[a][0] + t * (p[b][0] - p[a][0])) * g, (p[a][1] + t * (p[b][1] - p[a][1])) * g]); }
+                    if (pts.length >= 2) this.segs.push([pts[0], pts[1], lv === 0]);
+                    if (pts.length === 4) this.segs.push([pts[2], pts[3], lv === 0]);
+                }
+            }
+        }
+        this.vecs = [];
+        if (L.vectors) {
+            const g = 34, list = [];
+            for (let y = g / 2; y < this.h; y += g) for (let x = g / 2; x < this.w; x += g) {
+                if (this.ch.some(c => Math.hypot(x - c.x * this.s, y - c.y * this.s) < 20)) continue;
+                const [ex, ey] = this.field(x / this.s, y / this.s), m = Math.hypot(ex, ey);
+                if (m) list.push([x, y, ex / m, ey / m, Math.log10(m)]);
+            }
+            const lo = Math.min(...list.map(v => v[4])), hi = Math.max(...list.map(v => v[4]));
+            this.vecs = list.map(v => [...v.slice(0, 4), hi > lo ? (v[4] - lo) / (hi - lo) : 1]);
+        }
+    }
+    draw() {
+        if (this.dirty) { this.compute(); this.dirty = false; }
+        const { ctx, w, h, s } = this, L = this.layers;
+        ctx.clearRect(0, 0, w, h); ctx.fillStyle = COL.bg; ctx.fillRect(0, 0, w, h);
+        if (L.heat) { ctx.imageSmoothingEnabled = true; ctx.drawImage(this.off, 0, 0, w, h); }
+        gridLines(ctx, w, h, s, 0.1);
+        if (L.equip) {
+            ctx.save(); ctx.lineWidth = 1.5;
+            for (const [a, b, zero] of this.segs) {
+                ctx.strokeStyle = zero ? '#ffffff' : COL.gold;
+                ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+            }
+            ctx.restore();
+        }
+        if (L.lines) {
+            ctx.save(); ctx.strokeStyle = COL.field; ctx.lineWidth = 1.4;
+            for (const ln of this.lines) {
+                ctx.beginPath(); ln.pts.forEach(([x, y], k) => k ? ctx.lineTo(x * s, y * s) : ctx.moveTo(x * s, y * s)); ctx.stroke();
+            }
+            ctx.restore();
+            for (const ln of this.lines) {           // arrowheads along each line, pointing along E
+                let acc = 0;
+                for (let k = 1; k < ln.pts.length; k++) {
+                    const [x0, y0] = ln.pts[k - 1], [x1, y1] = ln.pts[k];
+                    acc += Math.hypot(x1 - x0, y1 - y0);
+                    if (acc > 0.11) {
+                        acc = 0;
+                        const d = ln.sign, ux = (x1 - x0) * d, uy = (y1 - y0) * d, m = Math.hypot(ux, uy);
+                        if (m) arrow(ctx, x1 * s - ux / m * 5, y1 * s - uy / m * 5, x1 * s + ux / m * 5, y1 * s + uy / m * 5, COL.field, 1, 8);
+                    }
+                }
+            }
+        }
+        if (L.vectors) for (const [x, y, ux, uy, t] of this.vecs)
+            arrow(ctx, x - ux * 8, y - uy * 8, x + ux * 8, y + uy * 8, `rgba(165,180,252,${0.2 + 0.8 * t})`, 1.6, 6);
+        this.ch.forEach((c, i) => chargeDot(ctx, c.x * s, c.y * s, c.q, this.R, i === this.sel));
+        this.drawProbe();
+    }
+    drawProbe() {
+        const { ctx, s } = this, p = this.probe, px = p.x * s, py = p.y * s;
+        const [Ex, Ey, V] = this.field(p.x, p.y), Em = Math.hypot(Ex, Ey);
+        const qt = parseFloat(this.test.value), L = this.layers;
+        const tiny = Em < 2e3;
+        let contribs = [];
+        if (L.contrib) {
+            contribs = this.ch.map((c, i) => {
+                const dx = p.x - c.x, dy = p.y - c.y, r = Math.max(Math.hypot(dx, dy), 0.012), kq = K * c.q * 1e-6;
+                return { i, Ex: kq * dx / r ** 3, Ey: kq * dy / r ** 3, V: kq / r };
+            });
+            const big = Math.max(...contribs.map(c => Math.hypot(c.Ex, c.Ey)), 1e-30), SC = 80 / big;
+            for (const c of contribs) {
+                const m = Math.hypot(c.Ex, c.Ey); if (!m) continue;
+                const ex = px + c.Ex * SC, ey = py + c.Ey * SC;
+                arrow(ctx, px, py, ex, ey, COL.vec, 2, 9);
+                label(ctx, 'E' + sub(c.i + 1), ex + c.Ex / m * 12, ey + c.Ey / m * 12, COL.vec, 11);
+            }
+            if (!tiny) { const k = Math.min(1, 180 / (Em * SC)); arrow(ctx, px, py, px + Ex * SC * k, py + Ey * SC * k, COL.net, 3.5, 12); }
+        } else if (!tiny) {
+            arrow(ctx, px, py, px + Ex / Em * 60, py + Ey / Em * 60, COL.net, 3.5, 12);
+            label(ctx, 'E', px + Ex / Em * 74, py + Ey / Em * 74, COL.net, 13);
+        }
+        if (qt && !tiny) {
+            const d = Math.sign(qt);
+            arrow(ctx, px, py, px + d * Ex / Em * 52, py + d * Ey / Em * 52, COL.pink, 3, 11, [2, 0]);
+            label(ctx, 'F', px + d * Ex / Em * 64 + 10, py + d * Ey / Em * 64, COL.pink, 13);
+        }
+        if (qt) chargeDot(ctx, px, py, qt, 8);
+        else {
+            ctx.save(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+            ctx.beginPath(); ctx.arc(px, py, 7, 0, 7); ctx.moveTo(px - 12, py); ctx.lineTo(px + 12, py); ctx.moveTo(px, py - 12); ctx.lineTo(px, py + 12); ctx.stroke();
+            ctx.restore();
+        }
+        label(ctx, 'probe', px, py + 20, '#fff', 11);
+        /* readout */
+        let html = `<b>At the probe</b><br>`;
+        html += tiny ? `E ≈ <span class="g">0</span> — a null point (forces from the charges cancel)<br>`
+                     : `E = <span class="g">${fmt(Em, 'N/C')}</span> at ${ang(Ex, Ey).toFixed(0)}° <span class="m">(a vector: size + direction)</span><br>`;
+        html += `V ${Math.abs(V) < 300 ? '≈ <b>0 V</b>' : '= <b>' + fmtS(V, 'V') + '</b>'} <span class="m">(a scalar: just a signed number)</span><br>`;
+        if (L.contrib && contribs.length) {
+            html += `<span class="m">V = ` + contribs.map(c => `V${sub(c.i + 1)}`).join(' + ') + ` = </span>` +
+                    contribs.map(c => `(${fmtS(c.V)})`).join(' + ') + ` = ${fmtS(V, 'V')} <span class="m">— plain addition, no angles</span><br>`;
+        }
+        if (qt) {
+            const q = qt * 1e-6;
+            html += `<span class="p">Test charge ${qt > 0 ? '+1' : '−1'} μC:</span> F = qE = ${fmt(Math.abs(q) * Em, 'N')}, ` +
+                    (tiny ? 'zero here' : qt > 0 ? '<b>same direction as E</b>' : '<b>opposite to E</b> (negative charge)') +
+                    `; U = qV = ${fmtS(q * V, 'J')}`;
+        } else html += `<span class="m">Pick a test charge to see the force F = qE on it.</span>`;
+        if (L.equip && this.dV) html += `<br><span class="m">Gold lines are drawn every ${fmt(this.dV, 'V')}; the white one is V = 0.</span>`;
+        if (tiny && Math.abs(V) >= 300) html += `<br><span class="g">E = 0 but V ≠ 0 here.</span>`;
+        if (!tiny && Math.abs(V) < 300) html += `<br><span class="g">V = 0 but E ≠ 0 here.</span>`;
+        this.out.innerHTML = html;
+    }
+}
+
+/* ================================================================ 4. dipole in a uniform field */
+class DipoleSim {
+    constructor(root) {
+        this.root = root; this.cv = root.querySelector('canvas.main'); this.pcv = root.querySelector('canvas.plot'); this.out = root.querySelector('.readout');
+        this.th = 60 * Math.PI / 180; this.om = 0; this.I = 8e-5; this.playing = false;
+        this.Ee = bindRange(root, 'E', v => { this.E = v * 1e3; this.draw(); }, v => v + ' kN/C');
+        this.pe = bindRange(root, 'p', v => { this.p = v * 1e-8; this.draw(); }, v => v.toFixed(1) + '×10⁻⁸ C·m');
+        this.be = bindRange(root, 'b', v => { this.b = v; }, v => v.toFixed(1));
+        this.E = parseFloat(this.Ee.value) * 1e3; this.p = parseFloat(this.pe.value) * 1e-8; this.b = parseFloat(this.be.value);
+        this.playBtn = root.querySelector('[data-a="play"]');
+        act(root, 'play', () => this.toggle());
+        const set = deg => () => { this.th = deg * Math.PI / 180; this.om = 0; this.draw(); };
+        act(root, 'a0', set(0)); act(root, 'a90', set(90)); act(root, 'a179', set(179));
+        onDrag(this.cv, {
+            down: (x, y) => { this.drag = true; this.om = 0; this.aim(x, y); return true; },
+            move: (x, y) => this.aim(x, y),
+            up: () => { this.drag = false; }
+        });
+        this.resize(); this.draw();
+        onResize(() => { this.resize(); this.draw(); });
+    }
+    aim(x, y) { if (!this.drag) return; this.th = Math.atan2(-(y - this.h / 2), x - this.w / 2); this.om = 0; this.draw(); }
+    resize() {
+        Object.assign(this, fitCanvas(this.cv, w => w < 500 ? 0.8 : 0.6));
+        const p = fitCanvas(this.pcv, w => w > 450 ? 0.36 : 0.58); this.pctx = p.ctx; this.pw = p.w; this.ph = p.h;
+    }
+    toggle() {
+        this.playing = !this.playing; this.playBtn.textContent = this.playing ? '⏸ Pause' : '▶ Play';
+        if (!this.playing) return;
+        let last = performance.now();
+        const step = t => {
+            if (!this.playing) return;
+            const dt = Math.min(0.05, (t - last) / 1000); last = t;
+            if (!this.drag) {
+                const n = 20, h = dt / n;
+                for (let i = 0; i < n; i++) {
+                    const tz = -this.p * this.E * Math.sin(this.th);
+                    this.om += (tz / this.I - this.b * this.om) * h; this.th += this.om * h;
+                }
+                this.th = Math.atan2(Math.sin(this.th), Math.cos(this.th));
+            }
+            this.draw(); requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    }
+    draw() {
+        const { ctx, w, h } = this, cx = w / 2, cy = h / 2, th = this.th;
+        ctx.clearRect(0, 0, w, h); ctx.fillStyle = COL.bg; ctx.fillRect(0, 0, w, h);
+        const Ef = this.E / 40e3;
+        for (let y = 26; y < h; y += 42) arrow(ctx, 10, y, w - 10, y, `rgba(165,180,252,${0.12 + 0.35 * Ef})`, 1.3, 9);
+        label(ctx, 'E →', w - 40, 14, COL.field, 13);
+        const L = Math.min(w, h) * 0.34, c = Math.cos(th), sn = Math.sin(th);
+        const pxp = cx + c * L / 2, pyp = cy - sn * L / 2, pxn = cx - c * L / 2, pyn = cy + sn * L / 2;
+        ctx.save(); ctx.strokeStyle = '#9ca3af'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(pxn, pyn); ctx.lineTo(pxp, pyp); ctx.stroke(); ctx.restore();
+        arrow(ctx, cx - c * L * 0.22 - sn * 16, cy + sn * L * 0.22 - c * 16, cx + c * L * 0.22 - sn * 16, cy - sn * L * 0.22 - c * 16, COL.net, 3, 11);
+        label(ctx, 'p', cx - sn * 30, cy - c * 30, COL.net, 13);
+        const fl = 18 + 60 * Ef;
+        if (fl > 19) {
+            arrow(ctx, pxp, pyp, pxp + fl, pyp, COL.vec, 3, 11); label(ctx, '+qE', pxp + fl + 20, pyp, COL.vec, 12);
+            arrow(ctx, pxn, pyn, pxn - fl, pyn, COL.vec, 3, 11); label(ctx, '−qE', pxn - fl - 20, pyn, COL.vec, 12);
+        }
+        const tz = -this.p * this.E * Math.sin(th), span = 1.3 * Math.abs(Math.sin(th));
+        if (span > 0.06 && this.E > 0) {
+            const cw = tz < 0, R = L * 0.34, a0 = -th + (cw ? 0.35 : -0.35), a1 = cw ? a0 + span : a0 - span;
+            ctx.save(); ctx.strokeStyle = COL.pink; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.arc(cx, cy, R, a0, a1, !cw); ctx.stroke(); ctx.restore();
+            const ex = cx + R * Math.cos(a1), ey = cy + R * Math.sin(a1), tx = cw ? -Math.sin(a1) : Math.sin(a1), ty = cw ? Math.cos(a1) : -Math.cos(a1);
+            arrow(ctx, ex - tx * 6, ey - ty * 6, ex + tx * 6, ey + ty * 6, COL.pink, 2, 11);
+            label(ctx, 'τ', cx + (R + 16) * Math.cos((a0 + a1) / 2), cy + (R + 16) * Math.sin((a0 + a1) / 2), COL.pink, 14);
+        }
+        chargeDot(ctx, pxn, pyn, -1, 15); chargeDot(ctx, pxp, pyp, 1, 15);
+        const deg = Math.abs(th) * 180 / Math.PI;
+        label(ctx, `θ = ${deg.toFixed(0)}°`, 40, 14, COL.txt, 13, 'left');
+        this.readout(); this.plot();
+    }
+    readout() {
+        const pE = this.p * this.E, th = this.th, deg = Math.abs(th) * 180 / Math.PI;
+        let st = '';
+        if (deg < 3) st = '<span class="g">Stable equilibrium</span> — aligned with E, U is lowest, no torque.';
+        else if (deg > 177) st = '<span class="p">Unstable equilibrium</span> — opposite to E, U is highest; any nudge flips it.';
+        else st = `Torque turns <b>p</b> back toward <b>E</b> (${-this.p * this.E * Math.sin(th) < 0 ? 'clockwise' : 'counter-clockwise'} here).`;
+        this.out.innerHTML =
+            `Angle between p and E: <b>θ = ${deg.toFixed(0)}°</b><br>` +
+            `Forces: +qE on the + end, −qE on the − end → <span class="g">net force = 0</span><br>` +
+            `Torque τ = pE sin θ = <b>${fmt(pE * Math.abs(Math.sin(th)), 'N·m')}</b> <span class="m">(max pE = ${fmt(pE, 'N·m')} at 90°)</span><br>` +
+            `Energy U = −pE cos θ = <b>${fmtS(-pE * Math.cos(th), 'J')}</b><br>` +
+            `Work to turn it from 0° to here: pE(1 − cos θ) = ${fmt(pE * (1 - Math.cos(th)), 'J')}<br>${st}`;
+    }
+    plot() {
+        const ctx = this.pctx, w = this.pw, h = this.ph;
+        const P = plotFrame(ctx, w, h, 'U and τ (in units of pE) vs θ');
+        const X = d => P.l + (d + 180) / 360 * (w - P.l - P.r), Y = v => P.t + (1.15 - v) / 2.3 * (h - P.t - P.b);
+        ctx.save(); ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.beginPath(); ctx.moveTo(P.l, Y(0)); ctx.lineTo(w - P.r, Y(0)); ctx.stroke(); ctx.restore();
+        for (const d of [-180, -90, 0, 90, 180]) text(ctx, d + '°', X(d), h - P.b + 14, COL.muted, 10, 'center');
+        for (const v of [-1, 1]) text(ctx, String(v), P.l - 6, Y(v) + 4, COL.muted, 10, 'right');
+        const curve = (f, col, dash) => {
+            ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = 2; if (dash) ctx.setLineDash(dash); ctx.beginPath();
+            for (let d = -180; d <= 180; d += 2) { const x = X(d), y = Y(f(d * Math.PI / 180)); d === -180 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+            ctx.stroke(); ctx.restore();
+        };
+        curve(t => -Math.cos(t), COL.net); curve(t => -Math.sin(t), COL.vec, [6, 4]);
+        const d = this.th * 180 / Math.PI;
+        for (const [f, col] of [[t => -Math.cos(t), COL.net], [t => -Math.sin(t), COL.vec]]) {
+            ctx.fillStyle = col; ctx.beginPath(); ctx.arc(X(d), Y(f(this.th)), 5, 0, 7); ctx.fill();
+        }
+        label(ctx, 'U = −pE cos θ', X(-150), Y(-0.75), COL.net, 11, 'left');
+        label(ctx, 'τ (restoring)', X(40), Y(-0.9), COL.vec, 11, 'left');
+    }
+}
+
+/* ================================================================ 5. particle between plates */
+class PlateSim {
+    constructor(root) {
+        this.root = root; this.cv = root.querySelector('canvas.main'); this.out = root.querySelector('.readout');
+        this.Ee = bindRange(root, 'E', v => { this.E = v; this.stop(); }, v => v + ' N/C');
+        this.ve = bindRange(root, 'v', v => { this.v0 = v * 1e7; this.stop(); }, v => v.toFixed(1) + '×10⁷ m/s');
+        this.pe = root.querySelector('[data-k="part"]'); this.pe.onchange = () => this.stop();
+        this.E = parseFloat(this.Ee.value); this.v0 = parseFloat(this.ve.value) * 1e7; this.down = 1; this.prog = null;
+        act(root, 'flip', () => { this.down *= -1; this.stop(); });
+        act(root, 'fire', () => this.fire());
+        this.resize(); this.draw();
+        onResize(() => { this.resize(); this.draw(); });
+    }
+    resize() { Object.assign(this, fitCanvas(this.cv, w => w < 500 ? 0.75 : 0.45)); }
+    phys() {
+        const e = this.pe.value === 'e';
+        const q = e ? -1.6e-19 : 1.6e-19, m = e ? 9.11e-31 : 1.67e-27;
+        const a = q * this.E * this.down / m;             // + = toward the bottom of the screen
+        const Lp = 0.10, gap = 0.04, tExit = Lp / this.v0;
+        const tHit = a ? Math.sqrt(gap / Math.abs(a)) : Infinity;
+        return { e, q, m, a, Lp, gap, tExit, tHit, hits: tHit < tExit };
+    }
+    stop() { this.prog = null; this.draw(); }
+    fire() {
+        this.prog = 0; let last = performance.now();
+        const step = t => {
+            if (this.prog == null) return;
+            this.prog += (t - last) / 1000 / 2.2; last = t;
+            this.draw();
+            if (this.prog < 1.6) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    }
+    draw() {
+        const { ctx, w, h } = this, P = this.phys();
+        const x0 = 0.12 * w, s = 0.62 * w / P.Lp, cy = h / 2, half = P.gap / 2 * s;
+        ctx.clearRect(0, 0, w, h); ctx.fillStyle = COL.bg; ctx.fillRect(0, 0, w, h);
+        const topPos = this.down > 0;
+        for (let x = x0 + 20; x < x0 + P.Lp * s; x += 34)
+            arrow(ctx, x, topPos ? cy - half + 8 : cy + half - 8, x, topPos ? cy + half - 8 : cy - half + 8, `rgba(165,180,252,${0.15 + 0.5 * this.E / 3000})`, 1.3, 8);
+        const plate = (y, pos) => {
+            ctx.fillStyle = pos ? COL.pos : COL.neg; ctx.fillRect(x0, y - 4, P.Lp * s, 8);
+            for (let x = x0 + 12; x < x0 + P.Lp * s; x += 26) label(ctx, pos ? '+' : '−', x, y + (y < cy ? -14 : 14), pos ? '#fca5a5' : '#93c5fd', 13);
+        };
+        plate(cy - half, topPos); plate(cy + half, !topPos);
+        label(ctx, 'E', x0 + P.Lp * s + 18, cy, COL.field, 13);
+        arrow(ctx, x0 + P.Lp * s + 34, cy - 22 * this.down, x0 + P.Lp * s + 34, cy + 22 * this.down, COL.field, 2, 9);
+        // trajectory
+        const tEnd = P.hits ? P.tHit : P.tExit;
+        const tMax = this.prog == null ? 0 : this.prog * tEnd;
+        const pos = t => {
+            if (t <= P.tExit || P.hits) { const tt = Math.min(t, tEnd); return [this.v0 * tt, 0.5 * P.a * tt * tt]; }
+            const vy = P.a * P.tExit, yE = 0.5 * P.a * P.tExit ** 2;
+            return [P.Lp + this.v0 * (t - P.tExit), yE + vy * (t - P.tExit)];
+        };
+        const X = x => x0 + x * s, Y = y => cy + y * s;
+        chargeDot(ctx, x0 - 34, cy, P.q, 9);
+        arrow(ctx, x0 - 22, cy, x0 - 4, cy, '#fff', 2, 8);
+        if (this.prog != null) {
+            ctx.save(); ctx.strokeStyle = COL.net; ctx.lineWidth = 2.2; ctx.beginPath();
+            const N = 160;
+            for (let i = 0; i <= N; i++) { const [x, y] = pos(tMax * i / N); const X1 = X(x), Y1 = Y(y); if (X1 > w || Y1 < 0 || Y1 > h) break; i ? ctx.lineTo(X1, Y1) : ctx.moveTo(X1, Y1); }
+            ctx.stroke(); ctx.restore();
+            const [x, y] = pos(tMax), px = X(x), py = Y(y);
+            if (px < w && py > 0 && py < h) {
+                if (x < P.Lp && !(P.hits && this.prog >= 1) && P.a) arrow(ctx, px, py, px, py + Math.sign(P.a) * 34, COL.pink, 3, 10);
+                chargeDot(ctx, px, py, P.q, 8);
+            }
+            if (P.hits && this.prog >= 1) label(ctx, '💥 hits the plate', X(this.v0 * P.tHit), Y(Math.sign(P.a) * P.gap / 2) + (P.a > 0 ? -18 : 18), COL.txt, 12);
+        } else label(ctx, 'press Fire', x0 + P.Lp * s / 2, cy, COL.muted, 13);
+        // readout
+        const F = Math.abs(P.q * this.E);
+        const sign = P.q < 0 ? 'opposite to E (negative charge)' : 'along E (positive charge)';
+        const y = 0.5 * Math.abs(P.a) * P.tExit ** 2;
+        this.out.innerHTML =
+            `<b>${P.e ? 'Electron' : 'Proton'}</b>: q = ${fmtS(P.q, 'C')}, m = ${fmt(P.m, 'kg')}<br>` +
+            `Force F = |q|E = <b>${fmt(F, 'N')}</b>, ${sign} → ${this.E ? 'pushed ' + (P.q * this.down > 0 ? 'down' : 'up') + ', toward the ' + ((P.q > 0) !== topPos ? '+' : '−') + ' plate' : 'no field'}<br>` +
+            `Acceleration a = qE/m = <b>${fmt(Math.abs(P.a), 'm/s²')}</b><br>` +
+            `Time between the plates t = L/v₀ = ${fmt(P.tExit, 's')}<br>` +
+            (P.hits ? `<span class="p">Hits the plate</span> after travelling ${fmt(this.v0 * P.tHit * 100, 'cm')} (it needed only 2 cm sideways).`
+                    : `Sideways deflection at exit y = ½at² = <b>${fmt(y * 1000, 'mm')}</b>${!P.e ? ' <span class="m">— tiny: the proton is 1836× heavier</span>' : ''}`);
+    }
+}
+
+/* ================================================================ 7. work and ΔV in a uniform field */
+class WorkSim {
+    constructor(root) {
+        this.root = root; this.cv = root.querySelector('canvas.main'); this.out = root.querySelector('.readout');
+        this.d = 0.20; this.m = 5e-3;
+        this.qe = root.querySelector('[data-k="q"]'); this.qe.onchange = () => { this.reset(); this.draw(); };
+        this.Ee = bindRange(root, 'E', v => { this.E = v; this.draw(); }, v => v + ' N/C');
+        this.E = parseFloat(this.Ee.value);
+        act(root, 'release', () => this.release());
+        act(root, 'reset', () => { this.reset(); this.draw(); });
+        onDrag(this.cv, {
+            down: (x, y) => {
+                const [cx, cy] = this.px(this.c);
+                if (Math.hypot(x - cx, y - cy) > 26) return false;
+                this.running = false; this.c.v = 0; this.start = { ...this.c }; this.path = [{ ...this.c }]; this.dragging = true; this.mode = 'drag';
+                return true;
+            },
+            move: (x, y) => {
+                if (!this.dragging) return;
+                this.c.x = clamp((x - this.x0) / this.s, 0.02, this.Wm - 0.02);
+                this.c.y = clamp((this.yb - y) / this.s, 0.006, this.d - 0.006);
+                this.path.push({ ...this.c }); this.draw();
+            },
+            up: () => { this.dragging = false; }
+        });
+        this.resize(); this.reset(); this.draw();
+        onResize(() => { this.resize(); this.draw(); });
+    }
+    resize() {
+        Object.assign(this, fitCanvas(this.cv, w => w < 500 ? 0.8 : 0.48));
+        this.yt = 0.12 * this.h; this.yb = 0.88 * this.h; this.s = (this.yb - this.yt) / this.d;
+        this.x0 = 0.06 * this.w; this.Wm = 0.88 * this.w / this.s;
+    }
+    px(c) { return [this.x0 + c.x * this.s, this.yb - c.y * this.s]; }
+    reset() {
+        this.running = false; this.mode = null;
+        this.c = { x: this.Wm * 0.35, y: this.d * 0.5, v: 0 };
+        this.start = { ...this.c }; this.path = [{ ...this.c }];
+    }
+    release() {
+        if (this.running) return;
+        this.running = true; this.mode = 'release'; this.start = { ...this.c }; this.c.v = 0; this.path = [{ ...this.c }];
+        const q = parseFloat(this.qe.value) * 1e-6;
+        let last = performance.now(), T = 0;
+        const step = t => {
+            if (!this.running) return;
+            const dt = Math.min(0.05, (t - last) / 1000); last = t;
+            const a = -q * this.E / this.m;                  // E points down (−y), so force on q is −qE in y
+            T += dt;                                          // constant force → exact kinematics
+            this.c.y = this.start.y + 0.5 * a * T * T; this.c.v = a * T;
+            if (this.c.y <= 0.006 || this.c.y >= this.d - 0.006) {
+                this.c.y = clamp(this.c.y, 0.006, this.d - 0.006);
+                this.c.v = Math.sign(a) * Math.sqrt(2 * Math.abs(a * (this.c.y - this.start.y)));
+                this.running = false;
+            }
+            this.path.push({ ...this.c });
+            this.draw(); if (this.running) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    }
+    draw() {
+        const { ctx, w, h, s } = this, q = parseFloat(this.qe.value) * 1e-6, Vt = this.E * this.d;
+        ctx.clearRect(0, 0, w, h); ctx.fillStyle = COL.bg; ctx.fillRect(0, 0, w, h);
+        for (let x = this.x0 + 30; x < w - 20; x += 48) arrow(ctx, x, this.yt + 10, x, this.yb - 10, 'rgba(165,180,252,0.25)', 1.2, 8);
+        for (let k = 1; k < 5; k++) {
+            const y = this.yb - k * (this.yb - this.yt) / 5;
+            ctx.save(); ctx.strokeStyle = 'rgba(245,158,11,0.55)'; ctx.setLineDash([6, 5]); ctx.beginPath(); ctx.moveTo(this.x0, y); ctx.lineTo(w - 10, y); ctx.stroke(); ctx.restore();
+            label(ctx, `${fmt(Vt * k / 5)} V`, w - 12, y - 9, COL.gold, 11, 'right');
+        }
+        ctx.fillStyle = COL.pos; ctx.fillRect(this.x0, this.yt - 5, w - this.x0 - 10, 7);
+        ctx.fillStyle = COL.neg; ctx.fillRect(this.x0, this.yb - 2, w - this.x0 - 10, 7);
+        label(ctx, `+ plate, V = ${fmt(Vt)} V`, this.x0 + 6, this.yt - 16, '#fca5a5', 12, 'left');
+        label(ctx, '− plate, V = 0', this.x0 + 6, this.yb + 16, '#93c5fd', 12, 'left');
+        label(ctx, 'E ↓', 22, h / 2, COL.field, 13);
+        if (this.path.length > 1) {
+            ctx.save(); ctx.strokeStyle = 'rgba(255,255,255,0.45)'; ctx.lineWidth = 1.5; ctx.beginPath();
+            this.path.forEach((p, i) => { const [x, y] = this.px(p); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.stroke(); ctx.restore();
+        }
+        const [sx, sy] = this.px(this.start);
+        ctx.save(); ctx.strokeStyle = '#fff'; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.arc(sx, sy, 12, 0, 7); ctx.stroke(); ctx.restore();
+        label(ctx, 'start', sx, sy - 22, '#fff', 11);
+        const [cx, cy] = this.px(this.c), up = q < 0;
+        arrow(ctx, cx, cy, cx, cy + (up ? -1 : 1) * (22 + 24 * this.E / 2000), COL.pink, 3, 11);
+        label(ctx, 'F = qE', cx + 30, cy + (up ? -26 : 26), COL.pink, 12, 'left');
+        chargeDot(ctx, cx, cy, q, 14);
+        // readout
+        const V1 = this.E * this.start.y, V2 = this.E * this.c.y, dV = V2 - V1, dU = q * dV, Wf = -dU;
+        let msg;
+        if (Math.abs(dV) < Vt * 0.006) msg = '<span class="g">ΔV ≈ 0: you moved along an equipotential, so no work is done.</span>';
+        else if (Wf > 0) msg = `<span class="g">The charge moved <b>with</b> its force:</span> the field did positive work and U fell by ${fmt(-dU, 'J')}.`;
+        else msg = `<span class="p">The charge moved <b>against</b> its force:</span> the field did negative work, U rose; an outside agent had to supply ${fmt(dU, 'J')}.`;
+        let extra = '';
+        if (q < 0 && Math.abs(dV) >= Vt * 0.006) extra = `<br><span class="m">Negative charge: V went ${dV > 0 ? 'UP' : 'DOWN'} but U went ${dU > 0 ? 'UP' : 'DOWN'} — ΔU = qΔV flips sign when q &lt; 0.</span>`;
+        let kin = '';
+        if (this.mode === 'release') { const Kk = 0.5 * this.m * this.c.v ** 2; kin = `<br>Kinetic energy gained K = ${fmt(Kk, 'J')} = −ΔU <span class="m">(energy conservation)</span>`; }
+        this.out.innerHTML =
+            `Charge q = <b>${q > 0 ? '+1' : '−1'} μC</b>, field E = ${this.E} N/C (down), V = E × height above the − plate<br>` +
+            `V at start = ${fmt(V1, 'V')}, V now = ${fmt(V2, 'V')} → <b>ΔV = ${fmtS(dV, 'V')}</b><br>` +
+            `ΔU = qΔV = <b>${fmtS(dU, 'J')}</b> &nbsp; Work by the field W = −ΔU = <b>${fmtS(Wf, 'J')}</b><br>${msg}${extra}${kin}`;
+    }
+}
+
+/* ================================================================ 8. closest approach */
+class ApproachSim {
+    constructor(root) {
+        this.root = root; this.cv = root.querySelector('canvas.main'); this.out = root.querySelector('.readout');
+        this.mode = root.querySelector('[data-k="mode"]'); this.sign = root.querySelector('[data-k="sign"]');
+        this.ve = bindRange(root, 'v', v => { this.v = v; this.setup(); this.draw(); }, v => v.toFixed(1) + ' m/s');
+        this.v = parseFloat(this.ve.value);
+        this.mode.onchange = this.sign.onchange = () => { this.setup(); this.draw(); };
+        act(root, 'go', () => { this.setup(); this.run(); });
+        this.resize(); this.setup(); this.draw();
+        onResize(() => { this.resize(); this.draw(); });
+    }
+    resize() { Object.assign(this, fitCanvas(this.cv, w => w < 560 ? 0.75 : 0.38)); }
+    setup() {
+        this.running = false; this.done = ''; this.trail = [];
+        const sg = parseInt(this.sign.value);
+        if (this.mode.value === 'A') this.P = [
+            { x: 0.2, v: this.v, m: 1e-3, q: 0.5e-6, name: 'projectile', fixed: false },
+            { x: 2.8, v: 0, m: 1, q: sg * 1e-6, name: 'nucleus (fixed)', fixed: true }];
+        else this.P = [
+            { x: 0.3, v: this.v, m: 1e-3, q: 1e-6, name: 'proton (m, +e)', fixed: false },
+            { x: 2.7, v: -this.v, m: 4e-3, q: sg * 2e-6, name: 'alpha (4m, +2e)', fixed: false }];
+        this.rmin = Infinity;
+        const [a, b] = this.P, r0 = b.x - a.x;
+        this.kqq = K * a.q * b.q; this.U0 = this.kqq / r0;
+        this.K0 = this.P.reduce((s, p) => s + (p.fixed ? 0 : 0.5 * p.m * p.v * p.v), 0);
+        this.Etot = this.K0 + this.U0;
+    }
+    run() {
+        this.running = true; let last = performance.now();
+        const contact = 0.06;
+        const step = t => {
+            if (!this.running) return;
+            const dtr = Math.min(0.05, (t - last) / 1000) * 0.5; last = t;
+            const n = 400, h = dtr / n, [a, b] = this.P;
+            for (let i = 0; i < n; i++) {
+                const r = b.x - a.x, F = this.kqq / (r * r);        // + pushes b right, a left
+                if (!a.fixed) a.v -= F / a.m * h;
+                if (!b.fixed) b.v += F / b.m * h;
+                a.x += a.v * h; b.x += b.v * h;
+                const rn = b.x - a.x; this.rmin = Math.min(this.rmin, rn);
+                if (rn < contact) { this.running = false; this.done = 'collide'; a.v = b.v = 0; break; }
+                if (a.x < 0 || b.x > 3.05 || (rn > 2.6 && a.v < 0)) { this.running = false; this.done = 'apart'; break; }
+            }
+            if (this.trail.length === 0 || Math.abs(this.trail[this.trail.length - 1] - a.x) > 0.02) this.trail.push(a.x);
+            this.draw(); if (this.running) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    }
+    draw() {
+        const { ctx, w, h } = this, [a, b] = this.P;
+        ctx.clearRect(0, 0, w, h); ctx.fillStyle = COL.bg; ctx.fillRect(0, 0, w, h);
+        const narrow = w < 560, trackW = narrow ? w - 30 : w * 0.66, ty = narrow ? h * 0.2 : h * 0.5;
+        const X = x => 15 + x / 3.0 * (trackW - 15);
+        ctx.save(); ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.beginPath(); ctx.moveTo(X(0), ty); ctx.lineTo(X(3), ty); ctx.stroke(); ctx.restore();
+        for (const x of this.trail) { ctx.fillStyle = 'rgba(244,114,182,0.35)'; ctx.beginPath(); ctx.arc(X(x), ty, 2, 0, 7); ctx.fill(); }
+        if (isFinite(this.rmin) && this.rmin < 3) {
+            label(ctx, `closest so far: ${(this.rmin * 100).toFixed(0)} cm`, X((a.x + b.x) / 2), ty + 40, COL.gold, 11);
+        }
+        this.P.forEach((p, i) => {
+            chargeDot(ctx, X(p.x), ty, p.q, 11);
+            label(ctx, p.name, X(p.x), i ? ty - 26 : ty - 44, COL.txt, 11);
+            if (Math.abs(p.v) > 0.05) arrow(ctx, X(p.x), ty + 18, X(p.x) + Math.sign(p.v) * (10 + 6 * Math.abs(p.v)), ty + 18, COL.vec, 2.5, 9);
+        });
+        // energy bars
+        const r = b.x - a.x, U = this.kqq / r;
+        const Ks = this.P.map(p => p.fixed ? null : 0.5 * p.m * p.v * p.v);
+        const bars = [];
+        Ks.forEach((k, i) => { if (k != null) bars.push([`K ${this.P[i].name.split(' ')[0]}`, k, COL.vec]); });
+        bars.push(['U', U, COL.pink]); bars.push(['Total', Ks.reduce((s, k) => s + (k || 0), 0) + U, COL.net]);
+        const bx0 = narrow ? 30 : w * 0.7, bw = narrow ? w - 50 : w * 0.28, by0 = narrow ? h * 0.86 : h * 0.72, bh = narrow ? h * 0.32 : h * 0.55;
+        const ref = Math.max(Math.abs(this.Etot), this.K0, 1e-12) * 1.1;
+        ctx.save(); ctx.strokeStyle = COL.muted; ctx.beginPath(); ctx.moveTo(bx0, by0); ctx.lineTo(bx0 + bw, by0); ctx.stroke(); ctx.restore();
+        const cw = bw / bars.length;
+        bars.forEach(([n, v, col], i) => {
+            const hh = clamp(v / ref, -0.5, 1.15) * bh, x = bx0 + i * cw + cw * 0.18;
+            ctx.fillStyle = col; ctx.fillRect(x, hh >= 0 ? by0 - hh : by0, cw * 0.64, Math.abs(hh));
+            text(ctx, n, x + cw * 0.32, by0 + 14, COL.muted, 10, 'center');
+            text(ctx, fmt(v, 'J'), x + cw * 0.32, (hh >= 0 ? by0 - hh : by0 - hh) + (hh >= 0 ? -5 : 14), col, 10, 'center');
+        });
+        text(ctx, 'Energy', bx0 + bw / 2, by0 - bh - 8, COL.txt, 12, 'center', true);
+        this.readout(r, U, Ks);
+    }
+    readout(r, U, Ks) {
+        const like = this.kqq > 0;
+        let html = `Separation r = <b>${(r * 100).toFixed(0)} cm</b>, U = kq₁q₂/r = ${fmtS(U, 'J')}, total energy = ${fmt(this.Etot, 'J')} (constant)<br>`;
+        if (!like) html += `<span class="p">Unlike charges attract</span>: U keeps falling and K keeps rising — there is no turning point; they collide.`;
+        else if (this.mode.value === 'A') {
+            const pred = this.kqq / this.Etot;
+            html += `Prediction: all the energy becomes U at the turning point → r<sub>min</sub> = kq₁q₂ / (K₀ + U₀) = <b>${(pred * 100).toFixed(1)} cm</b>` +
+                    (isFinite(this.rmin) && this.done ? ` &nbsp;|&nbsp; simulation: <span class="g">${(this.rmin * 100).toFixed(1)} cm</span>` : '');
+        } else {
+            const [a, b] = this.P, M = a.m + b.m, Pm = a.m * this.v - b.m * this.v, Kcm = Pm * Pm / (2 * M);
+            const slide = this.kqq / this.Etot, real = this.kqq / (this.Etot - Kcm);
+            html += `Slide method (assume both stop): r = kq₁q₂ / (K₁ + K₂ + U₀) = <b>${(slide * 100).toFixed(1)} cm</b><br>` +
+                    `Actual (momentum conserved — at closest approach they still move together): <b>${(real * 100).toFixed(1)} cm</b>` +
+                    (isFinite(this.rmin) && this.done ? ` &nbsp;|&nbsp; simulation: <span class="g">${(this.rmin * 100).toFixed(1)} cm</span>` : '') +
+                    `<br><span class="m">U₀ is the small energy they already have at the 2.4 m start. Use the slide method in the exam; this shows why it is an approximation.</span>`;
+        }
+        if (this.done === 'collide') html += `<br><span class="p">They collided.</span>`;
+        this.out.innerHTML = html;
+    }
+}
+
+/* ================================================================ boot */
+window.addEventListener('load', () => {
+    const $ = id => document.getElementById(id);
+    try { new TwoCharges($('sim-two')); } catch (e) { console.error(e); }
+    try { new NetForce($('sim-net')); } catch (e) { console.error(e); }
+    try { new FieldLab($('sim-field'), { preset: 'dipole', layers: { lines: true } }); } catch (e) { console.error(e); }
+    try { new DipoleSim($('sim-dipole')); } catch (e) { console.error(e); }
+    try { new PlateSim($('sim-plates')); } catch (e) { console.error(e); }
+    try { new FieldLab($('sim-pot'), { preset: 'dipole', layers: { heat: true, equip: true } }); } catch (e) { console.error(e); }
+    try { new WorkSim($('sim-work')); } catch (e) { console.error(e); }
+    try { new ApproachSim($('sim-approach')); } catch (e) { console.error(e); }
+});
+</script>
+</body>
+</html>
