@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulations — PHY-2105</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="theme.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <style>
         html, body { overflow-x: hidden; }
@@ -255,7 +256,7 @@
 
         <div class="sim" id="sim-pot">
             <h3>6. Potential map: V is a number, E is an arrow</h3>
-            <p class="lead">Colour shows the potential: <span style="color:#f87171">red = positive V</span>, <span style="color:#60a5fa">blue = negative V</span>, dark = near zero. Gold lines are equipotentials. Move the probe to read V and E.</p>
+            <p class="lead">Colour shows the potential: <span style="color:#f87171">red = positive V</span>, <span style="color:#60a5fa">blue = negative V</span>, neutral = near zero. Gold lines are equipotentials. Move the probe to read V and E.</p>
             <canvas class="main"></canvas>
             <div class="controls">
                 <div class="group"><span class="lbl">Presets:</span>
@@ -985,7 +986,7 @@ class FieldLab {
                     (tiny ? 'zero here' : qt > 0 ? '<b>same direction as E</b>' : '<b>opposite to E</b> (negative charge)') +
                     `; U = qV = ${fmtS(q * V, 'J')}`;
         } else html += `<span class="m">Pick a test charge to see the force F = qE on it.</span>`;
-        if (L.equip && this.dV) html += `<br><span class="m">Gold lines are drawn every ${fmt(this.dV, 'V')}; the white one is V = 0.</span>`;
+        if (L.equip && this.dV) html += `<br><span class="m">Gold lines are drawn every ${fmt(this.dV, 'V')}; the ${document.documentElement.dataset.theme === 'light' ? 'black' : 'white'} one is V = 0.</span>`;
         if (tiny && Math.abs(V) >= 300) html += `<br><span class="g">E = 0 but V ≠ 0 here.</span>`;
         if (!tiny && Math.abs(V) < 300) html += `<br><span class="g">V = 0 but E ≠ 0 here.</span>`;
         this.out.innerHTML = html;
