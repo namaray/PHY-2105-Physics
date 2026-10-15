@@ -3,8 +3,7 @@
 (function () {
     var KEY = 'phy2105-theme', root = document.documentElement, saved = null;
     try { saved = localStorage.getItem(KEY); } catch (e) {}
-    var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-    root.setAttribute('data-theme', saved || (prefersLight ? 'light' : 'dark'));
+    root.setAttribute('data-theme', saved || 'light');      // light unless the visitor picked dark
 
     function addButton() {
         var b = document.createElement('button');
