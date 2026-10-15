@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finals Cheat Sheet — PHY-2105</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-block { background: rgba(255,255,255,0.05); padding: 0.9rem; border-radius: 10px; border-left: 4px solid var(--accent-color); margin: 0.8rem 0; font-size: 1.05rem; overflow-x: auto; overflow-y: hidden; text-align: center; }
+        .formula-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.1rem 1.3rem; margin: 1rem 0; }
+        .formula-card h4 { color: var(--accent-color); margin-bottom: 0.4rem; font-size: 0.98rem; }
+        .formula-card p.note { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.4rem; }
+        .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 768px) { .formula-grid { grid-template-columns: 1fr; } }
+        .badge { display:inline-block; padding:0.2rem 0.7rem; border-radius:20px; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; }
+        .badge-math { background: rgba(99,102,241,0.2); color:#818cf8; }
+        .badge-short { background: rgba(236,72,153,0.2); color:#f472b6; }
+        .badge-graph { background: rgba(34,197,94,0.2); color:#4ade80; }
+        .notes-section { margin-bottom: 3rem; }
+        .notes-container { max-width: 880px; margin: 0 auto; padding: 2rem; }
+        .nav-bar { display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; padding:1rem 0; margin-bottom:2rem; border-bottom:1px solid rgba(255,255,255,0.1); }
+        .nav-bar a { color: var(--accent-color); text-decoration:none; font-weight:600; }
+        .nav-bar a:hover { text-decoration: underline; }
+        .warning-box { background: rgba(245,158,11,0.1); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .warning-box h4 { color:#f59e0b; margin-bottom:0.4rem; }
+        .excluded-box { background: rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.28); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .excluded-box h4 { color:#ef4444; margin-bottom:0.4rem; }
+        .good-box { background: rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.3); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .good-box h4 { color:#4ade80; margin-bottom:0.4rem; }
+        .exam-banner { background: linear-gradient(135deg, rgba(255,65,108,0.15), rgba(255,75,43,0.15)); border:1px solid rgba(255,65,108,0.3); border-radius:16px; padding:1.8rem; margin-bottom:2rem; text-align:center; }
+        .exam-banner h2 { color:#ff416c; margin-bottom:0.4rem; font-size:1.5rem; }
+        .exam-banner .exam-date { font-size:1.2rem; font-weight:700; }
+        .exam-banner .exam-meta { color: var(--text-secondary); margin-top:0.4rem; font-size:0.95rem; }
+        .marks-bar { display:flex; border-radius:12px; overflow:hidden; margin:1.2rem 0; height:38px; font-weight:700; font-size:0.85rem; }
+        .marks-math { background: linear-gradient(90deg,#6366f1,#8b5cf6); flex:7.5; display:flex; align-items:center; justify-content:center; color:#fff; }
+        .marks-short { background: linear-gradient(90deg,#f59e0b,#ef4444); flex:2.5; display:flex; align-items:center; justify-content:center; color:#fff; }
+        .collapsible-header { cursor:pointer; user-select:none; }
+        .collapsible-header::after { content:' ▾'; font-size:0.8em; color:var(--text-secondary); }
+        .collapsible-header.collapsed::after { content:' ▸'; }
+        .collapsible-body.collapsed { display:none; }
+        .checklist { list-style:none; padding:0; }
+        .checklist li { display:flex; gap:0.7rem; align-items:center; padding:0.6rem 0.9rem; margin:0.35rem 0; background:rgba(255,255,255,0.04); border-left:3px solid rgba(255,255,255,0.12); border-radius:8px; cursor:pointer; transition:all 0.2s ease; }
+        .checklist li:hover { background:rgba(255,255,255,0.07); transform:translateX(4px); }
+        .checklist li input[type="checkbox"] { width:18px; height:18px; accent-color:var(--accent-color); cursor:pointer; flex-shrink:0; }
+        .checklist li.checked { opacity:0.5; text-decoration:line-through; border-left-color:#22c55e; }
+        .progress-bar-container { width:100%; height:10px; background:rgba(255,255,255,0.1); border-radius:5px; overflow:hidden; }
+        .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,#6366f1,#a855f7); transition:width 0.4s ease; }
+        .progress-text { font-size:0.85rem; color:var(--text-secondary); text-align:right; margin-top:0.3rem; }
+        table.tbl { width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.93rem; }
+        table.tbl th, table.tbl td { padding:0.55rem 0.7rem; text-align:left; border-bottom:1px solid rgba(255,255,255,0.1); }
+        table.tbl th { color: var(--accent-color); }
+        .part-header { color:var(--accent-color); border-bottom:2px solid rgba(99,102,241,0.35); padding-bottom:0.4rem; margin:2.5rem 0 1.2rem; font-size:1.15rem; }
+        .qa { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:0.9rem 1.2rem; margin:0.8rem 0; }
+        .qa .q { color:#f472b6; font-weight:600; margin-bottom:0.35rem; }
+        .ex { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
+        .ex h4 { color:var(--accent-color); margin-bottom:0.5rem; }
+        .fc-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:0.8rem; }
+        @media (max-width: 900px) { .fc-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) { .fc-grid { grid-template-columns: 1fr; } }
+        .fc { background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:0.7rem 0.9rem; }
+        .fc h4 { color: var(--accent-color); font-size:0.9rem; margin-bottom:0.2rem; }
+        .fc .fx { text-align:center; font-size:1.0rem; overflow-x:auto; overflow-y:hidden; }
+        .fc p { font-size:0.82rem; color: var(--text-secondary); margin-top:0.2rem; }
+        .chap { border-left:4px solid; padding-left:0.8rem; margin:2.4rem 0 1rem; }
+        .chap.c1 { border-color:#f472b6; } .chap.c2 { border-color:#38bdf8; } .chap.c3 { border-color:#fbbf24; } .chap.c4 { border-color:#4ade80; }
+        .chap small { color: var(--text-secondary); font-weight:400; font-size:0.85rem; }
+        .chap small a { color: var(--accent-color); }
+        .rule-list li { margin:0.3rem 0; }
+        .fig-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:0.8rem; }
+        @media (max-width: 800px) { .fig-grid { grid-template-columns: 1fr 1fr; } }
+        .fig-grid img { width:100%; display:block; border-radius:8px; }
+        .fig-grid p { font-size:0.8rem; color: var(--text-secondary); text-align:center; margin-top:0.3rem; }
+        .linkrow { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.6rem; }
+        .linkrow a { padding:0.3rem 0.8rem; border-radius:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:var(--text-primary); text-decoration:none; font-size:0.88rem; }
+        .linkrow a:hover { border-color: var(--accent-color); }
+        table.tbl td a { color: var(--accent-color); }
+        @media print {
+            body { background:#fff !important; color:#000 !important; }
+            .background-elements, .nav-bar, .linkrow, .no-print { display:none !important; }
+            .fc, .formula-card, .qa, .warning-box, .good-box { background:#fff !important; border:1px solid #999 !important; break-inside: avoid; }
+            .fc h4, h2, h3, table.tbl th { color:#000 !important; }
+            .fc p, p, li, td { color:#111 !important; }
+            .notes-container { max-width:none; padding:0; }
+            .fig-grid img { filter: invert(1) hue-rotate(180deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div class="container notes-container">
+        <nav class="nav-bar">
+            <a href="index.html" class="back-btn"><span>←</span> Back to Home</a>
+            <a href="coulombs-law.html">Coulomb's Law</a>
+            <a href="electric-fields.html">Electric Field</a>
+            <a href="electric-potential.html">Electric Potential</a>
+        </nav>
+
+        <header class="notes-header">
+            <h1>📒 Finals Cheat Sheet</h1>
+            <p class="subtitle">PHY-2105 • Coulomb's Law · Electric Field · Electric Potential</p>
+        </header>
+
+        <div class="good-box no-print">
+            <h4>📚 Everything for the final, in one place</h4>
+            <p>This page condenses the three chapters. For full explanations and worked solutions:</p>
+            <div class="linkrow">
+                <a href="coulombs-law.html">Notes: Coulomb's Law</a>
+                <a href="electric-fields.html">Notes: Electric Field</a>
+                <a href="electric-potential.html">Notes: Electric Potential</a>
+                <a href="quiz3-problems.html">Solved: Coulomb's Law</a>
+                <a href="quiz4-problems.html">Solved: Electric Field</a>
+                <a href="quiz5-problems.html">Solved: Electric Potential</a>
+                <a href="assignment2.html">Solved: Assignment-2</a>
+            </div>
+            <p style="margin-top:0.6rem">Prints cleanly on white paper (Ctrl+P) — the navigation is hidden and the diagrams flip to dark-on-light.</p>
+        </div>
+
+        <!-- ================= 0. CONSTANTS ================= -->
+        <h2 class="chap c4">0. Constants &amp; Units</h2>
+        <table class="tbl">
+            <tr><th>Quantity</th><th>Value</th><th>Quantity</th><th>Value</th></tr>
+            <tr><td>\(k = 1/4\pi\varepsilon_0\)</td><td>\(8.99\times10^{9}\) N·m²/C²</td><td>\(\varepsilon_0\)</td><td>\(8.85\times10^{-12}\) C²/N·m²</td></tr>
+            <tr><td>\(e\)</td><td>\(1.6\times10^{-19}\) C</td><td>1 eV</td><td>\(1.6\times10^{-19}\) J</td></tr>
+            <tr><td>\(m_e\)</td><td>\(9.11\times10^{-31}\) kg</td><td>\(m_p\)</td><td>\(1.67\times10^{-27}\) kg</td></tr>
+            <tr><td>\(G\)</td><td>\(6.67\times10^{-11}\) N·m²/kg²</td><td>\(N_A\)</td><td>\(6.022\times10^{23}\) /mol</td></tr>
+            <tr><td>1 D (debye)</td><td>\(3.34\times10^{-30}\) C·m</td><td>\(g\)</td><td>9.8 m/s²</td></tr>
+        </table>
+        <p class="note" style="font-size:0.88rem;color:var(--text-secondary)">Prefixes: m \(10^{-3}\) · μ \(10^{-6}\) · n \(10^{-9}\) · p \(10^{-12}\) · f \(10^{-15}\) · cm → ×\(10^{-2}\) · nm → ×\(10^{-9}\) · fm → ×\(10^{-15}\).
+        The slides sometimes round \(k \approx 9\times10^9\) or even \(10^{10}\) — say which you use.</p>
+
+        <!-- ================= 1. COULOMB ================= -->
+        <h2 class="chap c1">1. Charge &amp; Coulomb's Law <small>— notes: <a href="coulombs-law.html">coulombs-law.html</a></small></h2>
+        <div class="fc-grid">
+            <div class="fc"><h4>Coulomb's law</h4><div class="fx">\[ F = \frac{k|q_1q_2|}{r^2} \]</div><p>Like charges repel, unlike attract. Force acts along the line joining them.</p></div>
+            <div class="fc"><h4>Vector form</h4><div class="fx">\[ \vec F_{12} = \frac{kq_1q_2}{r^2}\,\hat r_{12} \]</div><p>\(\hat r\) points from the source to the charge acted on.</p></div>
+            <div class="fc"><h4>Superposition</h4><div class="fx">\[ \vec F_{net} = \vec F_1 + \vec F_2 + \cdots \]</div><p>Vector sum: resolve, add components, recombine.</p></div>
+            <div class="fc"><h4>Resultant</h4><div class="fx">\[ F = \sqrt{F_x^2+F_y^2},\ \ \theta = \tan^{-1}\frac{F_y}{F_x} \]</div><p>Check the quadrant from the signs.</p></div>
+            <div class="fc"><h4>Quantization</h4><div class="fx">\[ q = ne,\quad n = \frac{q}{e} \]</div><p>Charge comes in whole multiples of e.</p></div>
+            <div class="fc"><h4>Charge in a sample</h4><div class="fx">\[ q = \frac{m}{M}N_A\,Z\,e \]</div><p>M = molar mass, Z = electrons (protons) per atom/unit.</p></div>
+            <div class="fc"><h4>Spheres (surface gap r)</h4><div class="fx">\[ F = \frac{kq_1q_2}{(r + 2R)^2} \]</div><p>Always use centre-to-centre distance.</p></div>
+            <div class="fc"><h4>Electric vs gravity</h4><div class="fx">\[ \frac{F_e}{F_g} = \frac{kq_1q_2}{Gm_1m_2} \]</div><p>r cancels. Two electrons: \(4\times10^{42}\); e–p: \(2\times10^{39}\).</p></div>
+            <div class="fc"><h4>Newton's 2nd law</h4><div class="fx">\[ a = \frac{F}{m} \]</div><p>"Acceleration as they separate".</p></div>
+            <div class="fc"><h4>Current</h4><div class="fx">\[ I = \frac{dq}{dt},\quad Q = \int i\,dt \]</div><p>Q = area under the i–t graph.</p></div>
+            <div class="fc"><h4>Voltage</h4><div class="fx">\[ V = \frac{dW}{dq} \]</div><p>1 V = 1 J/C.</p></div>
+            <div class="fc"><h4>Power</h4><div class="fx">\[ P = VI = \frac{dW}{dt},\quad W = \int P\,dt \]</div><p>Energy = area under the P–t graph.</p></div>
+        </div>
+        <div class="qa"><div class="q">Key facts (short questions)</div>
+            <ul class="rule-list">
+                <li><strong>Two kinds of charge;</strong> like repel, unlike attract. Charge is <strong>conserved</strong> and <strong>quantized</strong> (\(q = ne\)).</li>
+                <li><strong>Charging:</strong> friction (rubbing transfers electrons), conduction (contact shares charge), induction (nearby charge separates charge, then ground).</li>
+                <li><strong>Conductors</strong> have free electrons (metals); <strong>insulators</strong> don't (glass, rubber); <strong>semiconductors</strong> are in between (Si, Ge).</li>
+                <li>An object is negative if it has gained electrons, positive if it has lost them — protons don't move.</li>
+                <li>The electric force is enormously stronger than gravity; gravity is negligible between particles.</li>
+            </ul>
+        </div>
+
+        <!-- ================= 2. FIELD ================= -->
+        <h2 class="chap c2">2. Electric Field <small>— notes: <a href="electric-fields.html">electric-fields.html</a></small></h2>
+        <div class="fc-grid">
+            <div class="fc"><h4>Definition</h4><div class="fx">\[ \vec E = \frac{\vec F}{q_0} \]</div><p>N/C. Direction = force on a <em>positive</em> test charge.</p></div>
+            <div class="fc"><h4>Point charge</h4><div class="fx">\[ E = \frac{k|q|}{r^2} \]</div><p>Away from +, toward −.</p></div>
+            <div class="fc"><h4>Force from a field</h4><div class="fx">\[ \vec F = q\vec E \]</div><p>Electron: force <strong>opposite</strong> to \(\vec E\).</p></div>
+            <div class="fc"><h4>Superposition</h4><div class="fx">\[ \vec E = \sum \vec E_i \]</div><p>Vector sum — components.</p></div>
+            <div class="fc"><h4>Two equal fields at angle φ</h4><div class="fx">\[ E_{net} = 2E\cos\frac{\varphi}{2} \]</div><p>60° → \(\sqrt3E\); 90° → \(\sqrt2E\); 120° → \(E\).</p></div>
+            <div class="fc"><h4>Null point (like charges)</h4><div class="fx">\[ \frac{q_1}{x^2} = \frac{q_2}{(d-x)^2} \]</div><p>Between them, nearer the smaller one. Square-root both sides. (Unlike charges: outside, beyond the smaller.)</p></div>
+            <div class="fc"><h4>Acceleration in a field</h4><div class="fx">\[ a = \frac{|q|E}{m} \]</div><p>Then \(v = v_0 + at\), \(x = v_0t + \tfrac12at^2\).</p></div>
+            <div class="fc"><h4>Line charge element</h4><div class="fx">\[ dq = \lambda\,ds,\quad dE = \frac{k\,dq}{r^2} \]</div><p>λ = charge per length (C/m).</p></div>
+            <div class="fc"><h4>Charged ring (axis)</h4><div class="fx">\[ E = \frac{kqz}{(z^2+R^2)^{3/2}} \]</div><p>0 at the centre; \(\to kq/z^2\) far away.</p></div>
+            <div class="fc"><h4>Dipole moment</h4><div class="fx">\[ p = qd \]</div><p>Points <strong>from − to +</strong>. C·m. Molecule (slide method): \(d = p/Ne\).</p></div>
+            <div class="fc"><h4>Dipole field (far, on axis)</h4><div class="fx">\[ E = \frac{1}{2\pi\varepsilon_0}\frac{p}{z^3} = \frac{2kp}{z^3} \]</div><p>Falls as \(1/z^3\). On the bisector: \(kp/r^3\).</p></div>
+            <div class="fc"><h4>Torque on a dipole</h4><div class="fx">\[ \tau = pE\sin\theta,\quad \vec\tau = \vec p\times\vec E \]</div><p>Max \(pE\) at 90°; zero at 0° and 180°.</p></div>
+            <div class="fc"><h4>Dipole potential energy</h4><div class="fx">\[ U = -pE\cos\theta = -\vec p\cdot\vec E \]</div><p>\(-pE\) at 0° (stable), \(+pE\) at 180° (unstable).</p></div>
+            <div class="fc"><h4>Work rotating a dipole</h4><div class="fx">\[ W_{field} = -\Delta U,\quad W_{agent} = U_f - U_i \]</div><p>0°→180°: \(2pE\); 0°→θ: \(pE(1-\cos\theta)\).</p></div>
+            <div class="fc"><h4>Cross product</h4><div class="fx">\[ \vec a\times\vec b = \begin{vmatrix}\hat i&\hat j&\hat k\\a_x&a_y&a_z\\b_x&b_y&b_z\end{vmatrix} \]</div><p>Don't drop the minus on the ĵ term.</p></div>
+        </div>
+        <div class="qa"><div class="q">Field-line rules (short questions + drawings)</div>
+            <ul class="rule-list">
+                <li>Tangent to a line = direction of \(\vec E\); line density ∝ \(E\) (close lines = strong field).</li>
+                <li>Lines start on + and end on − (or at infinity); they <strong>never cross</strong> (E has one direction at a point).</li>
+                <li>Number of lines ∝ charge (draw twice as many for 2q). Introduced by <strong>Faraday</strong>.</li>
+                <li>Sphere: radial. Large sheet: parallel, uniform. Dipole: curve from + to −. Two like charges: repel, with a null point between.</li>
+                <li>Dipole in a uniform field: no net force (equal, opposite), but a torque that turns \(\vec p\) toward \(\vec E\). Microwave ovens rotate water dipoles.</li>
+            </ul>
+        </div>
+
+        <!-- ================= 3. POTENTIAL ================= -->
+        <h2 class="chap c3">3. Electric Potential <small>— notes: <a href="electric-potential.html">electric-potential.html</a></small></h2>
+        <div class="fc-grid">
+            <div class="fc"><h4>Potential energy change</h4><div class="fx">\[ \Delta U = U_f - U_i = -W \]</div><p>W = work by the field. Field does + work → U falls.</p></div>
+            <div class="fc"><h4>Potential</h4><div class="fx">\[ V = \frac{U}{q} \]</div><p>Volt = J/C. A <strong>scalar</strong> — add with signs.</p></div>
+            <div class="fc"><h4>Potential difference</h4><div class="fx">\[ \Delta V = \frac{\Delta U}{q} = -\frac{W}{q} \]</div><p>Keep the sign of q (electron: q = −e).</p></div>
+            <div class="fc"><h4>Work to bring q from ∞</h4><div class="fx">\[ W_{ext} = qV \]</div><p>Path doesn't matter.</p></div>
+            <div class="fc"><h4>From the field</h4><div class="fx">\[ V_f - V_i = -\int_i^f \vec E\cdot d\vec s \]</div><p>V falls along \(\vec E\).</p></div>
+            <div class="fc"><h4>Uniform field</h4><div class="fx">\[ \Delta V = -Ed \]</div><p>Magnitude \(V = Ed\).</p></div>
+            <div class="fc"><h4>Point charge</h4><div class="fx">\[ V = \frac{kq}{r} \]</div><p>Sign of q stays in. 1/r, not 1/r².</p></div>
+            <div class="fc"><h4>Group of charges</h4><div class="fx">\[ V = \sum \frac{kq_i}{r_i} \]</div><p>No components, no angles.</p></div>
+            <div class="fc"><h4>Equal distances</h4><div class="fx">\[ V = \frac{k\sum q_i}{r} \]</div><p>Square centre, arc centre, ring axis.</p></div>
+            <div class="fc"><h4>Point-charge shortcut</h4><div class="fx">\[ V = Er \]</div><p>From \(E = kq/r^2\), \(V = kq/r\).</p></div>
+            <div class="fc"><h4>Dipole (far)</h4><div class="fx">\[ V = \frac{kp\cos\theta}{r^2} \]</div><p>θ from the axis; 0 on the bisector.</p></div>
+            <div class="fc"><h4>Continuous charge</h4><div class="fx">\[ V = \int \frac{k\,dq}{r} \]</div><p>Still a scalar sum.</p></div>
+            <div class="fc"><h4>Gradient</h4><div class="fx">\[ E_s = -\frac{dV}{ds} \]</div><p>E points where V falls fastest.</p></div>
+            <div class="fc"><h4>Pair energy</h4><div class="fx">\[ U = \frac{kq_1q_2}{r} \]</div><p>Like: + ; unlike: −.</p></div>
+            <div class="fc"><h4>System energy</h4><div class="fx">\[ U = \sum_{pairs}\frac{kq_iq_j}{r_{ij}} \]</div><p>3 charges → 3 pairs; 4 → 6.</p></div>
+            <div class="fc"><h4>Closest approach</h4><div class="fx">\[ K_{initial} = \frac{kq_1q_2}{r_{min}} \]</div><p>Two movers: add both K's (slide method).</p></div>
+            <div class="fc"><h4>Electron-volt</h4><div class="fx">\[ \Delta U\,[\text{eV}] = (q/e)\,\Delta V \]</div><p>J ÷ \(1.6\times10^{-19}\) → eV.</p></div>
+            <div class="fc"><h4>Energy conservation</h4><div class="fx">\[ K_i + U_i = K_f + U_f \]</div><p>Speed from a potential drop: \(\tfrac12mv^2 = |q\Delta V|\).</p></div>
+        </div>
+        <div class="qa"><div class="q">Equipotentials (short questions + drawings)</div>
+            <ul class="rule-list">
+                <li>Equipotential = surface of equal V. Moving along it: \(\Delta V = 0\), so <strong>no work</strong>.</li>
+                <li>Always <strong>perpendicular</strong> to field lines; closer together where E is stronger.</li>
+                <li>Point charge: concentric spheres. Uniform field: parallel planes. Dipole: the bisector is the V = 0 surface.</li>
+                <li>V can be 0 where E ≠ 0 (midway in a dipole); E can be 0 where V ≠ 0 (midway between equal + charges).</li>
+            </ul>
+        </div>
+
+        <!-- ================= 4. COMPARISON ================= -->
+        <h2 class="chap c4">4. Force vs Field vs Potential vs Energy</h2>
+        <table class="tbl">
+            <tr><th></th><th>Force F</th><th>Field E</th><th>Potential V</th><th>Potential energy U</th></tr>
+            <tr><td>Point charge</td><td>\(kq_1q_2/r^2\)</td><td>\(kq/r^2\)</td><td>\(kq/r\)</td><td>\(kq_1q_2/r\)</td></tr>
+            <tr><td>Type</td><td>vector</td><td>vector</td><td><strong>scalar</strong></td><td><strong>scalar</strong></td></tr>
+            <tr><td>Unit</td><td>N</td><td>N/C = V/m</td><td>V = J/C</td><td>J (or eV)</td></tr>
+            <tr><td>Falls off as</td><td>\(1/r^2\)</td><td>\(1/r^2\) (dipole \(1/r^3\))</td><td>\(1/r\) (dipole \(1/r^2\))</td><td>\(1/r\)</td></tr>
+            <tr><td>Belongs to</td><td>a pair</td><td>the point</td><td>the point</td><td>the system</td></tr>
+            <tr><td>Combine by</td><td>vector sum</td><td>vector sum</td><td>plain sum with signs</td><td>sum over pairs</td></tr>
+            <tr><td>Links</td><td>\(F = qE\)</td><td>\(E = -dV/ds\)</td><td>\(V = U/q\)</td><td>\(U = qV\)</td></tr>
+        </table>
+
+        <!-- ================= 5. DIRECTIONS ================= -->
+        <h2 class="chap c1">5. Direction Rules — "Which Way?"</h2>
+        <div class="warning-box">
+            <ul class="rule-list">
+                <li><strong>Force:</strong> like charges push apart (force on a charge points away from the other); unlike pull together (toward the other).</li>
+                <li><strong>Field:</strong> points <em>away</em> from a + source and <em>toward</em> a − source — regardless of what's at the point.</li>
+                <li><strong>Negative test charge:</strong> its force is opposite to \(\vec E\). So an electron moves <em>against</em> the field, toward higher V.</li>
+                <li><strong>Potential:</strong> falls along \(\vec E\). A + charge moves toward lower V, a − charge toward higher V; both lose U.</li>
+                <li><strong>Dipole:</strong> \(\vec p\) points − → +. On its axis \(\vec E\) is along \(\vec p\); on the bisector \(\vec E\) is opposite to \(\vec p\). Torque turns \(\vec p\) toward \(\vec E\).</li>
+                <li><strong>Symmetry:</strong> equal charges at equal distances on opposite sides cancel (field/force). For potential nothing cancels by direction — only by sign.</li>
+                <li><strong>Angle convention:</strong> give θ from +x (0–360°), or "x° above the −x axis". Check the quadrant from the signs of the components.</li>
+            </ul>
+        </div>
+
+        <!-- ================= 6. GEOMETRY ================= -->
+        <h2 class="chap c2">6. Geometry Shortcuts</h2>
+        <table class="tbl">
+            <tr><th>Situation</th><th>Distance / result</th></tr>
+            <tr><td>Square of side a — corner to centre</td><td>\(r = a/\sqrt2\) (diagonal \(a\sqrt2\))</td></tr>
+            <tr><td>Rectangle 2a × a — corner to centre</td><td>\(\sqrt{a^2 + (a/2)^2} = \tfrac{\sqrt5}{2}a\)</td></tr>
+            <tr><td>Equilateral triangle side a — height; vertex to centroid</td><td>\(\tfrac{\sqrt3}{2}a\); \(a/\sqrt3\)</td></tr>
+            <tr><td>Isosceles right triangle legs a — hypotenuse</td><td>\(a\sqrt2\); midpoint of hypotenuse is \(a/\sqrt2\) from all three corners</td></tr>
+            <tr><td>Point on the bisector, charges ±d apart, height y</td><td>\(r = \sqrt{d^2 + y^2}\); \(\cos\theta = d/r\), \(\sin\theta = y/r\)</td></tr>
+            <tr><td>3-4-5 and 1-2-√5 triangles</td><td>\(\cos = 3/5, 4/5\); \(\cos = 1/\sqrt5, 2/\sqrt5\)</td></tr>
+            <tr><td>Two equal vectors at angle φ</td><td>\(2E\cos(\varphi/2)\) along the bisector</td></tr>
+            <tr><td>Square with all four equal charges, at centre</td><td>E = 0, F = 0; but V = 4kq/r</td></tr>
+        </table>
+
+        <!-- ================= 7. PROBLEM MAP ================= -->
+        <h2 class="chap c3">7. Problem Type → Method → Worked Example</h2>
+        <table class="tbl">
+            <tr><th>Problem type</th><th>Method</th><th>Practise</th></tr>
+            <tr><td>Charges on a line</td><td>Signs along x; arrows first</td><td><a href="quiz3-problems.html#ex-4">Coulomb Ex-4</a>, <a href="assignment2.html#q4">A2 Q4</a></td></tr>
+            <tr><td>Charges in 2-D (triangle, square)</td><td>Each vector → components → resultant</td><td><a href="quiz3-problems.html#ex-5">Coulomb Ex-5</a>, <a href="assignment2.html#q2">A2 Q2</a>, <a href="assignment2.html#q6">Q6</a>, <a href="quiz4-problems.html#slide-1">Field P1</a></td></tr>
+            <tr><td>Null point</td><td>\(q_1/x^2 = q_2/(d-x)^2\), square-root</td><td><a href="quiz3-problems.html#p-6">Coulomb P6</a>, <a href="assignment2.html#q1">A2 Q1</a>, <a href="quiz4-problems.html#pps-2">Field PPS 2</a></td></tr>
+            <tr><td>Charge in matter / stripped pennies</td><td>\(q = (m/M)N_AZe\), then F, a</td><td><a href="assignment2.html#q3">A2 Q3</a>, <a href="assignment2.html#q5">Q5</a></td></tr>
+            <tr><td>Electric vs gravity</td><td>Ratio; r cancels</td><td><a href="quiz3-problems.html#ex-6">Coulomb Ex-6</a>, <a href="quiz3-problems.html#p-7">P7</a></td></tr>
+            <tr><td>Field at a point (off-axis)</td><td>Away/toward → components</td><td><a href="assignment2.html#q7">A2 Q7</a>, <a href="quiz4-problems.html#pps-12">Field PPS 12</a></td></tr>
+            <tr><td>Symmetric arrays</td><td>Cancel pairs first</td><td><a href="assignment2.html#q10">A2 Q10</a>, <a href="quiz4-problems.html#pps-5">Field PPS 5</a></td></tr>
+            <tr><td>Dipole: p, τ, U, W</td><td>\(p = qd\); \(pE\sin\theta\); \(-pE\cos\theta\); \(U_f - U_i\)</td><td><a href="quiz4-problems.html#slide-3">Field P3</a>, <a href="assignment2.html#q8">A2 Q8</a></td></tr>
+            <tr><td>Dipole field / potential far away</td><td>\(2kp/z^3\); \(kp\cos\theta/r^2\)</td><td><a href="assignment2.html#q9">A2 Q9</a>, <a href="quiz5-problems.html#pps-7">Potential PPS 7</a></td></tr>
+            <tr><td>ΔU and ΔV for a moving charge</td><td>\(W = qEd\cos\theta\), \(\Delta U = -W\), \(\Delta V = \Delta U/q\)</td><td><a href="quiz5-problems.html#slide-1">Potential P1</a>, <a href="quiz5-problems.html#pps-13">PPS 13</a></td></tr>
+            <tr><td>Potential of several charges</td><td>\(\sum kq_i/r_i\) with signs</td><td><a href="quiz5-problems.html#slide-2">Potential P2</a>, <a href="quiz5-problems.html#pps-17">PPS 17</a>, <a href="quiz5-problems.html#pps-18">18</a></td></tr>
+            <tr><td>Work to bring a charge in</td><td>\(W = qV\) at the end point</td><td><a href="quiz5-problems.html#pps-10">PPS 10</a>, <a href="quiz5-problems.html#pps-14">14</a></td></tr>
+            <tr><td>Energy of a configuration</td><td>Sum over pairs</td><td><a href="quiz5-problems.html#slide-6">Potential P6</a>, <a href="quiz5-problems.html#pps-16">PPS 16</a></td></tr>
+            <tr><td>Closest approach</td><td>\(K = kq_1q_2/r_{min}\)</td><td><a href="quiz5-problems.html#pps-8">PPS 8</a>, <a href="quiz5-problems.html#pps-9">9</a></td></tr>
+            <tr><td>Graph questions</td><td>See section 9</td><td><a href="quiz4-problems.html#graphs">Field graphs</a>, <a href="quiz5-problems.html#graphs">Potential graphs</a></td></tr>
+        </table>
+
+        <!-- ================= 8. DEFINITIONS ================= -->
+        <h2 class="chap c4">8. One-Line Definitions</h2>
+        <table class="tbl">
+            <tr><td><strong>Electric field</strong></td><td>Force per unit positive test charge at a point, \(\vec E = \vec F/q_0\).</td></tr>
+            <tr><td><strong>Electric dipole</strong></td><td>Equal and opposite charges ±q a distance d apart; moment \(p = qd\), from − to +.</td></tr>
+            <tr><td><strong>Electric potential</strong></td><td>Work to bring a unit positive charge from the reference point (∞) to the point without acceleration; \(V = U/q\).</td></tr>
+            <tr><td><strong>Potential energy</strong></td><td>Energy of a configuration of charges from the conservative Coulomb force; \(\Delta U = -W\).</td></tr>
+            <tr><td><strong>Equipotential surface</strong></td><td>Adjacent points with the same V; no work is done moving along it.</td></tr>
+            <tr><td><strong>Electron-volt</strong></td><td>Energy gained by charge e through 1 V: \(1.6\times10^{-19}\) J.</td></tr>
+            <tr><td><strong>Linear charge density</strong></td><td>Charge per unit length λ (C/m).</td></tr>
+            <tr><td><strong>Quantization / conservation</strong></td><td>q = ne; the total charge of an isolated system never changes.</td></tr>
+        </table>
+
+        <!-- ================= 9. GRAPHS ================= -->
+        <h2 class="chap c1">9. Graphs to Be Able to Sketch</h2>
+        <div class="fig-grid">
+            <div><img src="quiz4-figures/fl-positive.svg" alt="Field lines of a positive charge"><p>Field lines: + charge</p></div>
+            <div><img src="quiz4-figures/fl-dipole.svg" alt="Field lines of a dipole"><p>Field lines: dipole</p></div>
+            <div><img src="quiz4-figures/fl-two-positive.svg" alt="Field lines of two positive charges"><p>Field lines: two + charges</p></div>
+            <div><img src="quiz5-figures/eq-dipole.svg" alt="Dipole equipotentials"><p>Equipotentials ⊥ field lines</p></div>
+            <div><img src="quiz5-figures/eq-point.svg" alt="Point charge equipotentials"><p>Point charge: circles</p></div>
+            <div><img src="quiz5-figures/eq-uniform.svg" alt="Uniform field equipotentials"><p>Uniform field: planes</p></div>
+            <div><img src="quiz4-figures/g-E-vs-r.svg" alt="E against r"><p>E vs r: 1/r² and 1/r³</p></div>
+            <div><img src="quiz5-figures/g-V-and-E-vs-r.svg" alt="V and E against r"><p>V (1/r) vs E (1/r²)</p></div>
+            <div><img src="quiz4-figures/g-ring.svg" alt="Ring field on its axis"><p>Ring field on its axis</p></div>
+            <div><img src="quiz4-figures/g-dipole-U-tau.svg" alt="Dipole U and torque against angle"><p>Dipole U and τ vs θ</p></div>
+            <div><img src="quiz5-figures/g-V-on-axis.svg" alt="V along the line through two charges"><p>V along two charges</p></div>
+            <div><img src="quiz5-figures/g-U-vs-r.svg" alt="U against separation"><p>U vs r (closest approach)</p></div>
+        </div>
+
+        <!-- ================= 10. TRAPS ================= -->
+        <h2 class="chap c2">10. Traps &amp; Known Slide Errors</h2>
+        <div class="warning-box">
+            <h4>Easy marks people lose</h4>
+            <ul class="rule-list">
+                <li><strong>Formula line first</strong>, then numbers — method marks survive arithmetic slips.</li>
+                <li><strong>Draw the arrows before calculating.</strong> Most wrong answers are direction errors.</li>
+                <li><strong>Vectors for F and E, scalars for V and U.</strong> Never resolve a potential; never add field magnitudes at an angle.</li>
+                <li><strong>r vs r²:</strong> V and U use r; F and E use r².</li>
+                <li><strong>Signs:</strong> use |q| for force/field sizes and get direction from the picture; keep the sign in V and U.</li>
+                <li><strong>Electrons:</strong> force opposite to E; \(\Delta V = \Delta U/q\) with q = −e.</li>
+                <li><strong>Agent vs field work:</strong> \(W_{agent} = +\Delta U\), \(W_{field} = -\Delta U\).</li>
+                <li><strong>Units:</strong> cm → m, μ/n/p/f prefixes, fm, eV ↔ J.</li>
+                <li><strong>State assumptions</strong> when a question is ambiguous (which corner, which axis, which value of k).</li>
+            </ul>
+        </div>
+        <div class="excluded-box">
+            <h4>⚠️ Slide answers that are wrong — know both</h4>
+            <ul class="rule-list">
+                <li><strong>Coulomb's Law Example-5:</strong> slide prints \(0.802\times10^{-4}\) N — that's \(F^2\); the force is \(\sqrt{0.802} = 0.896\times10^{-4}\) N.</li>
+                <li><strong>Electric Potential Problem-1:</strong> slide prints ΔV = 45 kV; \(1.2\times10^{-14}/1.6\times10^{-19} = 7.5\times10^4\) V (exactly \(Ed = 7.8\times10^4\) V unrounded).</li>
+                <li><strong>Closest approach (proton + alpha):</strong> slide method gives \(4ke^2/5mv^2\); the momentum-correct value is \(5ke^2/4mv^2\). Use the slide's in the exam.</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Made for PHY-2105 • Summer 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
