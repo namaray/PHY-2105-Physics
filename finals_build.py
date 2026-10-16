@@ -856,6 +856,324 @@ def paper_253():
     return meta, out
 
 
+# ================================================================== PAPER 252
+def reuse(paper_fn, part):
+    """Solution body of an identical question already solved on another paper."""
+    _, cards = paper_fn()
+    tag = '<details open><summary>📝 Solution</summary>'
+    for c in cards:
+        if f'id="q{part}"' in c:
+            return c[c.index(tag) + len(tag):c.rindex("</details>")]
+    raise KeyError(part)
+
+
+def d252_1a():
+    d = D(360, 170, "Between unlike charges both fields point the same way")
+    y = 70
+    d.line(30, y, 330, y, "ln", 1)
+    d.charge(70, y, 1, r=12); d.charge(290, y, -1, r=12)
+    d.text(70, y + 28, "+q", "txt", 11, bold=True); d.text(290, y + 28, "−q", "txt", 11, bold=True)
+    x = 120
+    d.dot(x, y, "txt", 4); d.text(x, y + 20, "a point between", "mut", 9.5)
+    d.arrow(x, y - 14, x + 45, y - 14, "pos", 2.4, 8); d.text(x + 50, y - 10, "E₊ (away from +)", "pos", 9.5, "start", True)
+    d.arrow(x, y - 32, x + 60, y - 32, "neg", 2.4, 8); d.text(x + 65, y - 28, "E₋ (toward −)", "neg", 9.5, "start", True)
+    d.text(180, 120, "same direction → they add → E ≠ 0 anywhere between", "net", 10.5, bold=True)
+    d.text(180, 140, "(a null point can exist only outside, beyond the smaller charge)", "mut", 9.5)
+    return d.svg()
+
+
+def d252_1b():
+    d = D(380, 190, "Water dipoles flipping in the oscillating field of a microwave oven")
+    for i, (dirn, th) in enumerate((("right", 0), ("left", 180))):
+        cx = 95 + i * 190
+        d.field(cx - 80, cx + 80, 22, 132, dirn, 3, 0.3)
+        d.text(cx + (70 if dirn == "right" else -70), 16, "E →" if dirn == "right" else "← E", "fld", 10, "end" if dirn == "right" else "start", True)
+        ox, oy = cx - 18 * cos(radians(th)), 78
+        for a in (52.5, -52.5):
+            ang = radians(th + a)
+            hx, hy = ox + 28 * cos(ang), oy - 28 * sin(ang)
+            d.line(ox, oy, hx, hy, "ln", 2)
+            d.charge(hx, hy, 1, r=8)
+        d.charge(ox, oy, -1, r=14)
+        d.text(ox - 24 * cos(radians(th)), oy + 4, "O", "txt", 10.5, "middle", True)
+        d.arrow(ox - 4 * cos(radians(th)), oy + 34, ox + 32 * cos(radians(th)), oy + 34, "net", 2, 7)
+        d.text(ox + 14 * cos(radians(th)), oy + 50, "p lines up with E", "net", 9.5, bold=True)
+    d.arrow(160, 78, 220, 78, "pink", 1.6, 7); d.arrow(220, 92, 160, 92, "pink", 1.6, 7)
+    d.text(190, 176, "E reverses ~5×10⁹ times a second → dipoles keep flipping → friction → heat", "txt", 9.5, bold=True)
+    return d.svg()
+
+
+def d252_2a():
+    d = D(320, 150, "Ball after electrons are pulled out")
+    d.circle(90, 72, 48, "ln", 1.4, fill="pos", op=0.15)
+    for x, y in ((70, 50), (105, 45), (60, 80), (95, 75), (120, 95), (80, 105), (115, 62)):
+        d.charge(x, y, 1, r=6)
+    d.text(90, 140, "q = +3.2×10⁻¹⁵ C", "txt", 10.5, bold=True)
+    d.arrow(140, 50, 180, 30, "neg", 1.6, 6); d.charge(188, 26, -1, r=6)
+    d.text(250, 72, "N = q / e", "net", 12, bold=True)
+    d.text(250, 90, "= 2.0×10⁴ electrons removed", "mut", 10)
+    return d.svg()
+
+
+def d252_2b():
+    d = D(420, 200, "Forces on q1 at the origin")
+    X = lambda x: 130 + x * 28
+    y0 = 46
+    d.line(X(-0.5), y0, X(9.6), y0, "ln", 1.2)
+    for x in range(0, 10):
+        d.line(X(x), y0 - 3, X(x), y0 + 3, "ln", 1); d.text(X(x), y0 + 15, str(x), "mut", 9)
+    for x, q, lab in ((0, 1, "q₁ +20 μC"), (4, -1, "q₂ −10 μC"), (9, 1, "q₃ +40 μC")):
+        d.charge(X(x), y0, q, r=9)
+        d.text(X(x), y0 - 15, lab, "txt", 9.5, bold=True)
+    tx = X(0)
+    rows = [(0.1124, "F₂ = 0.112 N (attracted toward q₂ →)"), (-0.0888, "F₃ = 0.0888 N (repelled by q₃ ←)")]
+    s = 110 / 0.1124
+    d.line(tx, y0 + 10, tx, 182, "mut", 1, "3,3")
+    s = 90 / 0.1124
+    for j, (f, t) in enumerate(rows):
+        y = 100 + 34 * j
+        d.arrow(tx, y, tx + f * s, y, "vec", 2.4, 7)
+        d.text(tx + f * s / 2 + (60 if f > 0 else 40), y - 8, t, "vec", 9.5, "middle", True)
+    d.arrow(tx, 172, tx + 0.0236 * s, 172, "net", 3, 8)
+    d.text(tx + 0.0236 * s + 8, 176, "net 0.0236 N → (+x)", "net", 10, "start", True)
+    return d.svg()
+
+
+def d252_2c():
+    d = D(320, 280, "Forces on q0 at the origin")
+    w = W(d, 170, 130, 26)
+    d.line(w.X(-4.8), w.Y(0), w.X(4.8), w.Y(0), "ln", 1); d.line(w.X(0), w.Y(-4.8), w.X(0), w.Y(4.6), "ln", 1)
+    ch = [(-4, 0, 1), (0, 4, 2), (0, -4, -8)]
+    vectors(w, ch, (0, 0), 1, None, "F = 2.82×10⁻⁸ N", px=86, offsets={1: -14, 2: 14}, lab_net=(w.X(0) + 72, w.Y(0) + 70))
+    d.text(w.X(0) + 18, w.Y(0) - 8, "F₁", "vec", 10.5, "start", True)
+    d.text(w.X(0) - 20, w.Y(0) + 34, "F₂", "vec", 10.5, "end", True)
+    d.text(w.X(0) - 20, w.Y(0) + 86, "F₃", "vec", 10.5, "end", True)
+    for (x, y, q), lab, pos in zip(ch, ("q₁ = +Q", "q₂ = +2Q", "q₃ = −8Q"), ((0, 26, "middle"), (16, 4, "start"), (-16, 4, "end"))):
+        d.charge(*w.P((x, y)), 1 if q > 0 else -1, r=10)
+        d.text(w.X(x) + pos[0], w.Y(y) + pos[1], lab, "txt", 10, pos[2], True)
+    d.charge(*w.P((0, 0)), 1, r=6)
+    d.text(w.X(-2), w.Y(0) - 8, "d", "gold", 10, bold=True); d.text(w.X(0) + 10, w.Y(2), "d", "gold", 10, "start", True)
+    return d.svg()
+
+
+def d252_3a():
+    d = D(360, 150, "Torque on the dipole: parallel and perpendicular")
+    for i, (th, t1, t2) in enumerate(((0, "p ∥ E", "τ = 0"), (90, "p ⊥ E", "τ = pE (maximum)"))):
+        cx = 90 + i * 180
+        d.field(cx - 80, cx + 80, 22, 112, "right", 3, 0.25)
+        L = 30
+        px, py = cx + L * cos(radians(th)), 67 - L * sin(radians(th))
+        nx, ny = cx - L * cos(radians(th)), 67 + L * sin(radians(th))
+        d.line(nx, ny, px, py, "ln", 3)
+        d.arrow(px + 8, py, px + 34, py, "vec", 2, 6); d.arrow(nx - 8, ny, nx - 34, ny, "vec", 2, 6)
+        d.charge(nx, ny, -1, r=8); d.charge(px, py, 1, r=8)
+        if th == 90:
+            d.arc(cx, 67, 18, 140, 40, "pink", 1.8, arrow_end=True)
+        d.text(cx, 130, t1, "txt", 11, bold=True); d.text(cx, 145, t2, "net", 10.5, bold=True)
+    d.text(352, 14, "E →", "fld", 10, "end", True)
+    return d.svg()
+
+
+def d252_3b():
+    d = D(360, 180, "Dipole along z, field along x: perpendicular")
+    o = (120, 120)
+    d.arrow(*o, 300, 120, "vec", 2.6, 9); d.text(304, 124, "E = 24 î", "vec", 10.5, "start", True)
+    d.arrow(*o, 120, 24, "net", 2.6, 9); d.text(128, 30, "p = 5.98×10⁻²⁸ k̂", "net", 10.5, "start", True)
+    d.poly([(o[0], o[1] - 14), (o[0] + 14, o[1] - 14), (o[0] + 14, o[1])], "ln", 1, close=False)
+    d.text(o[0] + 20, o[1] - 20, "90°", "gold", 10.5, "start", True)
+    d.text(180, 160, "U = −p·E = −pE cos 90° = 0", "txt", 10.5, bold=True)
+    d.text(40, 60, "z", "mut", 10); d.text(300, 140, "x", "mut", 10)
+    return d.svg()
+
+
+def d252_3c():
+    d = D(330, 330, "Square: fields at the centre")
+    w = W(d, 165, 160, 3900)
+    a = 0.04
+    h = a / 2
+    corners = [(-h, h, 2, "+2q"), (h, h, 4, "+4q"), (h, -h, -2, "−2q"), (-h, -h, -3, "−3q")]
+    d.poly([w.P((x, y)) for x, y, _, _ in corners], "ln", 1.4)
+    for x, y, _, _ in corners:
+        d.line(*w.P((x, y)), *w.P((0, 0)), "mut", 1, "4,4")
+    vectors(w, [(x, y, q) for x, y, q, _ in corners], (0, 0), 1, ["E₁", "E₂", "E₃", "E₄"], "E = 1.81×10⁵ N/C", px=46,
+            offsets={0: 8, 2: -8, 1: -8, 3: 8}, lab_net=(w.X(0) + 4, w.Y(-h) + 46))
+    for x, y, q, lab in corners:
+        d.charge(*w.P((x, y)), 1 if q > 0 else -1, r=11)
+        d.text(w.X(x) + (16 if x > 0 else -16), w.Y(y) + (-14 if y > 0 else 22), lab, "txt", 10.5, "start" if x > 0 else "end", True)
+    d.dim(*w.P((-h, h)), *w.P((h, h)), "4 cm", off=-22, tdy=-4)
+    return d.svg()
+
+
+def d252_4a():
+    d = D(320, 230, "Two charges and the point P")
+    w = W(d, 160, 190, 38)
+    d.line(w.X(-2.5), w.Y(0), w.X(2.5), w.Y(0), "ln", 1); d.line(w.X(0), w.Y(0), w.X(0), w.Y(4.6), "ln", 1)
+    for x in (-1, 1):
+        d.line(*w.P((x, 0)), *w.P((0, 4)), "gold", 1.3, "4,3")
+    d.text(w.X(-0.5) - 8, w.Y(2), "√17 m", "gold", 10, "end", True); d.text(w.X(0.5) + 8, w.Y(2), "√17 m", "gold", 10, "start", True)
+    d.charge(*w.P((-1, 0)), -1, r=10); d.charge(*w.P((1, 0)), -1, r=10)
+    d.text(w.X(-1), w.Y(0) + 24, "A: −q", "txt", 10, bold=True); d.text(w.X(1), w.Y(0) + 24, "B: −q", "txt", 10, bold=True)
+    d.dot(*w.P((0, 4))); d.text(w.X(0) + 8, w.Y(4) - 6, "P (0, 4)", "txt", 10.5, "start", True)
+    d.text(160, 14, "(ii) put Q = +q at A → V_A + V_B = 0", "net", 10, bold=True)
+    return d.svg()
+
+
+def d252_4b():
+    d = D(300, 220, "Four charges on a circle")
+    c, R = (150, 110), 80
+    d.circle(*c, R, "ln", 1.2)
+    for ang, q, lab in ((90, 1, "+20 nC"), (0, -1, "−30 nC"), (270, 1, "+30 nC"), (180, -1, "−20 nC")):
+        x, y = c[0] + R * cos(radians(ang)), c[1] - R * sin(radians(ang))
+        d.line(*c, x, y, "mut", 1, "4,4")
+        d.charge(x, y, q, r=10)
+        d.text(x + (16 if ang == 0 else -16 if ang == 180 else 14), y + (4 if ang in (0, 180) else (-12 if ang == 90 else 22)), lab, "txt", 10,
+               "start" if ang in (0, 90, 270) else "end", True)
+    d.dot(*c, "txt", 4)
+    d.text(c[0] + 30, c[1] - 12, "r = 2 m", "gold", 10, "start", True)
+    return d.svg()
+
+
+def d252_4c():
+    d = D(360, 120, "Point on the axis of the ammonia dipole")
+    d.charge(50, 60, -1, r=8); d.charge(80, 60, 1, r=8)
+    d.arrow(52, 84, 78, 84, "net", 1.8, 6); d.text(65, 100, "p", "net", 10, bold=True)
+    d.line(90, 60, 340, 60, "ln", 1, "4,4")
+    d.dot(300, 60, "txt", 4); d.text(300, 82, "P (θ = 0)", "txt", 10.5, bold=True)
+    d.dim(65, 60, 300, 60, "r = 60.0 nm", off=-28)
+    d.text(200, 108, "V = kp cos 0° / r² = kp / r²", "net", 10.5, bold=True)
+    return d.svg()
+
+
+def d252_6a():
+    d = D(340, 210, "Rectangle: distances from the centre")
+    w = W(d, 170, 105, 75)
+    pts = [(-2, 0.5 * 2, 2, "+2q₁"), (0, 1, 4, "+4q₂"), (2, 1, -3, "−3q₁"), (-2, -1, -1, "−q₁"), (0, -1, 4, "+4q₂"), (2, -1, 2, "+2q₁")]
+    d.poly([w.P((-2, 1)), w.P((2, 1)), w.P((2, -1)), w.P((-2, -1))], "ln", 1.2, dash="5,4")
+    for x, y, q, lab in pts:
+        d.line(*w.P((x, y)), *w.P((0, 0)), "mut", 1, "3,3")
+        d.charge(*w.P((x, y)), 1 if q > 0 else -1, r=9)
+        d.text(w.X(x), w.Y(y) + (-14 if y > 0 else 24), lab, "txt", 10, bold=True)
+    d.dot(*w.P((0, 0)), "txt", 4)
+    d.text(w.X(0) + 8, w.Y(0.5), "a/2", "net", 10, "start", True)
+    d.text(w.X(1) + 6, w.Y(0.5) - 6, "(√5/2)a", "gold", 10, "start", True)
+    return d.svg()
+
+
+def paper_252():
+    P = "252"
+    out = []
+    out.append(card(P, "1a", "1 (a)", 2, F((r"E = \frac{k|q|}{r^2}", "field of each charge: away from +, toward −"),) +
+        WHY("Take any point between +q and −q. The field of +q points <strong>away</strong> from +q — toward −q. "
+            "The field of −q points <strong>toward</strong> −q — also toward −q. Both point the same way, so they add; their sum can never be zero there.") +
+        FIG(d252_1a()) +
+        A("No. Between two opposite charges the two fields always point the same way (from + toward −), so E ≠ 0 at every point between them. "
+          "A zero-field point can exist only on the axis <em>outside</em> the pair, beyond the charge of smaller magnitude (and nowhere if the magnitudes are equal)."), "short"))
+    out.append(card(P, "1b", "1 (b)", 2,
+        F((r"\vec\tau = \vec p\times\vec E,\qquad U = -\vec p\cdot\vec E", "torque and energy of a dipole in a field")) +
+        ST(1, "A water molecule is a permanent dipole: its electrons crowd toward the oxygen, so the O side is negative and the H side positive (bond angle ~105°).") +
+        ST(2, "The oven fills the food with an electric field that reverses direction about 2.45 billion times a second (it oscillates).") +
+        ST(3, "Each time the field changes, it exerts a torque τ = pE sin θ that turns every water dipole toward the new field direction — so the molecules keep flipping back and forth.") +
+        ST(4, "The rotating molecules jostle their neighbours and keep breaking and re-forming hydrogen bonds. That energy is shared out as random molecular motion — i.e. thermal energy — so the temperature rises.") +
+        FIG(d252_1b()) +
+        A("The microwave's rapidly reversing field keeps exerting torques on the water dipoles, making them rotate back and forth; the energy of this agitation turns into heat (random motion), warming the sandwich."), "short"))
+    out.append(card(P, "1c", "1 (c)", 2, F((r"\tau = pE\sin\theta", ""),) +
+        M(r"\tau = 0\ \ \text{when}\ \sin\theta = 0,\ \text{i.e. } \theta = 0^\circ \text{ or } 180^\circ") +
+        WHY("At 0° and 180° the forces +qE and −qE act along the same line (the dipole axis), so they cancel without twisting. "
+            "0° is stable (U = −pE, a nudge brings it back); 180° is unstable (U = +pE, a nudge flips it).") +
+        FIG(d261_1b()) +
+        A("When the dipole moment is parallel (θ = 0°) or antiparallel (θ = 180°) to the field."), "short"))
+    out.append(card(P, "2a", "2 (a)", 2, G(r"\(q = +3.2\times10^{-15}\) C", EE) +
+        F((r"N = \frac{q}{e}", "each electron removed leaves +e behind")) +
+        M(r"N = \frac{3.2\times10^{-15}}{1.6\times10^{-19}} = 2.0\times10^{4}") +
+        FIG(d252_2a()) +
+        A(r"\(2.0\times10^4\) electrons were pulled out."), "math"))
+    out.append(card(P, "2b", "2 (b)", 3,
+        G(r"\(q_1 = +20\ \mu\)C at 0, \(q_2 = -10\ \mu\)C at 4 m, \(q_3 = +40\ \mu\)C at 9 m", KK) +
+        F(COUL, (r"F = \sum F_i\ \text{(signs along x)}", "")) +
+        M(r"F_{12} = \frac{(8.99\times10^9)(20\times10^{-6})(10\times10^{-6})}{4^2} = 0.112\ \text{N}") +
+        M(r"F_{13} = \frac{(8.99\times10^9)(20\times10^{-6})(40\times10^{-6})}{9^2} = 0.0888\ \text{N}") +
+        WHY("q₂ is negative → it <strong>attracts</strong> q₁ toward itself → +x. q₃ is positive like q₁ → it <strong>repels</strong> q₁ away from itself → −x.") +
+        M(r"F = +0.112 - 0.0888 = +0.0236\ \text{N}") +
+        FIG(d252_2b()) +
+        A(r"(i) \(2.36\times10^{-2}\) N; (ii) along +x (toward q₂) — the closer attraction beats the farther repulsion."), "math"))
+    out.append(card(P, "2c", "2 (c)", 3,
+        G(r"\(q_1 = +Q\) at \((-d, 0)\), \(q_2 = +2Q\) at \((0, d)\), \(q_3 = -8Q\) at \((0, -d)\)", r"\(Q = 5\) nC, \(d = 4\) m, \(q_0 = +1\) nC at O", KK) +
+        F(COUL, (r"F = \sqrt{F_x^2 + F_y^2}", "")) +
+        M(r"F_1 = \frac{k(5\times10^{-9})(10^{-9})}{16} = 2.81\times10^{-9},\quad F_2 = 2F_1 = 5.62\times10^{-9},\quad F_3 = 8F_1 = 2.25\times10^{-8}\ \text{N}") +
+        WHY("q₁ (+, on the left) repels q₀ → pushes it <strong>right</strong> (+x). q₂ (+, above) repels → pushes it <strong>down</strong>. "
+            "q₃ (−, below) attracts → pulls it <strong>down</strong> too. So F₂ and F₃ add.") +
+        M(r"F_x = +2.81\times10^{-9}\ \text{N},\qquad F_y = -(5.62 + 22.5)\times10^{-9} = -2.81\times10^{-8}\ \text{N}") +
+        M(r"F = \sqrt{(0.281)^2 + (2.81)^2}\times10^{-8} = 2.82\times10^{-8}\ \text{N},\qquad \theta = \tan^{-1}\frac{2.81}{0.281} = 84.3^\circ") +
+        FIG(d252_2c()) +
+        A(r"(i) \(F = 2.82\times10^{-8}\) N; (ii) 84.3° below the +x axis (275.7°) — almost straight down, slightly to the right."), "math"))
+    out.append(card(P, "3a", "3 (a)", 3,
+        G(r"\(\pm5e\), \(d = 0.4\) nm", r"\(E = 8\times10^{-9}\) N/C", EE) +
+        F((r"p = qd", ""), (r"\tau = pE\sin\theta", "")) +
+        M(r"p = (5)(1.6\times10^{-19})(4\times10^{-10}) = 3.2\times10^{-28}\ \text{C·m}") +
+        ST(1, "(i) Parallel, θ = 0°:") + M(r"\tau = pE\sin0^\circ = 0") +
+        ST(2, "(ii) Perpendicular, θ = 90°:") + M(r"\tau = pE = (3.2\times10^{-28})(8\times10^{-9}) = 2.56\times10^{-36}\ \text{N·m}") +
+        FIG(d252_3a()) +
+        A(r"(i) 0; (ii) \(2.56\times10^{-36}\) N·m (the maximum possible torque)."), "math"))
+    out.append(card(P, "3b", "3 (b)", 3,
+        G(r"\(p = 5.98\times10^{-30}\) C·m", "NH₄OH: 1 N (7 protons), 5 H (1 each), 1 O (8) → 20 protons (and 20 electrons)",
+          r"(ii) \(\vec p = 5.98\times10^{-28}\,\hat k\) C·m, \(\vec E = 24\,\hat i\) N/C", EE) +
+        F((r"d = \frac{p}{Ne}", "slide method: total charge Ne of one sign, separated by d"), (r"U = -\vec p\cdot\vec E", "")) +
+        ST(1, "(i)") + M(r"d = \frac{5.98\times10^{-30}}{(20)(1.6\times10^{-19})} = 1.87\times10^{-12}\ \text{m}") +
+        ST(2, "(ii) p is along k̂ and E along î, which are perpendicular:") + M(r"U = -(5.98\times10^{-28}\,\hat k)\cdot(24\,\hat i) = -(5.98\times10^{-28})(24)(\hat k\cdot\hat i) = 0") +
+        FIG(d252_3b()) +
+        FL("Part (ii) gives p = 5.98×10⁻²⁸ (not ×10⁻³⁰ as in the first line). It doesn't matter here: the dot product is zero for any size of p.") +
+        A(r"(i) \(d = 1.87\times10^{-12}\) m; (ii) \(U = 0\) (p ⊥ E)."), "math"))
+    out.append(card(P, "3c", "3 (c)", 3,
+        G(r"Corners in order around the square: +2q, +4q, −2q, −3q; side \(a = 4\) cm", r"\(q = 2\) nC", KK) +
+        F(FIELD, (r"r = \frac{a}{\sqrt2}", "corner to centre")) +
+        ST(1, r"\(r = 0.04/\sqrt2 = 0.0283\) m, so one \(q\) at a corner gives") +
+        M(r"E_0 = \frac{kq}{r^2} = \frac{(8.99\times10^9)(2\times10^{-9})}{(0.0283)^2} = 2.25\times10^{4}\ \text{N/C}") +
+        WHY("Positive corners push the field away, negative corners pull it in. +2q (top-left) and −2q (bottom-right) both give a field pointing toward the bottom-right corner: "
+            "2E₀ + 2E₀ = 4E₀. +4q (top-right) and −3q (bottom-left) both point toward the bottom-left corner: 4E₀ + 3E₀ = 7E₀. "
+            "The two diagonals are at 90°.") +
+        M(r"E = \sqrt{(4E_0)^2 + (7E_0)^2} = \sqrt{65}\,E_0 = 1.81\times10^{5}\ \text{N/C}") +
+        M(r"\text{angle from the } -2q\text{ diagonal} = \tan^{-1}\frac{7}{4} = 60.3^\circ // \Rightarrow\ 254.7^\circ \text{ from } +x") +
+        FIG(d252_3c(), "(i) The arrangement, with the four fields at the centre (to scale) and their sum.") +
+        FL("The paper doesn't fix which corner holds which charge. They are placed in the order given, going round the square — state this.") +
+        A(r"(ii) \(E = 1.81\times10^5\) N/C, pointing down and to the left at 254.7° from +x (15.3° to the left of straight down), toward the side between the −2q and −3q corners."), "math"))
+    out.append(card(P, "4a", "4 (a)", 3,
+        G(r"Charges \(-q\) with \(q = 2\times10^{-5}\) C at A \((-1, 0)\) and B \((1, 0)\)", "P at (0, 4) m", KK) +
+        F((r"V = \sum\frac{kq_i}{r_i}", "scalar sum")) +
+        ST(1, r"Distance from each charge: \(r = \sqrt{1^2 + 4^2} = \sqrt{17} = 4.12\) m.") +
+        ST(2, "(i)") + M(r"V = 2\cdot\frac{k(-2\times10^{-5})}{\sqrt{17}} = -8.72\times10^{4}\ \text{V}\ \Rightarrow\ |V| = 8.72\times10^{4}\ \text{V}") +
+        ST(3, "(ii) For V = 0 the new charge must cancel B's contribution. Both are at the same distance, so") +
+        M(r"\frac{kQ}{\sqrt{17}} + \frac{k(-q)}{\sqrt{17}} = 0\ \Longrightarrow\ Q = +q = +2\times10^{-5}\ \text{C}") +
+        FIG(d252_4a()) +
+        A(r"(i) \(|V| = 8.72\times10^4\) V (V itself is negative); (ii) \(Q = +2\times10^{-5}\) C."), "math"))
+    out.append(card(P, "4b", "4 (b)", 3,
+        G("20, −30, 30, −20 nC, all on a circle of radius r = 2 m", KK) +
+        F((r"V = \frac{k\sum q_i}{r}", "all at the same distance from the centre → add the charges")) +
+        M(r"\sum q = 20 - 30 + 30 - 20 = 0\ \Longrightarrow\ V = \frac{k(0)}{2} = 0") +
+        FIG(d252_4b()) +
+        A("V = 0 at the centre."), "math"))
+    out.append(card(P, "4c", "4 (c)", 3,
+        G(r"\(p = 3\) D \(= 3(3.4\times10^{-30}) = 1.02\times10^{-29}\) C·m", r"\(r = 60.0\) nm on the axis (θ = 0)", KK) +
+        F((r"V = \frac{kp\cos\theta}{r^2}", "dipole potential far away")) +
+        M(r"V = \frac{(8.99\times10^9)(1.02\times10^{-29})}{(60.0\times10^{-9})^2} = 2.55\times10^{-5}\ \text{V}") +
+        FIG(d252_4c()) +
+        A(r"\(V = 2.55\times10^{-5}\) V."), "math"))
+    out.append(card(P, "5a", "5 (a)", 4, "<p class='note'>Same derivation as Final 261 Q4 (a).</p>" + reuse(paper_261, "4a"), "derive"))
+    out.append(card(P, "5b", "5 (b)", 4, "<p class='note'>Same derivation as Final 261 Q4 (b).</p>" + reuse(paper_261, "4b"), "derive"))
+    out.append(card(P, "6a", "6 (a)", 4,
+        G(r"Corners: \(+2q_1,\ -3q_1,\ -q_1,\ +2q_1\); middles of the long sides: \(+4q_2\) each", r"\(q_1 = q\), \(q_2 = 2q\); rectangle \(2a\times a\)") +
+        F((r"V = \sum\frac{kq_i}{r_i}", "")) +
+        ST(1, r"Corners are all \(\sqrt{a^2 + (a/2)^2} = \tfrac{\sqrt5}{2}a\) from the centre, and their charges add to") +
+        M(r"2q_1 - 3q_1 - q_1 + 2q_1 = 0\ \Longrightarrow\ V_{corners} = 0") +
+        ST(2, r"The two middle charges are \(a/2\) away:") +
+        M(r"V = 2\cdot\frac{k(4q_2)}{a/2} = \frac{16kq_2}{a} = \frac{16k(2q)}{a} = \frac{32kq}{a} = \frac{8q}{\pi\varepsilon_0 a}") +
+        FIG(d252_6a()) +
+        A(r"\(V = \dfrac{32kq}{a} = \dfrac{8q}{\pi\varepsilon_0\,a}\) (only the two \(+4q_2\) charges contribute)."), "math"))
+    out.append(card(P, "6b", "6 (b)", 4, "<p class='note'>Same derivation as Final 261 Q5 (b).</p>" + reuse(paper_261, "5b"), "derive"))
+    meta = dict(title="Final Exam — Summer 2025 (252)", sub="PHY-2105 • Full marks 40 • 2 hours • Q1–Q4 compulsory, then Q5 or Q6",
+                toc=[(x, x) for x in ("1a", "1b", "1c", "2a", "2b", "2c", "3a", "3b", "3c", "4a", "4b", "4c", "5a", "5b", "6a", "6b")])
+    return meta, out
+
+
 # ------------------------------------------------------------------ page shell
 STYLE = r"""
         :root { --d-pos:#ef4444; --d-neg:#3b82f6; --d-vec:#fbbf24; --d-net:#4ade80; --d-ln:#9ca3af; --d-txt:#e5e7eb;
@@ -898,7 +1216,7 @@ def build(paper, fn):
     print(f"final-{paper}.html: {len(cards)} parts")
 
 
-PAPERS = {"261": paper_261, "253": paper_253}
+PAPERS = {"261": paper_261, "253": paper_253, "252": paper_252}
 
 if __name__ == "__main__":
     which = sys.argv[1] if len(sys.argv) > 1 else "all"
