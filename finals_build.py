@@ -51,6 +51,36 @@ COUL = (r"F = \frac{k|q_1q_2|}{r^2}", "Coulomb's law — size of the force. Like
 FIELD = (r"E = \frac{k|q|}{r^2}", "field of a point charge — <strong>away</strong> from +, <strong>toward</strong> −")
 
 
+HOW = ('<div class="how"><strong>🧮 How to get the components</strong> Put the force (or field) on a right triangle. '
+       'If θ is its angle with the <em>horizontal</em>:<div class="fx">\\[ F_x = F\\cos\\theta,\\qquad F_y = F\\sin\\theta \\]</div>'
+       'Then give each part a sign from the way it points: <strong>right / up = +</strong>, <strong>left / down = −</strong>. '
+       'cos θ and sin θ come straight from the geometry: cos θ = (horizontal side) / (hypotenuse), sin θ = (vertical side) / (hypotenuse).</div>')
+
+
+def comp_fig(phi, F_lab, x_lab, y_lab, th_lab, side=()):
+    """A vector at angle phi (degrees from +x) split into its horizontal and vertical parts."""
+    d = D(420, 214 + 17 * len(side), "Splitting a vector into components")
+    c, s_ = cos(radians(phi)), sin(radians(phi))
+    L = 150
+    ox = 280 if c < 0 else 140
+    oy = 180 if s_ > 0 else 30
+    tx, ty = ox + L * c, oy - L * s_
+    d.arrow(ox, oy, tx, oy, "pink", 2, 8, dash="6,4")
+    d.arrow(tx, oy, tx, ty, "pink", 2, 8, dash="6,4")
+    d.arrow(ox, oy, tx, ty, "vec", 2.8, 10)
+    th = degrees(atan2(abs(s_), abs(c)))
+    a0 = 180 if c < 0 else 0
+    a1 = 180 - th if (c < 0 and s_ > 0) else (180 + th if (c < 0 and s_ < 0) else (th if s_ > 0 else -th))
+    d.arc(ox, oy, 34, a0, a1)
+    d.text(ox + (10 if c < 0 else -10), oy + (-4 if s_ > 0 else 14), th_lab, "gold", 10.5, "start" if c < 0 else "end", True)
+    d.text((ox + tx) / 2, oy + (16 if s_ > 0 else -8), x_lab, "pink", 10.5, "middle", True)
+    d.text(tx + (-8 if c < 0 else 8), (oy + ty) / 2, y_lab, "pink", 10.5, "end" if c < 0 else "start", True)
+    d.text((ox + tx) / 2 + (18 if c < 0 else -18), (oy + ty) / 2 + (-10 if s_ > 0 else 14), F_lab, "vec", 11, "start" if c < 0 else "end", True)
+    for j, t in enumerate(side):
+        d.text(210, 222 + 17 * j, t, "txt", 10.5, "middle", j == 0)
+    return d.svg()
+
+
 def card(paper, part, title, marks, body, kind=""):
     badge = {"derive": '<span class="badge badge-proof">Show that</span>',
              "short": '<span class="badge badge-short">Short</span>'}.get(kind, '<span class="badge badge-math">Math</span>')
@@ -420,10 +450,21 @@ def paper_261():
         ST(2, "Sizes:") + M(r"F_B = \frac{(8.99\times10^9)(10^{-8})^2}{4^2} = 5.62\times10^{-8}\ \text{N},\qquad F_C = \frac{(8.99\times10^9)(10^{-8})^2}{20} = 4.50\times10^{-8}\ \text{N}") +
         WHY("<strong>B is negative, A positive → attraction:</strong> A is pulled straight down toward B. "
             "<strong>C and A are both positive → repulsion:</strong> A is pushed away from C, along the line C→A, i.e. up and to the left.") +
-        ST(3, r"Components (C→A direction is \((-2, 4)/\sqrt{20} = (-0.447, 0.894)\)):") +
-        M(r"\vec F_B = (0,\ -5.62)\times10^{-8},\qquad \vec F_C = (-2.01,\ +4.02)\times10^{-8}\ \text{N}") +
-        M(r"F_x = -2.01\times10^{-8}\ \text{N},\qquad F_y = -5.62 + 4.02 = -1.60\times10^{-8}\ \text{N}") +
-        ST(4, "Resultant:") + M(r"F = \sqrt{(2.01)^2 + (1.60)^2}\times10^{-8} = 2.57\times10^{-8}\ \text{N},\qquad \theta = \tan^{-1}\frac{1.60}{2.01} = 38.5^\circ") +
+        ST(3, "Split each force into its horizontal (x) and vertical (y) parts.") + HOW +
+        "<p class='sub'><strong>F_B</strong> points straight down, so all of it is vertical and none is horizontal:</p>" +
+        M(r"F_{Bx} = 0,\qquad F_{By} = -5.62\times10^{-8}\ \text{N} // (\text{down} \Rightarrow -)") +
+        "<p class='sub'><strong>F_C</strong> points along the line from C to A. Going from C to A you move <strong>2 m left</strong> and <strong>4 m up</strong>, "
+        "over a length of √20 m. That right triangle gives the cos and sin of the angle θ the force makes with the horizontal:</p>" +
+        M(r"\cos\theta = \frac{\text{horizontal}}{\text{hypotenuse}} = \frac{2}{\sqrt{20}} = 0.447,\qquad \sin\theta = \frac{\text{vertical}}{\text{hypotenuse}} = \frac{4}{\sqrt{20}} = 0.894\qquad (\theta = 63.4^\circ)") +
+        M(r"F_{Cx} = -F_C\cos\theta = -(4.50\times10^{-8})(0.447) = -2.01\times10^{-8}\ \text{N} // (\text{left} \Rightarrow -)") +
+        M(r"F_{Cy} = +F_C\sin\theta = +(4.50\times10^{-8})(0.894) = +4.02\times10^{-8}\ \text{N} // (\text{up} \Rightarrow +)") +
+        FIG(comp_fig(116.57, "F_C = 4.50×10⁻⁸ N", "F_Cx = −2.01×10⁻⁸", "F_Cy = +4.02×10⁻⁸", "θ = 63.4°",
+                     ("Triangle C → A:", "2 m left, 4 m up, √20 m long", "cos θ = 2/√20 = 0.447", "sin θ = 4/√20 = 0.894")),
+            "F_C split into a horizontal part (left) and a vertical part (up).") +
+        ST(4, "Add the parts of both forces:") +
+        M(r"F_x = F_{Bx} + F_{Cx} // = 0 + (-2.01\times10^{-8}) = -2.01\times10^{-8}\ \text{N}") +
+        M(r"F_y = F_{By} + F_{Cy} // = -5.62\times10^{-8} + 4.02\times10^{-8} = -1.60\times10^{-8}\ \text{N}") +
+        ST(5, "Resultant:") + M(r"F = \sqrt{(2.01)^2 + (1.60)^2}\times10^{-8} = 2.57\times10^{-8}\ \text{N},\qquad \theta = \tan^{-1}\frac{1.60}{2.01} = 38.5^\circ") +
         FIG(d261_2a()) +
         FL("The paper doesn't say where the right angle is. \"4 m height and 2 m base BC\" puts it at B, with AB vertical — that's used here; state it in your answer.") +
         A(r"\(F = 2.57\times10^{-8}\) N, pointing down and to the left, 38.5° below the −x direction (218.5° from +x)."), "math"))
@@ -444,12 +485,18 @@ def paper_261():
     out.append(card(P, "2c", "2 (c)", 4,
         G(r"\(q_1 = 10\) nC, \(q_2 = 20\) nC (taken as positive), each \(r = 2\) m from the origin, 45° either side of the +y axis",
           r"\(q_0 = +1\) nC at the origin", KK) +
-        F(COUL, (r"F = \sqrt{F_1^2 + F_2^2}\ \ (\text{forces at }90^\circ)", "q₁ is at 135°, q₂ at 45° — 90° apart, so their forces on q₀ are perpendicular")) +
+        F(COUL, (r"F = \sqrt{F_1^2 + F_2^2} // (\text{forces at }90^\circ)", "q₁ is at 135°, q₂ at 45° — 90° apart, so their forces on q₀ are perpendicular")) +
         M(r"F_1 = \frac{(8.99\times10^9)(10\times10^{-9})(10^{-9})}{2^2} = 2.25\times10^{-8}\ \text{N},\qquad F_2 = \frac{(8.99\times10^9)(20\times10^{-9})(10^{-9})}{2^2} = 4.50\times10^{-8}\ \text{N}") +
         WHY("Both charges are positive, like q₀, so both push it <em>away</em>: q₁ (upper-left) pushes q₀ down-right, along 315°; "
             "q₂ (upper-right) pushes it down-left, along 225°.") +
-        ST(1, "Components:") +
-        M(r"F_x = 2.25\cos45^\circ - 4.50\cos45^\circ = -1.59\times10^{-8}\ \text{N} // F_y = -(2.25 + 4.50)\sin45^\circ = -4.77\times10^{-8}\ \text{N}") +
+        ST(1, "Components. Each force is 45° from the vertical, so also 45° from the horizontal: cos 45° = sin 45° = 0.707.") + HOW +
+        M(r"F_{1x} = +F_1\cos45^\circ = +(2.25\times10^{-8})(0.707) = +1.59\times10^{-8}\ \text{N} // (\text{right})") +
+        M(r"F_{1y} = -F_1\sin45^\circ = -(2.25\times10^{-8})(0.707) = -1.59\times10^{-8}\ \text{N} // (\text{down})") +
+        M(r"F_{2x} = -F_2\cos45^\circ = -(4.50\times10^{-8})(0.707) = -3.18\times10^{-8}\ \text{N} // (\text{left})") +
+        M(r"F_{2y} = -F_2\sin45^\circ = -(4.50\times10^{-8})(0.707) = -3.18\times10^{-8}\ \text{N} // (\text{down})") +
+        FIG(comp_fig(225, "F₂ = 4.50×10⁻⁸ N", "F₂x = −3.18×10⁻⁸", "F₂y = −3.18×10⁻⁸", "45°",
+                     ("q₂ is up-right, so it pushes", "q₀ down-left, 45° below −x.", "cos 45° = sin 45° = 0.707")), "F₂ split into its parts (F₁ works the same way, to the right).") +
+        M(r"F_x = 1.59 - 3.18 = -1.59\times10^{-8}\ \text{N},\qquad F_y = -1.59 - 3.18 = -4.77\times10^{-8}\ \text{N}") +
         ST(2, "Resultant:") + M(r"F = \sqrt{1.59^2 + 4.77^2}\times10^{-8} = 5.03\times10^{-8}\ \text{N},\qquad \theta = \tan^{-1}\frac{4.77}{1.59} = 71.6^\circ") +
         FIG(d261_2c()) +
         FL("The paper gives no signs for q₁ and q₂; they're taken as positive (as written, \"10 nC\" and \"20 nC\").") +
@@ -473,11 +520,16 @@ def paper_261():
         "<h4 style='margin-top:1rem'>(i) Both −8 C</h4>" +
         WHY("Negative charges: each field points <strong>toward</strong> its charge. From P, A is down-left and B is down-right (both at 45°). "
             "The sideways parts cancel; the downward parts add.") +
-        M(r"E = 2(2.25\times10^9)\cos45^\circ = 3.18\times10^{9}\ \text{N/C, along } -y") +
+        HOW + "<p class='sub'>From P to A is 4 m left and 4 m down (length 4√2 m), so cos θ = sin θ = 4/(4√2) = 0.707 (θ = 45°). Each field has parts of size (2.25×10⁹)(0.707) = 1.59×10⁹ N/C.</p>" +
+        M(r"\vec E_A = (-1.59,\ -1.59)\times10^9 // (\text{left, down}),\qquad \vec E_B = (+1.59,\ -1.59)\times10^9 // (\text{right, down})") +
+        M(r"E_x = -1.59 + 1.59 = 0,\qquad E_y = -1.59 - 1.59 = -3.18\times10^{9}\ \text{N/C}") +
+        M(r"E = 3.18\times10^{9}\ \text{N/C, along } -y") +
         "<h4 style='margin-top:1rem'>(ii) A replaced by +8 C</h4>" +
         WHY("Now A is positive: its field points <strong>away</strong> from A → up-right. B (still negative) gives down-right. "
             "The up and down parts cancel; the rightward parts add.") +
-        M(r"E = 2(2.25\times10^9)\cos45^\circ = 3.18\times10^{9}\ \text{N/C, along } +x") +
+        M(r"\vec E_A = (+1.59,\ +1.59)\times10^9 // (\text{right, up}),\qquad \vec E_B = (+1.59,\ -1.59)\times10^9 // (\text{right, down})") +
+        M(r"E_x = 1.59 + 1.59 = 3.18\times10^{9}\ \text{N/C},\qquad E_y = 1.59 - 1.59 = 0") +
+        M(r"E = 3.18\times10^{9}\ \text{N/C, along } +x") +
         FIG(d261_3b()) +
         FL("The figure labels both charges \"−q\" and gives q = −8 C, which would make them +8 C — but then part (ii), replacing one with +8 C, would change nothing. "
            "So the intended reading is that both charges are −8 C. Say so in your answer.") +
@@ -760,7 +812,7 @@ def paper_253():
         A(r"\(2.0\times10^4\) (twenty thousand) excess electrons."), "short"))
     out.append(card(P, "2", "2", 4,
         G(r"\(q_1 = +5\ \mu\)C, \(q_2 = -10\ \mu\)C, 10 cm apart", r"\(q_0 = +1\ \mu\)C at the midpoint → 5 cm = 0.05 m from each", KK) +
-        F(COUL, (r"F = F_1 + F_2\ \ (\text{same direction})", "")) +
+        F(COUL, (r"F = F_1 + F_2 // (\text{same direction})", "")) +
         M(r"F_1 = \frac{(8.99\times10^9)(5\times10^{-6})(1\times10^{-6})}{(0.05)^2} = 18.0\ \text{N}") +
         M(r"F_2 = \frac{(8.99\times10^9)(10\times10^{-6})(1\times10^{-6})}{(0.05)^2} = 36.0\ \text{N}") +
         WHY("q₀ is positive. +5 μC <strong>repels</strong> it → pushes it away from +5 μC, toward −10 μC. −10 μC <strong>attracts</strong> it → pulls it toward −10 μC. "
@@ -775,8 +827,15 @@ def paper_253():
         M(r"F_1 = \frac{(8.99\times10^9)(5)(10^{-9})}{2^2} = 11.24\ \text{N},\qquad F_2 = \frac{(8.99\times10^9)(10)(10^{-9})}{2^2} = 22.48\ \text{N}") +
         WHY("All positive → both forces are repulsions, pointing <em>away</em> from each source. q₁ is directly left of P → F₁ points along <strong>+x</strong>. "
             "q₂ is up-left at 60° → F₂ points down-right, 60° below +x.") +
-        ST(1, "(i) Components:") +
-        M(r"F_x = 11.24 + 22.48\cos60^\circ = 22.48\ \text{N},\qquad F_y = 0 - 22.48\sin60^\circ = -19.46\ \text{N}") +
+        ST(1, "(i) Components.") + HOW +
+        "<p class='sub'><strong>F₁</strong> lies along +x, so it is all horizontal:</p>" +
+        M(r"F_{1x} = +11.24\ \text{N},\qquad F_{1y} = 0") +
+        "<p class='sub'><strong>F₂</strong> points 60° below +x (straight away from q₂, which sits 60° above the line to q₁):</p>" +
+        M(r"F_{2x} = +F_2\cos60^\circ = +(22.48)(0.5) = +11.24\ \text{N} // (\text{right})") +
+        M(r"F_{2y} = -F_2\sin60^\circ = -(22.48)(0.866) = -19.46\ \text{N} // (\text{down})") +
+        FIG(comp_fig(-60, "F₂ = 22.48 N", "F₂x = +11.24 N", "F₂y = −19.46 N", "60°",
+                     ("cos 60° = 0.5", "sin 60° = 0.866")), "F₂ split into its parts.") +
+        M(r"F_x = F_{1x} + F_{2x} = 11.24 + 11.24 = 22.48\ \text{N},\qquad F_y = 0 + (-19.46) = -19.46\ \text{N}") +
         ST(2, "(ii) Resultant:") +
         M(r"F = \sqrt{22.48^2 + 19.46^2} = 29.7\ \text{N},\qquad \theta = \tan^{-1}\frac{19.46}{22.48} = 40.9^\circ\ \text{below } +x") +
         FIG(d253_3()) +
@@ -788,7 +847,14 @@ def paper_253():
         M(r"E_1 = \frac{(8.99\times10^9)(10)}{25} = 3.60\times10^{9}\ \text{N/C},\qquad E_2 = \frac{(8.99\times10^9)(5)}{25} = 1.80\times10^{9}\ \text{N/C}") +
         WHY("q₁ is negative → E₁ points <strong>toward</strong> q₁: down-left, along (−0.6, −0.8). "
             "q₂ is positive → E₂ points <strong>away</strong> from q₂: up-left, along (−0.6, +0.8). Both lean left; their vertical parts partly cancel.") +
-        M(r"E_x = -0.6(3.60 + 1.80)\times10^9 = -3.24\times10^{9},\qquad E_y = (-0.8)(3.60) + (0.8)(1.80) = -1.44\times10^{9}\ \text{N/C}") +
+        HOW + "<p class='sub'>From P to either charge is 3 m sideways and 4 m down, length 5 m, so cos θ = 3/5 = 0.6 and sin θ = 4/5 = 0.8 (θ = 53.1° from the horizontal).</p>" +
+        M(r"E_{1x} = -E_1\cos\theta = -(3.60\times10^9)(0.6) = -2.16\times10^{9} // (\text{left})") +
+        M(r"E_{1y} = -E_1\sin\theta = -(3.60\times10^9)(0.8) = -2.88\times10^{9} // (\text{down})") +
+        M(r"E_{2x} = -E_2\cos\theta = -(1.80\times10^9)(0.6) = -1.08\times10^{9} // (\text{left})") +
+        M(r"E_{2y} = +E_2\sin\theta = +(1.80\times10^9)(0.8) = +1.44\times10^{9} // (\text{up})") +
+        FIG(comp_fig(233.13, "E₁ = 3.60×10⁹ N/C", "E₁x = −2.16×10⁹", "E₁y = −2.88×10⁹", "53.1°",
+                     ("P → q₁: 3 m left, 4 m down, 5 m", "cos θ = 3/5 = 0.6", "sin θ = 4/5 = 0.8")), "E₁ split into its parts (E₂ is the same idea, pointing up-left).") +
+        M(r"E_x = -2.16 - 1.08 = -3.24\times10^{9},\qquad E_y = -2.88 + 1.44 = -1.44\times10^{9}\ \text{N/C}") +
         M(r"E = \sqrt{3.24^2 + 1.44^2}\times10^9 = 3.54\times10^{9}\ \text{N/C},\qquad \theta = \tan^{-1}\frac{1.44}{3.24} = 24.0^\circ") +
         FIG(d253_4()) +
         A(r"(i) \(3.54\times10^9\) N/C; (ii) 24.0° below the −x axis (204° from +x), i.e. down and to the left."), "math"))
@@ -1102,6 +1168,8 @@ def paper_252():
         M(r"F_1 = \frac{k(5\times10^{-9})(10^{-9})}{16} = 2.81\times10^{-9},\quad F_2 = 2F_1 = 5.62\times10^{-9},\quad F_3 = 8F_1 = 2.25\times10^{-8}\ \text{N}") +
         WHY("q₁ (+, on the left) repels q₀ → pushes it <strong>right</strong> (+x). q₂ (+, above) repels → pushes it <strong>down</strong>. "
             "q₃ (−, below) attracts → pulls it <strong>down</strong> too. So F₂ and F₃ add.") +
+        "<p class='sub'>Each force lies along an axis, so one component is the whole force and the other is zero:</p>" +
+        M(r"\vec F_1 = (+2.81\times10^{-9},\ 0),\quad \vec F_2 = (0,\ -5.62\times10^{-9}),\quad \vec F_3 = (0,\ -2.25\times10^{-8})\ \text{N}") +
         M(r"F_x = +2.81\times10^{-9}\ \text{N},\qquad F_y = -(5.62 + 22.5)\times10^{-9} = -2.81\times10^{-8}\ \text{N}") +
         M(r"F = \sqrt{(0.281)^2 + (2.81)^2}\times10^{-8} = 2.82\times10^{-8}\ \text{N},\qquad \theta = \tan^{-1}\frac{2.81}{0.281} = 84.3^\circ") +
         FIG(d252_2c()) +
@@ -1132,6 +1200,11 @@ def paper_252():
             "2E₀ + 2E₀ = 4E₀. +4q (top-right) and −3q (bottom-left) both point toward the bottom-left corner: 4E₀ + 3E₀ = 7E₀. "
             "The two diagonals are at 90°.") +
         M(r"E = \sqrt{(4E_0)^2 + (7E_0)^2} = \sqrt{65}\,E_0 = 1.81\times10^{5}\ \text{N/C}") +
+        "<p class='sub'>The same answer with x and y components (both diagonals are 45° from the horizontal, cos 45° = sin 45° = 0.707):</p>" + HOW +
+        M(r"4E_0 = 8.99\times10^4\ \text{(down-right)} // x:\ (+8.99\times10^4)(0.707) = +6.36\times10^4 // y:\ -(8.99\times10^4)(0.707) = -6.36\times10^4") +
+        M(r"7E_0 = 1.57\times10^5\ \text{(down-left)} // x:\ -(1.57\times10^5)(0.707) = -1.11\times10^5 // y:\ -(1.57\times10^5)(0.707) = -1.11\times10^5") +
+        M(r"E_x = 6.36\times10^4 - 1.11\times10^5 = -4.77\times10^{4},\qquad E_y = -6.36\times10^4 - 1.11\times10^5 = -1.75\times10^{5}\ \text{N/C}") +
+        M(r"E = \sqrt{(4.77\times10^4)^2 + (1.75\times10^5)^2} = 1.81\times10^{5}\ \text{N/C}") +
         M(r"\text{angle from the } -2q\text{ diagonal} = \tan^{-1}\frac{7}{4} = 60.3^\circ // \Rightarrow\ 254.7^\circ \text{ from } +x") +
         FIG(d252_3c(), "(i) The arrangement, with the four fields at the centre (to scale) and their sum.") +
         FL("The paper doesn't fix which corner holds which charge. They are placed in the order given, going round the square — state this.") +
@@ -1188,6 +1261,12 @@ STYLE = r"""
         figure.dgf figcaption { font-size:0.85rem; color:var(--text-secondary); margin-top:0.3rem; }
         .mk { float:right; font-size:0.8rem; color:var(--text-secondary); font-weight:600; }
         .rules { margin:0.4rem 0 0 1.2rem; } .rules li { margin:0.25rem 0; }
+        .how { background: rgba(168,85,247,0.08); border:1px solid rgba(168,85,247,0.35); border-radius:10px; padding:0.6rem 1.1rem; margin:0.8rem 0; font-size:0.93rem; }
+        .how > strong:first-child { color:#c084fc; display:block; margin-bottom:0.2rem; }
+        [data-theme="light"] .how > strong:first-child { color:#7e22ce; }
+        .how .fx { text-align:center; }
+        p.sub { margin-top:0.7rem; }
+        @media (max-width: 700px) { .math-block, .fx { font-size: 0.86rem !important; } }
         .why { background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.35); border-radius:10px; padding:0.6rem 1.1rem; margin:0.8rem 0; font-size:0.94rem; }
         .why strong:first-child { color:#38bdf8; }
         [data-theme="light"] .why strong:first-child { color:#0369a1; }
