@@ -4,7 +4,7 @@ Run: python3 finals_derivations.py
 Frequencies come from the 13 final papers in finals/ (221 is a midterm and has none);
 three extra derivations come from the slides/notes and have not been asked yet.
 """
-from finals_build import (M, FIG, RING_EXPLAIN, d253_8a, d261_5b, d253_8b, d261_1b, d261_4b, d253_9b, d261_4a,
+from finals_build import (M, FIG, RING_EXPLAIN, U_EXPLAIN, d253_8a, d261_5b, d253_8b, d261_1b, d261_4b, d253_9b, d261_4a,
                           d253_9a, d261_5a)
 from visual_cheatsheet import f_def, p_system, p_grad, p_equal
 
@@ -93,12 +93,16 @@ D.append(dict(id="d4", title="Potential energy of a dipole: U = −p · E", shor
     phr=["Show that a potential energy U is associated with the orientation of the dipole moment in the field, U = −p·E. (231, 233, 252, 261)",
          "Calculate the condition for maximum and zero potential energy. (233, 252, 261)",
          "Show that U = −p·E. Draw the diagram and discuss the conditions of maximum potential energy. (251)"],
-    fig=FIG(d261_4b()),
+    fig=U_EXPLAIN + FIG(d261_4b()),
     body=step("Torque tries to reduce θ", M(r"\tau = -pE\sin\theta") +
               "<p>(The minus sign: the torque acts to <em>decrease</em> the angle between p and E.)</p>") +
          step("Work done by the field as θ₀ → θ", M(r"W = \int_{\theta_0}^{\theta}\tau\,d\theta = \int_{\theta_0}^{\theta}(-pE\sin\theta)\,d\theta = pE\left(\cos\theta - \cos\theta_0\right)")) +
-         step("Potential energy", r"<p>\(\Delta U = -W\). Choose the zero of energy at \(\theta_0 = 90^\circ\) (\(\cos 90^\circ = 0\)):</p>" +
-              M(r"U(\theta) - U(90^\circ) = -pE\cos\theta + pE\cos90^\circ\ \Longrightarrow\ U = -pE\cos\theta")) +
+         step("Potential energy", r"<p>\(\Delta U = -W\). Choose the zero of energy at \(\theta_0 = 90^\circ\):</p>" +
+              M(r"U(\theta) - U(90^\circ) = -W = -pE\,(\cos\theta - \cos90^\circ)")) +
+         step("Both reference terms vanish", r"<p>\(U(90^\circ) = 0\) (that's how we chose it) and \(\cos90^\circ = 0\):</p>" +
+              M(r"U(\theta) - 0 = -pE\,(\cos\theta - 0)\ \Longrightarrow\ U = -pE\cos\theta")) +
+         step("Write it as a dot product", r"<p>For any two vectors \(\vec a\cdot\vec b = ab\cos\theta\). So \(pE\cos\theta = \vec p\cdot\vec E\):</p>" +
+              M(r"U = -pE\cos\theta = -\vec p\cdot\vec E")) +
          result(r"U = -pE\cos\theta = -\vec p\cdot\vec E",
                 "<p style='margin-top:.6rem;font-size:.92rem'><strong>Maximum</strong> +pE at θ = 180° (antiparallel, unstable). <strong>Zero</strong> at θ = 90°. <strong>Minimum</strong> −pE at θ = 0° (aligned, stable). "
                 "Work by an external agent to turn it: W = U<sub>f</sub> − U<sub>i</sub>.</p>") +

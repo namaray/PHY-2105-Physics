@@ -452,6 +452,26 @@ RING_EXPLAIN = (
     '<p style="margin-top:.5rem"><strong>Where (z² + R²)<sup>3/2</sup> comes from:</strong> one factor 1/r² from Coulomb\'s law, times cos θ = z/r from the triangle, gives z/r³ — and r³ = (z² + R²)<sup>3/2</sup>.</p>'
     '</div>' + FIG(d_ring_pair(), "The top and bottom pieces: their sideways (pink) parts cancel, their axial (green) parts add."))
 
+U_EXPLAIN = (
+    '<div class="how"><strong>🧠 The idea before the maths</strong>'
+    '<p><strong>What U means:</strong> energy the dipole stores just because of <em>which way it points</em>. Think of a ball on a hill: '
+    'pointing <strong>along</strong> E is the bottom of the hill (lowest energy, it stays put); pointing <strong>against</strong> E is the top (highest energy, the slightest nudge flips it).</p>'
+    '<p style="margin-top:.5rem"><strong>Why it changes with angle:</strong> the field twists the dipole toward E with torque pE sin θ. '
+    'Turning it away from E means fighting that twist — you do work, and that work is stored as potential energy (like lifting a ball).</p>'
+    '<p style="margin-top:.5rem"><strong>Where the cos comes from:</strong> work = torque added up over the angle turned (an integral), and '
+    '\\( \\int\\sin\\theta\\,d\\theta = -\\cos\\theta \\). That is the only reason the answer has −cos θ in it.</p>'
+    '<p style="margin-top:.5rem"><strong>Why zero at 90°:</strong> like choosing "ground level" for height, the zero of energy is a choice. '
+    '90° is picked because cos 90° = 0, so the formula comes out with no extra constant.</p>'
+    '<table class="tbl" style="margin-top:.6rem"><tr><th>θ</th><th>U = −pE cos θ</th><th>meaning</th></tr>'
+    '<tr><td>0° (along E)</td><td>−pE</td><td>lowest — stable, bottom of the hill</td></tr>'
+    '<tr><td>90°</td><td>0</td><td>the reference point</td></tr>'
+    '<tr><td>180° (against E)</td><td>+pE</td><td>highest — unstable, top of the hill</td></tr></table>'
+    '<p style="margin-top:.5rem"><strong>The "= −p·E" part is the same thing in vector shorthand:</strong> a dot product is defined as '
+    '\\( \\vec a\\cdot\\vec b = ab\\cos\\theta \\), so \\( \\vec p\\cdot\\vec E = pE\\cos\\theta \\). Use the vector form when p and E are given in '
+    'î, ĵ components: multiply matching parts and add, e.g. \\( \\vec p\\cdot\\vec E = p_xE_x + p_yE_y \\).</p>'
+    '<p style="margin-top:.5rem"><strong>The minus sign</strong> makes "aligned" the low-energy position. Without it, aligned would be the high-energy one — backwards.</p>'
+    '</div>')
+
 def paper_261():
     P = "261"
     out = []
@@ -609,14 +629,18 @@ def paper_261():
         FIG(d261_4a(), "Each element's field splits into an axial part (kept) and a sideways part (cancelled by the opposite element).") +
         A(r"\(E = \dfrac{1}{4\pi\varepsilon_0}\dfrac{qz}{(z^2+R^2)^{3/2}}\), directed along the axis (away from the ring for q > 0). Checks: E = 0 at the centre (z = 0); E → kq/z² far away."), "derive"))
 
-    out.append(card(P, "4b", "4 (b)", 4,
+    out.append(card(P, "4b", "4 (b)", 4, U_EXPLAIN +
         ST(1, r"A dipole at angle θ to \(\vec E\) feels a torque that tries to <em>decrease</em> θ:") +
         M(r"\tau = -pE\sin\theta") +
         ST(2, r"Work done by the field as the dipole turns from \(\theta_0\) to θ:") +
         M(r"W = \int_{\theta_0}^{\theta}\tau\,d\theta = \int_{\theta_0}^{\theta}(-pE\sin\theta)\,d\theta = pE(\cos\theta - \cos\theta_0)") +
-        ST(3, r"Potential energy change \(\Delta U = -W\). Choose the reference \(U = 0\) at \(\theta_0 = 90^\circ\) (\(\cos90^\circ = 0\)):") +
-        M(r"U(\theta) - 0 = -pE\cos\theta + pE\cos90^\circ\ \Longrightarrow\ U = -pE\cos\theta = -\vec p\cdot\vec E") +
-        ST(4, "Conditions:") +
+        ST(3, r"Potential energy change: \(\Delta U = -W\). Choose the reference \(U = 0\) at \(\theta_0 = 90^\circ\) — the angle where the energy is zero:") +
+        M(r"U(\theta) - U(90^\circ) = -W = -pE\,(\cos\theta - \cos90^\circ)") +
+        ST(4, r"Both reference terms vanish: \(U(90^\circ) = 0\) (that's how we chose it) and \(\cos90^\circ = 0\):") +
+        M(r"U(\theta) - 0 = -pE\,(\cos\theta - 0)\ \Longrightarrow\ U = -pE\cos\theta") +
+        ST(5, r"Write it as a dot product. For any two vectors, \(\vec a\cdot\vec b = ab\cos\theta\) (θ = angle between them). With \(\vec a = \vec p\) and \(\vec b = \vec E\), \(pE\cos\theta\) is exactly \(\vec p\cdot\vec E\):") +
+        M(r"U = -pE\cos\theta = -\vec p\cdot\vec E") +
+        ST(6, "Conditions:") +
         M(r"U_{max} = +pE\ \ \text{at } \theta = 180^\circ,\qquad U = 0\ \ \text{at } \theta = 90^\circ,\qquad U_{min} = -pE\ \ \text{at } \theta = 0^\circ") +
         FIG(d261_4b()) +
         A(r"\(U = -\vec p\cdot\vec E\). Maximum (+pE) when p is antiparallel to E (180°, unstable); zero when p ⊥ E (90°); minimum (−pE) when aligned (0°, stable)."), "derive"))
