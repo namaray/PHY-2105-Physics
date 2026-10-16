@@ -130,8 +130,15 @@ D.append(dict(id="d6", title="Electric field of a charged ring (on its axis)", s
               M(r"dE = \frac{1}{4\pi\varepsilon_0}\frac{\lambda\,ds}{z^2 + R^2}")) +
          step("Symmetry", r"<p>The element directly opposite gives an equal \(dE\) whose sideways part points the other way. All sideways (\(dE\sin\theta\)) parts cancel; only the axial parts \(dE\cos\theta\) add, with</p>" +
               M(r"\cos\theta = \frac zr = \frac{z}{(z^2 + R^2)^{1/2}}")) +
-         step("Add round the ring", M(r"E = \oint dE\cos\theta = \frac{1}{4\pi\varepsilon_0}\frac{z\lambda}{(z^2 + R^2)^{3/2}}\oint ds = \frac{1}{4\pi\varepsilon_0}\frac{z\lambda(2\pi R)}{(z^2 + R^2)^{3/2}}") +
-              r"<p>and \(\lambda(2\pi R) = q\).</p>") +
+         step("Add round the ring", r"<p><strong>(a) Axial part of one piece</strong> = (its field from Step 1) × (cos θ from Step 2). This is where z comes in — it is the adjacent side of the triangle in cos θ = z/r:</p>" +
+        M(r"dE\cos\theta = \underbrace{\frac{1}{4\pi\varepsilon_0}\frac{\lambda\,ds}{z^2 + R^2}}_{dE\ \text{(Step 1)}}\times\underbrace{\frac{z}{(z^2 + R^2)^{1/2}}}_{\cos\theta\ \text{(Step 2)}}") +
+        r"<p><strong>(b) Combine the powers</strong> of \((z^2+R^2)\): \(\ (z^2+R^2)^{1}\times(z^2+R^2)^{1/2} = (z^2+R^2)^{3/2}\):</p>" +
+        M(r"dE\cos\theta = \frac{1}{4\pi\varepsilon_0}\frac{z\,\lambda\,ds}{(z^2 + R^2)^{3/2}}") +
+        r"<p><strong>(c) Add this up for every piece</strong> round the ring (∮ means “sum all the way round”). Only \(ds\) changes from piece to piece — z, R and λ are the same for all of them — so everything except ds comes outside the sum:</p>" +
+        M(r"E = \oint dE\cos\theta = \frac{1}{4\pi\varepsilon_0}\frac{z\,\lambda}{(z^2 + R^2)^{3/2}}\oint ds") +
+        r"<p><strong>(d)</strong> All the little lengths ds added together make the whole circumference: \(\oint ds = 2\pi R\).</p>" +
+        M(r"E = \frac{1}{4\pi\varepsilon_0}\frac{z\,\lambda\,(2\pi R)}{(z^2 + R^2)^{3/2}}") +
+              r"<p>and \(\lambda(2\pi R) = q\) (charge per length × length of the ring = total charge).</p>") +
          result(r"E = \frac{1}{4\pi\varepsilon_0}\frac{qz}{(z^2 + R^2)^{3/2}}") +
          step("Limits", M(r"z = 0:\ \ E = 0 // (\text{every element is cancelled by the opposite one})") +
               M(r"z \gg R:\ \ (z^2 + R^2)^{3/2} \approx z^3\ // \Rightarrow\ E \approx \frac{1}{4\pi\varepsilon_0}\frac{q}{z^2} // (\text{looks like a point charge})")) +

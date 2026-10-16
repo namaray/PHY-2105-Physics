@@ -591,8 +591,15 @@ def paper_261():
         ST(2, r"Symmetry: the element directly opposite gives a \(d\vec E\) with the same axial part and an equal but opposite sideways part. "
               r"So all the sideways (\(dE\sin\theta\)) parts cancel and only the axial parts \(dE\cos\theta\) survive, with") +
         M(r"\cos\theta = \frac{z}{r} = \frac{z}{(z^2 + R^2)^{1/2}}") +
-        ST(3, "Add up the axial parts around the whole ring (z and R are the same for every element):") +
-        M(r"E = \oint dE\cos\theta = \frac{1}{4\pi\varepsilon_0}\frac{z\,\lambda}{(z^2+R^2)^{3/2}}\oint ds = \frac{1}{4\pi\varepsilon_0}\frac{z\,\lambda\,(2\pi R)}{(z^2+R^2)^{3/2}}") +
+        ST(3, "Put Steps 1 and 2 together, then add up round the ring.") +
+        r"<p><strong>(a) Axial part of one piece</strong> = (its field from Step 1) × (cos θ from Step 2). This is where z comes in — it is the adjacent side of the triangle in cos θ = z/r:</p>" +
+        M(r"dE\cos\theta = \underbrace{\frac{1}{4\pi\varepsilon_0}\frac{\lambda\,ds}{z^2 + R^2}}_{dE\ \text{(Step 1)}}\times\underbrace{\frac{z}{(z^2 + R^2)^{1/2}}}_{\cos\theta\ \text{(Step 2)}}") +
+        r"<p><strong>(b) Combine the powers</strong> of \((z^2+R^2)\): \(\ (z^2+R^2)^{1}\times(z^2+R^2)^{1/2} = (z^2+R^2)^{3/2}\):</p>" +
+        M(r"dE\cos\theta = \frac{1}{4\pi\varepsilon_0}\frac{z\,\lambda\,ds}{(z^2 + R^2)^{3/2}}") +
+        r"<p><strong>(c) Add this up for every piece</strong> round the ring (∮ means “sum all the way round”). Only \(ds\) changes from piece to piece — z, R and λ are the same for all of them — so everything except ds comes outside the sum:</p>" +
+        M(r"E = \oint dE\cos\theta = \frac{1}{4\pi\varepsilon_0}\frac{z\,\lambda}{(z^2 + R^2)^{3/2}}\oint ds") +
+        r"<p><strong>(d)</strong> All the little lengths ds added together make the whole circumference: \(\oint ds = 2\pi R\).</p>" +
+        M(r"E = \frac{1}{4\pi\varepsilon_0}\frac{z\,\lambda\,(2\pi R)}{(z^2 + R^2)^{3/2}}") +
         ST(4, r"Since \(\lambda(2\pi R) = q\) (charge per length × length of the ring = total charge):") +
         M(r"E = \frac{1}{4\pi\varepsilon_0}\frac{qz}{(z^2 + R^2)^{3/2}}") +
         ST(5, "Check it makes sense:") +
