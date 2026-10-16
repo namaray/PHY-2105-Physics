@@ -4,7 +4,7 @@ Run: python3 finals_derivations.py
 Frequencies come from the 13 final papers in finals/ (221 is a midterm and has none);
 three extra derivations come from the slides/notes and have not been asked yet.
 """
-from finals_build import (M, FIG, RING_EXPLAIN, U_EXPLAIN, d253_8a, d261_5b, d253_8b, d261_1b, d261_4b, d253_9b, d261_4a,
+from finals_build import (M, FIG, RING_EXPLAIN, U_EXPLAIN, DERIV, render_steps, RES, d253_8a, d261_5b, d253_8b, d261_1b, d261_4b, d253_9b, d261_4a,
                           d253_9a, d261_5a)
 from visual_cheatsheet import f_def, p_system, p_grad, p_equal
 
@@ -215,12 +215,18 @@ FROM_NOTES.append(dict(id="n3", title="Potential of any continuous charge distri
          result(r"V = \frac{1}{4\pi\varepsilon_0}\int\frac{dq}{r}")))
 
 
+KEY = {"d1": "axis", "d2": "dipoleV", "d3": "torque", "d4": "U", "d5": "pointV", "d6": "ring", "d7": "VfVi", "d8": "line",
+       "d9": "pointE", "n1": "system", "n2": "grad", "n3": "continuous"}
+
+
 def section(n, d, from_notes=False):
     badge = ('<span class="badge badge-notes">From the slides</span>' if from_notes else
              f'<span class="badge badge-freq">{len(d["papers"])}/{N_PAPERS} papers</span>')
     head = f'<section class="notes-section" id="{d["id"]}"><h2>{n}. {d["title"]} {badge}</h2>'
     meta = "" if from_notes else asked(d["papers"], d["phr"])
-    return head + meta + f'<div class="formula-card">{d["fig"]}{d["body"]}</div></section>\n'
+    x = DERIV[KEY[d["id"]]]
+    body = x["idea"] + x["figs"]() + render_steps(x["steps"]) + RES(x["result"], x["note"]) + (tip(x["tip"]) if x["tip"] else "")
+    return head + meta + f'<div class="formula-card">{body}</div></section>\n'
 
 
 def build():
@@ -232,7 +238,7 @@ def build():
         .badge-freq { background: rgba(239,68,68,0.16); color:#f87171; }
         .badge-notes { background: rgba(99,102,241,0.18); color:#818cf8; }
         [data-theme="light"] .badge-freq { color:#b91c1c; } [data-theme="light"] .badge-notes { color:#4338ca; }
-        .step { margin: 0.9rem 0; padding-left: 1rem; border-left: 2px solid var(--border-color); }
+        p.step { margin: 1.1rem 0 0.2rem; padding-left: 0.8rem; border-left: 3px solid var(--accent-color); }
         .step-label { color: var(--accent-color); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.4px; display:block; margin-bottom:0.3rem; }
         .result { background: rgba(34,197,94,0.10); border:1px solid rgba(34,197,94,0.3); border-radius:10px; padding:0.8rem 1.2rem; margin-top:1rem; }
         .result-label { color:#4ade80; font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.5px; }
