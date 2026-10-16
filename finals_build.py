@@ -546,6 +546,316 @@ def paper_261():
     return meta, out
 
 
+# ================================================================== PAPER 253
+def d253_1b():
+    d = D(320, 210, "Moving along an equipotential takes no work")
+    c = (160, 110)
+    for k in range(10):
+        a = radians(k * 36 + 18)
+        d.arrow(c[0] + 14 * cos(a), c[1] - 14 * sin(a), c[0] + 98 * cos(a), c[1] - 98 * sin(a), "fld", 1.2, 6, op=0.7)
+    d.circle(*c, 62, "gold", 2, dash="6,4")
+    d.charge(*c, 1, r=11)
+    A, B = (c[0] + 62 * cos(radians(150)), c[1] - 62 * sin(radians(150))), (c[0] + 62 * cos(radians(40)), c[1] - 62 * sin(radians(40)))
+    d.arc(*c, 62, 150, 40, "pink", 3, arrow_end=True)
+    d.dot(*A, "txt", 5); d.dot(*B, "txt", 5)
+    d.text(A[0] - 10, A[1] - 6, "A (V)", "txt", 11, "end", True); d.text(B[0] + 10, B[1] - 6, "B (V)", "txt", 11, "start", True)
+    d.text(c[0], 200, "ΔV = 0 → W = qΔV = 0, whatever the path", "net", 10.5, bold=True)
+    return d.svg()
+
+
+def d253_1c():
+    d = D(320, 150, "Counting electrons on a charged ball")
+    d.circle(90, 72, 48, "ln", 1.4, fill="neg", op=0.15)
+    for x, y in ((70, 50), (105, 45), (60, 80), (95, 75), (120, 95), (80, 105), (115, 62)):
+        d.charge(x, y, -1, r=6)
+    d.text(90, 140, "q = −3.2×10⁻¹⁵ C", "txt", 10.5, bold=True)
+    d.arrow(150, 72, 180, 72, "ln", 1.4, 6)
+    d.text(250, 66, "N = q / e", "net", 12, bold=True)
+    d.text(250, 84, "= 2.0×10⁴ extra electrons", "mut", 10)
+    return d.svg()
+
+
+def d_double():
+    return d261_1c()
+
+
+def d253_2():
+    d = D(380, 175, "Forces on +1 μC at the midpoint")
+    d.line(40, 50, 340, 50, "ln", 1.2)
+    d.charge(60, 50, 1, r=11); d.charge(320, 50, -1, r=13); d.charge(190, 50, 1, r=7)
+    d.text(60, 28, "+5 μC", "txt", 10.5, bold=True); d.text(320, 28, "−10 μC", "txt", 10.5, bold=True); d.text(190, 28, "+1 μC", "txt", 10.5, bold=True)
+    d.dim(60, 50, 190, 50, "5 cm", off=16, tdy=14); d.dim(190, 50, 320, 50, "5 cm", off=16, tdy=14)
+    for j, (L, c, t) in enumerate(((50, "vec", "F₁ = 18.0 N (pushed away from +5 μC)"), (100, "vec", "F₂ = 36.0 N (pulled toward −10 μC)"),
+                                  (150, "net", "F = 53.9 N → toward −10 μC"))):
+        y = 102 + 24 * j
+        d.arrow(190, y, 190 + L, y, c, 2.6 if c == "vec" else 3.2, 8)
+        d.text(184, y + 4, t, c, 9.5, "end", True)
+    return d.svg()
+
+
+def d253_3():
+    d = D(340, 240, "Forces on q0 at P")
+    w = W(d, 230, 150, 50)
+    q1, q2 = (-2, 0), (-1, sqrt(3))
+    d.line(*w.P(q1), *w.P((0, 0)), "ln", 1.4); d.line(*w.P(q2), *w.P((0, 0)), "ln", 1.4)
+    d.arc(w.X(0), w.Y(0), 26, 120, 180); d.text(w.X(0) - 34, w.Y(0) - 14, "60°", "gold", 10, "end", True)
+    d.text(w.X(-1), w.Y(0) + 16, "d = 2 m", "gold", 10, bold=True); d.text(w.X(-0.5) - 26, w.Y(0.87) - 4, "d", "gold", 10, bold=True)
+    vectors(w, [(q1[0], q1[1], 5), (q2[0], q2[1], 10)], (0, 0), 1, ["F₁", "F₂"], "F = 29.7 N", px=60, lab_net=(w.X(0) + 30, w.Y(0) + 76))
+    d.line(w.X(0), w.Y(0), w.X(1.8), w.Y(0), "mut", 1, "3,3")
+    d.arc(w.X(0), w.Y(0), 38, -40.9, 0); d.text(w.X(0) + 44, w.Y(0) + 18, "40.9°", "gold", 10, "start", True)
+    d.charge(*w.P(q1), 1, r=11); d.charge(*w.P(q2), 1, r=13); d.charge(*w.P((0, 0)), 1, r=6)
+    d.text(w.X(q1[0]), w.Y(q1[1]) + 24, "q₁ = 5 C", "txt", 10, bold=True); d.text(w.X(q2[0]) - 18, w.Y(q2[1]) - 14, "q₂ = 10 C", "txt", 10, bold=True)
+    d.text(w.X(0) + 6, w.Y(0) - 10, "q₀ (P)", "txt", 10, "start", True)
+    return d.svg()
+
+
+def d253_4():
+    d = D(340, 240, "Field at P from -10 C and +5 C")
+    w = W(d, 170, 200, 34)
+    d.line(w.X(-4.4), w.Y(0), w.X(4.4), w.Y(0), "ln", 1); d.line(w.X(0), w.Y(0), w.X(0), w.Y(5.3), "ln", 1)
+    for x in (-3, 3):
+        d.line(*w.P((x, 0)), *w.P((0, 4)), "mut", 1, "3,3")
+    d.text(w.X(-1.5) - 16, w.Y(2) - 2, "5 m", "gold", 10, "end", True); d.text(w.X(1.5) + 16, w.Y(2) - 2, "5 m", "gold", 10, "start", True)
+    vectors(w, [(-3, 0, -10), (3, 0, 5)], (0, 4), 1, ["E₁", "E₂"], "E = 3.54×10⁹ N/C", px=70, lab_net=(w.X(0) - 118, w.Y(4) + 10))
+    d.charge(*w.P((-3, 0)), -1, r=12); d.charge(*w.P((3, 0)), 1, r=9)
+    d.text(w.X(-3), w.Y(0) + 26, "q₁ = −10 C", "txt", 10, bold=True); d.text(w.X(3), w.Y(0) + 26, "q₂ = +5 C", "txt", 10, bold=True)
+    d.dot(*w.P((0, 4))); d.text(w.X(0) + 8, w.Y(4) - 8, "P (0, 4)", "txt", 10.5, "start", True)
+    return d.svg()
+
+
+def d253_5():
+    d = D(320, 210, "Dipole moment and field in the xy-plane; torque out of the page")
+    o = (90, 170)
+    ap, aE = degrees(atan2(2, 5)), degrees(atan2(6000, 5000))
+    d.axes(o[0] - 20, o[1], 300, 20, "x", "y")
+    for ang, L, c, t in ((ap, 150, "net", "p = (5, 2)×10⁻³⁰"), (aE, 150, "vec", "E = (5000, 6000)")):
+        e = (o[0] + L * cos(radians(ang)), o[1] - L * sin(radians(ang)))
+        d.arrow(*o, *e, c, 2.6, 9); d.text(e[0] + 6, e[1] + (12 if c == "net" else -2), t, c, 10.5, "start", True)
+    d.arc(*o, 60, ap, aE, "gold", 1.4); d.text(o[0] + 66, o[1] - 50, "θ = 28.4°", "gold", 10.5, "start", True)
+    d.circle(o[0], o[1], 9, "pink", 1.8); d.dot(o[0], o[1], "pink", 2.5)
+    d.text(o[0] + 16, o[1] + 26, "τ: out of the page (+k̂)", "pink", 10, "start", True)
+    d.arc(*o, 100, ap + 4, aE - 4, "pink", 1.6, arrow_end=True)
+    return d.svg()
+
+
+def d253_6():
+    d = D(320, 240, "Distances from P to the four charges")
+    P = (130, 130)
+    s = 62
+    dirs = [(115, 1, s, "+q", "d"), (25, -1, s, "−q", "d"), (25, -1, 2 * s, "−q", "2d"), (-65, 1, s, "+q", "d")]
+    for ang, q, r, lab, dl in dirs:
+        x, y = P[0] + r * cos(radians(ang)), P[1] - r * sin(radians(ang))
+        d.line(*P, x, y, "mut", 1, "4,4")
+        d.charge(x, y, q, r=9)
+        d.text(x + 14, y - 8, lab, "txt", 10, "start", True)
+        if dl == "2d":
+            d.text(P[0] + 1.5 * s * cos(radians(25)) + 4, P[1] - 1.5 * s * sin(radians(25)) + 16, "d", "gold", 10, bold=True)
+        else:
+            d.text(P[0] + r / 2 * cos(radians(ang)) + 10, P[1] - r / 2 * sin(radians(ang)) + 4, dl, "gold", 10, bold=True)
+    d.dot(*P, "txt", 4); d.text(P[0] - 10, P[1] + 4, "P", "txt", 11, "end", True)
+    d.text(160, 232, "V = kq(1/d − 1/d − 1/2d + 1/d) = kq/2d", "net", 10.5, bold=True)
+    return d.svg()
+
+
+def d253_7():
+    d = D(300, 252, "P is the midpoint of the hypotenuse")
+    w = W(d, 60, 200, 150)
+    A, B, C = (0, 1), (1, 0), (0, 0)
+    M_ = (0.5, 0.5)
+    d.poly([w.P(A), w.P(B), w.P(C)], "ln", 1.4)
+    for p in (A, B, C):
+        d.line(*w.P(p), *w.P(M_), "gold", 1.4, "4,3")
+    d.text(w.X(0.25) - 6, w.Y(0.75) - 4, "a/√2", "gold", 10, "end", True)
+    d.charge(*w.P(A), 1, r=10); d.charge(*w.P(B), 1, r=10); d.charge(*w.P(C), 1, r=10)
+    d.text(w.X(0) + 16, w.Y(1) + 4, "q₁ = +2e", "txt", 10, "start", True)
+    d.text(w.X(1) + 14, w.Y(0) + 4, "q₂ = +2e", "txt", 10, "start", True)
+    d.text(w.X(0) + 16, w.Y(0) - 10, "q₃ = +3e", "txt", 10, "start", True)
+    d.dot(*w.P(M_)); d.text(w.X(0.5) + 8, w.Y(0.5) - 6, "P", "txt", 11, "start", True)
+    d.dim(*w.P(C), *w.P(B), "a = 5 μm", off=26, tdy=14)
+    return d.svg()
+
+
+def d253_8a():
+    d = D(360, 170, "Dipole on the z axis: fields of + and − at P")
+    y = 90
+    zx = lambda z: 46 + z * 52
+    d.line(20, y, 350, y, "ln", 1, "4,4")
+    d.charge(zx(-0.5), y, -1, r=9); d.charge(zx(0.5), y, 1, r=9)
+    d.dot(zx(0), y, "txt", 3)
+    d.dim(zx(-0.5), y, zx(0.5), y, "d", off=22, tdy=14)
+    d.dot(zx(4.2), y, "txt", 4); d.text(zx(4.2), y + 22, "P", "txt", 11, bold=True)
+    d.dim(zx(0), y, zx(4.2), y, "z", off=-36)
+    d.arrow(zx(4.2), y - 14, zx(4.2) + 60, y - 14, "pos", 2.4, 8); d.text(zx(4.2) - 6, y - 18, "E₊ = kq/(z − d/2)²", "pos", 10, "end", True)
+    d.arrow(zx(4.2), y + 14, zx(4.2) - 44, y + 14, "neg", 2.4, 8); d.text(zx(4.2) - 50, y + 18, "E₋ = kq/(z + d/2)²", "neg", 10, "end", True)
+    d.text(180, 160, "E₊ is slightly bigger (closer) → net along +z", "net", 10, bold=True)
+    return d.svg()
+
+
+def d253_8b():
+    d = D(340, 210, "Torque on a dipole: lever arm d/2 sin θ")
+    d.field(10, 330, 20, 190, "right", 4, 0.25)
+    c, th, L = (170, 105), 40, 70
+    px, py = c[0] + L * cos(radians(th)), c[1] - L * sin(radians(th))
+    nx, ny = c[0] - L * cos(radians(th)), c[1] + L * sin(radians(th))
+    d.line(nx, ny, px, py, "ln", 3)
+    d.arrow(px + 9, py, px + 60, py, "vec", 2.4); d.text(px + 62, py + 4, "F = qE", "vec", 10.5, "start", True)
+    d.arrow(nx - 9, ny, nx - 60, ny, "vec", 2.4); d.text(nx - 62, ny + 4, "F = qE", "vec", 10.5, "end", True)
+    d.line(c[0], c[1], c[0] + 100, c[1], "mut", 1, "3,3")
+    d.arc(*c, 30, 0, th); d.text(c[0] + 36, c[1] - 10, "θ", "gold", 11, "start", True)
+    d.line(c[0], c[1], c[0], py, "pink", 1.4, "3,3"); d.line(c[0], py, px, py, "mut", 1, "2,2")
+    d.text(c[0] - 6, (c[1] + py) / 2 + 4, "(d/2) sin θ", "pink", 10, "end", True)
+    d.charge(nx, ny, -1, r=9); d.charge(px, py, 1, r=9)
+    d.text(170, 202, "τ = 2 · qE · (d/2) sin θ = pE sin θ", "net", 10.5, bold=True)
+    return d.svg()
+
+
+def d253_9a():
+    d = D(340, 190, "Moving a test charge from i to f through a field")
+    d.field(10, 330, 20, 170, "right", 4, 0.3)
+    pts = [(40 + 26 * k, 150 - 95 * max(0.0, sin(k / 10 * 3.14159265)) ** 0.9) for k in range(11)]
+    d.poly(pts, "pink", 2, close=False)
+    k = 4
+    d.arrow(*pts[k], *pts[k + 1], "pink", 2.4, 8); d.text(pts[k][0] - 6, pts[k][1] - 8, "ds", "pink", 11, "end", True)
+    d.arrow(pts[k + 1][0], pts[k + 1][1], pts[k + 1][0] + 46, pts[k + 1][1], "vec", 2.2, 7)
+    d.text(pts[k + 1][0] + 50, pts[k + 1][1] + 4, "F = q₀E", "vec", 10.5, "start", True)
+    d.charge(*pts[k + 1], 1, r=6)
+    d.text(pts[0][0] - 4, pts[0][1] + 16, "i", "txt", 12, bold=True); d.text(pts[-1][0] + 4, pts[-1][1] + 16, "f", "txt", 12, bold=True)
+    d.text(320, 16, "E →", "fld", 10, "end", True)
+    d.text(240, 184, "dW = q₀ E · ds", "net", 10.5, bold=True)
+    return d.svg()
+
+
+def d253_9b():
+    d = D(340, 150, "Bringing the test charge in from infinity along a radial line")
+    d.charge(40, 75, 1, r=13); d.text(40, 104, "q", "txt", 11, bold=True)
+    d.line(53, 75, 330, 75, "ln", 1, "4,4")
+    d.dot(150, 75, "txt", 4); d.text(150, 100, "P (r = R)", "txt", 10.5, bold=True)
+    for x in (200, 260):
+        d.arrow(x, 58, x + 34, 58, "vec", 1.8, 6)
+    d.text(232, 48, "E = kq/r² (radial)", "vec", 10, bold=True)
+    d.text(320, 100, "→ ∞ (V = 0)", "mut", 10, "end", True)
+    d.dim(40, 75, 150, 75, "R", off=34, tdy=14)
+    return d.svg()
+
+
+def paper_253():
+    P = "253"
+    out = []
+    out.append(card(P, "1a", "1 (a)", 2, F(COUL,) +
+        ST(1, r"With \(r \to 2r\):") + M(r"F' = \frac{kq^2}{(2r)^2} = \frac{1}{4}\cdot\frac{kq^2}{r^2} = \frac{F}{4}") +
+        WHY("Coulomb's law is an <strong>inverse-square</strong> law: the force depends on 1/r², so doubling r divides the force by 2² = 4. "
+            "The charges are still alike, so the force stays repulsive — only its size changes.") +
+        FIG(d_double()) +
+        A("The force becomes one quarter of its original value (still repulsive)."), "short"))
+    out.append(card(P, "1b", "1 (b)", 2, F((r"W = q\,\Delta V = q(V_B - V_A)", "work done to move q (slowly) from A to B"),) +
+        ST(1, r"\(V_A = V_B = V\), so") + M(r"W = q(V - V) = 0") +
+        WHY("A and B lie on the same <strong>equipotential surface</strong>. The field is perpendicular to an equipotential, so moving along it the force has no component along the motion — "
+            "and the work depends only on the end points, so <em>any</em> path from A to B gives zero.") +
+        FIG(d253_1b()) +
+        A("Zero work, because ΔV = 0 between points at the same potential (W = qΔV)."), "short"))
+    out.append(card(P, "1c", "1 (c)", 2, G(r"\(q = -3.2\times10^{-15}\) C", r"\(e = -1.6\times10^{-19}\) C (electron)") +
+        F((r"q = Ne\ \Longrightarrow\ N = \frac{q}{e}", "quantization of charge")) +
+        M(r"N = \frac{-3.2\times10^{-15}}{-1.6\times10^{-19}} = 2.0\times10^{4}") +
+        FIG(d253_1c()) +
+        A(r"\(2.0\times10^4\) (twenty thousand) excess electrons."), "short"))
+    out.append(card(P, "2", "2", 4,
+        G(r"\(q_1 = +5\ \mu\)C, \(q_2 = -10\ \mu\)C, 10 cm apart", r"\(q_0 = +1\ \mu\)C at the midpoint → 5 cm = 0.05 m from each", KK) +
+        F(COUL, (r"F = F_1 + F_2\ \ (\text{same direction})", "")) +
+        M(r"F_1 = \frac{(8.99\times10^9)(5\times10^{-6})(1\times10^{-6})}{(0.05)^2} = 18.0\ \text{N}") +
+        M(r"F_2 = \frac{(8.99\times10^9)(10\times10^{-6})(1\times10^{-6})}{(0.05)^2} = 36.0\ \text{N}") +
+        WHY("q₀ is positive. +5 μC <strong>repels</strong> it → pushes it away from +5 μC, toward −10 μC. −10 μC <strong>attracts</strong> it → pulls it toward −10 μC. "
+            "Both forces point the same way, so they <em>add</em>. (Between unlike charges forces never cancel.)") +
+        M(r"F = 18.0 + 36.0 = 53.9\ \text{N}") +
+        FIG(d253_2()) +
+        A("53.9 N, directed from the +5 μC charge toward the −10 μC charge."), "math"))
+    out.append(card(P, "3", "3", 5,
+        G(r"\(q_1 = 5\) C at distance \(d = 2\) m to the left of P; \(q_2 = 10\) C at distance \(d\) from P, 60° above that line",
+          r"\(q_0 = 1\) nC at P; charges taken as positive", "Axes: P at the origin, +x to the right", KK) +
+        F(COUL, (r"F_x = \sum F\cos\theta,\quad F_y = \sum F\sin\theta,\quad F = \sqrt{F_x^2 + F_y^2}", "")) +
+        M(r"F_1 = \frac{(8.99\times10^9)(5)(10^{-9})}{2^2} = 11.24\ \text{N},\qquad F_2 = \frac{(8.99\times10^9)(10)(10^{-9})}{2^2} = 22.48\ \text{N}") +
+        WHY("All positive → both forces are repulsions, pointing <em>away</em> from each source. q₁ is directly left of P → F₁ points along <strong>+x</strong>. "
+            "q₂ is up-left at 60° → F₂ points down-right, 60° below +x.") +
+        ST(1, "(i) Components:") +
+        M(r"F_x = 11.24 + 22.48\cos60^\circ = 22.48\ \text{N},\qquad F_y = 0 - 22.48\sin60^\circ = -19.46\ \text{N}") +
+        ST(2, "(ii) Resultant:") +
+        M(r"F = \sqrt{22.48^2 + 19.46^2} = 29.7\ \text{N},\qquad \theta = \tan^{-1}\frac{19.46}{22.48} = 40.9^\circ\ \text{below } +x") +
+        FIG(d253_3()) +
+        A(r"(i) \(F_x = +22.5\) N, \(F_y = -19.5\) N. (ii) \(F = 29.7\) N at 40.9° below the +x axis (319.1°)."), "math"))
+    out.append(card(P, "4", "4", 5,
+        G(r"\(q_1 = -10\) C at \(x = -3\) m, \(q_2 = +5\) C at \(x = +3\) m", "P at (0, 4) m", KK) +
+        F(FIELD, (r"\vec E = \vec E_1 + \vec E_2", "")) +
+        ST(1, r"Distances: \(r = \sqrt{3^2 + 4^2} = 5\) m for both.") +
+        M(r"E_1 = \frac{(8.99\times10^9)(10)}{25} = 3.60\times10^{9}\ \text{N/C},\qquad E_2 = \frac{(8.99\times10^9)(5)}{25} = 1.80\times10^{9}\ \text{N/C}") +
+        WHY("q₁ is negative → E₁ points <strong>toward</strong> q₁: down-left, along (−0.6, −0.8). "
+            "q₂ is positive → E₂ points <strong>away</strong> from q₂: up-left, along (−0.6, +0.8). Both lean left; their vertical parts partly cancel.") +
+        M(r"E_x = -0.6(3.60 + 1.80)\times10^9 = -3.24\times10^{9},\qquad E_y = (-0.8)(3.60) + (0.8)(1.80) = -1.44\times10^{9}\ \text{N/C}") +
+        M(r"E = \sqrt{3.24^2 + 1.44^2}\times10^9 = 3.54\times10^{9}\ \text{N/C},\qquad \theta = \tan^{-1}\frac{1.44}{3.24} = 24.0^\circ") +
+        FIG(d253_4()) +
+        A(r"(i) \(3.54\times10^9\) N/C; (ii) 24.0° below the −x axis (204° from +x), i.e. down and to the left."), "math"))
+    out.append(card(P, "5", "5", 6,
+        G(r"\(\vec p = (5\hat i + 2\hat j)\times10^{-30}\) C·m", r"\(\vec E = (5000\hat i + 6000\hat j)\) N/C") +
+        F((r"\vec\tau = \vec p\times\vec E", "torque"), (r"U = -\vec p\cdot\vec E", "potential energy")) +
+        ST(1, "(i) Both vectors lie in the xy-plane, so only the k̂ part survives:") +
+        M(r"\vec\tau = (p_xE_y - p_yE_x)\,\hat k // = [(5)(6000) - (2)(5000)]\times10^{-30}\,\hat k = 2.0\times10^{-26}\,\hat k\ \text{N·m}") +
+        WHY("+k̂ is out of the page: the torque turns p counter-clockwise, toward E (p is at 21.8°, E at 50.2°, so p has to rotate up by 28.4° to line up).") +
+        ST(2, "(ii)") + M(r"U = -[(5)(5000) + (2)(6000)]\times10^{-30} = -3.7\times10^{-26}\ \text{J}") +
+        FIG(d253_5()) +
+        A(r"(i) \(\vec\tau = (2.0\times10^{-26}\ \text{N·m})\,\hat k\) — magnitude \(2.0\times10^{-26}\) N·m, along +z (out of the page). (ii) \(U = -3.7\times10^{-26}\) J."), "math"))
+    out.append(card(P, "6", "6", 3,
+        G(r"\(q = 6\) nC, \(d = 2\) m", "from the figure: +q at d, −q at d, −q at 2d, +q at d", KK) +
+        F((r"V = \sum\frac{kq_i}{r_i}", "scalar sum — signs matter, directions don't")) +
+        M(r"V = kq\left(\frac1d - \frac1d - \frac1{2d} + \frac1d\right) = \frac{kq}{2d} // = \frac{(8.99\times10^9)(6\times10^{-9})}{2(2)} = 13.5\ \text{V}") +
+        FIG(d253_6()) +
+        A(r"\(V = 13.5\) V."), "math"))
+    out.append(card(P, "7", "7", 3,
+        G(r"\(q_1 = q_2 = +2e\), \(q_3 = +3e\)", r"\(a = 5\ \mu\)m", "P is the midpoint of the hypotenuse (foot of the perpendicular from particle 3)", KK + ", " + EE) +
+        F((r"V = \sum\frac{kq_i}{r_i}", ""), (r"r = \frac{a}{\sqrt2}", "the midpoint of the hypotenuse is equidistant from all three corners")) +
+        M(r"r = \frac{5\times10^{-6}}{\sqrt2} = 3.54\times10^{-6}\ \text{m}") +
+        M(r"V = \frac{k(2e + 2e + 3e)}{r} // = \frac{(8.99\times10^9)(7)(1.6\times10^{-19})}{3.54\times10^{-6}} = 2.85\times10^{-3}\ \text{V}") +
+        FIG(d253_7()) +
+        A(r"\(V = 2.85\times10^{-3}\) V."), "math"))
+    out.append(card(P, "8a", "8 (a)", 4,
+        '<p>Put the dipole on the z-axis with its centre at the origin: +q at z = +d/2, −q at z = −d/2. P is on the axis at distance z.</p>' +
+        ST(1, "Fields at P (both along the axis; + pushes away, − pulls toward):") +
+        M(r"E = E_{(+)} - E_{(-)} = \frac{1}{4\pi\varepsilon_0}\frac{q}{(z - \frac d2)^2} - \frac{1}{4\pi\varepsilon_0}\frac{q}{(z + \frac d2)^2}") +
+        ST(2, r"Factor out \(z^2\):") +
+        M(r"E = \frac{q}{4\pi\varepsilon_0 z^2}\left[\left(1 - \frac{d}{2z}\right)^{-2} - \left(1 + \frac{d}{2z}\right)^{-2}\right]") +
+        ST(3, r"For \(z \gg d\), use \((1 \pm x)^{-2} \approx 1 \mp 2x\):") +
+        M(r"E \approx \frac{q}{4\pi\varepsilon_0 z^2}\left[\left(1 + \frac dz\right) - \left(1 - \frac dz\right)\right] = \frac{q}{4\pi\varepsilon_0 z^2}\cdot\frac{2d}{z}") +
+        M(r"E = \frac{1}{2\pi\varepsilon_0}\frac{qd}{z^3} = \frac{1}{2\pi\varepsilon_0}\frac{p}{z^3}") +
+        FIG(d253_8a()) +
+        A(r"\(E = \dfrac{1}{2\pi\varepsilon_0}\dfrac{qd}{z^3}\), along the dipole axis (in the direction of \(\vec p\)); it falls off as 1/z³."), "derive"))
+    out.append(card(P, "8b", "8 (b)", 4,
+        ST(1, r"In a uniform field the forces on the ends are \(+q\vec E\) and \(-q\vec E\): equal and opposite, so the net force is zero.") +
+        ST(2, r"Each force has a lever arm \((d/2)\sin\theta\) about the centre, and both turn the dipole the same way:") +
+        M(r"\tau = F\frac d2\sin\theta + F\frac d2\sin\theta = qE\,d\sin\theta = pE\sin\theta") +
+        ST(3, r"The torque is perpendicular to the plane of \(\vec p\) and \(\vec E\) and turns \(\vec p\) toward \(\vec E\) — exactly the cross product:") +
+        M(r"\vec\tau = \vec p\times\vec E") +
+        ST(4, "Conditions:") + M(r"\tau_{max} = pE\ \ (\theta = 90^\circ),\qquad \tau = 0\ \ (\theta = 0^\circ \text{ or } 180^\circ)") +
+        FIG(d253_8b()) +
+        A(r"\(\vec\tau = \vec p\times\vec E\), \(|\tau| = pE\sin\theta\): maximum pE when p ⊥ E; zero when p is parallel or antiparallel to E."), "derive"))
+    out.append(card(P, "9a", "9 (a)", 4,
+        ST(1, r"A positive test charge \(q_0\) moves through \(d\vec s\) in a field \(\vec E\). The field's force is \(q_0\vec E\), so the work done on it is") +
+        M(r"dW = \vec F\cdot d\vec s = q_0\vec E\cdot d\vec s") +
+        ST(2, "Add up the work along the whole path from i to f:") +
+        M(r"W = q_0\int_i^f \vec E\cdot d\vec s") +
+        ST(3, r"The potential difference is the work per unit charge with a minus sign, \(V_f - V_i = -W/q_0\):") +
+        M(r"V_f - V_i = -\int_i^f \vec E\cdot d\vec s") +
+        FIG(d253_9a()) +
+        A(r"\(V_f - V_i = -\displaystyle\int_i^f \vec E\cdot d\vec s\). Moving along \(\vec E\) makes the integral positive, so V decreases in the direction of the field."), "derive"))
+    out.append(card(P, "9b", "9 (b)", 4,
+        ST(1, r"Start from \(V_f - V_i = -\int_i^f \vec E\cdot d\vec s\). Take the test charge from P (distance R) straight out to infinity, along the field line:") +
+        M(r"\vec E\cdot d\vec s = E\,dr,\qquad E = \frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}") +
+        ST(2, r"Set \(V_f = V(\infty) = 0\) and \(V_i = V\):") +
+        M(r"0 - V = -\frac{q}{4\pi\varepsilon_0}\int_R^\infty\frac{dr}{r^2} = -\frac{q}{4\pi\varepsilon_0}\left[-\frac1r\right]_R^\infty = -\frac{q}{4\pi\varepsilon_0}\frac1R") +
+        ST(3, r"So, renaming R as r:") + M(r"V = \frac{1}{4\pi\varepsilon_0}\frac{q}{r}") +
+        FIG(d253_9b()) +
+        A(r"\(V = \dfrac{1}{4\pi\varepsilon_0}\dfrac qr\) — positive for a positive charge, negative for a negative one, and zero at infinity."), "derive"))
+    meta = dict(title="Final Exam — Fall 2025 (253)", sub="PHY-2105 • Full marks 40 • 2 hours • Q1–Q7 compulsory, then Q8 or Q9",
+                toc=[(x, x) for x in ("1a", "1b", "1c", "2", "3", "4", "5", "6", "7", "8a", "8b", "9a", "9b")])
+    return meta, out
+
+
 # ------------------------------------------------------------------ page shell
 STYLE = r"""
         :root { --d-pos:#ef4444; --d-neg:#3b82f6; --d-vec:#fbbf24; --d-net:#4ade80; --d-ln:#9ca3af; --d-txt:#e5e7eb;
@@ -588,7 +898,7 @@ def build(paper, fn):
     print(f"final-{paper}.html: {len(cards)} parts")
 
 
-PAPERS = {"261": paper_261}
+PAPERS = {"261": paper_261, "253": paper_253}
 
 if __name__ == "__main__":
     which = sys.argv[1] if len(sys.argv) > 1 else "all"
