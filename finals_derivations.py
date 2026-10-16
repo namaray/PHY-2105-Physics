@@ -4,7 +4,7 @@ Run: python3 finals_derivations.py
 Frequencies come from the 13 final papers in finals/ (221 is a midterm and has none);
 three extra derivations come from the slides/notes and have not been asked yet.
 """
-from finals_build import (M, FIG, d253_8a, d261_5b, d253_8b, d261_1b, d261_4b, d253_9b, d261_4a,
+from finals_build import (M, FIG, RING_EXPLAIN, d253_8a, d261_5b, d253_8b, d261_1b, d261_4b, d253_9b, d261_4a,
                           d253_9a, d261_5a)
 from visual_cheatsheet import f_def, p_system, p_grad, p_equal
 
@@ -125,7 +125,7 @@ D.append(dict(id="d6", title="Electric field of a charged ring (on its axis)", s
     phr=["Derive expression for electric field for a charged ring. Modify the expression when z ≫ R and z = 0. (213B)",
          "Show that the electric field due to a charged ring at large distance is … (243)",
          "Show that the electric field at a point due to a uniformly distributed infinite line charge or ring charge is E = qz / 4πε₀(z² + R²)^{3/2}. (252, 261)"],
-    fig=FIG(d261_4a()),
+    fig=RING_EXPLAIN + FIG(d261_4a()),
     body=step("Element of the ring", r"<p>Split the ring (radius R, charge q, \(\lambda = q/2\pi R\)) into elements \(ds\) with \(dq = \lambda\,ds\). Each is a point charge a distance \(r = \sqrt{z^2 + R^2}\) from P:</p>" +
               M(r"dE = \frac{1}{4\pi\varepsilon_0}\frac{\lambda\,ds}{z^2 + R^2}")) +
          step("Symmetry", r"<p>The element directly opposite gives an equal \(dE\) whose sideways part points the other way. All sideways (\(dE\sin\theta\)) parts cancel; only the axial parts \(dE\cos\theta\) add, with</p>" +

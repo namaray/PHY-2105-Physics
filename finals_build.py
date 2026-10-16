@@ -324,6 +324,31 @@ def d261_3c():
     return d.svg()
 
 
+def d_ring_pair():
+    d = D(400, 250, "Two opposite pieces of the ring: sideways parts cancel, axial parts add")
+    c, P, R = (60, 125), (200, 125), 85
+    d.p.append(f'<ellipse cx="{c[0]}" cy="{c[1]}" rx="16" ry="{R}" style="stroke:var(--d-pos);stroke-width:3;fill:none;opacity:0.6"/>')
+    d.line(c[0], c[1], 390, c[1], "ln", 1, "4,4")
+    L = 70
+    for piece, tag in (((c[0], c[1] - R), "top"), ((c[0], c[1] + R), "bottom")):
+        d.circle(*piece, 6, None, fill="pos")
+        d.text(piece[0] + 12, piece[1] + (4 if tag == "top" else 10), f"dq ({tag})", "pos", 10, "start", True)
+        d.line(*piece, *P, "mut", 1, "3,3")
+        u = unit(*piece, *P)
+        e = (P[0] + u[0] * L, P[1] + u[1] * L)
+        d.arrow(*P, *e, "vec", 2.4, 8)
+        d.line(e[0], P[1], *e, "pink", 1.8, "4,3")
+        below = e[1] > P[1]
+        d.text(e[0] + 6, e[1] + (12 if below else -4), f"dE from {tag} piece", "vec", 9.5, "start", True)
+        d.text(e[0] + 6, (P[1] + e[1]) / 2 + 4, "dE sin θ", "pink", 9.5, "start", True)
+    ax = 2 * L * u[0]
+    d.arrow(P[0], P[1], P[0] + ax, P[1], "net", 3, 9)
+    d.text(P[0] + ax + 6, P[1] + 4, "E", "net", 12, "start", True)
+    d.dot(*P); d.text(P[0] - 6, P[1] - 8, "P", "txt", 11, "end", True)
+    d.text(200, 240, "pink: equal and opposite → cancel   ·   green: the axial parts add up", "mut", 9.5)
+    return d.svg()
+
+
 def d261_4a():
     d = D(360, 220, "Ring of charge: field on the axis")
     c, P, R = (60, 110), (236, 110), 80
@@ -412,6 +437,20 @@ def d261_5b():
     d.text(176, 100, "r", "txt", 11, bold=True)
     return d.svg()
 
+
+RING_EXPLAIN = (
+    '<div class="how"><strong>🧠 The idea before the maths</strong>'
+    '<p><strong>Why not just kq/r²?</strong> That formula is for charge sitting at <em>one point</em>. The ring\'s charge is spread around a circle, so there is no single distance to use.</p>'
+    '<p style="margin-top:.5rem"><strong>The plan — chop, find, add:</strong></p><ol class="rules">'
+    '<li><strong>Chop</strong> the ring into tiny pieces dq. Each piece is small enough to be a point charge.</li>'
+    '<li><strong>Every piece is the same distance</strong> from P: go z along the axis and R out to the ring, so by Pythagoras \\( r = \\sqrt{z^2 + R^2} \\).</li>'
+    '<li><strong>One piece</strong> gives \\( dE = k\\,dq/r^2 \\), pointing away from that piece — a <em>slanted</em> arrow.</li>'
+    '<li><strong>Split</strong> each slanted arrow into an <em>axial</em> part \\( dE\\cos\\theta \\) (along the axis) and a <em>sideways</em> part \\( dE\\sin\\theta \\).</li>'
+    '<li><strong>Symmetry:</strong> the piece directly opposite makes a mirror-image arrow. Same axial part, opposite sideways part. So every sideways part is cancelled by its partner '
+    '— <em>only the axial parts survive</em>, and they all point the same way, so they simply add.</li>'
+    '<li><strong>Add</strong> the axial parts of all the pieces. Because z and R are the same for every piece, they come out of the sum, and the dq\'s add up to the total charge q.</li></ol>'
+    '<p style="margin-top:.5rem"><strong>Where (z² + R²)<sup>3/2</sup> comes from:</strong> one factor 1/r² from Coulomb\'s law, times cos θ = z/r from the triangle, gives z/r³ — and r³ = (z² + R²)<sup>3/2</sup>.</p>'
+    '</div>' + FIG(d_ring_pair(), "The top and bottom pieces: their sideways (pink) parts cancel, their axial (green) parts add."))
 
 def paper_261():
     P = "261"
@@ -546,7 +585,7 @@ def paper_261():
         A(r"\(V = +3.60\times10^{-8}\) V."), "math"))
 
     out.append(card(P, "4a", "4 (a)", 4,
-        '<p>The formula given is the field of a <strong>ring</strong> of radius R and charge q at a point P on its axis, a distance z from the centre.</p>' +
+        '<p>The formula given is the field of a <strong>ring</strong> of radius R and charge q at a point P on its axis, a distance z from the centre.</p>' + RING_EXPLAIN +
         ST(1, r"Split the ring into small elements of length \(ds\), each carrying \(dq = \lambda\,ds\) with \(\lambda = q/2\pi R\). Treat each as a point charge:") +
         M(r"dE = \frac{1}{4\pi\varepsilon_0}\frac{dq}{r^2} = \frac{1}{4\pi\varepsilon_0}\frac{\lambda\,ds}{z^2 + R^2}") +
         ST(2, r"Symmetry: the element directly opposite gives a \(d\vec E\) with the same axial part and an equal but opposite sideways part. "
@@ -554,8 +593,12 @@ def paper_261():
         M(r"\cos\theta = \frac{z}{r} = \frac{z}{(z^2 + R^2)^{1/2}}") +
         ST(3, "Add up the axial parts around the whole ring (z and R are the same for every element):") +
         M(r"E = \oint dE\cos\theta = \frac{1}{4\pi\varepsilon_0}\frac{z\,\lambda}{(z^2+R^2)^{3/2}}\oint ds = \frac{1}{4\pi\varepsilon_0}\frac{z\,\lambda\,(2\pi R)}{(z^2+R^2)^{3/2}}") +
-        ST(4, r"Since \(\lambda(2\pi R) = q\):") +
+        ST(4, r"Since \(\lambda(2\pi R) = q\) (charge per length × length of the ring = total charge):") +
         M(r"E = \frac{1}{4\pi\varepsilon_0}\frac{qz}{(z^2 + R^2)^{3/2}}") +
+        ST(5, "Check it makes sense:") +
+        M(r"z = 0:\ E = 0 // (\text{at the centre every piece is cancelled by the opposite one})") +
+        M(r"z \gg R:\ (z^2 + R^2)^{3/2} \approx z^3\ \Rightarrow\ E \approx \frac{1}{4\pi\varepsilon_0}\frac{q}{z^2} // (\text{from far away the ring looks like a point charge})") +
+        '<img class="svg-fig" src="quiz4-figures/g-ring.svg" alt="Ring field along its axis"><p class="fig-cap">E along the axis: zero at the centre, a maximum near z ≈ 0.7R, then falling like a point charge.</p>' +
         FIG(d261_4a(), "Each element's field splits into an axial part (kept) and a sideways part (cancelled by the opposite element).") +
         A(r"\(E = \dfrac{1}{4\pi\varepsilon_0}\dfrac{qz}{(z^2+R^2)^{3/2}}\), directed along the axis (away from the ring for q > 0). Checks: E = 0 at the centre (z = 0); E → kq/z² far away."), "derive"))
 
