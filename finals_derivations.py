@@ -260,7 +260,7 @@ def build():
         @media (max-width: 700px) { .math-block { font-size: 0.86rem !important; } }
     </style>
 </head>"""
-    nav = ('<nav class="nav-bar"><a href="index.html" class="back-btn">← Back to Home</a><a href="finals-cheatsheet.html">Cheat Sheet</a>'
+    nav = ('<nav class="nav-bar"><a href="index.html" class="back-btn">← Back to Home</a><a href="finals-derivations-short.html">⚡ Short version</a><a href="finals-cheatsheet.html">Cheat Sheet</a>'
            '<a href="visual-cheatsheet.html">Visual Sheet</a><a href="final-261.html">Final 261</a><a href="final-253.html">Final 253</a>'
            '<a href="final-252.html">Final 252</a></nav>')
     rows = ""
