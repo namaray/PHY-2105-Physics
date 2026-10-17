@@ -4,7 +4,7 @@ Run: python3 finals_derivations.py
 Frequencies come from the 13 final papers in finals/ (221 is a midterm and has none);
 three extra derivations come from the slides/notes and have not been asked yet.
 """
-from finals_build import (M, FIG, RING_EXPLAIN, U_EXPLAIN, DERIV, render_steps, RES, d253_8a, d261_5b, d253_8b, d261_1b, d261_4b, d253_9b, d261_4a,
+from finals_build import (M, FIG, RING_EXPLAIN, U_EXPLAIN, DERIV, TOOLS, tool_tex, render_steps, RES, d253_8a, d261_5b, d253_8b, d261_1b, d261_4b, d253_9b, d261_4a,
                           d253_9a, d261_5a)
 from visual_cheatsheet import f_def, p_system, p_grad, p_equal
 
@@ -225,7 +225,7 @@ def section(n, d, from_notes=False):
     head = f'<section class="notes-section" id="{d["id"]}"><h2>{n}. {d["title"]} {badge}</h2>'
     meta = "" if from_notes else asked(d["papers"], d["phr"])
     x = DERIV[KEY[d["id"]]]
-    body = x["idea"] + x["figs"]() + render_steps(x["steps"]) + RES(x["result"], x["note"]) + (tip(x["tip"]) if x["tip"] else "")
+    body = x["start"] + x["idea"] + x["figs"]() + render_steps(x["steps"]) + RES(x["result"], x["note"]) + (tip(x["tip"]) if x["tip"] else "")
     return head + meta + f'<div class="formula-card">{body}</div></section>\n'
 
 
@@ -235,6 +235,9 @@ def build():
     css = r"""
         .excluded-box { background: rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.28); border-radius:12px; padding:1.1rem 1.4rem; margin:1.2rem 0; }
         .excluded-box h4 { color:#ef4444; margin-bottom:0.4rem; }
+        .start { background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.35); border-radius:10px; padding:0.6rem 1.1rem; margin:0.8rem 0; font-size:0.93rem; }
+        .start > strong:first-child { color:#38bdf8; } [data-theme="light"] .start > strong:first-child { color:#0369a1; }
+        .start ul { margin:0.3rem 0 0 1.1rem; } .start li { margin:0.25rem 0; } .start .mut { color: var(--text-secondary); font-size:0.88rem; } .start .tt { margin:0.2rem 0 0.1rem 0.6rem; line-height:2.2; }
         .badge-freq { background: rgba(239,68,68,0.16); color:#f87171; }
         .badge-notes { background: rgba(99,102,241,0.18); color:#818cf8; }
         [data-theme="light"] .badge-freq { color:#b91c1c; } [data-theme="light"] .badge-notes { color:#4338ca; }
@@ -283,9 +286,17 @@ def build():
             <p>Gauss's law (flux through a cylinder, Coulomb's law from Gauss's law — 213A, 243), drift velocity and current density (203, 211),
             capacitors in series/parallel and AC power (211). These belonged to older course outlines that went beyond the three chapters you were taught.</p>
         </div>
+        <div class="formula-card" id="toolkit"><h3 style="margin:0 0 .4rem;color:var(--accent-color)">🧰 Toolkit — the only formulas the derivations use</h3>
+            <p style="font-size:.92rem;color:var(--text-secondary)">Every derivation below is built from these. Learn them first; each derivation's
+            <strong>📌 Start from these</strong> box tells you which ones it needs, and each step is tagged (T1…T13).</p>
+            <table class="rank">{{TOOLROWS}}</table>
+            <p style="font-size:.92rem;margin-top:.6rem"><strong>Suggested learning order</strong> (each one builds on the ones before):
+            9 (point-charge field) → 7 (V from E) → 5 (point-charge V) → 2 (dipole V) → 1 (dipole field) → 3 (torque) → 4 (U = −p·E) → 6 (ring) → 8 (line) → 10–12.</p></div>
         <div class="formula-card toc"><strong>Ranking</strong>
             <table class="rank"><tr><th>#</th><th>Derivation</th><th>Papers</th><th>Last asked</th></tr>{rows}</table></div>
 """
+    toolrows = "".join(f'<tr><td><b>{k}</b></td><td>{v[0]}</td><td style="line-height:2.3">{tool_tex(v[1])}<div style="font-size:.82rem;color:var(--text-secondary)">{v[2]}</div></td></tr>' for k, v in TOOLS.items())
+    intro = intro.replace("{TOOLROWS}", toolrows)
     body = ['<body><div class="container notes-container">', nav,
             '<header class="notes-header"><h1>🧾 Finals Derivation Sheet</h1>'
             '<p class="subtitle">PHY-2105 • Coulomb\'s Law · Electric Field · Electric Potential — every "show that", most-asked first</p></header>', intro,

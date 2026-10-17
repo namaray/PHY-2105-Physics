@@ -1252,9 +1252,43 @@ def RES(tex, note=""):
             + (f'<p style="margin-top:.6rem;font-size:.92rem">{note}</p>' if note else "") + "</div>")
 
 
+# The basic formulas every derivation is built from (shown as a toolkit and cited per derivation)
+TOOLS = {
+    "T1": ("Coulomb's law", r"F = \frac{k\,q_1q_2}{r^2},\quad k = \frac{1}{4\pi\varepsilon_0}", "force between two point charges; like repel, unlike attract"),
+    "T2": ("Field of a point charge", r"E = \frac{kq}{r^2}", "points away from +, toward −"),
+    "T3": ("Force from a field", r"F = qE", "a + charge is pushed along E, a − charge against E"),
+    "T4": ("Potential of a point charge", r"V = \frac{kq}{r}", "a plain number; keeps the sign of q"),
+    "T5": ("Superposition", r"\vec E = \vec E_1 + \vec E_2 + \cdots,\qquad V = V_1 + V_2 + \cdots", "fields add as arrows, potentials add as numbers"),
+    "T6": ("Work", r"W = Fd\cos\theta\qquad(\text{tiny step: } dW = \vec F\cdot d\vec s)", "θ = angle between the force and the motion"),
+    "T7": ("Energy and potential", r"\Delta U = -W,\qquad \Delta V = \frac{\Delta U}{q}", "W = work done by the field"),
+    "T8": ("Torque", r"\tau = F\times(\text{lever arm})", "lever arm = perpendicular distance from the pivot to the force's line"),
+    "T9": ("Dot and cross product", r"\vec a\cdot\vec b = ab\cos\theta,\qquad |\vec a\times\vec b| = ab\sin\theta", "θ = angle between the two vectors"),
+    "T10": ("Right-triangle trig", r"\cos\theta = \frac{\text{adjacent}}{\text{hypotenuse}},\quad \sin\theta = \frac{\text{opposite}}{\text{hypotenuse}},\quad c^2 = a^2 + b^2", ""),
+    "T11": ("Integrals you need", r"\int\frac{dr}{r^2} = -\frac1r,\quad \int\sin\theta\,d\theta = -\cos\theta,\quad \int\frac{dx}{\sqrt{x^2+d^2}} = \ln\!\left(x + \sqrt{x^2+d^2}\right)",
+            "∫ just means \"add up lots of tiny pieces\""),
+    "T12": ("Far-away approximation", r"d \ll z\ \Rightarrow\ z \pm \tfrac d2 \approx z", "when P is far, the small size d of the dipole hardly changes the distances"),
+    "T13": ("Dipole moment", r"p = qd", "points from −q to +q"),
+}
+
+
+def tool_tex(tex):
+    """Show each formula of a tool on its own line, full size."""
+    import re as _re
+    parts = _re.split(r",\\q?quad ", tex)
+    return "<br>".join(f"\\( \\displaystyle {p_} \\)" for p_ in parts)
+
+
+def START(*ids, extra=()):
+    rows = "".join(f'<li><b>{t}</b> {TOOLS[t][0]}:<div class="tt">{tool_tex(TOOLS[t][1])}</div>' + (f'<span class="mut">{TOOLS[t][2]}</span>' if TOOLS[t][2] else "") + "</li>" for t in ids)
+    rows += "".join(f"<li>{e}</li>" for e in extra)
+    return f'<div class="start"><strong>📌 Start from these</strong><ul>{rows}</ul></div>'
+
+
+
 DERIV = {}
 
 DERIV["axis"] = dict(
+    start=START("T2", "T5", "T12", "T13"),
     title="Electric field on the axis of a dipole",
     idea=IDEA("A dipole is a +q and a −q a small distance d apart. At a point P on the axis beyond +q, the +q is <strong>closer</strong>, so it pushes P away strongly; "
               "the −q is <strong>farther</strong>, so it pulls back a bit more weakly. The two fields point opposite ways and <em>nearly</em> cancel.",
@@ -1263,11 +1297,11 @@ DERIV["axis"] = dict(
     figs=lambda: FIG(d253_8a()),
     steps=[("Set up", "Put the dipole on the z-axis with its centre at the origin: +q at z = +d/2, −q at z = −d/2. P is on the axis at distance z. Distances from P:",
             [r"\text{to } +q:\ z - \frac d2,\qquad \text{to } -q:\ z + \frac d2"]),
-           ("Field of +q", "Coulomb's law with distance z − d/2. P is beyond +q, so this field points away from +q, along +z:",
+           ("Field of +q (T2)", "Coulomb's law with distance z − d/2. P is beyond +q, so this field points away from +q, along +z:",
             [r"E_{(+)} = \frac{kq}{(z - \frac d2)^2}"]),
-           ("Field of −q", "Distance z + d/2. A negative charge's field points toward it, so along −z:",
+           ("Field of −q (T2)", "Distance z + d/2. A negative charge's field points toward it, so along −z:",
             [r"E_{(-)} = \frac{kq}{(z + \frac d2)^2}"]),
-           ("Subtract", "They point in opposite directions, so the net field is the difference:",
+           ("Subtract (T5)", "They point in opposite directions, so the net field is the difference:",
             [r"E = E_{(+)} - E_{(-)} = kq\left[\frac{1}{(z - \frac d2)^2} - \frac{1}{(z + \frac d2)^2}\right]"]),
            ("Common denominator", "Put both fractions over one denominator:",
             [r"E = kq\,\frac{(z + \frac d2)^2 - (z - \frac d2)^2}{(z - \frac d2)^2\,(z + \frac d2)^2}"]),
@@ -1275,15 +1309,16 @@ DERIV["axis"] = dict(
             [r"(z^2 + zd + \tfrac{d^2}{4}) - (z^2 - zd + \tfrac{d^2}{4}) = 2zd"]),
            ("Simplify the bottom", r"Difference of two squares: \((z - \tfrac d2)(z + \tfrac d2) = z^2 - \tfrac{d^2}{4}\), so the bottom is that squared:",
             [r"E = kq\,\frac{2zd}{(z^2 - \frac{d^2}{4})^2}\qquad(\text{exact})"]),
-           ("Far away (z ≫ d)", r"\(d^2/4\) is tiny next to \(z^2\), so the bottom is about \((z^2)^2 = z^4\):",
+           ("Far away, z ≫ d (T12)", r"\(d^2/4\) is tiny next to \(z^2\), so the bottom is about \((z^2)^2 = z^4\):",
             [r"E \approx kq\,\frac{2zd}{z^4} = \frac{2kqd}{z^3}"]),
-           ("Use p = qd and k = 1/4πε₀", r"\(2k = \dfrac{2}{4\pi\varepsilon_0} = \dfrac{1}{2\pi\varepsilon_0}\):",
+           ("Use p = qd (T13) and k = 1/4πε₀", r"\(2k = \dfrac{2}{4\pi\varepsilon_0} = \dfrac{1}{2\pi\varepsilon_0}\):",
             [r"E = \frac{2kp}{z^3} = \frac{1}{2\pi\varepsilon_0}\frac{p}{z^3}"])],
     result=r"E = \frac{1}{2\pi\varepsilon_0}\frac{p}{z^3}",
     note="Points along the axis in the direction of p (from − to +). 1/z³: it fades faster than a single charge because the two fields almost cancel.",
     tip="Draw the diagram first. If asked to \"modify when z ≫ d\", write the exact line (step 7) <em>and</em> the approximation (step 8).")
 
 DERIV["dipoleV"] = dict(
+    start=START("T4", "T5", "T10", "T12", "T13"),
     title="Electric potential of a dipole",
     idea=IDEA("Potential is a <strong>scalar</strong> (just a number with a sign), so we simply <em>add</em> the potential of +q and of −q — no arrows, no components.",
               "The two distances r₊ and r₋ are almost the same, so the two potentials almost cancel. The tiny difference between the distances is what matters, "
@@ -1291,34 +1326,35 @@ DERIV["dipoleV"] = dict(
               "Plan: add the two potentials, put them over one denominator, then use \"far away\" to replace the distances."),
     figs=lambda: FIG(d261_5b(), "The extra distance to −q is the projection of d on the line to P: d cos θ."),
     steps=[("Set up", "Dipole centre at the origin, +q above and −q below, a distance d apart. P is a distance r from the centre at angle θ from the dipole axis. Call its distances to the charges r₊ and r₋.", []),
-           ("Potential of each charge", "V = kq/r for each; the −q gives a negative potential:",
+           ("Potential of each charge (T4)", "V = kq/r for each; the −q gives a negative potential:",
             [r"V_{(+)} = \frac{kq}{r_{(+)}},\qquad V_{(-)} = -\frac{kq}{r_{(-)}}"]),
-           ("Add them (scalars)", "", [r"V = kq\left(\frac{1}{r_{(+)}} - \frac{1}{r_{(-)}}\right)"]),
+           ("Add them as numbers (T5)", "", [r"V = kq\left(\frac{1}{r_{(+)}} - \frac{1}{r_{(-)}}\right)"]),
            ("Common denominator", "", [r"V = kq\,\frac{r_{(-)} - r_{(+)}}{r_{(-)}\,r_{(+)}}"]),
-           ("The top, far away", "When P is far (r ≫ d) the lines from the two charges to P are almost parallel. Draw a perpendicular from +q onto the line from −q: "
+           ("The top, far away (T10, T12)", "When P is far (r ≫ d) the lines from the two charges to P are almost parallel. Draw a perpendicular from +q onto the line from −q: "
             "the extra distance is the side of a right triangle with hypotenuse d and angle θ, i.e. the adjacent side:",
             [r"r_{(-)} - r_{(+)} \approx d\cos\theta"]),
-           ("The bottom, far away", "Both distances are almost equal to r:", [r"r_{(-)}\,r_{(+)} \approx r\cdot r = r^2"]),
+           ("The bottom, far away (T12)", "Both distances are almost equal to r:", [r"r_{(-)}\,r_{(+)} \approx r\cdot r = r^2"]),
            ("Substitute", "", [r"V = kq\,\frac{d\cos\theta}{r^2}"]),
-           ("Use p = qd", "", [r"V = \frac{kp\cos\theta}{r^2} = \frac{1}{4\pi\varepsilon_0}\frac{p\cos\theta}{r^2}"])],
+           ("Use p = qd (T13)", "", [r"V = \frac{kp\cos\theta}{r^2} = \frac{1}{4\pi\varepsilon_0}\frac{p\cos\theta}{r^2}"])],
     result=r"V = \frac{1}{4\pi\varepsilon_0}\frac{p\cos\theta}{r^2}",
     note="Checks: on the axis (θ = 0) V = kp/r²; on the perpendicular bisector (θ = 90°) V = 0 — every point there is equally far from +q and −q; behind (θ = 180°) V = −kp/r².",
     tip="Mark r₊, r₋, θ and the little d cos θ segment on your diagram — that projection is the step the marker looks for.")
 
 DERIV["torque"] = dict(
+    start=START("T3", "T8", "T10", "T13", "T9"),
     title="Torque on a dipole: τ = p × E",
     idea=IDEA("In a uniform field the two ends feel equal and opposite forces (+qE and −qE), so the dipole doesn't slide anywhere — <strong>no net force</strong>.",
               "But the two forces act on different lines, a bit like two hands turning a steering wheel. That makes a <strong>twist</strong> (torque) that turns p toward E.",
               "Torque = force × lever arm (the perpendicular distance from the pivot to the force's line). The lever arm here is (d/2) sin θ, which is where the sin θ comes from."),
     figs=lambda: FIG(d253_8b()) + FIG(d261_1b(), "Torque is zero at 0° and 180°, maximum at 90°."),
-    steps=[("Forces on the ends", "The +q end is pushed along E, the −q end against E, each with size qE:", [r"F_{(+)} = qE,\qquad F_{(-)} = qE\ \ (\text{opposite directions})"]),
+    steps=[("Forces on the ends (T3)", "The +q end is pushed along E, the −q end against E, each with size qE:", [r"F_{(+)} = qE,\qquad F_{(-)} = qE\ \ (\text{opposite directions})"]),
            ("Net force", "", [r"F_{net} = qE - qE = 0"]),
-           ("Lever arm", "Take the centre as the pivot. Each end is d/2 from it. The rod makes angle θ with E, so the perpendicular distance from the pivot to each force's line is the side opposite θ:",
+           ("Lever arm (T10)", "Take the centre as the pivot. Each end is d/2 from it. The rod makes angle θ with E, so the perpendicular distance from the pivot to each force's line is the side opposite θ:",
             [r"\text{lever arm} = \frac d2\sin\theta"]),
-           ("Torque of each force", "Torque = force × lever arm:", [r"\tau_{(+)} = qE\cdot\frac d2\sin\theta,\qquad \tau_{(-)} = qE\cdot\frac d2\sin\theta"]),
+           ("Torque of each force (T8)", "Torque = force × lever arm:", [r"\tau_{(+)} = qE\cdot\frac d2\sin\theta,\qquad \tau_{(-)} = qE\cdot\frac d2\sin\theta"]),
            ("Add them", "Both turn the dipole the same way (toward E), so they add:", [r"\tau = 2\cdot qE\,\frac d2\sin\theta = qEd\sin\theta"]),
-           ("Use p = qd", "", [r"\tau = pE\sin\theta"]),
-           ("Vector form", r"The torque points perpendicular to the plane of \(\vec p\) and \(\vec E\), by the right-hand rule turning \(\vec p\) toward \(\vec E\). "
+           ("Use p = qd (T13)", "", [r"\tau = pE\sin\theta"]),
+           ("Vector form (T9)", r"The torque points perpendicular to the plane of \(\vec p\) and \(\vec E\), by the right-hand rule turning \(\vec p\) toward \(\vec E\). "
             r"That is exactly the cross product, whose size is \(|\vec a\times\vec b| = ab\sin\theta\):", [r"\vec\tau = \vec p\times\vec E"]),
            ("Conditions", r"\(\sin\theta\) is biggest (1) at 90° and zero at 0° and 180°:",
             [r"\tau_{max} = pE\ \ (\theta = 90^\circ),\qquad \tau = 0\ \ (\theta = 0^\circ,\ 180^\circ)"])],
@@ -1327,6 +1363,7 @@ DERIV["torque"] = dict(
     tip="Two diagrams earn the marks: the dipole with both forces and the lever arm, and the three orientations 0°, 90°, 180°.")
 
 DERIV["U"] = dict(
+    start=START("T6", "T7", "T11", "T9", extra=["Torque on a dipole \\( \\tau = pE\\sin\\theta \\) — derivation 3"]),
     title="Potential energy of a dipole: U = −p · E",
     idea=IDEA("<strong>What U means:</strong> energy the dipole stores just because of <em>which way it points</em>. Think of a ball on a hill: pointing <strong>along</strong> E is the bottom "
               "(lowest energy, it stays put); pointing <strong>against</strong> E is the top (highest energy, the slightest nudge flips it).",
@@ -1336,15 +1373,15 @@ DERIV["U"] = dict(
               "<strong>Why zero at 90°:</strong> like choosing \"ground level\" for height, the zero is a choice; 90° is picked because cos 90° = 0.",
               "<strong>The \"= −p·E\" part</strong> is the same thing in vector shorthand: \\( \\vec a\\cdot\\vec b = ab\\cos\\theta \\), so \\( \\vec p\\cdot\\vec E = pE\\cos\\theta \\)."),
     figs=lambda: FIG(d261_4b()),
-    steps=[("Torque from the field", "The field twists the dipole so as to <em>decrease</em> θ — hence the minus sign:", [r"\tau = -pE\sin\theta"]),
-           ("Work done by the field", "Work = torque added up over the angle turned, from θ₀ to θ:", [r"W = \int_{\theta_0}^{\theta}\tau\,d\theta = \int_{\theta_0}^{\theta}(-pE\sin\theta)\,d\theta"]),
+    steps=[("Torque from the field (derivation 3)", "The field twists the dipole so as to <em>decrease</em> θ — hence the minus sign:", [r"\tau = -pE\sin\theta"]),
+           ("Work done by the field (T6)", "Work = torque added up over the angle turned, from θ₀ to θ:", [r"W = \int_{\theta_0}^{\theta}\tau\,d\theta = \int_{\theta_0}^{\theta}(-pE\sin\theta)\,d\theta"]),
            ("Take the constant out", "", [r"W = -pE\int_{\theta_0}^{\theta}\sin\theta\,d\theta"]),
-           ("Integrate", r"\(\int\sin\theta\,d\theta = -\cos\theta\), so between the limits:", [r"\int_{\theta_0}^{\theta}\sin\theta\,d\theta = -\cos\theta + \cos\theta_0",
+           ("Integrate (T11)", r"\(\int\sin\theta\,d\theta = -\cos\theta\), so between the limits:", [r"\int_{\theta_0}^{\theta}\sin\theta\,d\theta = -\cos\theta + \cos\theta_0",
                                                                                                  r"W = -pE(-\cos\theta + \cos\theta_0) = pE(\cos\theta - \cos\theta_0)"]),
-           ("Potential energy = minus the field's work", "", [r"U(\theta) - U(\theta_0) = -W = -pE(\cos\theta - \cos\theta_0)"]),
+           ("Potential energy = minus the field's work (T7)", "", [r"U(\theta) - U(\theta_0) = -W = -pE(\cos\theta - \cos\theta_0)"]),
            ("Choose the zero", r"Take \(\theta_0 = 90^\circ\) with \(U(90^\circ) = 0\). Since \(\cos 90^\circ = 0\), both reference terms vanish:",
             [r"U(\theta) - 0 = -pE(\cos\theta - 0)", r"U = -pE\cos\theta"]),
-           ("Dot-product form", r"\(pE\cos\theta\) is \(\vec p\cdot\vec E\):", [r"U = -\vec p\cdot\vec E"]),
+           ("Dot-product form (T9)", r"\(pE\cos\theta\) is \(\vec p\cdot\vec E\):", [r"U = -\vec p\cdot\vec E"]),
            ("Conditions", "", [r"\theta = 0^\circ:\ U = -pE\ \ (\text{minimum, stable})", r"\theta = 90^\circ:\ U = 0",
                                r"\theta = 180^\circ:\ U = +pE\ \ (\text{maximum, unstable})"])],
     result=r"U = -pE\cos\theta = -\vec p\cdot\vec E",
@@ -1352,28 +1389,30 @@ DERIV["U"] = dict(
     tip="Say why θ₀ = 90° (it makes U = 0 there) and sketch the U–θ curve for the conditions.")
 
 DERIV["pointV"] = dict(
+    start=START("T2", "T9", "T11", extra=["\\( V_f - V_i = -\\int_i^f \\vec E\\cdot d\\vec s \\) — derivation 7"]),
     title="Potential of a point charge (and of a group of charges)",
     idea=IDEA("Potential at P = the work per unit charge to bring a test charge in from far away (where V = 0) to P. "
               "We get it from the field by adding up E · ds along a path between P and infinity — that's the formula V<sub>f</sub> − V<sub>i</sub> = −∫E·ds (derivation 7).",
               "The easiest path is the straight radial line, because then E and ds point the same way and E · ds is just E dr.",
               "For several charges: potential is a scalar, so their potentials simply add."),
     figs=lambda: FIG(d253_9b()) + FIG(p_equal(), "For a group, add the potentials as plain numbers (with signs)."),
-    steps=[("Start formula", "", [r"V_f - V_i = -\int_i^f\vec E\cdot d\vec s"]),
+    steps=[("Start formula (derivation 7)", "", [r"V_f - V_i = -\int_i^f\vec E\cdot d\vec s"]),
            ("Choose the end points", r"Start at P (distance R from q) and finish at infinity. At infinity the potential is zero:",
             [r"V_i = V,\qquad V_f = V(\infty) = 0"]),
-           ("Choose the path", r"Go straight out along a radial line. E points radially too, so the angle between them is 0 and \(\vec E\cdot d\vec s = E\,dr\):",
+           ("Choose the path (T2, T9)", r"Go straight out along a radial line. E points radially too, so the angle between them is 0 and \(\vec E\cdot d\vec s = E\,dr\):",
             [r"E = \frac{kq}{r^2}"]),
            ("Substitute", "", [r"0 - V = -\int_R^{\infty}\frac{kq}{r^2}\,dr = -kq\int_R^{\infty}\frac{dr}{r^2}"]),
-           ("Integrate", r"\(\int r^{-2}\,dr = -\dfrac1r\). Evaluate from R to ∞ (1/∞ = 0):",
+           ("Integrate (T11)", r"\(\int r^{-2}\,dr = -\dfrac1r\). Evaluate from R to ∞ (1/∞ = 0):",
             [r"\int_R^{\infty}\frac{dr}{r^2} = \left[-\frac1r\right]_R^{\infty} = 0 - \left(-\frac1R\right) = \frac1R"]),
            ("Solve for V", "", [r"-V = -\frac{kq}{R}\ \Longrightarrow\ V = \frac{kq}{R}"]),
-           ("Group of n charges", "Each charge gives its own kq/r; potentials are scalars, so just add (keep each sign):",
+           ("Group of n charges (T5)", "Each charge gives its own kq/r; potentials are scalars, so just add (keep each sign):",
             [r"V = V_1 + V_2 + \cdots + V_n = \sum_{i=1}^{n}\frac{kq_i}{r_i}"])],
     result=r"V = \frac{1}{4\pi\varepsilon_0}\frac{q}{r},\qquad V = \frac{1}{4\pi\varepsilon_0}\sum_i\frac{q_i}{r_i}",
     note="V has the same sign as q and is zero at infinity.",
     tip="If asked to \"modify for n charges\", the one-line superposition step is the whole answer.")
 
 DERIV["ring"] = dict(
+    start=START("T2", "T5", "T10", "T11"),
     title="Electric field of a charged ring (on its axis)",
     idea=IDEA("<strong>Why not just kq/r²?</strong> That's for charge at <em>one point</em>; the ring's charge is spread round a circle.",
               "<strong>Plan — chop, find, add:</strong> chop the ring into tiny pieces dq (each is a point charge). Every piece is the <em>same distance</em> from P: "
@@ -1383,14 +1422,14 @@ DERIV["ring"] = dict(
               "<strong>Where (z² + R²)<sup>3/2</sup> comes from:</strong> 1/r² from Coulomb × cos θ = z/r from the triangle = z/r³."),
     figs=lambda: FIG(d_ring_pair(), "The top and bottom pieces: their sideways (pink) parts cancel, their axial (green) parts add.") + FIG(d261_4a()),
     steps=[("One piece", r"A tiny piece of length ds carries \(dq = \lambda\,ds\), where \(\lambda = q/2\pi R\) is the charge per length:", [r"dq = \lambda\,ds"]),
-           ("Its distance from P", "Go z along the axis and R out to the ring:", [r"r = \sqrt{z^2 + R^2}"]),
-           ("Its field", "Coulomb's law for a point charge:", [r"dE = \frac{k\,dq}{r^2} = \frac{k\lambda\,ds}{z^2 + R^2}"]),
-           ("Keep only the axial part", "Sideways parts cancel in pairs (symmetry), so we need dE cos θ. From the triangle, adjacent side z, hypotenuse r:",
+           ("Its distance from P (T10)", "Go z along the axis and R out to the ring:", [r"r = \sqrt{z^2 + R^2}"]),
+           ("Its field (T2)", "Coulomb's law for a point charge:", [r"dE = \frac{k\,dq}{r^2} = \frac{k\lambda\,ds}{z^2 + R^2}"]),
+           ("Keep only the axial part (T10)", "Sideways parts cancel in pairs (symmetry), so we need dE cos θ. From the triangle, adjacent side z, hypotenuse r:",
             [r"\cos\theta = \frac zr = \frac{z}{(z^2 + R^2)^{1/2}}"]),
            ("Multiply", "Axial part of one piece = dE × cos θ — this is where z comes in:",
             [r"dE\cos\theta = \frac{k\lambda\,ds}{z^2 + R^2}\times\frac{z}{(z^2 + R^2)^{1/2}}"]),
            ("Combine the powers", r"\((z^2+R^2)^1\times(z^2+R^2)^{1/2} = (z^2+R^2)^{3/2}\):", [r"dE\cos\theta = \frac{k\,z\,\lambda\,ds}{(z^2 + R^2)^{3/2}}"]),
-           ("Add round the ring", "Only ds changes from piece to piece; k, z, R and λ are the same for all, so they come outside the sum (∮ = \"all the way round\"):",
+           ("Add round the ring (T11)", "Only ds changes from piece to piece; k, z, R and λ are the same for all, so they come outside the sum (∮ = \"all the way round\"):",
             [r"E = \oint dE\cos\theta = \frac{k\,z\,\lambda}{(z^2 + R^2)^{3/2}}\oint ds"]),
            ("Length of the ring", r"All the ds add up to the circumference, \(\oint ds = 2\pi R\), and \(\lambda\cdot2\pi R = q\):",
             [r"E = \frac{k\,z\,(\lambda\,2\pi R)}{(z^2 + R^2)^{3/2}} = \frac{kqz}{(z^2 + R^2)^{3/2}}"]),
@@ -1401,24 +1440,32 @@ DERIV["ring"] = dict(
     tip="Write the symmetry sentence (\"sideways parts cancel\") explicitly — it carries marks. The papers' wording \"infinite line charge or ring charge\" still means the <em>ring</em> formula.")
 
 DERIV["VfVi"] = dict(
+    start=START("T3", "T6", "T7", "T9"),
     title="Potential difference from the field: V<sub>f</sub> − V<sub>i</sub> = −∫ E · ds",
-    idea=IDEA("The field pushes on a charge, so it does work as the charge moves. Potential difference is defined from that work: "
-              "ΔV = −(work done by the field) ÷ (charge).",
-              "Along a path, the field may change and the path may bend, so we add up the work in tiny steps ds — that's the integral. "
-              "The dot product E · ds keeps only the part of the force along the motion (the only part that does work)."),
+    idea=IDEA("This is just <strong>work → energy → potential</strong>, using T3, T6 and T7.",
+              "<strong>Part A</strong> does the simple case: a uniform field and a straight path. There it's one line of work, W = Fd, and you get ΔV = −Ed.",
+              "<strong>Part B</strong> is the <em>same idea</em> when the field changes or the path bends: chop the path into tiny straight steps, "
+              "do Part A on each step, and add them up. \"Add up tiny pieces\" is all the ∫ sign means."),
     figs=lambda: FIG(d253_9a()),
-    steps=[("Force on a test charge", r"A positive test charge \(q_0\) in the field feels", [r"\vec F = q_0\vec E"]),
-           ("Work over a tiny step", r"Work = force · displacement. For a small step \(d\vec s\):", [r"dW = \vec F\cdot d\vec s = q_0\,\vec E\cdot d\vec s"]),
-           ("Work over the whole path", "Add up all the small steps from i to f:", [r"W = \int_i^f dW = q_0\int_i^f\vec E\cdot d\vec s"]),
-           ("Definition of potential difference", r"\(\Delta U = -W\) and \(\Delta V = \Delta U/q_0\), so", [r"V_f - V_i = \frac{\Delta U}{q_0} = -\frac{W}{q_0}"]),
-           ("Substitute W", r"The \(q_0\) cancels:", [r"V_f - V_i = -\frac{q_0\int_i^f\vec E\cdot d\vec s}{q_0} = -\int_i^f\vec E\cdot d\vec s"]),
-           ("Uniform field", r"Moving a distance d straight along a uniform E: \(\vec E\cdot d\vec s = E\,ds\) (cos 0° = 1) and E comes out of the integral:",
-            [r"V_f - V_i = -E\int_i^f ds = -Ed"])],
-    result=r"V_f - V_i = -\int_i^f\vec E\cdot d\vec s",
-    note="The minus sign means V <em>decreases</em> as you move along E. The answer doesn't depend on the path (the electric force is conservative).",
-    tip="Draw the field lines, the path from i to f and one small ds with F = q₀E on it — the question usually says \"draw proper diagram\".")
+    steps=[("Part A — force on the test charge (T3)", r"Put a small positive test charge \(q_0\) in a uniform field E. It is pushed along E:",
+            [r"F = q_0E"]),
+           ("Part A — work done by the field (T6)", "Let it move a distance d straight along E. Force and motion point the same way (θ = 0°, cos 0° = 1):",
+            [r"W = Fd\cos0^\circ = q_0Ed"]),
+           ("Part A — change in potential energy (T7)", "", [r"\Delta U = -W = -q_0Ed"]),
+           ("Part A — change in potential (T7)", r"Divide by the charge; \(q_0\) cancels:", [r"\Delta V = \frac{\Delta U}{q_0} = \frac{-q_0Ed}{q_0} = -Ed"]),
+           ("Part B — chop the path into tiny steps", r"If E changes or the path bends, take a tiny step \(d\vec s\). Over such a short step E is constant and the step is straight, "
+            r"so Part A works on it. The work is force × step × cos θ, which is a dot product (T9):",
+            [r"dW = q_0E\,ds\cos\theta = q_0\,\vec E\cdot d\vec s"]),
+           ("Part B — add up all the steps", r"Adding every tiny piece from i to f is what \(\int_i^f\) means:", [r"W = q_0\int_i^f\vec E\cdot d\vec s"]),
+           ("Part B — potential difference (T7)", r"Exactly as in Part A, divide by \(-q_0\):",
+            [r"V_f - V_i = -\frac{W}{q_0} = -\int_i^f\vec E\cdot d\vec s"]),
+           ("Check", "For a uniform E along a straight path, the integral is just E × d, giving back Part A:", [r"-\int_i^f\vec E\cdot d\vec s = -E\,d"])],
+    result=r"V_f - V_i = -\int_i^f\vec E\cdot d\vec s\qquad(\text{uniform field: } \Delta V = -Ed)",
+    note="The minus sign: V <em>drops</em> as you move along E (the field does positive work, so energy falls). The answer doesn't depend on the path.",
+    tip="Write Part A first — it shows you understand the idea — then generalise. Draw the field lines, the path and one small ds with F = q₀E on it.")
 
 DERIV["line"] = dict(
+    start=START("T4", "T5", "T10", "T11"),
     title="Potential of a line of charge (rod of length L)",
     idea=IDEA("Same chop-and-add idea as the ring, but simpler because potential is a <strong>scalar</strong> — no components, no cancelling arrows. "
               "Each little piece of the rod is a point charge with potential k dq / r.",
@@ -1426,10 +1473,10 @@ DERIV["line"] = dict(
     figs=lambda: FIG(d261_5a()),
     steps=[("Set up", "Rod along the x-axis from x = 0 to x = L, uniform charge per length λ. P is a distance d from the left end, straight above it.", []),
            ("One piece", r"The piece of length dx at position x carries", [r"dq = \lambda\,dx"]),
-           ("Its distance from P", "Right triangle with sides x and d:", [r"r = \sqrt{x^2 + d^2}"]),
-           ("Its potential", "Point-charge potential:", [r"dV = \frac{k\,dq}{r} = \frac{k\lambda\,dx}{\sqrt{x^2 + d^2}}"]),
-           ("Add all the pieces", "Potentials are scalars, so just integrate along the rod; kλ is constant:", [r"V = k\lambda\int_0^L\frac{dx}{\sqrt{x^2 + d^2}}"]),
-           ("Standard integral", "", [r"\int\frac{dx}{\sqrt{x^2 + d^2}} = \ln\left(x + \sqrt{x^2 + d^2}\right)"]),
+           ("Its distance from P (T10)", "Right triangle with sides x and d:", [r"r = \sqrt{x^2 + d^2}"]),
+           ("Its potential (T4)", "Point-charge potential:", [r"dV = \frac{k\,dq}{r} = \frac{k\lambda\,dx}{\sqrt{x^2 + d^2}}"]),
+           ("Add all the pieces (T5)", "Potentials are scalars, so just integrate along the rod; kλ is constant:", [r"V = k\lambda\int_0^L\frac{dx}{\sqrt{x^2 + d^2}}"]),
+           ("Standard integral (T11)", "", [r"\int\frac{dx}{\sqrt{x^2 + d^2}} = \ln\left(x + \sqrt{x^2 + d^2}\right)"]),
            ("Put in the limits", r"Top (x = L) minus bottom (x = 0); at x = 0 the log is \(\ln(0 + \sqrt{d^2}) = \ln d\):",
             [r"V = k\lambda\left[\ln\left(L + \sqrt{L^2 + d^2}\right) - \ln d\right]"]),
            ("Combine the logs", r"\(\ln a - \ln b = \ln(a/b)\):", [r"V = k\lambda\,\ln\left[\frac{L + \sqrt{L^2 + d^2}}{d}\right]"])],
@@ -1438,10 +1485,11 @@ DERIV["line"] = dict(
     tip="Label x, dx, d and r on the diagram — the triangle gives r = √(x² + d²).")
 
 DERIV["pointE"] = dict(
+    start=START("T1", extra=["Definition of the field: \\( \\vec E = \\vec F / q_0 \\) (force per unit positive test charge)"]),
     title="Electric field of a point charge (from Coulomb's law)",
     idea=IDEA("The field is defined as force per unit positive test charge. So put a test charge near q, find the Coulomb force on it, and divide the test charge out."),
     figs=lambda: FIG(f_def()),
-    steps=[("Coulomb force on a test charge", r"A small positive test charge \(q_0\) a distance r from q, with \(\hat r\) the unit vector pointing from q to the test charge:",
+    steps=[("Coulomb force on a test charge (T1)", r"A small positive test charge \(q_0\) a distance r from q, with \(\hat r\) the unit vector pointing from q to the test charge:",
             [r"\vec F = \frac{k\,q\,q_0}{r^2}\,\hat r"]),
            ("Definition of the field", "", [r"\vec E = \frac{\vec F}{q_0}"]),
            ("Divide", r"The \(q_0\) cancels — the field doesn't depend on the test charge:", [r"\vec E = \frac{kq}{r^2}\,\hat r"])],
@@ -1450,12 +1498,13 @@ DERIV["pointE"] = dict(
     tip="Coulomb's law → divide by q₀ → vector form with r̂ → direction rule.")
 
 DERIV["system"] = dict(
+    start=START("T4", "T6", "T7", extra=["Work to bring a charge q to a point at potential V: \\( W = qV \\)"]),
     title="Potential energy of a system of point charges",
     idea=IDEA("The energy stored in a group of charges = the work needed to bring them together, one at a time, from far away. "
               "Each new charge has to be pushed against the charges already there — that gives one term for every <em>pair</em>."),
     figs=lambda: FIG(p_system()),
     steps=[("First charge", r"Bring \(q_1\) in from infinity. Nothing else is there yet, so no force and no work:", [r"W_1 = 0"]),
-           ("Second charge", r"Bring \(q_2\) to a distance \(r_{12}\) from \(q_1\). The work is \(q_2\) times the potential of \(q_1\) at that spot:",
+           ("Second charge (W = qV, T4)", r"Bring \(q_2\) to a distance \(r_{12}\) from \(q_1\). The work is \(q_2\) times the potential of \(q_1\) at that spot:",
             [r"W_2 = q_2V_1 = q_2\,\frac{kq_1}{r_{12}} = \frac{kq_1q_2}{r_{12}}"]),
            ("Third charge", r"\(q_3\) is pushed against both \(q_1\) and \(q_2\):", [r"W_3 = q_3(V_1 + V_2) = \frac{kq_1q_3}{r_{13}} + \frac{kq_2q_3}{r_{23}}"]),
            ("Total = stored energy", "", [r"U = W_1 + W_2 + W_3 = k\left(\frac{q_1q_2}{r_{12}} + \frac{q_1q_3}{r_{13}} + \frac{q_2q_3}{r_{23}}\right)"])],
@@ -1464,12 +1513,13 @@ DERIV["system"] = dict(
     tip="3 charges → 3 pairs, 4 charges → 6 pairs. Keep the signs of the charges.")
 
 DERIV["grad"] = dict(
+    start=START("T6", "T7"),
     title="Field from potential (potential gradient)",
     idea=IDEA("This runs derivation 7 backwards: instead of getting V from E, get E from V. Over a tiny step, the work done by the field can be written two ways — "
               "using the force, and using the potential change. Setting them equal gives E."),
     figs=lambda: FIG(p_grad()),
-    steps=[("Work using the force", r"A test charge \(q_0\) moves a tiny distance \(ds\) at angle θ to \(\vec E\):", [r"dW = q_0E\cos\theta\,ds"]),
-           ("Work using the potential", r"\(dW = -q_0\,dV\):", [r"dW = -q_0\,dV"]),
+    steps=[("Work using the force (T6)", r"A test charge \(q_0\) moves a tiny distance \(ds\) at angle θ to \(\vec E\):", [r"dW = q_0E\cos\theta\,ds"]),
+           ("Work using the potential (T7)", r"\(dW = -q_0\,dV\):", [r"dW = -q_0\,dV"]),
            ("Set them equal", "", [r"q_0E\cos\theta\,ds = -q_0\,dV"]),
            ("Solve", r"Cancel \(q_0\), divide by ds; \(E\cos\theta\) is the component of E along s:", [r"E_s = E\cos\theta = -\frac{dV}{ds}"])],
     result=r"E_s = -\frac{dV}{ds}",
@@ -1477,11 +1527,12 @@ DERIV["grad"] = dict(
     tip="State clearly that E cos θ is the component of E along the displacement.")
 
 DERIV["continuous"] = dict(
+    start=START("T4", "T5", "T11"),
     title="Potential of any continuous charge distribution",
     idea=IDEA("Chop the charge into tiny pieces, treat each as a point charge, and add their potentials. Because potential is a scalar, \"add\" really is just adding numbers."),
     figs=lambda: "",
-    steps=[("One piece", "Each tiny piece dq is a point charge:", [r"dV = \frac{k\,dq}{r}"]),
-           ("Add them all", "", [r"V = \int dV = k\int\frac{dq}{r}"]),
+    steps=[("One piece (T4)", "Each tiny piece dq is a point charge:", [r"dV = \frac{k\,dq}{r}"]),
+           ("Add them all (T5, T11)", "", [r"V = \int dV = k\int\frac{dq}{r}"]),
            ("What dq is", r"Line: \(dq = \lambda\,ds\). Surface: \(dq = \sigma\,dA\). Volume: \(dq = \rho\,dV\).", []),
            ("Example: ring on its axis", r"Every piece is at \(r = \sqrt{z^2+R^2}\), so r comes outside and the dq's add to q:",
             [r"V = \frac{k}{\sqrt{z^2+R^2}}\int dq = \frac{kq}{\sqrt{z^2+R^2}}"])],
@@ -1493,7 +1544,7 @@ DERIV["continuous"] = dict(
 def render_deriv(key, answer=None):
     """The full clear write-up of a derivation (for a paper card or the derivation sheet)."""
     d = DERIV[key]
-    html = d["idea"] + d["figs"]() + render_steps(d["steps"]) + RES(d["result"], d["note"])
+    html = d["start"] + d["idea"] + d["figs"]() + render_steps(d["steps"]) + RES(d["result"], d["note"])
     if answer:
         html += A(answer)
     return html
@@ -1518,6 +1569,9 @@ STYLE = r"""
         [data-theme="light"] .how > strong:first-child { color:#7e22ce; }
         .how .fx { text-align:center; }
         p.sub { margin-top:0.7rem; }
+        .start { background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.35); border-radius:10px; padding:0.6rem 1.1rem; margin:0.8rem 0; font-size:0.93rem; }
+        .start > strong:first-child { color:#38bdf8; } [data-theme="light"] .start > strong:first-child { color:#0369a1; }
+        .start ul { margin:0.3rem 0 0 1.1rem; } .start li { margin:0.25rem 0; } .start .mut { color: var(--text-secondary); font-size:0.88rem; } .start .tt { margin:0.2rem 0 0.1rem 0.6rem; line-height:2.2; }
         @media (max-width: 700px) { .math-block, .fx { font-size: 0.86rem !important; } }
         .why { background: rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.35); border-radius:10px; padding:0.6rem 1.1rem; margin:0.8rem 0; font-size:0.94rem; }
         .why strong:first-child { color:#38bdf8; }
